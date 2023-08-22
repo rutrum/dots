@@ -1,0 +1,6 @@
+{}:
+{
+  enable = true;
+  config = ./polybar.ini;
+  script = "polybar bottom &";
+}
