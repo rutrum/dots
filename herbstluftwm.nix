@@ -1,17 +1,16 @@
-{ terminal }:
+{ pkgs, terminal }:
 let 
   mod = "Mod4";
 in {
   enable = true;
+  package = pkgs.herbstluftwm;
   extraConfig = ''
   '';
   keybinds = {
     "${mod}-Return" = "spawn ${terminal}";
-    Mod-Shift-e spawn /home/rutrum/scripts/power.sh
-hc keybind $Mod-Shift-r reload
-hc keybind $Mod-Shift-q close
-hc keybind $Mod-Return spawn urxvt
-
+    "${mod}-Shift-e" = "spawn /home/rutrum/scripts/power.sh";
+    "${mod}-Shift-r" = "reload";
+    "${mod}-Shift-q" = "close";
   };
   mousebinds = {
     
@@ -19,7 +18,5 @@ hc keybind $Mod-Return spawn urxvt
   settings = {
 
   };
-  tags = {
-
-  };
+  # tags = { };
 }

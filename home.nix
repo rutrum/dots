@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, pkgs-stable, ... }: let
   terminal = "urxvt";
 in {
   # Home Manager needs a bit of information about you and the
@@ -16,14 +16,36 @@ in {
   # changes in each release.
   home.stateVersion = "23.05";
 
+  home.sessionPath = [
+    "/home/rutrum/.nix-profile/bin"
+  ];
+
+  home.sessionVariables = {
+
+  };
+
+  xsession = {
+    enable = true;
+    # profileExtra = ''
+    #     PATH=$PATH:/home/rutrum/.nix-profile/bin
+    # '';
+    # windowManager.herbstluftwm = import ./herbstluftwm.nix { 
+    #   pkgs = pkgs-stable; 
+    #   terminal = terminal;
+    # };
+  };
+
+  # neovim config
+  # xdg.configFile.nvim = {
+  #   source = ./neovim;
+  #   recursive = true;
+  # };
+
+  programs.neovim = import ./neovim.nix { inherit pkgs; };
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
 
     git = {
       enable = true;
@@ -39,6 +61,11 @@ in {
       };
       theme = "glue_pro_blue";
     };
+
+    # status bar
+    # eww = {
+    #   enable = true;
+    # };
 
     ssh = {
       enable = true;
@@ -74,6 +101,8 @@ in {
 
         # ^S no longer pauses terminal
         stty -ixon
+
+        PATH=/home/rutrum/.nix-profile/bin:$PATH
       '';
       shellAliases = {
         v = "nvim";
@@ -94,7 +123,8 @@ in {
         df = "df -h";
         ll = "ls -lhF";
 
-        hms = "home-manager switch";
+        hms = "home-manager switch --flake ~/dots";
+        nd = "nix develop";
 
         clone = "(pwd | ${terminal} & disown \$!)";
       };
@@ -117,6 +147,7 @@ in {
     # firefox
     zathura
     flameshot
+    gimp
 
     # command line utilities
     just
@@ -140,14 +171,27 @@ in {
     picom = {
       enable = true;
       vSync = true;
+      settings = {
+        shadow = true;
+
+        shadow-radius = 12;
+        shadow-opacity = 0.6;
+        shadow-offset-x = -15;
+        shadow-offset-y = -15;
+        shadow-exclude = [
+          "name = 'Notification'"
+        ];
+
+        blur = {
+          method = "gaussian";
+          size = 10;
+          deviation = 10.0;
+        };
+      };
     };
 
     # syncthing.enable = true;
 
     polybar = import ./polybar.nix {};
-  };
-
-  xsession.windowManager = {
-    # herbstluftwm = import ./herbstluftwm.nix { terminal };
   };
 }

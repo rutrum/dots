@@ -1,6 +1,10 @@
 {
   enable = true;
   fonts = [ "xft:DejaVu Sans Mono:size=10" ];
+  keybindings = {
+    "Shift-Control-C" = "eval:selection_to_clipboard";
+    "Shift-Control-V" = "eval:paste_clipboard";
+  };
   extraConfig = {
     # catppuccin: https://github.com/catppuccin/urxvt/blob/main/catppuccin.Xresources
     foreground = "#DADAE8";
