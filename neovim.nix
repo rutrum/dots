@@ -4,7 +4,8 @@ let
   plugins = with pkgs.vimPlugins; [
 
     # language specific plugins
-    vim-nix
+    vim-nix # nix
+    vim-parinfer # lisp
 
     # needs an icon set? maybe not urxvt
     # { plugin = lualine-nvim;

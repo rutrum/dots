@@ -11,9 +11,15 @@
 
     # include stable version
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
+
+    # eww default bar
+    eww-repo = {
+      url = "github:elkowar/eww";
+      flake = false;
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-stable, ... }:
+  outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -30,6 +36,7 @@
         # to pass through arguments to home.nix
         extraSpecialArgs = {
               inherit pkgs-stable;
+              inherit eww-repo;
         };
       };
     };

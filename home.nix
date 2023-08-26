@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, ... }: let
+{ config, pkgs, pkgs-stable, eww-repo, ... }: let
   terminal = "urxvt";
 in {
   # Home Manager needs a bit of information about you and the
@@ -20,9 +20,7 @@ in {
     "/home/rutrum/.nix-profile/bin"
   ];
 
-  home.sessionVariables = {
-
-  };
+  fonts.fontconfig.enable = true;
 
   xsession = {
     enable = true;
@@ -63,9 +61,10 @@ in {
     };
 
     # status bar
-    # eww = {
-    #   enable = true;
-    # };
+    eww = {
+      enable = true;
+      configDir = "${eww-repo}/examples/eww-bar";
+    };
 
     ssh = {
       enable = true;
@@ -148,6 +147,10 @@ in {
     zathura
     flameshot
     gimp
+
+    # fonts
+    nerdfonts
+    noto-fonts-emoji
 
     # command line utilities
     just

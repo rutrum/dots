@@ -1,3 +1,5 @@
+# https://starship.rs/config/
+
 {
   enable = true;
   enableBashIntegration = true;
@@ -17,6 +19,8 @@
     directory = {
       truncate_to_repo = true;
       truncation_symbol = "";
+      read_only = " (ro)";
+      read_only_style = "bold red";
     };
   };
 }

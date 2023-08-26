@@ -1,6 +1,10 @@
 {
   enable = true;
-  fonts = [ "xft:DejaVu Sans Mono:size=10" ];
+  fonts = [ 
+    "xft:DroidSansM Nerd Font Mono:size=10" # nerdfont
+    "xfg:Noto Color Emoji" # emoji
+    "xft:DejaVu Sans Mono:size=10" # fallback
+  ];
   keybindings = {
     "Shift-Control-C" = "eval:selection_to_clipboard";
     "Shift-Control-V" = "eval:paste_clipboard";
