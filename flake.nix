@@ -17,9 +17,11 @@
       url = "github:elkowar/eww";
       flake = false;
     };
+
+    wasm4.url = "/home/rutrum/repo/wasm4-nix";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }:
+  outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -37,6 +39,7 @@
         extraSpecialArgs = {
               inherit pkgs-stable;
               inherit eww-repo;
+              wasm4 = inputs.wasm4.defaultPackage.${system};
         };
       };
     };

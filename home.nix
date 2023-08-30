@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, eww-repo, ... }: let
+{ config, pkgs, pkgs-stable, eww-repo, ... }@inputs: let
   terminal = "urxvt";
 in {
   # Home Manager needs a bit of information about you and the
@@ -86,9 +86,9 @@ in {
     urxvt = import ./urxvt.nix;
     starship = import ./starship.nix;
 
-    fish = {
-      enable = true;
-    };
+    # fish = {
+    # enable = true;
+    # };
 
     bash = {
       enable = true;
@@ -148,6 +148,9 @@ in {
     flameshot
     gimp
 
+    # 3d printing
+    # cura # needs nvidia drivers in nix
+
     # fonts
     nerdfonts
     noto-fonts-emoji
@@ -168,19 +171,26 @@ in {
 
     # doesn't work without gpu shinanigans
     # alacritty
+
+    # my flakes
+    inputs.wasm4
   ];
 
   services = {
     picom = {
       enable = true;
-      vSync = true;
       settings = {
+        # fix for nvidia: https://nixos.wiki/wiki/Nvidia
+        unredir-if-possible = false;
+        backend = "xrender";
+        vsync = true;
+
         shadow = true;
 
         shadow-radius = 12;
-        shadow-opacity = 0.6;
-        shadow-offset-x = -15;
-        shadow-offset-y = -15;
+        shadow-opacity = 0.3;
+        shadow-offset-x = 0;
+        shadow-offset-y = 0;
         shadow-exclude = [
           "name = 'Notification'"
         ];
@@ -188,7 +198,7 @@ in {
         blur = {
           method = "gaussian";
           size = 10;
-          deviation = 10.0;
+          deviation = 15.0;
         };
       };
     };
