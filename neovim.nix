@@ -6,6 +6,14 @@ let
     # language specific plugins
     vim-nix # nix
     vim-parinfer # lisp
+    { plugin = hop-nvim;
+      type = "lua";
+      config = "require('hop').setup()";
+    }
+    # better source code highlighting
+    # nvim-treesitter.withPlugins (parsers: with parsers; [
+    #   nix
+    # ])
 
     # needs an icon set? maybe not urxvt
     # { plugin = lualine-nvim;

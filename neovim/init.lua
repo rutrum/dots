@@ -17,4 +17,13 @@ vim.o.updatetime = 300
 
 vim.o.mouse = 'a'
 
-
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+-- override f
+--vim.keymap.set('', 'f', function()
+--    hop.hint_char1({direction = directions.AFTER_CURSOR, current_line_only = true })
+--end, {remap=true});
+-- leader + f look for word
+vim.keymap.set('', '<leader>f', function()
+    hop.hint_words()
+end);
