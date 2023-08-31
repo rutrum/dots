@@ -135,15 +135,15 @@
       "locked": {
         "lastModified": 1693340036,
         "narHash": "sha256-XxUjTEhbbXeoIrfQi3u4y9VWYJ05W5NS8ClwZ1PWBIU=",
-        "ref": "refs/heads/master",
+        "owner": "rutrum",
+        "repo": "wasm4-nix",
         "rev": "ec7ee8ad50b16cd8b2c64fe1b1e393200a1735fe",
-        "revCount": 1,
-        "type": "git",
-        "url": "file:///home/rutrum/repo/wasm4-nix"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/rutrum/repo/wasm4-nix"
+        "owner": "rutrum",
+        "repo": "wasm4-nix",
+        "type": "github"
       }
     },
     "wasm4_2": {

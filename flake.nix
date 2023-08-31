@@ -18,7 +18,7 @@
       flake = false;
     };
 
-    wasm4.url = "/home/rutrum/repo/wasm4-nix";
+    wasm4.url = "github:rutrum/wasm4-nix";
   };
 
   outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
