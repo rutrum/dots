@@ -85,6 +85,7 @@ in {
 
     urxvt = import ./urxvt.nix;
     starship = import ./starship.nix;
+    firefox = import ./firefox.nix { inherit (inputs) firefox-addons; };
 
     # fish = {
     # enable = true;
