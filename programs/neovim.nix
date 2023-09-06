@@ -35,7 +35,7 @@ in {
   defaultEditor = true;
   viAlias = true;
   vimAlias = true;
-  extraLuaConfig = pkgs.lib.fileContents ./neovim/init.lua;
+  extraLuaConfig = pkgs.lib.fileContents ./neovim.lua;
 
   # only needed if a plugin requires it
   # extraLuaPackages = luaPkgs: with luaPkgs; [ luautf8 ];

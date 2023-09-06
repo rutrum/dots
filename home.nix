@@ -39,11 +39,15 @@ in {
   #   recursive = true;
   # };
 
-  programs.neovim = import ./neovim.nix { inherit pkgs; };
 
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+
+    neovim = import ./programs/neovim.nix { inherit pkgs; };
+    urxvt = import ./programs/urxvt.nix;
+    starship = import ./programs/starship.nix;
+    firefox = import ./programs/firefox.nix { inherit (inputs) firefox-addons; };
 
     git = {
       enable = true;
@@ -82,10 +86,6 @@ in {
         };
       };
     };
-
-    urxvt = import ./urxvt.nix;
-    starship = import ./starship.nix;
-    firefox = import ./firefox.nix { inherit (inputs) firefox-addons; };
 
     # fish = {
     # enable = true;
@@ -206,6 +206,6 @@ in {
 
     # syncthing.enable = true;
 
-    polybar = import ./polybar.nix {};
+    polybar = import ./services/polybar.nix {};
   };
 }
