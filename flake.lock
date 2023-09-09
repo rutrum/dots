@@ -16,7 +16,45 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1693454547,
+        "narHash": "sha256-WSHLsOLc9lgGUplTzglVpA6gH/IoBNLjhHrYZfOYIq8=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "8ff4c08551bc3e6e4286e2a49ca643df83e5c552",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "flake-utils": {
+      "locked": {
+        "lastModified": 1629284811,
+        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c5d161cc0af116a2e17f54316f0bf43f0819785c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
       "inputs": {
         "systems": "systems"
       },
@@ -105,6 +143,7 @@
     "root": {
       "inputs": {
         "eww-repo": "eww-repo",
+        "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
@@ -128,22 +167,22 @@
     },
     "wasm4": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2",
         "wasm4": "wasm4_2"
       },
       "locked": {
         "lastModified": 1693340036,
         "narHash": "sha256-XxUjTEhbbXeoIrfQi3u4y9VWYJ05W5NS8ClwZ1PWBIU=",
-        "ref": "refs/heads/master",
+        "owner": "rutrum",
+        "repo": "wasm4-nix",
         "rev": "ec7ee8ad50b16cd8b2c64fe1b1e393200a1735fe",
-        "revCount": 1,
-        "type": "git",
-        "url": "file:///home/rutrum/repo/wasm4-nix"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/rutrum/repo/wasm4-nix"
+        "owner": "rutrum",
+        "repo": "wasm4-nix",
+        "type": "github"
       }
     },
     "wasm4_2": {

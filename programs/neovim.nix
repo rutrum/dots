@@ -7,6 +7,14 @@ let
     vim-nix # nix
     vim-parinfer # lisp
     vim-svelte
+    { plugin = hop-nvim;
+      type = "lua";
+      config = "require('hop').setup()";
+    }
+    # better source code highlighting
+    # nvim-treesitter.withPlugins (parsers: with parsers; [
+    #   nix
+    # ])
 
     # needs an icon set? maybe not urxvt
     # { plugin = lualine-nvim;
@@ -28,7 +36,7 @@ in {
   defaultEditor = true;
   viAlias = true;
   vimAlias = true;
-  extraLuaConfig = pkgs.lib.fileContents ./neovim/init.lua;
+  extraLuaConfig = pkgs.lib.fileContents ./neovim.lua;
 
   # only needed if a plugin requires it
   # extraLuaPackages = luaPkgs: with luaPkgs; [ luautf8 ];

@@ -18,7 +18,11 @@
       flake = false;
     };
 
-    wasm4.url = "/home/rutrum/repo/wasm4-nix";
+    wasm4.url = "github:rutrum/wasm4-nix";
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
@@ -40,6 +44,7 @@
               inherit pkgs-stable;
               inherit eww-repo;
               wasm4 = inputs.wasm4.defaultPackage.${system};
+              firefox-addons = inputs.firefox-addons.packages.${system};
         };
       };
     };
