@@ -6,6 +6,7 @@ let
     # language specific plugins
     vim-nix # nix
     vim-parinfer # lisp
+    vim-svelte
 
     # needs an icon set? maybe not urxvt
     # { plugin = lualine-nvim;
