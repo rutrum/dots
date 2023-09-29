@@ -6,6 +6,7 @@ let
     # language specific plugins
     vim-nix # nix
     vim-parinfer # lisp
+    vim-svelte
     { plugin = hop-nvim;
       type = "lua";
       config = "require('hop').setup()";
