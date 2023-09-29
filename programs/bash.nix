@@ -32,6 +32,7 @@
     ll = "ls -lhF";
 
     hms = "home-manager switch --flake ~/dots";
+    snrs = "sudo nixos-rebuild switch --flake ~/dots";
     nd = "nix develop";
 
     clone = "(pwd | ${terminal} & disown \$!)";

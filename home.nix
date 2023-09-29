@@ -22,8 +22,8 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  xsession = {
-    enable = true;
+  # xsession = {
+    # enable = true;
     # profileExtra = ''
     #     PATH=$PATH:/home/rutrum/.nix-profile/bin
     # '';
@@ -31,6 +31,11 @@ in {
     #   pkgs = pkgs-stable; 
     #   terminal = terminal;
     # };
+  # };
+
+  home.file.xmonad = {
+    source = ./xmonad.hs;
+    target = ".config/xmonad/xmonad.hs";
   };
 
   # neovim config
@@ -110,6 +115,8 @@ in {
     zathura
     flameshot
     gimp
+    sxiv
+    pavucontrol
 
     # 3d printing
     # cura # needs nvidia drivers in nix
@@ -128,6 +135,17 @@ in {
     du-dust
     watchexec
     yt-dlp
+    tree
+    trash-cli
+    htop
+    wget
+
+    # ricing
+    feh
+
+    # hardware utilities
+    acpi
+    brightnessctl
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec
@@ -141,11 +159,11 @@ in {
 
   services = {
     picom = {
-      enable = true;
+      enable = false;
       settings = {
         # fix for nvidia: https://nixos.wiki/wiki/Nvidia
         unredir-if-possible = false;
-        backend = "xrender";
+        backend = "xrender"; # this might be a problem for my laptop
         vsync = true;
 
         shadow = true;

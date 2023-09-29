@@ -31,6 +31,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
+      nixosConfigurations."rumprism" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ( import ./system.nix )
+        ];
+      };
+
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
