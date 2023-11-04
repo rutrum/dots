@@ -9,7 +9,10 @@
 
     # ^S no longer pauses terminal
     stty -ixon
-
+  '';
+  profileExtra = ''
+    # add nix application desktop files
+    XDG_DATA_DIRS=$HOME/.nix-profile/share:"''${XDG_DATA_DIRS}"
     PATH=/home/rutrum/.nix-profile/bin:$PATH
   '';
   shellAliases = {

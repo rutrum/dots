@@ -39,6 +39,8 @@ in {
   #   recursive = true;
   # };
 
+  # for discord, nvidia drivers
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -48,7 +50,7 @@ in {
     urxvt = import ./programs/urxvt.nix;
     bash = import ./programs/bash.nix { inherit terminal; };
     starship = import ./programs/starship.nix;
-    firefox = import ./programs/firefox.nix { inherit (inputs) firefox-addons; };
+    firefox = import ./programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
       enable = true;
@@ -106,13 +108,20 @@ in {
     ungoogled-chromium
     # todo
     # thunderbird
-    # firefox
     zathura
     flameshot
     gimp
+    gnome.simple-scan
+    qownnotes
+    nextcloud-client
+    discord
+    libreoffice
 
     # 3d printing
-    # cura # needs nvidia drivers in nix
+    cura # needs nvidia drivers in nix
+
+    # graphics stuff
+    #nixgl.auto.nixGLNvidia
 
     # fonts
     nerdfonts
@@ -128,6 +137,10 @@ in {
     du-dust
     watchexec
     yt-dlp
+    neofetch
+
+    # container and virtual machines
+    distrobox
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec
@@ -136,7 +149,7 @@ in {
     # alacritty
 
     # my flakes
-    inputs.wasm4
+    # inputs.wasm4
   ];
 
   services = {

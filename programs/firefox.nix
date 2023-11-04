@@ -1,6 +1,8 @@
-{ firefox-addons }:
+{ firefox-addons, pkgs-stable }:
 {
   enable = true;
+  package = pkgs-stable.firefox;
+
   profiles.normal = {
     name = "normal";
     isDefault = true;

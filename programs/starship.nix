@@ -6,7 +6,7 @@
   enableFishIntegration = true;
   settings = {
     format = ''
-      $username$nix_shell$directory$character
+      $env_var$username$nix_shell$directory$character
     '';
     add_newline = false;
     nix_shell = {
@@ -21,6 +21,11 @@
       truncation_symbol = "";
       read_only = " (ro)";
       read_only_style = "bold red";
+    };
+
+    # for distrobox
+    env_var.CONTAINER_ID = {
+      format = "[distrobox:$env_value ](bold yellow)";
     };
   };
 }

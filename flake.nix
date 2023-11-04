@@ -18,6 +18,8 @@
       flake = false;
     };
 
+    nixgl.url = "github:guibou/nixGL";
+
     wasm4.url = "github:rutrum/wasm4-nix";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -28,7 +30,11 @@
   outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ inputs.nixgl.overlay ];
+      };
+      #pkgs = nixpkgs.legacyPackages.${system};
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
