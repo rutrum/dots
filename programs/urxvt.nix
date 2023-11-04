@@ -8,6 +8,8 @@
   keybindings = {
     "Shift-Control-C" = "eval:selection_to_clipboard";
     "Shift-Control-V" = "eval:paste_clipboard";
+    "Control-Equals" = "font-size:increase";
+    "Control-Minus" = "font-size:decrease";
   };
   extraConfig = {
     # catppuccin: https://github.com/catppuccin/urxvt/blob/main/catppuccin.Xresources
