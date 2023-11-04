@@ -116,16 +116,13 @@ in {
     zathura
     flameshot
     gimp
-<<<<<<< HEAD
     gnome.simple-scan
     qownnotes
     nextcloud-client
     discord
     libreoffice
-=======
     sxiv
     pavucontrol
->>>>>>> a0e7275e067eef76f31dc78bbab583465c7fa9be
 
     # 3d printing
     cura # needs nvidia drivers in nix
