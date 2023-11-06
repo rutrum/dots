@@ -39,5 +39,8 @@
     nd = "nix develop";
 
     clone = "(pwd | ${terminal} & disown \$!)";
+
+    # distrobox applications
+    w4 = "distrobox enter deb -- w4";
   };
 }
