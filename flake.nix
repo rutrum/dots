@@ -12,6 +12,14 @@
     # include stable version
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
 
+    nixpkgs-anki-2_1_60 = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "refs/heads/nixpkgs-unstable";
+      rev = "8cad3dbe48029cb9def5cdb2409a6c80d3acfe2e";
+    };
+
     # eww default bar
     eww-repo = {
       url = "github:elkowar/eww";
@@ -58,6 +66,7 @@
               inherit eww-repo;
               wasm4 = inputs.wasm4.defaultPackage.${system};
               firefox-addons = inputs.firefox-addons.packages.${system};
+              anki-bin = inputs.nixpkgs-anki-2_1_60.legacyPackages.${system}.anki-bin;
         };
       };
     };
