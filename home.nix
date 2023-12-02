@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, eww-repo, ... }@inputs: let
+{ config, pkgs, pkgs-stable, anki-bin, eww-repo, ... }@inputs: let
   terminal = "urxvt";
 in {
   # Home Manager needs a bit of information about you and the
@@ -61,6 +61,9 @@ in {
       enable = true;
       userEmail = "dave@rutrum.net";
       userName = "rutrum";
+      extraConfig = {
+        pull.rebase = false;
+      };
     };
 
     rofi = {
@@ -124,6 +127,7 @@ in {
     sxiv
     pavucontrol
     libsForQt5.dolphin # file manager
+    anki-bin
 
     # 3d printing
     cura # needs nvidia drivers in nix
@@ -150,6 +154,7 @@ in {
     trash-cli
     htop
     wget
+    unzip
 
     # container and virtual machines
     distrobox

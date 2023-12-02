@@ -40,6 +40,15 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # GPU stuff
+  hardware.opengl.enable = true;
+
+  # printing
+  services.printing.enable = true; # enables printing support via the CUPS daemon
+  services.avahi.enable = true; # runs the Avahi daemon
+  services.avahi.nssmdns = true; # enables the mDNS NSS plug-in
+  services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
+
   # services.avahi = {
   #   enable = true;
   #   nssmdns = true;
