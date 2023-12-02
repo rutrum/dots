@@ -123,6 +123,7 @@ in {
     libreoffice
     sxiv
     pavucontrol
+    libsForQt5.dolphin # file manager
 
     # 3d printing
     cura # needs nvidia drivers in nix
