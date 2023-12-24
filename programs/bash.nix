@@ -42,5 +42,7 @@
 
     # distrobox applications
     w4 = "distrobox enter deb -- w4";
+
+    nixgl = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:guibou/nixGL --";
   };
 }

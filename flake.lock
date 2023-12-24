@@ -141,6 +141,23 @@
         "type": "github"
       }
     },
+    "nixpkgs-anki-2_1_60": {
+      "locked": {
+        "lastModified": 1682890487,
+        "narHash": "sha256-JcEYGIUr2T1D3QAkurclH0Jt4aaykK/hNd4JCshpKqA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8cad3dbe48029cb9def5cdb2409a6c80d3acfe2e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "refs/heads/nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "rev": "8cad3dbe48029cb9def5cdb2409a6c80d3acfe2e",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1697900913,
@@ -196,6 +213,7 @@
         "home-manager": "home-manager",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-anki-2_1_60": "nixpkgs-anki-2_1_60",
         "nixpkgs-stable": "nixpkgs-stable",
         "wasm4": "wasm4"
       }

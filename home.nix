@@ -85,7 +85,7 @@ in {
       enable = true;
       matchBlocks = {
         vultr = {
-          hostname = "144.202.23.250";
+          hostname = "45.63.65.162";
         };
         thomas = {
           hostname = "thomas.butler.edu";
