@@ -78,9 +78,6 @@ in {
     };
   };
 
-  # for discord, nvidia drivers
-  nixpkgs.config.allowUnfree = true;
-
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
