@@ -4,6 +4,7 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Hooks.EwmhDesktops (ewmhFullscreen, ewmh)
 import XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Layout.Tabbed (simpleTabbed)
 
 import System.Exit (exitSuccess)
 
@@ -32,13 +33,13 @@ myTerminal = "urxvt"
 myLayout = --fullscreenFull $ 
     avoidStruts $
     smartBorders $ smartSpacingWithEdge 3 $ 
-    tiled ||| Mirror tiled ||| Full ||| threeCol ||| MosaicAlt M.empty
+    leftMaster ||| topMaster ||| Full ||| MosaicAlt M.empty ||| simpleTabbed
   where
-    threeCol = ThreeColMid nmaster delta ratio
-    tiled   = Tall nmaster delta ratio
+    topMaster = Mirror leftMaster
+    leftMaster = Tall nmaster delta ratio
     nmaster = 1 -- default number of windows in master pane
-    ratio   = 3/5 -- proportion of screen occupied by master pane 
-    delta   = 3/100 -- Percent of screen to increment by when resizing panes
+    ratio = 3/5 -- proportion of screen occupied by master pane 
+    delta = 3/100 -- Percent of screen to increment by when resizing panes
 
 main :: IO ()
 main = xmonad $ ewmhFullscreen $ ewmh $ myConfig
