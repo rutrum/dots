@@ -12,8 +12,6 @@
       sponsorblock
       floccus
       vimium
-      istilldontcareaboutcookies
-      clearurls
     ];
     # referenced https://brainfucksec.github.io/firefox-hardening-guide
     settings = {
@@ -63,6 +61,9 @@
       # disable extensions
       "extensions.pocket.enabled" = false;
       "extensions.Screenshots.disabled" = true;
+
+      # webgl doesn't work, force it?
+      # "webgl.force-enabled" = true;
     };
     search = {
       default = "DuckDuckGo";

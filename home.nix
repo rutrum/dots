@@ -48,6 +48,39 @@ in {
     target = ".config/xmonad/xmonad.hs";
   };
 
+  nix.registry = {
+    # redo nixpkgs to be stable
+    nixpkgs = {
+      from = {
+        type = "indirect";
+        id = "nixpkgs";
+      };
+      to = {
+        type = "github";
+        owner = "NixOS";
+        repo = "nixpkgs";
+        ref = "nixos-23.11"; # TODO: make this a variable somewhere
+      };
+    };
+
+    # add nixpkgs unstable
+    unstable = {
+      from = {
+        type = "indirect";
+        id = "unstable";
+      };
+      to = {
+        type = "github";
+        owner = "NixOS";
+        repo = "nixpkgs";
+        ref = "nixos-unstable";
+      };
+    };
+  };
+
+  # for discord, nvidia drivers
+  nixpkgs.config.allowUnfree = true;
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -86,7 +119,7 @@ in {
       enable = true;
       matchBlocks = {
         vultr = {
-          hostname = "144.202.23.250";
+          hostname = "45.63.65.162";
         };
         thomas = {
           hostname = "thomas.butler.edu";
@@ -127,8 +160,8 @@ in {
     libreoffice
     sxiv
     pavucontrol
+    libsForQt5.dolphin # file manager
     anki-bin
-    libreoffice
     libsForQt5.dolphin
     font-manager
 
