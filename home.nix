@@ -16,21 +16,31 @@ in {
   # changes in each release.
   home.stateVersion = "23.05";
 
+  # for discord, nvidia drivers
+  nixpkgs.config.allowUnfree = true;
+
   home.sessionPath = [
     "/home/rutrum/.nix-profile/bin"
   ];
 
   fonts.fontconfig.enable = true;
 
+  # requires xserver enabled in system config
   # xsession = {
     # enable = true;
-    # profileExtra = ''
-    #     PATH=$PATH:/home/rutrum/.nix-profile/bin
-    # '';
+
     # windowManager.herbstluftwm = import ./herbstluftwm.nix { 
     #   pkgs = pkgs-stable; 
     #   terminal = terminal;
     # };
+    # windowManager.xmonad.enable = true;
+
+    # windowManager.awesome.enable = true;
+  # };
+
+  # home.file.awesome = {
+    # source = config.lib.file.mkOutOfStoreSymlink ./awesome.lua;
+    # target = ".config/awesome/rc.lua";
   # };
 
   home.file.xmonad = {
@@ -67,9 +77,6 @@ in {
       };
     };
   };
-
-  # for discord, nvidia drivers
-  nixpkgs.config.allowUnfree = true;
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -152,6 +159,8 @@ in {
     pavucontrol
     libsForQt5.dolphin # file manager
     anki-bin
+    libsForQt5.dolphin
+    font-manager
 
     # 3d printing
     cura # needs nvidia drivers in nix
@@ -162,6 +171,7 @@ in {
     # fonts
     nerdfonts
     noto-fonts-emoji
+    iosevka-bin
 
     # command line utilities
     just
@@ -179,9 +189,15 @@ in {
     htop
     wget
     unzip
+    yazi # terminal file browser
+    ueberzugpp # for yazi terminal image previews
 
     # container and virtual machines
     distrobox
+    # podman
+    # podman-compose
+
+    pods # ui for podman
 
     # ricing
     feh

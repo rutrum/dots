@@ -38,7 +38,23 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      defaultNetwork.settings.dns_enabled = true;
+      dockerSocket.enable = true;
+    };
+    oci-containers.backend = "podman";
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Add flake registries nixpkgs stable
+  nix.registry = {
+    #nixpkgs-stable = {
+    #  to = "github:NixOS/nixpkgs/nixos-23.05";
+    #};
+  };
 
   # GPU stuff
   hardware.opengl.enable = true;
@@ -58,6 +74,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Do this stuff with home-manager
   # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
