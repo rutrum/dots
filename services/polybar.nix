@@ -1,6 +1,7 @@
-{}:
 {
-  enable = true;
-  config = ./polybar.ini;
-  script = "polybar bottom &";
+  services.polybar = {
+    enable = true;
+    config = ./polybar.ini;
+    script = "polybar bottom &";
+  };
 }
