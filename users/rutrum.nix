@@ -3,10 +3,10 @@
 in {
   
   imports = [
-    ./programs/urxvt.nix
-    ./programs/bash.nix
-    ./programs/alacritty.nix
-    ./programs/starship.nix
+    ../programs/urxvt.nix
+    ../programs/bash.nix
+    ../programs/alacritty.nix
+    ../programs/starship.nix
   ];
 
   bash.terminal = "alacritty"; # should probably find a better spot for this
@@ -54,7 +54,7 @@ in {
   # };
 
   home.file.xmonad = {
-    source = ./xmonad.hs;
+    source = ../xmonad.hs;
     target = ".config/xmonad/xmonad.hs";
   };
 
@@ -114,8 +114,8 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    neovim = import ./programs/neovim.nix { inherit pkgs; };
-    firefox = import ./programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
+    neovim = import ../programs/neovim.nix { inherit pkgs; };
+    firefox = import ../programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
       enable = true;
@@ -173,7 +173,6 @@ in {
   home.packages = with pkgs; [
 
     # graphical applications
-    ungoogled-chromium
     mullvad-browser
     # todo
     # thunderbird
@@ -285,7 +284,7 @@ in {
 
     # syncthing.enable = true;
 
-    polybar = import ./services/polybar.nix {};
+    polybar = import ../services/polybar.nix {};
     # nixos thing!: syncthing = import ./services/syncthing.nix {};
   };
 }

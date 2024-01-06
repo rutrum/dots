@@ -10,7 +10,7 @@
     };
 
     # include stable version
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.11";
 
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
 
@@ -40,7 +40,7 @@
   outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
+      pkgs = import nixpkgs-stable {
         inherit system;
         overlays = [ inputs.nixgl.overlay ];
       };
@@ -68,7 +68,7 @@
         # the path to your home.nix.
         modules = [ 
           inputs.flatpaks.homeManagerModules.default
-          ./home.nix 
+          ./users/rutrum.nix 
         ];
 
         # Optionally use extraSpecialArgs

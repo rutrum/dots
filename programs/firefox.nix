@@ -80,7 +80,6 @@
           # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
           definedAliases = [ "np" ];
         };
-
         "Home Manager Options" = {
           urls = [{
             template = "https://mipmip.github.io/home-manager-option-search/";
@@ -89,6 +88,15 @@
             ];
           }];
           definedAliases = [ "hm" ];
+        };
+        "YouTube" = {
+          urls = [{
+            template = "https://www.youtube.com/results";
+            params = [
+              { name = "search_query"; value = "{searchTerms}"; }
+            ];
+          }];
+          definedAliases = [ "yt" ];
         };
 
         "Bing".metaData.hidden = true;
