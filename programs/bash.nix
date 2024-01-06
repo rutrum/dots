@@ -1,48 +1,64 @@
-{ terminal }:
-{
-  enable = true;
-  initExtra = ''
-    # Opens a file in the default program.
-    open () {
-      xdg-open "$1" & &> /dev/null
-    }
+{ config, lib, ... }: 
+with lib;
+let
+  cfg = config.bash;
+in {
+  options = {
+    bash.terminal = mkOption {
+      type = types.str;
+      description = ''
+        The default terminal.
+      '';
+    };
+  };
 
-    # ^S no longer pauses terminal
-    stty -ixon
-  '';
-  profileExtra = ''
-    # add nix application desktop files
-    XDG_DATA_DIRS=$HOME/.nix-profile/share:"''${XDG_DATA_DIRS}"
-    PATH=/home/rutrum/.nix-profile/bin:$PATH
-  '';
-  shellAliases = {
-    v = "nvim";
-    j = "just";
-    py = "python3";
+  config = {
+    programs.bash = {
+      enable = true;
+      initExtra = ''
+        # Opens a file in the default program.
+        open () {
+          xdg-open "$1" & &> /dev/null
+        }
 
-    # don't overwrite files or prompt
-    cp = "cp -i";
-    mv = "mv -i";
+        # ^S no longer pauses terminal
+        stty -ixon
+      '';
+      profileExtra = ''
+        # add nix application desktop files
+        XDG_DATA_DIRS=$HOME/.nix-profile/share:"''${XDG_DATA_DIRS}"
+        PATH=/home/rutrum/.nix-profile/bin:$PATH
+      '';
+      shellAliases = {
+        v = "nvim";
+        j = "just";
+        py = "python3";
 
-    # colors
-    less = "less -R";
-    ls = "ls --color=auto";
-    grep = "grep --color=auto";
+        # don't overwrite files or prompt
+        cp = "cp -i";
+        mv = "mv -i";
 
-    # print human readable sizes
-    du = "du -h";
-    df = "df -h";
-    ll = "ls -lhF";
+        # colors
+        less = "less -R";
+        ls = "ls --color=auto";
+        grep = "grep --color=auto";
 
-    hms = "home-manager switch --flake ~/dots";
-    snrs = "sudo nixos-rebuild switch --flake ~/dots";
-    nd = "nix develop";
+        # print human readable sizes
+        du = "du -h";
+        df = "df -h";
+        ll = "ls -lhF";
 
-    clone = "(pwd | ${terminal} & disown \$!)";
+        hms = "home-manager switch --flake ~/dots";
+        snrs = "sudo nixos-rebuild switch --flake ~/dots";
+        nd = "nix develop";
 
-    # distrobox applications
-    w4 = "distrobox enter deb -- w4";
+        clone = "(pwd | ${cfg.terminal} & disown \$!)";
 
-    nixgl = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:guibou/nixGL --";
+        # distrobox applications
+        w4 = "distrobox enter deb -- w4";
+
+        nixgl = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:guibou/nixGL --";
+      };
+    };
   };
 }

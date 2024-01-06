@@ -11,7 +11,6 @@
       ublock-origin
       sponsorblock
       floccus
-      vimium
     ];
     # referenced https://brainfucksec.github.io/firefox-hardening-guide
     settings = {

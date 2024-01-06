@@ -1,6 +1,16 @@
 { config, pkgs, pkgs-stable, anki-bin, eww-repo, ... }@inputs: let
   terminal = "urxvt";
 in {
+  
+  imports = [
+    ./programs/urxvt.nix
+    ./programs/bash.nix
+    ./programs/alacritty.nix
+    ./programs/starship.nix
+  ];
+
+  bash.terminal = "alacritty"; # should probably find a better spot for this
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "rutrum";
@@ -16,7 +26,7 @@ in {
   # changes in each release.
   home.stateVersion = "23.05";
 
-  # for discord, nvidia drivers
+  # for nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
   home.sessionPath = [
@@ -46,6 +56,28 @@ in {
   home.file.xmonad = {
     source = ./xmonad.hs;
     target = ".config/xmonad/xmonad.hs";
+  };
+
+  # Home Directories
+
+  # symlink my music directory
+  home.file.music = {
+    source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
+    target = "music";
+  };
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+
+    desktop = "${config.home.homeDirectory}/desktop";
+    documents = null;
+    download = "${config.home.homeDirectory}/downloads";
+    music = "${config.home.homeDirectory}/music";
+    pictures = null;
+    publicShare = null;
+    templates = null;
+    videos = null;
   };
 
   nix.registry = {
@@ -83,9 +115,6 @@ in {
     home-manager.enable = true;
 
     neovim = import ./programs/neovim.nix { inherit pkgs; };
-    urxvt = import ./programs/urxvt.nix;
-    bash = import ./programs/bash.nix { inherit terminal; };
-    starship = import ./programs/starship.nix;
     firefox = import ./programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
@@ -161,6 +190,8 @@ in {
     anki-bin
     libsForQt5.dolphin
     font-manager
+    bitwarden
+    steam
 
     # 3d printing
     cura # needs nvidia drivers in nix
@@ -188,6 +219,7 @@ in {
     trash-cli
     htop
     wget
+    cmus
     unzip
     yazi # terminal file browser
     ueberzugpp # for yazi terminal image previews
@@ -209,14 +241,20 @@ in {
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec
 
-    # doesn't work without gpu shinanigans
-    # alacritty
-
     # my flakes
     # inputs.wasm4
   ];
 
+
   services = {
+    # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
+    flatpak = {
+      enableModule = true;
+      packages = [
+        "flathub:app/info.beyondallreason.bar//master"
+      ];
+    };
+
     picom = {
       enable = false;
       settings = {
@@ -246,5 +284,6 @@ in {
     # syncthing.enable = true;
 
     polybar = import ./services/polybar.nix {};
+    # nixos thing!: syncthing = import ./services/syncthing.nix {};
   };
 }

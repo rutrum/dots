@@ -12,6 +12,8 @@
     # include stable version
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
 
+    flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
+
     nixpkgs-anki-2_1_60 = {
       type = "github";
       owner = "nixos";
@@ -52,12 +54,22 @@
         ];
       };
 
+      nixosConfigurations."rumtower" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ( import ./hosts/rumtower/configuration.nix )
+        ];
+      };
+
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ 
+          inputs.flatpaks.homeManagerModules.default
+          ./home.nix 
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
