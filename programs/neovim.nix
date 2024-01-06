@@ -1,4 +1,4 @@
-{ pkgs }:
+{ config, lib, pkgs, ... }:
 let 
   # todo: figure out how to map the type to lua for all plugins
   plugins = with pkgs.vimPlugins; [
@@ -32,14 +32,16 @@ let
     }
   ];
 in {
-  enable = true;
-  defaultEditor = true;
-  viAlias = true;
-  vimAlias = true;
-  extraLuaConfig = pkgs.lib.fileContents ./neovim.lua;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    extraLuaConfig = pkgs.lib.fileContents ./neovim.lua;
 
-  # only needed if a plugin requires it
-  # extraLuaPackages = luaPkgs: with luaPkgs; [ luautf8 ];
+    # only needed if a plugin requires it
+    # extraLuaPackages = luaPkgs: with luaPkgs; [ luautf8 ];
 
-  inherit plugins;
+    inherit plugins;
+  };
 }

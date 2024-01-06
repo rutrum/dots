@@ -7,6 +7,8 @@ in {
     ../programs/bash.nix
     ../programs/alacritty.nix
     ../programs/starship.nix
+    ../programs/neovim.nix
+
     ../services/picom.nix
     ../services/polybar.nix
   ];
@@ -116,7 +118,7 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    neovim = import ../programs/neovim.nix { inherit pkgs; };
+    #neovim = import ../programs/neovim.nix { inherit pkgs; };
     firefox = import ../programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
