@@ -174,27 +174,28 @@ in {
 
     # graphical applications
     ungoogled-chromium
+    mullvad-browser
     # todo
     # thunderbird
     zathura
     flameshot
     gimp
     gnome.simple-scan
-    qownnotes
     nextcloud-client
     discord
     libreoffice
     sxiv
     pavucontrol
-    libsForQt5.dolphin # file manager
     anki-bin
-    libsForQt5.dolphin
     font-manager
     bitwarden
+
+    # gaming
     steam
 
     # 3d printing
     cura # needs nvidia drivers in nix
+    # openscad # beta installed through flatpak
 
     # graphics stuff
     #nixgl.auto.nixGLNvidia
@@ -252,6 +253,7 @@ in {
       enableModule = true;
       packages = [
         "flathub:app/info.beyondallreason.bar//master"
+        "flathub:app/org.openscad.OpenSCAD//beta"
       ];
     };
 

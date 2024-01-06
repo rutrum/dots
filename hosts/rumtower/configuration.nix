@@ -6,8 +6,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -23,21 +23,21 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-services.flatpak.enable = true;
-nix = {
-  package = pkgs.nixFlakes;
-  extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-};
+  services.flatpak.enable = true;
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
-fileSystems = {
-	#"/".device = "/dev/nvme0n1";
-	"/mnt/barracuda" = {
-		device = "/dev/sda";
-		fsType = "ext4";
-	};
-};
+  fileSystems = {
+    #"/".device = "/dev/nvme0n1";
+    "/mnt/barracuda" = {
+      device = "/dev/sda";
+      fsType = "ext4";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";
@@ -57,30 +57,32 @@ fileSystems = {
     LC_TIME = "en_US.UTF-8";
   };
 
+  services.mullvad-vpn.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
-  enable = true;
-  displayManager.gdm.enable = true;
-  desktopManager.gnome.enable = true;
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     layout = "us";
     xkbVariant = "";
-	videoDrivers = ["nvidia"];
+    videoDrivers = ["nvidia"];
   };
 
-virtualisation.podman = {
-	enable = true;
-};
+  virtualisation.podman = {
+    enable = true;
+  };
 
-#nvidia crap
-hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
-hardware.nvidia = {
-	modesetting.enable = true;
-	powerManagement.enable = false;
-	powerManagement.finegrained = false;
-	open = false;
-	nvidiaSettings = true;
-	package = config.boot.kernelPackages.nvidiaPackages.stable;
-};
+  #nvidia crap
+  hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rutrum = {
@@ -99,7 +101,7 @@ hardware.nvidia = {
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-neovim git  
+  neovim git  
 ];
 
   # Some programs need SUID wrappers, can be configured further or are
