@@ -3,15 +3,24 @@
 in {
   
   imports = [
-    ../programs/urxvt.nix
-    ../programs/bash.nix
     ../programs/alacritty.nix
-    ../programs/starship.nix
+    ../programs/bash.nix
     ../programs/neovim.nix
+    ../programs/starship.nix
+    ../programs/urxvt.nix
+
+    ../modules/games.nix
 
     ../services/picom.nix
     ../services/polybar.nix
   ];
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = "zathura.desktop";
+    };
+  };
 
   bash.terminal = "alacritty"; # should probably find a better spot for this
 
@@ -179,22 +188,21 @@ in {
     # graphical applications
     mullvad-browser
     # todo
-    # thunderbird
+    thunderbird
     zathura
     flameshot
     gimp
     gnome.simple-scan
     nextcloud-client
-    discord
+    armcord
     libreoffice
     sxiv
     pavucontrol
     anki-bin
     font-manager
     bitwarden
-
-    # gaming
-    steam
+    jellyfin-media-player
+    drawio
 
     # 3d printing
     cura # needs nvidia drivers in nix
@@ -202,6 +210,7 @@ in {
 
     # graphics stuff
     #nixgl.auto.nixGLNvidia
+    vlc
 
     # fonts
     nerdfonts
@@ -222,6 +231,7 @@ in {
     tree
     trash-cli
     htop
+    nvtop
     wget
     cmus
     unzip
@@ -255,7 +265,6 @@ in {
     flatpak = {
       enableModule = true;
       packages = [
-        "flathub:app/info.beyondallreason.bar//master"
         "flathub:app/org.openscad.OpenSCAD//beta"
       ];
     };

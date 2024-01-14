@@ -7,7 +7,28 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/paperless.nix
+    ../../modules/gnome.nix
+    ../modules/podman.nix
   ];
+
+  # let's play with containers
+  # systemd podman volumes are stored in default location:
+  # /var/lib/containers/storage
+  # https://mynixos.com/nixpkgs/option/virtualisation.containers.storage.settings
+  # you can see the containers running using podman ps as the *root* user
+  virtualisation.oci-containers = {
+    containers = {
+      jellyfin = {
+        image = "linuxserver/jellyfin";
+        ports = [ "8096:8096" ];
+        volumes = [ 
+          "/mnt/barracuda/media:/media" 
+          "jellyfin_config:/config"
+        ];
+      };
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -36,6 +57,12 @@
     "/mnt/barracuda" = {
       device = "/dev/sda";
       fsType = "ext4";
+    };
+
+    "/mnt/nfs_dave" = {
+      device = "192.168.50.90:/dave";
+      fsType = "nfs";
+      options = [ "x-systemd.automount" "noauto" ];
     };
   };
 
@@ -69,10 +96,6 @@
     videoDrivers = ["nvidia"];
   };
 
-  virtualisation.podman = {
-    enable = true;
-  };
-
   #nvidia crap
   hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
   hardware.nvidia = {
@@ -95,14 +118,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # electron and chromium with wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  neovim git  
-];
+    neovim git  
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
