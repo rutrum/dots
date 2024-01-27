@@ -42,9 +42,9 @@ in {
   # for nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
-  home.sessionPath = [
-    "/home/rutrum/.nix-profile/bin"
-  ];
+  #home.sessionPath = [
+  #  "/home/rutrum/.nix-profile/bin"
+  #];
 
   fonts.fontconfig.enable = true;
 
@@ -74,10 +74,10 @@ in {
   # Home Directories
 
   # symlink my music directory
-  home.file.music = {
-    source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
-    target = "music";
-  };
+  #home.file.music = {
+  #  source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
+  #  target = "music";
+  #};
 
   xdg.userDirs = {
     enable = true;
@@ -217,6 +217,9 @@ in {
     noto-fonts-emoji
     iosevka-bin
 
+    # hardware management?
+    psensor
+
     # command line utilities
     just
     ripgrep
@@ -264,6 +267,9 @@ in {
     # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
     flatpak = {
       enableModule = true;
+      remotes = {
+        "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      };
       packages = [
         "flathub:app/org.openscad.OpenSCAD//beta"
       ];

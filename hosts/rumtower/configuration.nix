@@ -7,9 +7,10 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/paperless.nix
     ../../modules/gnome.nix
-    ../modules/podman.nix
+
+    ../modules/paperless.nix
+    ../modules/docker.nix
   ];
 
   # let's play with containers
@@ -22,6 +23,7 @@
       jellyfin = {
         image = "linuxserver/jellyfin";
         ports = [ "8096:8096" ];
+        autoStart = true;
         volumes = [ 
           "/mnt/barracuda/media:/media" 
           "jellyfin_config:/config"
@@ -45,6 +47,7 @@
   networking.networkmanager.enable = true;
 
   services.flatpak.enable = true;
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -59,11 +62,11 @@
       fsType = "ext4";
     };
 
-    "/mnt/nfs_dave" = {
-      device = "192.168.50.90:/dave";
-      fsType = "nfs";
-      options = [ "x-systemd.automount" "noauto" ];
-    };
+    #"/mnt/nfs_dave" = {
+    #  device = "192.168.50.90:/dave";
+    #  fsType = "nfs";
+    #  options = [ "x-systemd.automount" "noauto" ];
+    #};
   };
 
   # Set your time zone.
@@ -119,7 +122,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    neovim git  
+    neovim git home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,7 +142,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

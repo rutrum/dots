@@ -33,6 +33,7 @@ in {
         v = "nvim";
         j = "just";
         py = "python3";
+        py3 = "python3";
 
         # don't overwrite files or prompt
         cp = "cp -i";
