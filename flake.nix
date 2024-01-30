@@ -3,10 +3,10 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     # include stable version
@@ -33,30 +33,30 @@
     wasm4.url = "github:rutrum/wasm4-nix";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
+  outputs = { home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs-stable {
         inherit system;
         overlays = [ inputs.nixgl.overlay ];
       };
-      #pkgs = nixpkgs.legacyPackages.${system};
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
-      nixosConfigurations."rumprism" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."rumprism" = pkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ( import ./hosts/rumprism/configuration.nix )
         ];
       };
 
-      nixosConfigurations."rumtower" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.flatpaks.nixosModules.default
           ( import ./hosts/rumtower/configuration.nix )
         ];
       };

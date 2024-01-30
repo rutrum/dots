@@ -266,12 +266,12 @@ in {
   services = {
     # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
     flatpak = {
-      enableModule = true;
+      enableModule = false;
       remotes = {
         "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
       };
       packages = [
-        "flathub:app/org.openscad.OpenSCAD//beta"
+        "flathub:app/info.beyondallreason.bar//master"
       ];
     };
 

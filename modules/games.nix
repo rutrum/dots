@@ -5,7 +5,7 @@
     superTuxKart
     prismlauncher
   ];
-  services.flatpak.packages = [
-    "flathub:app/info.beyondallreason.bar//master"
-  ];
+  #services.flatpak.packages = [
+  #  "flathub:app/info.beyondallreason.bar//master"
+  #];
 }
