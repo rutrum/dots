@@ -10,13 +10,14 @@ in {
     ../programs/urxvt.nix
 
     ../modules/games.nix
+    ../modules/3d_printing.nix
 
     ../services/picom.nix
     ../services/polybar.nix
   ];
 
   xdg.mimeApps = {
-    enable = true;
+    enable = false;
     defaultApplications = {
       "application/pdf" = "zathura.desktop";
     };
@@ -204,10 +205,6 @@ in {
     jellyfin-media-player
     drawio
 
-    # 3d printing
-    cura # needs nvidia drivers in nix
-    # openscad # beta installed through flatpak
-
     # graphics stuff
     #nixgl.auto.nixGLNvidia
     vlc
@@ -266,13 +263,11 @@ in {
   services = {
     # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
     flatpak = {
-      enableModule = false;
+      enableModule = true;
       remotes = {
         "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        "flathub-beta" = "https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo";
       };
-      packages = [
-        "flathub:app/info.beyondallreason.bar//master"
-      ];
     };
 
     # syncthing.enable = true;

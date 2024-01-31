@@ -10,6 +10,7 @@
     ../../modules/gnome.nix
 
     ../modules/paperless.nix
+    ../modules/firefly.nix
     ../modules/docker.nix
   ];
 
@@ -33,18 +34,18 @@
   };
 
   # play with flatpak
-  services.flatpak = {
-    # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
-    # doesn't work because script can use ping...I can't use ping either
-    enableModule = true;
-    remotes = {
-      "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-    };
-    packages = [
-      #"flathub:app/org.openscad.OpenSCAD//beta"
-      "flathub:app/info.beyondallreason.bar//master"
-    ];
-  };
+  #services.flatpak = {
+  #  # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
+  #  # doesn't work because script can use ping...I can't use ping either
+  #  enableModule = true;
+  #  remotes = {
+  #    "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+  #  };
+  #  packages = [
+  #    #"flathub:app/org.openscad.OpenSCAD//beta"
+  #    "flathub:app/info.beyondallreason.bar//master"
+  #  ];
+  #};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

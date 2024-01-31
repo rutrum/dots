@@ -1,11 +1,9 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    steam
-    superTuxKart
-    prismlauncher
+    cura
   ];
   services.flatpak.packages = [
-    "flathub:app/info.beyondallreason.bar//stable"
+    "flathub-beta:app/org.openscad.OpenSCAD//beta"
   ];
 }
