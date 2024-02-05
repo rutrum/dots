@@ -1,6 +1,0 @@
-(defwindow test
-  :stacking "fg"
-  :windowtype "normal"
-  :wm-ignore true
-  :geometry (geometry :width "50%" :height "100%")
-  (label :text "Hey!"))

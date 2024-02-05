@@ -30,14 +30,23 @@
       environment = {};
       dependsOn = [ "firefly-db" ];
       autoStart = true;
+      environmentFiles = [
+        /home/rutrum/secrets/firefly.env
+      ];
       extraOptions = [
         "--network=firefly"
       ];
     };
     firefly-db = {
       image = "library/mariadb:latest"; # official docker images use "library/"
-      volumes = [ "/mnt/barracuda/firefly/db:/var/lib/mysql" ];
+      volumes = [ "/mnt/barracuda/firefly/new_db:/var/lib/mysql" ];
       autoStart = true;
+      environment = {
+        MYSQL_RANDOM_ROOT_PASSWORD = "yes";
+        MYSQL_USER = "firefly";
+        MYSQL_PASSWORD = "secret_firefly_password";
+        MYSQL_DATABASE = "firefly";
+      };
       extraOptions = [
         "--network=firefly"
       ];

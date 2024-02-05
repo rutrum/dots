@@ -9,8 +9,8 @@ in {
     ../programs/starship.nix
     ../programs/urxvt.nix
 
-    ../modules/games.nix
-    ../modules/3d_printing.nix
+    ./modules/games.nix
+    ./modules/3d_printing.nix
 
     ../services/picom.nix
     ../services/polybar.nix
@@ -149,12 +149,6 @@ in {
       theme = "glue_pro_blue";
     };
 
-    # status bar
-    eww = {
-      enable = true;
-      configDir = "${eww-repo}/examples/eww-bar";
-    };
-
     ssh = {
       enable = true;
       matchBlocks = {
@@ -204,6 +198,7 @@ in {
     bitwarden
     jellyfin-media-player
     drawio
+    calibre
 
     # graphics stuff
     #nixgl.auto.nixGLNvidia
