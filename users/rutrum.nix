@@ -3,11 +3,11 @@
 in {
   
   imports = [
-    ../programs/alacritty.nix
-    ../programs/bash.nix
-    ../programs/neovim.nix
-    ../programs/starship.nix
-    ../programs/urxvt.nix
+    ./modules/alacritty.nix
+    ./modules/bash.nix
+    ./modules/neovim.nix
+    ./modules/starship.nix
+    ./modules/urxvt.nix
 
     ./modules/games.nix
     ./modules/3d_printing.nix
@@ -128,8 +128,7 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    #neovim = import ../programs/neovim.nix { inherit pkgs; };
-    firefox = import ../programs/firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
+    firefox = import ./firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
       enable = true;
@@ -182,7 +181,8 @@ in {
 
     # graphical applications
     mullvad-browser
-    # todo
+    mullvad-vpn
+    obs-studio
     thunderbird
     zathura
     flameshot
@@ -199,6 +199,7 @@ in {
     jellyfin-media-player
     drawio
     calibre
+    freetube
 
     # graphics stuff
     #nixgl.auto.nixGLNvidia

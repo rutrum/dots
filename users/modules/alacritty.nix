@@ -12,6 +12,18 @@
         normal.family = "Iosevka Nerd Font Mono";
       };
       inherit (lib.importTOML ./catppuccin-mocha.toml) colors;
+      key_bindings = [
+        { 
+          key = "I";
+          mods = "Alt";
+          action = "IncreaseFontSize";
+        }
+        { 
+          key = "U";
+          mods = "Alt";
+          action = "DecreaseFontSize";
+        }
+      ];
     };
   };
 }

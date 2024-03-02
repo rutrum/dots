@@ -7,9 +7,10 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/gnome.nix
+    ../modules/gnome.nix
 
     ../modules/paperless.nix
+    ../modules/printing.nix
     ../modules/firefly.nix
     ../modules/docker.nix
   ];
