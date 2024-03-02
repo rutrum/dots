@@ -1,4 +1,5 @@
-{ config, pkgs, pkgs-stable, anki-bin, eww-repo, ... }@inputs: let
+{ config, pkgs, inputs, ... }: 
+let
   terminal = "urxvt";
 in {
   
@@ -11,6 +12,8 @@ in {
 
     ./modules/games.nix
     ./modules/3d_printing.nix
+
+    (import ./modules/firefox.nix inputs)
   ];
 
   xdg.mimeApps = {
@@ -125,7 +128,7 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    firefox = import ./firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
+    #firefox = import ./firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
 
     git = {
       enable = true;

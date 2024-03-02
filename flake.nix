@@ -31,6 +31,7 @@
     nixgl.url = "github:guibou/nixGL";
 
     wasm4.url = "github:rutrum/wasm4-nix";
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -73,13 +74,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = {
-              inherit pkgs-stable;
-              inherit eww-repo;
-              wasm4 = inputs.wasm4.defaultPackage.${system};
-              firefox-addons = inputs.firefox-addons.packages.${system};
-              anki-bin = inputs.nixpkgs-anki-2_1_60.legacyPackages.${system}.anki-bin;
-        };
+        extraSpecialArgs = { inherit inputs; };
       };
     };
 }
