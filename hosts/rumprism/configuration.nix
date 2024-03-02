@@ -135,7 +135,12 @@
   #  programs.bash.enable = true;
   #};
 
-  environment.systemPackages = import ./packages.nix pkgs;
+  environment.systemPackages = with pkgs; [
+    git
+    home-manager
+    neovim
+    rxvt-unicode
+  ]
 
   # programs.firefox = {
   #   enable = true;

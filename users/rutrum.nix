@@ -11,9 +11,6 @@ in {
 
     ./modules/games.nix
     ./modules/3d_printing.nix
-
-    ../services/picom.nix
-    ../services/polybar.nix
   ];
 
   xdg.mimeApps = {
