@@ -4,6 +4,7 @@
     ./bash.nix
     ./starship.nix
     ./neovim.nix
+    ./nix.nix
   ];
 
   programs = {
@@ -23,7 +24,6 @@
       enableBashIntegration = true;
     };
   };
-
 
   home.packages = with pkgs; [
     just

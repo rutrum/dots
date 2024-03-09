@@ -4,11 +4,11 @@ let
 in {
   
   imports = [
-    ./modules/alacritty.nix
     ./modules/cli
-    ./modules/urxvt.nix
+    ./modules/terminal
     ./modules/video-production.nix
-
+    ./modules/office.nix
+    ./modules/ssh.nix
     ./modules/games.nix
     ./modules/3d_printing.nix
 
@@ -48,26 +48,8 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  # requires xserver enabled in system config
-  # xsession = {
-    # enable = true;
-
-    # windowManager.herbstluftwm = import ./herbstluftwm.nix { 
-    #   pkgs = pkgs-stable; 
-    #   terminal = terminal;
-    # };
-    # windowManager.xmonad.enable = true;
-
-    # windowManager.awesome.enable = true;
-  # };
-
-  # home.file.awesome = {
-    # source = config.lib.file.mkOutOfStoreSymlink ./awesome.lua;
-    # target = ".config/awesome/rc.lua";
-  # };
-
   home.file.xmonad = {
-    source = ../xmonad.hs;
+    source = ./modules/x/xmonad.hs;
     target = ".config/xmonad/xmonad.hs";
   };
 
@@ -93,65 +75,9 @@ in {
     videos = null;
   };
 
-  nix.registry = {
-    # redo nixpkgs to be stable
-    nixpkgs = {
-      from = {
-        type = "indirect";
-        id = "nixpkgs";
-      };
-      to = {
-        type = "github";
-        owner = "NixOS";
-        repo = "nixpkgs";
-        ref = "nixos-23.11"; # TODO: make this a variable somewhere
-      };
-    };
-
-    # add nixpkgs unstable
-    unstable = {
-      from = {
-        type = "indirect";
-        id = "unstable";
-      };
-      to = {
-        type = "github";
-        owner = "NixOS";
-        repo = "nixpkgs";
-        ref = "nixos-unstable";
-      };
-    };
-  };
-
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    rofi = {
-      enable = true;
-      extraConfig = {
-        lines = 10;
-        show-icons = true;
-      };
-      theme = "glue_pro_blue";
-    };
-
-    ssh = {
-      enable = true;
-      matchBlocks = {
-        vultr = {
-          hostname = "45.63.65.162";
-        };
-        thomas = {
-          hostname = "thomas.butler.edu";
-          user = "dpurdum";
-        };
-        bigdawg = {
-          hostname = "bigdawg.butler.edu";
-          user = "dpurdum";
-        };
-      };
-    };
   };
 
   home.packages = with pkgs; [
@@ -166,25 +92,16 @@ in {
     gnome.simple-scan
     nextcloud-client
     armcord
-    libreoffice
     sxiv
     pavucontrol
     anki-bin
     font-manager
     bitwarden
     jellyfin-media-player
-    drawio
     calibre
     freetube
 
-    # graphics stuff
-    #nixgl.auto.nixGLNvidia
     vlc
-
-    # fonts
-    nerdfonts
-    noto-fonts-emoji
-    iosevka-bin
 
     # command line utilities
 
