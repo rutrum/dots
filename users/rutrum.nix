@@ -9,6 +9,7 @@ in {
     ./modules/neovim.nix
     ./modules/starship.nix
     ./modules/urxvt.nix
+    ./modules/video-production.nix
 
     ./modules/games.nix
     ./modules/3d_printing.nix
@@ -182,7 +183,6 @@ in {
     # graphical applications
     mullvad-browser
     mullvad-vpn
-    obs-studio
     thunderbird
     zathura
     flameshot
