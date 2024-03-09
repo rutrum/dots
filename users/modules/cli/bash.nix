@@ -23,6 +23,10 @@ in {
 
         # ^S no longer pauses terminal
         stty -ixon
+
+        nrn () {
+          nix run nixpkgs#"$1"
+        }
       '';
       profileExtra = ''
         # add nix application desktop files

@@ -43,6 +43,7 @@
     wget
     cmus
     unzip
+    fzf
     yazi # terminal file browser
     ueberzugpp # for yazi terminal image previews
   ];
