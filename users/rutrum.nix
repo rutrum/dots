@@ -5,9 +5,7 @@ in {
   
   imports = [
     ./modules/alacritty.nix
-    ./modules/bash.nix
-    ./modules/neovim.nix
-    ./modules/starship.nix
+    ./modules/cli
     ./modules/urxvt.nix
     ./modules/video-production.nix
 
@@ -129,15 +127,6 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    git = {
-      enable = true;
-      userEmail = "dave@rutrum.net";
-      userName = "rutrum";
-      extraConfig = {
-        pull.rebase = false;
-      };
-    };
-
     rofi = {
       enable = true;
       extraConfig = {
@@ -162,13 +151,6 @@ in {
           user = "dpurdum";
         };
       };
-    };
-
-    dircolors.enable = true;
-
-    zoxide = {
-      enable = true;
-      enableBashIntegration = true;
     };
   };
 
@@ -205,25 +187,6 @@ in {
     iosevka-bin
 
     # command line utilities
-    just
-    ripgrep
-    pandoc
-    tealdeer
-    bat
-    fd
-    du-dust
-    watchexec
-    yt-dlp
-    neofetch
-    tree
-    trash-cli
-    htop
-    nvtop
-    wget
-    cmus
-    unzip
-    yazi # terminal file browser
-    ueberzugpp # for yazi terminal image previews
 
     # container and virtual machines
     distrobox
