@@ -15,6 +15,8 @@
     ../modules/docker.nix
   ];
 
+  networking.hostName = "rumtower";
+
   # let's play with containers
   # systemd podman volumes are stored in default location:
   # /var/lib/containers/storage
@@ -52,7 +54,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "rumtower"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking

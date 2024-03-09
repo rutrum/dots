@@ -129,8 +129,6 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    #firefox = import ./firefox.nix { inherit (inputs) firefox-addons pkgs-stable; };
-
     git = {
       enable = true;
       userEmail = "dave@rutrum.net";
@@ -165,10 +163,6 @@ in {
         };
       };
     };
-
-    # fish = {
-    # enable = true;
-    # };
 
     dircolors.enable = true;
 
@@ -210,9 +204,6 @@ in {
     noto-fonts-emoji
     iosevka-bin
 
-    # hardware management?
-    psensor
-
     # command line utilities
     just
     ripgrep
@@ -241,12 +232,10 @@ in {
 
     pods # ui for podman
 
-    # ricing
-    feh
-
     # hardware utilities
     acpi
     brightnessctl
+    psensor
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec
