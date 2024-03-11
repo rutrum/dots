@@ -39,7 +39,6 @@
     tree
     trash-cli
     htop
-    nvtop
     wget
     cmus
     unzip
