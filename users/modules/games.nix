@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  nixpkgs.config.allowUnfree = true; # for steam
   home.packages = with pkgs; [
     steam
     superTuxKart

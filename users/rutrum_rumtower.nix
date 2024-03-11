@@ -2,10 +2,28 @@
 let
   terminal = "urxvt";
 in {
+  
   imports = [
     ./modules/cli
+    ./modules/terminal
+    ./modules/video-production.nix
+    ./modules/office.nix
     ./modules/ssh.nix
+    ./modules/games.nix
+    ./modules/3d_printing.nix
+    ./modules/flatpak.nix
+
+    (import ./modules/firefox.nix inputs)
   ];
+
+  xdg.mimeApps = {
+    enable = false;
+    defaultApplications = {
+      "application/pdf" = "zathura.desktop";
+    };
+  };
+
+  bash.terminal = "alacritty"; # should probably find a better spot for this
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -22,21 +40,7 @@ in {
   # changes in each release.
   home.stateVersion = "23.05";
 
-  # for nvidia drivers
-  nixpkgs.config.allowUnfree = true;
-
-  home.sessionPath = [
-    "/home/rutrum/.nix-profile/bin"
-  ];
-
   fonts.fontconfig.enable = true;
-
-  #home.file.xmonad = {
-  #  source = ./modules/x/xmonad.hs;
-  #  target = ".config/xmonad/xmonad.hs";
-  #};
-
-  # Home Directories
 
   # symlink my music directory
   #home.file.music = {
@@ -59,9 +63,46 @@ in {
   };
 
   programs = {
-    # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    # graphical applications
+    mullvad-browser
+    mullvad-vpn
+    thunderbird
+    zathura
+    flameshot
+    gimp
+    gnome.simple-scan
+    nextcloud-client
+    armcord
+    sxiv
+    pavucontrol
+    anki-bin
+    font-manager
+    bitwarden
+    jellyfin-media-player
+    calibre
+    freetube
+    vlc
+
+    # container and virtual machines
+    distrobox
+    # podman
+    # podman-compose
+
+    pods # ui for podman
+
+    # hardware utilities
+    acpi
+    brightnessctl
+    psensor
+
+    # dont exist yet with nixpkgs, but cargo install works
+    #vtracer toml-cli ytop checkexec
+
+    # my flakes
+    # inputs.wasm4
+  ];
 }
