@@ -12,6 +12,8 @@ in {
   home.username = "rutrum";
   home.homeDirectory = "/home/rutrum";
 
+  bash.terminal = "alacritty"; # should probably find a better spot for this
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
