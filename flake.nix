@@ -36,6 +36,12 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+
+    # nix/nvim framework
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
 
   outputs = { home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
@@ -66,6 +72,7 @@
         inherit pkgs;
         modules = [ 
           inputs.flatpaks.homeManagerModules.default
+          inputs.nixvim.homeManagerModules.nixvim
           ./users/rutrum.nix 
         ];
         extraSpecialArgs = { inherit inputs; };
@@ -75,6 +82,7 @@
         inherit pkgs;
         modules = [ 
           inputs.flatpaks.homeManagerModules.default
+          inputs.nixvim.homeManagerModules.nixvim
           ./users/rutrum_rumtower.nix
         ];
         extraSpecialArgs = { inherit inputs; };

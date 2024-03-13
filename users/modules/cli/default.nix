@@ -32,6 +32,7 @@
     tealdeer
     bat
     fd
+    jq
     du-dust
     watchexec
     yt-dlp

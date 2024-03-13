@@ -36,19 +36,61 @@
     };
   };
 
-  # play with flatpak
-  #services.flatpak = {
-  #  # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
-  #  # doesn't work because script can use ping...I can't use ping either
-  #  enableModule = true;
-  #  remotes = {
-  #    "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-  #  };
-  #  packages = [
-  #    #"flathub:app/org.openscad.OpenSCAD//beta"
-  #    "flathub:app/info.beyondallreason.bar//master"
-  #  ];
-  #};
+  # play with wiki
+  services.mediawiki = {
+    enable = true;
+    passwordSender = "";
+    passwordFile = pkgs.writeText "password" "password1234dd";
+    #database.type = "sqlite";
+    #database.port = 3307;
+    url = "http://localhost:80";
+    httpd.virtualHost.listen = [
+      {
+        ip = "127.0.0.1";
+        port = 80;
+        ssl = false;
+      }
+    ];
+    webserver = "nginx";
+    extraConfig = ''
+      # Disable anonymous editing
+      $wgGroupPermissions['*']['edit'] = false;
+    '';
+  };
+
+  # syncthing
+  services.syncthing = {
+    enable = true;
+    user = "rutrum";
+    dataDir = "/home/rutrum/sync";
+    openDefaultPorts = true;
+    settings = {
+      folders = {
+        music = {
+          id = "pcmtp-7hjbs";
+          path = "/mnt/barracuda/media/music";
+          type = "sendonly";
+          devices = [ "rumbeta" ];
+        };
+        photos = {
+          id = "pixel_6a_bde5-photos";
+          path = "/mnt/barracuda/media/pictures/pixel6a_camera";
+          type = "receiveonly";
+          devices = [ "rumbeta" ];
+        };
+        #roms = {
+        #};
+        notes = {
+          id = "mqkjy-xoe93";
+          path = "/mnt/barracuda/notes";
+          devices = [ "rumbeta" ];
+        };
+      };
+      devices = {
+        rumbeta.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";
+      };
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
