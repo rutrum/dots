@@ -5,7 +5,10 @@
   # Electron and Chromium with Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     gnome.gnome-tweaks
-  ];
+
+  ]) ++ (with pkgs.gnomeExtensions; [
+    forge
+  ]);
 }

@@ -19,6 +19,7 @@ in {
         extensions.fzf-native.enable = true;
       };
       surround.enable = true;
+      nvim-ufo.enable = false;
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
@@ -35,9 +36,14 @@ in {
       tabstop = 4;
       shiftwidth = 4;
       expandtab = true;
+      smartindent = true;
 
       updatetime = 100;
       mouse = "a";
+
+      # don't keep things highlighted after search
+      hlsearch = false;
+      scrolloff = 8;
     };
 
     keymaps = [

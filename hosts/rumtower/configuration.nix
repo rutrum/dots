@@ -36,6 +36,10 @@
     };
   };
 
+  # Fonts
+  # This should be a module
+  fonts.fontDir.enable = true;
+
   # play with wiki
   services.mediawiki = {
     enable = true;
@@ -158,6 +162,9 @@
     videoDrivers = ["nvidia"];
   };
 
+  #services.gnome.core-utilities.enable =  false;
+  # consider manually adding back certain utilities
+
   #nvidia crap
   hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
   hardware.nvidia = {
@@ -182,6 +189,8 @@
 
   environment.systemPackages = with pkgs; [
     neovim git home-manager
+
+    # gnome stuff
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
