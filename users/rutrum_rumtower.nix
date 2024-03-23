@@ -12,6 +12,7 @@ in {
     ./modules/games.nix
     ./modules/3d_printing.nix
     ./modules/flatpak.nix
+    ./modules/databases.nix
 
     (import ./modules/firefox.nix inputs)
   ];
@@ -47,6 +48,11 @@ in {
   #  source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
   #  target = "music";
   #};
+
+  programs.nix-index = {
+    enable = true;
+    enableBashIntegration = true;
+  };
 
   xdg.userDirs = {
     enable = true;
