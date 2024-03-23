@@ -68,12 +68,30 @@
         ];
       };
 
+      nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.flatpaks.nixosModules.default
+          ( import ./hosts/rumnas/configuration.nix )
+        ];
+      };
+
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
           inputs.flatpaks.homeManagerModules.default
           inputs.nixvim.homeManagerModules.nixvim
           ./users/rutrum.nix 
+        ];
+        extraSpecialArgs = { inherit inputs; };
+      };
+
+      homeConfigurations."rutrum@rumnas" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ 
+          inputs.flatpaks.homeManagerModules.default
+          inputs.nixvim.homeManagerModules.nixvim
+          ./users/rutrum_rumnas.nix 
         ];
         extraSpecialArgs = { inherit inputs; };
       };
