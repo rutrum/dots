@@ -9,6 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../modules/nix.nix
+      ../modules/8bitdo.nix
+      ../modules/ssh_server.nix
     ];
 
   # put this somewhere, required for BAR and openscad
