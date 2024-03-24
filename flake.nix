@@ -77,13 +77,21 @@
         ];
         extraSpecialArgs = { inherit inputs; };
       };
-
       homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
           inputs.flatpaks.homeManagerModules.default
           inputs.nixvim.homeManagerModules.nixvim
           ./users/rutrum_rumtower.nix
+        ];
+        extraSpecialArgs = { inherit inputs; };
+      };
+      homeConfigurations."rutrum@rumprism" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ 
+          inputs.flatpaks.homeManagerModules.default
+          inputs.nixvim.homeManagerModules.nixvim
+          ./users/rutrum_rumprism.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
