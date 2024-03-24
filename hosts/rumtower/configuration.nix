@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../modules/gnome.nix
 
+    ../modules/nix.nix
     ../modules/paperless.nix
     ../modules/printing.nix
     ../modules/firefly.nix
@@ -110,13 +111,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   services.flatpak.enable = true;
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   fileSystems = {
     #"/".device = "/dev/nvme0n1";
