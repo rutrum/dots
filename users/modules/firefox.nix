@@ -13,6 +13,7 @@
         ublock-origin
         sponsorblock
         floccus
+        dearrow
       ];
 
       # referenced https://brainfucksec.github.io/firefox-hardening-guide

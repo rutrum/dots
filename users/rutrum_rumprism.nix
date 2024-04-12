@@ -67,7 +67,6 @@
     #thunderbird
     zathura
     flameshot
-    #gimp
     gnome.simple-scan
     nextcloud-client
     #armcord

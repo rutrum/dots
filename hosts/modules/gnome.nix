@@ -7,8 +7,8 @@
 
   environment.systemPackages = (with pkgs; [
     gnome.gnome-tweaks
-
   ]) ++ (with pkgs.gnomeExtensions; [
     forge
+    gsnap
   ]);
 }

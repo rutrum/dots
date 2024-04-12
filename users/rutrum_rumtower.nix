@@ -7,6 +7,7 @@ in {
     ./modules/cli
     ./modules/terminal
     ./modules/video-production.nix
+    ./modules/photo-production.nix
     ./modules/office.nix
     ./modules/ssh.nix
     ./modules/games.nix
@@ -78,11 +79,10 @@ in {
     mullvad-vpn
     thunderbird
     zathura
-    flameshot
-    gimp
+    flameshot # x only?
     gnome.simple-scan
     nextcloud-client
-    armcord
+    inputs.pkgs_unstable.armcord
     sxiv
     pavucontrol
     anki-bin
@@ -104,6 +104,8 @@ in {
     acpi
     brightnessctl
     psensor
+
+    rustdesk
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec

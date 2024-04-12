@@ -4,38 +4,21 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [
     ./hardware-configuration.nix
     ../modules/gnome.nix
+    ../modules/nvidia.nix
 
     ../modules/nix.nix
     ../modules/paperless.nix
     ../modules/printing.nix
     ../modules/firefly.nix
     ../modules/docker.nix
+    ../modules/rustdesk.nix
+    ../modules/jellyfin.nix
   ];
 
   networking.hostName = "rumtower";
-
-  # let's play with containers
-  # systemd podman volumes are stored in default location:
-  # /var/lib/containers/storage
-  # https://mynixos.com/nixpkgs/option/virtualisation.containers.storage.settings
-  # you can see the containers running using podman ps as the *root* user
-  virtualisation.oci-containers = {
-    containers = {
-      jellyfin = {
-        image = "linuxserver/jellyfin";
-        ports = [ "8096:8096" ];
-        autoStart = true;
-        volumes = [ 
-          "/mnt/barracuda/media:/media" 
-          "jellyfin_config:/config"
-        ];
-      };
-    };
-  };
 
   # Fonts
   # This should be a module
@@ -151,30 +134,20 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    desktopManager.xfce.enable = true;
     layout = "us";
     xkbVariant = "";
-    videoDrivers = ["nvidia"];
   };
 
   #services.gnome.core-utilities.enable =  false;
   # consider manually adding back certain utilities
 
-  #nvidia crap
-  hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rutrum = {
     isNormalUser = true;
     description = "rutrum";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -183,27 +156,9 @@
 
   environment.systemPackages = with pkgs; [
     neovim git home-manager
-
-    # gnome stuff
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
   networking.firewall.enable = false;
   networking.nftables.enable = true;
 
