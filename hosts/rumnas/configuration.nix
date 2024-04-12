@@ -12,8 +12,11 @@
       ../modules/8bitdo.nix
       ../modules/ssh_server.nix
       ../modules/rustdesk.nix
+      ../modules/heimdall.nix
       ../modules/nvidia.nix
     ];
+
+  heimdall.port = 80;
 
   # put this somewhere, required for BAR and openscad
   services.flatpak.enable = true;
