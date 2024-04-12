@@ -11,6 +11,7 @@
       ../modules/nix.nix
       ../modules/8bitdo.nix
       ../modules/ssh_server.nix
+      ../modules/docker.nix
       ../modules/rustdesk.nix
       ../modules/heimdall.nix
       ../modules/nvidia.nix
