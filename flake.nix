@@ -60,6 +60,13 @@
         ];
       };
 
+      nixosConfigurations."rumpi" = pkgs.lib.nixosSystem {
+        system = "aarch64";
+        modules = [
+          ( import ./hosts/rumpi/configuration.nix )
+        ];
+      };
+
       nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -69,6 +76,14 @@
       };
 
       nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.flatpaks.nixosModules.default
+          ( import ./hosts/rumnas/configuration.nix )
+        ];
+      };
+
+      nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           inputs.flatpaks.nixosModules.default
