@@ -22,7 +22,7 @@
       image = "ghcr.io/home-assistant/home-assistant:stable";
       ports = [ "8082:8123" "1400:1400" ];
       volumes = [
-        "$HOME/volumes/home-assistant/config:/config"
+        "/root/volumes/home-assistant/config:/config"
         "/etc/localtime:/etc/localtime:ro"
       ];
       # doens't feel necessary when /localtime is mapped
@@ -44,7 +44,10 @@
         S0_LEGACY_KEY = "17DFB0C1BED4CABFF54E4B5375E257B3";
       };
       extraOptions = [
-        "--device=/home/rutrum/HubZ:/dev/zwave"
+        # Find the device for the hub and map it.  Previous config mapped to symlink:
+        # HubZ -> /dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0
+        #"--device=/home/rutrum/HubZ:/dev/zwave"
+        "--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if01-port0:/dev/zwave"
         "--network=home-assistant"
       ];
     };

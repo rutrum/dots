@@ -16,6 +16,7 @@
     ../modules/firefly.nix
     ../modules/docker.nix
     ../modules/jellyfin.nix
+    ../modules/home-assistant.nix
   ];
 
   networking.hostName = "rumtower";
