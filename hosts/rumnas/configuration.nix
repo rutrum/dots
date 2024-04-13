@@ -23,6 +23,8 @@
   # put this somewhere, required for BAR and openscad
   services.flatpak.enable = true;
 
+  # TODO: configure caddy for web services
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,6 +37,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  networking.firewall.enable = true; # remove this sometime?
 
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";
@@ -73,7 +77,7 @@
   users.users.rutrum = {
     isNormalUser = true;
     description = "rutrum";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
 

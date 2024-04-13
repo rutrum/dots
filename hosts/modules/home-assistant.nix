@@ -6,7 +6,7 @@
       image = "ghcr.io/home-assistant/home-assistant:stable";
       ports = [ "8082:8123" "1400:1400" ];
       volumes = [
-        # "/somewhere:/config"
+        # "$HOME/volumes/home-assistant/config:/config"
         "/etc/localhost:/etc/localtime:ro"
       ];
       environment = {

@@ -23,6 +23,7 @@ in {
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
+      vim-nix
     ];
 
     globals = {
