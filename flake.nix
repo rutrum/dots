@@ -83,14 +83,6 @@
         ];
       };
 
-      nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.flatpaks.nixosModules.default
-          ( import ./hosts/rumnas/configuration.nix )
-        ];
-      };
-
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
