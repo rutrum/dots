@@ -1,30 +1,52 @@
 { pkgs, config, ... }:
 {
-# TODO: not finished, needs testing
+  systemd.services.init-home-assistant-network = {
+    description = "Create network for home-assistant containers.";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig.type = "oneshot";
+    script = let
+      dockercli = "${config.virtualisation.docker.package}/bin/docker";
+    in ''
+      check=$(${dockercli} network ls | grep "home-assistant" || true)
+      if [ -z "$check" ]; then
+        ${dockercli} network create home-assistant
+      else
+        echo "Network 'home-assistant' already exists."
+      fi
+    '';
+  };
   virtualisation.oci-containers.containers = {
     home-assistant = {
       image = "ghcr.io/home-assistant/home-assistant:stable";
       ports = [ "8082:8123" "1400:1400" ];
       volumes = [
-        # "$HOME/volumes/home-assistant/config:/config"
-        "/etc/localhost:/etc/localtime:ro"
+        "$HOME/volumes/home-assistant/config:/config"
+        "/etc/localtime:/etc/localtime:ro"
       ];
-      environment = {
-        TZ = "America/Chicago";
-      };
-      dependsOn = [];
+      # doens't feel necessary when /localtime is mapped
+      #environment = {
+      #  TZ = "America/Chicago";
+      #};
       autoStart = true;
+      extraOptions = [
+        "--network=home-assistant"
+      ];
     };
     home-assistant-zwave-js = {
       image = "kpine/zwave-js-server:latest";
       # ports = [ "8083:3000" ]; # shouldn't be necessary, only home-assistant needs this
-      #? devices = "";
       environment = {
         S2_ACCESS_CONTROL_KEY = "7764841BC794A54442E324682A550CEF";
         S2_AUTHENTICATED_KEY = "66EA86F088FFD6D7497E0B32BC0C8B99";
         S2_UNAUTHENTICATED_KEY = "2FAB1A27E19AE9C7CC6D18ACEB90C357";
         S0_LEGACY_KEY = "17DFB0C1BED4CABFF54E4B5375E257B3";
       };
+      extraOptions = [
+        "--device=/home/rutrum/HubZ:/dev/zwave"
+        "--network=home-assistant"
+      ];
     };
   };
 }
