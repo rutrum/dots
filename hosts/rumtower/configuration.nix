@@ -11,10 +11,10 @@
 
     ../modules/nix.nix
     ../modules/paperless.nix
+    ../modules/adguard-home.nix
     ../modules/printing.nix
     ../modules/firefly.nix
     ../modules/docker.nix
-    ../modules/rustdesk.nix
     ../modules/jellyfin.nix
   ];
 

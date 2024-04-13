@@ -15,6 +15,7 @@
       ../modules/rustdesk.nix
       ../modules/heimdall.nix
       ../modules/nvidia.nix
+      ../modules/adguard-home.nix
     ];
 
   heimdall.port = 80;
