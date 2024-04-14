@@ -10,6 +10,8 @@
       ./hardware-configuration.nix
       ../modules/octoprint.nix
     ];
+    
+  # TODO: configure syncthing for sharing gcode files
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
   boot.loader.grub.enable = false;
