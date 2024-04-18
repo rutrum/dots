@@ -17,6 +17,8 @@
     ../modules/docker.nix
     ../modules/jellyfin.nix
     ../modules/home-assistant.nix
+
+    ../modules/mouse.nix
   ];
 
   networking.hostName = "rumtower";
