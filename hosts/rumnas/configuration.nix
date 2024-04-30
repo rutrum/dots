@@ -16,6 +16,7 @@
       ../modules/heimdall.nix
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
+      ../modules/home-assistant.nix
     ];
 
   heimdall.port = 80;
@@ -24,6 +25,12 @@
   services.flatpak.enable = true;
 
   # TODO: configure caddy for web services
+
+  # stop sleeping/hibernating/suspend
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
