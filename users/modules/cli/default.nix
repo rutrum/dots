@@ -1,9 +1,10 @@
+inputs:
 { pkgs, config, ... }:
 {
   imports = [
     ./bash.nix
     ./starship.nix
-    ./neovim.nix
+    (import ./neovim.nix inputs)
     ./nix.nix
   ];
 

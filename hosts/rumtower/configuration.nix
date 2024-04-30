@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS 
 # manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -17,8 +17,15 @@
     ../modules/docker.nix
     ../modules/jellyfin.nix
     ../modules/home-assistant.nix
+    ../modules/8bitdo.nix
 
     ../modules/mouse.nix
+    ../modules/tailscale.nix
+
+    # cheers to this guy:
+    # https://discourse.nixos.org/t/use-a-module-from-nixpkgs-unstable-in-flake/31463/4
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/tabby.nix"
+    (import ../modules/tabby.nix inputs.nixpkgs-unstable)
   ];
 
   networking.hostName = "rumtower";
