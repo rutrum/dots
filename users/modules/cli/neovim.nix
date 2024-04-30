@@ -1,3 +1,4 @@
+{ nixpkgs-unstable, ... }:
 { config, lib, pkgs, ... }:
 let
   telescope = "require('telescope.builtin')";
@@ -20,10 +21,15 @@ in {
       };
       surround.enable = true;
       nvim-ufo.enable = false;
+      #cmp-tabby = {
+      #  enable = true;
+      #  host = "http://localhost:11029";
+      #};
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
       vim-nix
+      nixpkgs-unstable.legacyPackages.x86_64-linux.vimPlugins.cmp-tabby
     ];
 
     globals = {
@@ -76,6 +82,12 @@ in {
       vim.keymap.set("", 'T', function()
         hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
       end, {remap=true})
+
+      local tabby = require('cmp_tabby.config')
+      tabby:setup({
+          host = 'http://localhost:11029',
+          max_lines = 1000,
+      })
     '';
 
     #colorschemes.catppuccin = {

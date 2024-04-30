@@ -69,10 +69,17 @@
         # "webgl.force-enabled" = true;
       };
       search = {
-        default = "DuckDuckGo";
+        default = "Searxng";
         force = true;
 
         engines = {
+          "Searxng" = {
+            urls = [{
+              template = "https://etsi.me/search";
+              params = [{ name = "q"; value = "{searchTerms}"; }];
+            }];
+            definedAliases = [ "srx" ];
+          };
           "Nix Packages" = {
             urls = [{
               template = "https://search.nixos.org/packages";

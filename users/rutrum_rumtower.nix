@@ -4,7 +4,7 @@ let
 in {
   
   imports = [
-    ./modules/cli
+    (import ./modules/cli inputs)
     ./modules/terminal
     ./modules/video-production.nix
     ./modules/photo-production.nix
@@ -14,6 +14,7 @@ in {
     ./modules/3d_printing.nix
     ./modules/flatpak.nix
     ./modules/databases.nix
+    ./modules/networking.nix
 
     (import ./modules/firefox.nix inputs)
   ];
@@ -82,7 +83,7 @@ in {
     flameshot # x only?
     gnome.simple-scan
     nextcloud-client
-    inputs.pkgs_unstable.armcord
+    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.armcord
     sxiv
     pavucontrol
     anki-bin

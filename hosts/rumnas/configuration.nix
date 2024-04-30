@@ -17,6 +17,7 @@
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
       ../modules/home-assistant.nix
+      ../modules/tailscale.nix
     ];
 
   heimdall.port = 80;
