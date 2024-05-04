@@ -17,6 +17,7 @@
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
       ../modules/tailscale.nix
+      ../modules/games.nix
     ];
 
   heimdall.port = 80;

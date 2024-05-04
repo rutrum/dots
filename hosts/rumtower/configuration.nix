@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ../modules/gnome.nix
     ../modules/nvidia.nix
+    ../modules/games.nix
 
     ../modules/nix.nix
     ../modules/paperless.nix
@@ -16,7 +17,6 @@
     ../modules/firefly.nix
     ../modules/docker.nix
     ../modules/jellyfin.nix
-    ../modules/home-assistant.nix
     ../modules/8bitdo.nix
 
     ../modules/mouse.nix
