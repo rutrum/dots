@@ -21,6 +21,7 @@
 
     ../modules/mouse.nix
     ../modules/tailscale.nix
+    ../modules/rustdesk_client.nix
 
     # cheers to this guy:
     # https://discourse.nixos.org/t/use-a-module-from-nixpkgs-unstable-in-flake/31463/4

@@ -12,7 +12,8 @@
       ../modules/8bitdo.nix
       ../modules/ssh_server.nix
       ../modules/docker.nix
-      ../modules/rustdesk.nix
+      ../modules/rustdesk_server.nix
+      ../modules/rustdesk_client.nix
       ../modules/heimdall.nix
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
