@@ -20,6 +20,7 @@
       ../modules/home-assistant.nix
       ../modules/tailscale.nix
       ../modules/games.nix
+      ../modules/nocodb.nix
     ];
 
   heimdall.port = 80;
