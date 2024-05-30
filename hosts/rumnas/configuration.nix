@@ -21,6 +21,7 @@
       ../modules/tailscale.nix
       ../modules/games.nix
       ../modules/nocodb.nix
+      ../modules/ai.nix
     ];
 
   heimdall.port = 80;
@@ -29,6 +30,9 @@
   services.flatpak.enable = true;
 
   # TODO: configure caddy for web services
+
+  # allow x forwarding
+  programs.ssh.forwardX11 = true;
 
   # stop sleeping/hibernating/suspend
   systemd.targets.sleep.enable = false;
@@ -46,10 +50,17 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  fileSystems = {
+    "/mnt/vault" = { 
+      device = "/dev/md127";
+      fsType = "btrfs";
+    };
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
 
-  networking.firewall.enable = true; # remove this sometime?
+  networking.firewall.enable = false; # remove this sometime?
 
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";
