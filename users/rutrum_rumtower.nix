@@ -74,44 +74,45 @@ in {
     home-manager.enable = true;
   };
 
-  home.packages = with pkgs; [
-    # graphical applications
-    mullvad-browser
-    mullvad-vpn
-    thunderbird
-    zathura
-    flameshot # x only?
-    gnome.simple-scan
-    nextcloud-client
-    inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.armcord
-    sxiv
-    pavucontrol
-    anki-bin
-    font-manager
-    bitwarden
-    jellyfin-media-player
-    calibre
-    freetube
-    vlc
+  home.packages = let 
+    stable-packages = with pkgs; [
+      # graphical applications
+      mullvad-browser
+      mullvad-vpn
+      thunderbird
+      zathura
+      flameshot # x only?
+      gnome.simple-scan
+      nextcloud-client
+      sxiv
+      pavucontrol
+      anki-bin
+      font-manager
+      bitwarden
+      jellyfin-media-player
+      calibre
+      vlc
 
-    # container and virtual machines
-    distrobox
-    # podman
-    # podman-compose
+      # container and virtual machines
+      distrobox
+      # podman
+      # podman-compose
 
-    pods # ui for podman
+      pods # ui for podman
 
-    # hardware utilities
-    acpi
-    brightnessctl
-    psensor
+      # hardware utilities
+      acpi
+      brightnessctl
+      psensor
 
-    rustdesk
+      rustdesk
 
-    # dont exist yet with nixpkgs, but cargo install works
-    #vtracer toml-cli ytop checkexec
-
-    # my flakes
-    # inputs.wasm4
-  ];
+      # dont exist yet with nixpkgs, but cargo install works
+      #vtracer toml-cli ytop checkexec
+    ];
+    unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
+      armcord
+      freetube
+    ];
+  in stable-packages ++ unstable-packages;
 }

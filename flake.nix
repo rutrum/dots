@@ -3,7 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -73,6 +73,7 @@
           inputs.flatpaks.nixosModules.default
           ( import ./hosts/rumtower/configuration.nix )
         ];
+        specialArgs = { inherit inputs; };
       };
 
       nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
