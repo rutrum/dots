@@ -34,6 +34,14 @@
   # allow x forwarding
   programs.ssh.forwardX11 = true;
 
+  # backups?
+  services.borgbackup.repos.paperless = {
+    path = "/mnt/vault/backups/paperless";
+    authorizedKeys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
+    ];
+  };
+
   # stop sleeping/hibernating/suspend
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
