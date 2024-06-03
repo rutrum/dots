@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    dbeaver
+    dbeaver-bin
     sqlite-jdbc
     postgresql_jdbc
     mysql_jdbc

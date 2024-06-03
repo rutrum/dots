@@ -22,11 +22,7 @@
     ../modules/mouse.nix
     ../modules/tailscale.nix
     ../modules/rustdesk_client.nix
-
-    # cheers to this guy:
-    # https://discourse.nixos.org/t/use-a-module-from-nixpkgs-unstable-in-flake/31463/4
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/tabby.nix"
-    (import ../modules/tabby.nix inputs.nixpkgs-unstable)
+    ../modules/tabby.nix
   ];
 
   networking.hostName = "rumtower";
@@ -34,28 +30,6 @@
   # Fonts
   # This should be a module
   fonts.fontDir.enable = true;
-
-  # play with wiki
-  services.mediawiki = {
-    enable = true;
-    passwordSender = "";
-    passwordFile = pkgs.writeText "password" "password1234dd";
-    #database.type = "sqlite";
-    #database.port = 3307;
-    url = "http://localhost:80";
-    httpd.virtualHost.listen = [
-      {
-        ip = "127.0.0.1";
-        port = 80;
-        ssl = false;
-      }
-    ];
-    webserver = "nginx";
-    extraConfig = ''
-      # Disable anonymous editing
-      $wgGroupPermissions['*']['edit'] = false;
-    '';
-  };
 
   # syncthing
   services.syncthing = {
@@ -99,6 +73,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-ensure-profiles.after = [ "NetworkManager.service" ];
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -146,8 +122,8 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     desktopManager.xfce.enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   #services.gnome.core-utilities.enable =  false;

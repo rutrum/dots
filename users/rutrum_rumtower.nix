@@ -89,6 +89,7 @@ in {
       anki-bin
       font-manager
       bitwarden
+      qbittorrent
       jellyfin-media-player
       calibre
       vlc
@@ -106,6 +107,8 @@ in {
       psensor
 
       rustdesk
+
+      vscodium
 
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
