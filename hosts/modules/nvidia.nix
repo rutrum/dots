@@ -3,7 +3,15 @@
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
-  hardware.nvidia-container-toolkit.enable = true;
+
+  #hardware.nvidia-container-toolkit.enable = true;
+  virtualisation.docker.enableNvidia = true;
+  #virtualisation.docker.daemon.settings = {
+  #  runtimes.nvidia = {
+  #    path = "${pkgs.nvidia-container-toolkit}/bin/nvidia-container-runtime";
+  #    runtimeArgs = [];
+  #  };
+  #};
 
   hardware.nvidia = {
     modesetting.enable = true;

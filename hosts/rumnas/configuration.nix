@@ -22,6 +22,7 @@
       ../modules/games.nix
       ../modules/nocodb.nix
       ../modules/ai.nix
+      ../modules/tabby.nix
     ];
 
   heimdall.port = 80;
@@ -59,14 +60,15 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   fileSystems = {
-    "/mnt/vault" = { 
-      device = "/dev/md127";
-      fsType = "btrfs";
-    };
+    #"/mnt/vault" = { 
+    #  device = "/dev/md127";
+    #  fsType = "btrfs";
+    #};
   };
 
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   networking.firewall.enable = false; # remove this sometime?
 
