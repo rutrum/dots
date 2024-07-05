@@ -58,6 +58,11 @@
           path = "/mnt/barracuda/notes";
           devices = [ "rumbeta" ];
         };
+        prism-instances = {
+          id = "cdgrh-cn25a";
+          path = "/home/rutrum/.local/share/PrismLauncher/instances";
+          devices = [ ];
+        };
       };
       devices = {
         rumbeta.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";

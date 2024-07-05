@@ -25,10 +25,18 @@ in {
         enable = true;
         host = "http://localhost:11029";
       };
+      lsp = {
+        enable = true;
+        servers = {
+          # markdown
+          marksman.enable = true;
+        };
+      };
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
       #vim-nix
+      vim-markdown
     ];
 
     globals = {

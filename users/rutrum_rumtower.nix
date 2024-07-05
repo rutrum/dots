@@ -79,7 +79,10 @@ in {
       # graphical applications
       mullvad-browser
       mullvad-vpn
+
       thunderbird
+      protonmail-bridge-gui
+
       zathura
       flameshot # x only?
       gnome.simple-scan
@@ -112,6 +115,7 @@ in {
 
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
+      discord
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       armcord
