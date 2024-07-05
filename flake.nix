@@ -60,8 +60,8 @@
         ];
       };
 
-      nixosConfigurations."rumpi" = pkgs.lib.nixosSystem {
-        system = "aarch64";
+      nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
+        system = "aarch64-linux";
         modules = [
           ( import ./hosts/rumpi/configuration.nix )
         ];
