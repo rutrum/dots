@@ -6,6 +6,25 @@
       ../modules/tailscale.nix
   ];
 
+  services.syncthing = {
+    enable = true;
+    user = "rutrum";
+    dataDir = "/home/rutrum/sync";
+    openDefaultPorts = true;
+    settings = {
+      folders = {
+        prism-instances = {
+          id = "cdgrh-cn25a";
+          path = "/home/rutrum/.local/share/PrismLauncher/instances";
+          devices = [ "rumtower" ];
+        };
+      };
+      devices = {
+        rumtower.id = "VAMK7HO-ILEHTIX-P53VEG3-ZLDD4XO-AJEIP7J-WMBTQCS-GMEZSQD-YFYLZAQ";
+      };
+    };
+  };
+
   services.mullvad-vpn.enable = true;
 
   # Bootloader.
@@ -15,6 +34,7 @@
 
   networking.hostName = "rumprism";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

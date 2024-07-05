@@ -1,13 +1,13 @@
 { config, pkgs, inputs, ... }: 
 {
   imports = [
-    ./modules/cli
     ./modules/terminal
     ./modules/office.nix
     ./modules/ssh.nix
     ./modules/3d_printing.nix
     ./modules/flatpak.nix
     (import ./modules/firefox.nix inputs)
+    (import ./modules/cli inputs)
   ];
 
   xdg.mimeApps = {
@@ -75,18 +75,13 @@
     anki-bin
     font-manager
     bitwarden
-    #jellyfin-media-player
-    #calibre
-    #freetube
     vlc
+    prismlauncher # minecraft
+    localsend
 
     # container and virtual machines
     distrobox
     xorg.xhost # for graphical apps
-    # podman
-    # podman-compose
-
-    pods # ui for podman
 
     # hardware utilities
     acpi

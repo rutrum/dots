@@ -112,6 +112,7 @@ in {
       rustdesk
 
       vscodium
+      localsend
 
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec

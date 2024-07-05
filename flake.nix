@@ -51,7 +51,7 @@
         overlays = [ inputs.nixgl.overlay ];
       };
     in {
-      nixosConfigurations."rumprism" = pkgs.lib.nixosSystem {
+      nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ( import ./hosts/rumprism/configuration.nix )
