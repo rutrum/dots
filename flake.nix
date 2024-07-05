@@ -47,11 +47,11 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs-stable {
         inherit system;
+        config.allowUnfree = true;
         overlays = [ inputs.nixgl.overlay ];
       };
-      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
-      nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
+      nixosConfigurations."rumprism" = pkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ( import ./hosts/rumprism/configuration.nix )
