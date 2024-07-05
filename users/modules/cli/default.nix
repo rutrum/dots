@@ -1,9 +1,10 @@
+inputs:
 { pkgs, config, ... }:
 {
   imports = [
     ./bash.nix
     ./starship.nix
-    ./neovim.nix
+    (import ./neovim.nix inputs)
     ./nix.nix
   ];
 
@@ -46,5 +47,6 @@
     fzf
     yazi # terminal file browser
     ueberzugpp # for yazi terminal image previews
+    python3
   ];
 }

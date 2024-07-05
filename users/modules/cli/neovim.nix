@@ -1,3 +1,4 @@
+{ nixpkgs-unstable, ... }:
 { config, lib, pkgs, ... }:
 let
   telescope = "require('telescope.builtin')";
@@ -20,10 +21,22 @@ in {
       };
       surround.enable = true;
       nvim-ufo.enable = false;
+      cmp-tabby = {
+        enable = true;
+        host = "http://localhost:11029";
+      };
+      lsp = {
+        enable = true;
+        servers = {
+          # markdown
+          marksman.enable = true;
+        };
+      };
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
-      vim-nix
+      #vim-nix
+      vim-markdown
     ];
 
     globals = {

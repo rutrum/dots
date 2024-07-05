@@ -12,10 +12,17 @@
       ../modules/8bitdo.nix
       ../modules/ssh_server.nix
       ../modules/docker.nix
-      ../modules/rustdesk.nix
+      ../modules/rustdesk_server.nix
+      ../modules/rustdesk_client.nix
       ../modules/heimdall.nix
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
+      ../modules/home-assistant.nix
+      ../modules/tailscale.nix
+      ../modules/games.nix
+      ../modules/nocodb.nix
+      ../modules/ai.nix
+      ../modules/tabby.nix
     ];
 
   heimdall.port = 80;
@@ -24,6 +31,23 @@
   services.flatpak.enable = true;
 
   # TODO: configure caddy for web services
+
+  # allow x forwarding
+  programs.ssh.forwardX11 = true;
+
+  # backups?
+  services.borgbackup.repos.paperless = {
+    path = "/mnt/vault/backups/paperless";
+    authorizedKeys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
+    ];
+  };
+
+  # stop sleeping/hibernating/suspend
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -35,10 +59,18 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  fileSystems = {
+    #"/mnt/vault" = { 
+    #  device = "/dev/md127";
+    #  fsType = "btrfs";
+    #};
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
-  networking.firewall.enable = true; # remove this sometime?
+  networking.firewall.enable = false; # remove this sometime?
 
   # Set your time zone.
   time.timeZone = "America/Indiana/Indianapolis";

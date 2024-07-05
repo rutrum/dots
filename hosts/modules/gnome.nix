@@ -3,12 +3,12 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Electron and Chromium with Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  #environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = (with pkgs; [
     gnome.gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
     forge
-    gsnap
+    wintile-windows-10-window-tiling-for-gnome
   ]);
 }

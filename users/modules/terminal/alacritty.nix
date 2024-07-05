@@ -12,7 +12,7 @@
         normal.family = "Iosevka Nerd Font Mono";
       };
       inherit (lib.importTOML ./catppuccin-mocha.toml) colors;
-      key_bindings = [
+      keyboard.bindings = [
         { 
           key = "I";
           mods = "Alt";

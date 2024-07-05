@@ -4,7 +4,7 @@ let
 in {
   
   imports = [
-    ./modules/cli
+    (import ./modules/cli inputs)
     ./modules/terminal
     ./modules/video-production.nix
     ./modules/photo-production.nix
@@ -14,6 +14,7 @@ in {
     ./modules/3d_printing.nix
     ./modules/flatpak.nix
     ./modules/databases.nix
+    ./modules/networking.nix
 
     (import ./modules/firefox.nix inputs)
   ];
@@ -73,44 +74,52 @@ in {
     home-manager.enable = true;
   };
 
-  home.packages = with pkgs; [
-    # graphical applications
-    mullvad-browser
-    mullvad-vpn
-    thunderbird
-    zathura
-    flameshot # x only?
-    gnome.simple-scan
-    nextcloud-client
-    inputs.pkgs_unstable.armcord
-    sxiv
-    pavucontrol
-    anki-bin
-    font-manager
-    bitwarden
-    jellyfin-media-player
-    calibre
-    freetube
-    vlc
+  home.packages = let 
+    stable-packages = with pkgs; [
+      # graphical applications
+      mullvad-browser
+      mullvad-vpn
 
-    # container and virtual machines
-    distrobox
-    # podman
-    # podman-compose
+      thunderbird
+      protonmail-bridge-gui
 
-    pods # ui for podman
+      zathura
+      flameshot # x only?
+      gnome.simple-scan
+      nextcloud-client
+      sxiv
+      pavucontrol
+      anki-bin
+      font-manager
+      bitwarden
+      qbittorrent
+      jellyfin-media-player
+      calibre
+      vlc
 
-    # hardware utilities
-    acpi
-    brightnessctl
-    psensor
+      # container and virtual machines
+      distrobox
+      # podman
+      # podman-compose
 
-    rustdesk
+      pods # ui for podman
 
-    # dont exist yet with nixpkgs, but cargo install works
-    #vtracer toml-cli ytop checkexec
+      # hardware utilities
+      acpi
+      brightnessctl
+      psensor
 
-    # my flakes
-    # inputs.wasm4
-  ];
+      rustdesk
+
+      vscodium
+
+      # dont exist yet with nixpkgs, but cargo install works
+      #vtracer toml-cli ytop checkexec
+      discord
+    ];
+    unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
+      armcord
+      freetube
+    ];
+  in stable-packages ++ unstable-packages;
 }

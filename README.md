@@ -1,45 +1,57 @@
 # My Home-Manager Configuration
 
-Still a work in progress.  I think you can get started by downloading the repo, nix and home-manager, enabling flakes, then running
+My dotfiles are managed using [Home Manager](https://github.com/nix-community/home-manager).  All my computers run Home Manager using nix to specify my configuration files and installed user-space tools and applications.  Similarly, my linux machines run [NixOS](https://wiki.nixos.org/wiki/Overview_of_the_NixOS_Linux_distribution), an operating whose configuration is built on `nix`.  NixOS manages system configuration, like hardware drivers, firewall rules, systemd units, file systems, and desktop environments.  
 
-```
-home-manager switch --flake .
-```
+Together, these tools entirely define my home (and soon cloud) infrastructure and user-space configuration and tools.
 
-## From Scratch
+## Starting From Scratch
 
 ### NixOS
 
 On a new NixOS installation, run this from the home directory.
 
 ```
-nix-shell -p git home-manager ...
-git clone asdfasdfasdf
+nix-shell -p git
+git clone git@github.com:rutrum/dots.git
 cd ~/dots
-home-manager switch --flake .#rutrum
+nixos-rebuild switch --extra-experimental-features flakes \
+    --extra-experimental-features nix-command switch --flake .#<host>
 ```
 
-Then run `snrs` to load the system configuration.
 
-### Just Home Manager configuration
+### Home Manager
 
-Be sure to install nix.  Run above.
+In any linux environment with nix installed, run the following from the home directory.
+
+```
+nix-shell -p git home-manager
+git clone git@github.com:rutrum/dots.git
+cd ~/dots
+home-manager --extra-experimental-features flakes \
+    --extra-experimental-features nix-command switch --flake .#rutrum
+```
+
+Then run `snrs` to load the system configuration or run `hms` to reload the home-manager configuration.
 
 ## Directory Structure
 
 * `hosts`: machine specific NixOS configurations
 * `hosts/modules`: NixOS modules
-* `users`: user specific home-manager configurations
+* `users`: user/machine specific home-manager configurations
 * `users/modules`: home-manager modules
+
+The modules are not polished, nor meant for external use.  They are simply used to break up parts of my configuration and share between hosts and users.
 
 ## Hosts and Users
 
-I want to manage 3 NixOS configurations:
+I manage a few host machines on my home network:
 * `rumtower`: my gaming and main productivity rig
 * `rumprism`: my laptop for light productivity work
 * `rumnas`: my home NAS and server
+* `rumpi`: my Raspberry Pi 4
 
-Similarly, 3 home-manager configurations:
+Similarly, home-manager configurations:
 * `rutrum@rumtower`
 * `rutrum@rumprism`
-* `rutrum`: for every other system, including non-nixos systems, like my work laptop
+* `rutrum@rumnas`
+* `rutrum`: for every other system, including non-nixos systems, like my work laptop running Windows with WSL

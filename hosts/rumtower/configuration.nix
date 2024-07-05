@@ -1,13 +1,14 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS 
 # manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ../modules/gnome.nix
     ../modules/nvidia.nix
+    ../modules/games.nix
 
     ../modules/nix.nix
     ../modules/paperless.nix
@@ -16,7 +17,12 @@
     ../modules/firefly.nix
     ../modules/docker.nix
     ../modules/jellyfin.nix
-    ../modules/home-assistant.nix
+    ../modules/8bitdo.nix
+
+    ../modules/mouse.nix
+    ../modules/tailscale.nix
+    ../modules/rustdesk_client.nix
+    ../modules/tabby.nix
   ];
 
   networking.hostName = "rumtower";
@@ -24,28 +30,6 @@
   # Fonts
   # This should be a module
   fonts.fontDir.enable = true;
-
-  # play with wiki
-  services.mediawiki = {
-    enable = true;
-    passwordSender = "";
-    passwordFile = pkgs.writeText "password" "password1234dd";
-    #database.type = "sqlite";
-    #database.port = 3307;
-    url = "http://localhost:80";
-    httpd.virtualHost.listen = [
-      {
-        ip = "127.0.0.1";
-        port = 80;
-        ssl = false;
-      }
-    ];
-    webserver = "nginx";
-    extraConfig = ''
-      # Disable anonymous editing
-      $wgGroupPermissions['*']['edit'] = false;
-    '';
-  };
 
   # syncthing
   services.syncthing = {
@@ -74,6 +58,11 @@
           path = "/mnt/barracuda/notes";
           devices = [ "rumbeta" ];
         };
+        prism-instances = {
+          id = "cdgrh-cn25a";
+          path = "/home/rutrum/.local/share/PrismLauncher/instances";
+          devices = [ ];
+        };
       };
       devices = {
         rumbeta.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";
@@ -89,6 +78,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-ensure-profiles.after = [ "NetworkManager.service" ];
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -136,8 +127,8 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     desktopManager.xfce.enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   #services.gnome.core-utilities.enable =  false;

@@ -8,7 +8,9 @@
   
   # Fix for using Xinput mode on 8bitdo Ultimate C controller
   # Inspired by https://aur.archlinux.org/packages/8bitdo-ultimate-controller-udev
-  environment.systemPackages = [ pkgs.xboxdrv ];
+  environment.systemPackages = with pkgs; [ 
+      xboxdrv 
+  ];
   # Udev rules to start or stop systemd service when controller is connected or disconnected
   services.udev.extraRules = ''
     # May vary depending on your controller model, find product id using 'lsusb'
@@ -21,7 +23,7 @@
     unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --mimic-xpad --silent --type xbox360 --device-by-id %I --force-feedback";
+      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --silent --type xbox360 --device-by-id %I --force-feedback --buttonmap A=B,B=A,X=Y,Y=X";
     };
   };
 }

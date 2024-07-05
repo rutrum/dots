@@ -2,15 +2,13 @@
   description = "Home Manager configuration of rutrum";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.05";
+
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-
-    # include stable version
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.11";
 
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
 
@@ -39,8 +37,8 @@
 
     # nix/nvim framework
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-23.11";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -49,9 +47,9 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs-stable {
         inherit system;
+        config.allowUnfree = true;
         overlays = [ inputs.nixgl.overlay ];
       };
-      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
       nixosConfigurations."rumprism" = pkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -73,6 +71,7 @@
           inputs.flatpaks.nixosModules.default
           ( import ./hosts/rumtower/configuration.nix )
         ];
+        specialArgs = { inherit inputs; };
       };
 
       nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {

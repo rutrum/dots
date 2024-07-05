@@ -3,7 +3,10 @@
   imports =
   [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../modules/tailscale.nix
   ];
+
+  services.mullvad-vpn.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -140,7 +143,7 @@
     home-manager
     neovim
     rxvt-unicode
-  ]
+  ];
 
   # programs.firefox = {
   #   enable = true;
