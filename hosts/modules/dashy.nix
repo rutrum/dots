@@ -12,7 +12,7 @@
         ports = [ "${toString config.dashy.port}:8080" ];
         autoStart = true;
         volumes = [
-          "/root/heimdallconfig:/config"
+          "/root/dashy_config.yml:/app/user-data/conf.yml"
         ];
         environment = {
           NODE_ENV = "production";
