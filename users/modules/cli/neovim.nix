@@ -23,7 +23,7 @@ in {
       nvim-ufo.enable = false;
       cmp-tabby = {
         enable = true;
-        host = "http://localhost:11029";
+        settings.host = "http://localhost:11029";
       };
       lsp = {
         enable = true;
@@ -43,7 +43,7 @@ in {
       mapleader = " ";
       maplocalleader = " ";
     };
-    options = {
+    opts = {
       relativenumber = true;
 
       # tabs
@@ -62,14 +62,12 @@ in {
 
     keymaps = [
       {
-        action = "require('telescope.builtin').find_files";
+        action.__raw = "require('telescope.builtin').find_files";
         key = "<leader>ff";
-        lua = true;
       }
       {
-        action = "require('hop').hint_words";
+        action.__raw = "require('hop').hint_words";
         key = "<leader>w";
-        lua = true;
       }
     ];
 
