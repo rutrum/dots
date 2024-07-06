@@ -23,6 +23,7 @@
     ../modules/tailscale.nix
     ../modules/rustdesk_client.nix
     ../modules/tabby.nix
+    ../modules/syncthing.nix
   ];
 
   networking.hostName = "rumtower";
@@ -51,8 +52,6 @@
           type = "receiveonly";
           devices = [ "rumbeta" ];
         };
-        #roms = {
-        #};
         notes = {
           id = "mqkjy-xoe93";
           path = "/mnt/barracuda/notes";
@@ -63,10 +62,6 @@
           path = "/home/rutrum/.local/share/PrismLauncher/instances";
           devices = [ "rumprism" ];
         };
-      };
-      devices = {
-        rumbeta.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";
-        rumprism.id = "RVLPXSV-2XJT3ZJ-LNTRNRB-XQWY372-EPLFFPB-Z74FVM6-SVIYHRF-6777ZQ6";
       };
     };
   };

@@ -15,6 +15,7 @@
       ../modules/rustdesk_server.nix
       ../modules/rustdesk_client.nix
       ../modules/heimdall.nix
+      ../modules/dashy.nix
       ../modules/nvidia.nix
       ../modules/adguard-home.nix
       ../modules/home-assistant.nix
@@ -25,7 +26,8 @@
       ../modules/tabby.nix
     ];
 
-  heimdall.port = 80;
+  heimdall.port = 8081;
+  dashy.port = 80;
 
   # put this somewhere, required for BAR and openscad
   services.flatpak.enable = true;
