@@ -32,8 +32,8 @@ in {
         # add nix application desktop files
         XDG_DATA_DIRS=$HOME/.nix-profile/share:"''${XDG_DATA_DIRS}"
         PATH=/home/rutrum/.nix-profile/bin:$PATH
-        VISUAL='neovim'
-        EDITOR='neovim'
+        VISUAL='nvim'
+        EDITOR='nvim'
       '';
       shellAliases = {
         v = "nvim";
