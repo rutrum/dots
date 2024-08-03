@@ -12,19 +12,20 @@
 
     ../modules/nix.nix
     ../modules/paperless.nix
-    ../modules/adguard-home.nix
     ../modules/printing.nix
     ../modules/firefly.nix
     ../modules/docker.nix
     ../modules/jellyfin.nix
-    ../modules/8bitdo.nix
 
-    ../modules/mouse.nix
+    ../modules/hardware/8bitdo.nix
+    ../modules/hardware/mouse.nix
+
     ../modules/tailscale.nix
     ../modules/rustdesk_client.nix
-    ../modules/tabby.nix
     ../modules/syncthing.nix
   ];
+
+  virtualisation.waydroid.enable = true;
 
   networking.hostName = "rumtower";
 

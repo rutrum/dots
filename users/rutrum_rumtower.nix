@@ -78,7 +78,6 @@ in {
     stable-packages = with pkgs; [
       # graphical applications
       mullvad-browser
-      mullvad-vpn
 
       thunderbird
       protonmail-bridge-gui
@@ -113,6 +112,8 @@ in {
 
       vscodium
       localsend
+
+      pdftk
 
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec

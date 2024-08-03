@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../modules/nix.nix
-      ../modules/8bitdo.nix
+      ../modules/hardware/8bitdo.nix
       ../modules/ssh_server.nix
       ../modules/docker.nix
       ../modules/rustdesk_server.nix

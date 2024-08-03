@@ -25,7 +25,10 @@
     };
   };
 
-  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn; # includes GUI
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

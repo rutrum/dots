@@ -10,5 +10,6 @@
   ]) ++ (with pkgs.gnomeExtensions; [
     forge
     wintile-windows-10-window-tiling-for-gnome
+    sound-output-device-chooser
   ]);
 }
