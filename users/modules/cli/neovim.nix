@@ -9,6 +9,15 @@ in {
     vimAlias = true;
 
     clipboard.providers.wl-copy.enable = true;
+    clipboard.providers.xclip.enable = true;
+
+    colorschemes.catppuccin = {
+      enable = true;
+      settings = {
+        flavour = "frappe";
+        transparent_background = true;
+      };
+    };
 
     plugins = {
       # all grammars by default
@@ -31,6 +40,10 @@ in {
           # markdown
           marksman.enable = true;
         };
+      };
+      which-key = {
+        # popup that lists keybindings
+        enable = true;
       };
     };
     extraPlugins = with pkgs.vimPlugins; [
@@ -64,10 +77,12 @@ in {
       {
         action.__raw = "require('telescope.builtin').find_files";
         key = "<leader>ff";
+        options.desc = "Find files";
       }
       {
         action.__raw = "require('hop').hint_words";
         key = "<leader>w";
+        options.desc = "Hop to word";
       }
     ];
 
