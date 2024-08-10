@@ -24,6 +24,14 @@ inputs:
       enable = true;
       enableBashIntegration = true;
     };
+
+    zellij = {
+      enable = true;
+      enableBashIntegration = true;
+      settings = {
+        theme = "catppuccin-mocha";
+      };
+    };
   };
 
   home.packages = with pkgs; [
