@@ -27,7 +27,8 @@ inputs:
 
     zellij = {
       enable = true;
-      enableBashIntegration = true;
+      # this enables zellij on shell startup
+      #enableBashIntegration = true;
       settings = {
         theme = "catppuccin-mocha";
       };
