@@ -115,6 +115,11 @@
     packages = with pkgs; [];
   };
 
+  #user.users.borg = {
+  #  isSystemUser = true;
+  #  description = "Account for borgmatic";
+  #};
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "rutrum";
 

@@ -35,6 +35,15 @@ inputs:
     };
   };
 
+  # GPG program for making PGP keys
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    pinentryPackage = pkgs.pinentry-curses;
+    enable = true;
+    enableBashIntegration = true;
+    enableSshSupport = true;
+  };
+
   home.packages = with pkgs; [
     just
     ripgrep

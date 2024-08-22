@@ -6,6 +6,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./borg.nix
+
     ../modules/gnome.nix
     ../modules/nvidia.nix
     ../modules/games.nix
@@ -23,11 +25,19 @@
     ../modules/tailscale.nix
     ../modules/rustdesk_client.nix
     ../modules/syncthing.nix
+
+    inputs.sops-nix.nixosModules.sops
   ];
 
   virtualisation.waydroid.enable = true;
 
   networking.hostName = "rumtower";
+
+  # sops
+  # also make this a shared module
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
 
   # Fonts
   # This should be a module

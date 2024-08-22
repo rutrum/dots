@@ -15,6 +15,7 @@ in {
     ./modules/flatpak.nix
     ./modules/databases.nix
     ./modules/networking.nix
+    ./modules/encryption.nix
 
     (import ./modules/firefox.nix inputs)
   ];

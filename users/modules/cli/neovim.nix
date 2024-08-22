@@ -28,6 +28,7 @@ in {
         enable = true;
         extensions.fzf-native.enable = true;
       };
+      nix.enable = true; # .nix
       surround.enable = true;
       nvim-ufo.enable = false;
       cmp-tabby = {

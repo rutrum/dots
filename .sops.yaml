@@ -1,0 +1,8 @@
+keys:
+  - &rumtower age1qfyrgusnydn54uf343qarlwhlax8rx6dj3uuvkaafj3y3ckmzassh9m9kz
+
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+        - *rumtower

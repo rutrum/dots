@@ -20,11 +20,7 @@
       rev = "8cad3dbe48029cb9def5cdb2409a6c80d3acfe2e";
     };
 
-    # eww default bar
-    eww-repo = {
-      url = "github:elkowar/eww";
-      flake = false;
-    };
+    sops-nix.url = "github:Mic92/sops-nix";
 
     nixgl.url = "github:guibou/nixGL";
 
@@ -42,7 +38,7 @@
     };
   };
 
-  outputs = { home-manager, nixpkgs-stable, eww-repo, ... }@inputs:
+  outputs = { home-manager, nixpkgs-stable, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs-stable {
