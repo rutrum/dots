@@ -1,23 +1,34 @@
 { pkgs, config, ... }: let
   backup_directory = "ssh://rutrum@rumnas/mnt/vault/backups";
-in {
-  sops.secrets."borg/paperless_passphrase" = {
-    owner = "rutrum"; # make this the original borg owner
-    # todo: change ownership of the paperless backup repo to borg user?
-    # todo: add borg to users list
-  };
-  services.borgbackup.jobs.paperless = {
+  secrets = config.sops.secrets;
+  paperless_job = {
     paths = [ "/mnt/barracuda/paperless" ];
     #environment.BORG_RSH = "ssh -v";
     repo = "${backup_directory}/paperless";
-    encryption = {
-      mode = "repokey";
-      passCommand = "cat ${config.sops.secrets."borg/paperless_passphrase".path}";
-    };
     compression = "auto,lzma";
     startAt = "daily";
     user = "rutrum";
     doInit = false;
+  };
+in {
+  sops.secrets = {
+    "borg/paperless_passphrase".owner = "rutrum";
+    "borgbase/paperless_passphrase".owner = "rutrum";
+  };
+
+  services.borgbackup.jobs.paperless_rumnas = paperless_job // {
+    repo = "${backup_directory}/paperless";
+    encryption = {
+      mode = "repokey";
+      passCommand = "cat ${secrets."borg/paperless_passphrase".path}";
+    };
+  };
+  services.borgbackup.jobs.paperless_borgbase = paperless_job // {
+    repo = "ssh://r62595uo@r62595uo.repo.borgbase.com/./repo";
+    encryption = {
+      mode = "repokey-blake2";
+      passCommand = "cat ${secrets."borgbase/paperless_passphrase".path}";
+    };
   };
 
   environment.systemPackages = [ pkgs.borgbackup ];
