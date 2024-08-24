@@ -1,14 +1,13 @@
-{ nixpkgs-stable, firefox-addons, ... }:
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   programs.firefox = {
     enable = true;
-    package = nixpkgs-stable.legacyPackages.${pkgs.system}.firefox;
+    #package = nixpkgs-stable.legacyPackages.${pkgs.system}.firefox;
 
     profiles.normal = {
       name = "normal";
       isDefault = true;
-      extensions = with firefox-addons.packages.${pkgs.system}; [
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         bitwarden
         ublock-origin
         sponsorblock

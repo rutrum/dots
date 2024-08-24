@@ -10,28 +10,20 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
+    # declaratively manage flatpaks
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
 
-    nixpkgs-anki-2_1_60 = {
-      type = "github";
-      owner = "nixos";
-      repo = "nixpkgs";
-      ref = "refs/heads/nixpkgs-unstable";
-      rev = "8cad3dbe48029cb9def5cdb2409a6c80d3acfe2e";
-    };
-
+    # mount secrets at runtime from encrypted sops files
     sops-nix.url = "github:Mic92/sops-nix";
-
-    nixgl.url = "github:guibou/nixGL";
-
-    wasm4.url = "github:rutrum/wasm4-nix";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    # nix/nvim framework
+    # configure neovim and neovim plugins with nix
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -43,8 +35,10 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs-stable {
         inherit system;
-        config.allowUnfree = true;
-        overlays = [ inputs.nixgl.overlay ];
+        config.allowUnfree = true; # remove this
+        overlays = [ 
+          inputs.alacritty-theme.overlays.default
+        ];
       };
     in {
       nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
@@ -81,8 +75,6 @@
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
-          inputs.flatpaks.homeManagerModules.default
-          inputs.nixvim.homeManagerModules.nixvim
           ./users/rutrum.nix 
         ];
         extraSpecialArgs = { inherit inputs; };
@@ -91,9 +83,7 @@
       homeConfigurations."rutrum@rumnas" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
-          inputs.flatpaks.homeManagerModules.default
-          inputs.nixvim.homeManagerModules.nixvim
-          ./users/rutrum_rumnas.nix 
+          ./users/rumnas.nix 
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -101,9 +91,7 @@
       homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
-          inputs.flatpaks.homeManagerModules.default
-          inputs.nixvim.homeManagerModules.nixvim
-          ./users/rutrum_rumtower.nix
+          ./users/rumtower.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -111,9 +99,7 @@
       homeConfigurations."rutrum@rumprism" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ 
-          inputs.flatpaks.homeManagerModules.default
-          inputs.nixvim.homeManagerModules.nixvim
-          ./users/rutrum_rumprism.nix
+          ./users/rumprism.nix
         ];
         extraSpecialArgs = { inherit inputs; };
       };

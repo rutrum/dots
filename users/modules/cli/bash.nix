@@ -24,6 +24,9 @@ in {
         # ^S no longer pauses terminal
         stty -ixon
 
+        nsn () {
+          nix shell nixpkgs#"$1"
+        }
         nrn () {
           nix run nixpkgs#"$1"
         }
@@ -39,9 +42,8 @@ in {
         v = "nvim";
         j = "just";
         py = "python3";
-        py3 = "python3";
 
-        # don't overwrite files or prompt
+        # prompt on file overwrite
         cp = "cp -i";
         mv = "mv -i";
 
@@ -55,16 +57,12 @@ in {
         df = "df -h";
         ll = "ls -lhF";
 
+        # nix shortcuts
         hms = "home-manager switch --flake ~/dots";
         snrs = "sudo nixos-rebuild switch --flake ~/dots";
         nd = "nix develop";
 
         clone = "(pwd | ${cfg.terminal} & disown \$!)";
-
-        # distrobox applications
-        w4 = "distrobox enter deb -- w4";
-
-        nixgl = "NIXPKGS_ALLOW_UNFREE=1 nix run --impure github:guibou/nixGL --";
       };
     };
   };

@@ -1,8 +1,12 @@
 { config, pkgs, inputs, ... }: 
-let
-  terminal = "urxvt";
-in {
+{
+  # This is the base rutrum config that all other rutrum_system configs include.
+  # It is also a standalone headless user configuration (such as raspberry pi servers 
+  # or WSL) which means there shouln't be any GUI applications
+
   imports = [
+    inputs.flatpaks.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
     ./modules/cli
     ./modules/ssh.nix
   ];
@@ -14,31 +18,10 @@ in {
 
   bash.terminal = "alacritty"; # should probably find a better spot for this
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.05";
-
-  # for nvidia drivers
-  nixpkgs.config.allowUnfree = true;
-
+  # can this be removed?
   home.sessionPath = [
     "/home/rutrum/.nix-profile/bin"
   ];
-
-  fonts.fontconfig.enable = true;
-
-  #home.file.xmonad = {
-  #  source = ./modules/x/xmonad.hs;
-  #  target = ".config/xmonad/xmonad.hs";
-  #};
-
-  # Home Directories
 
   # symlink my music directory
   #home.file.music = {
@@ -61,9 +44,18 @@ in {
   };
 
   programs = {
-    # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };
 
   home.packages = with pkgs; [];
+
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "23.05";
 }

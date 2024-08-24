@@ -1,6 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    nh
+  ];
   nix.registry = {
+    # TODO: something was done in 24.05 to add flake inputs as
+    # registries, so this may be unncessary...looks like this is
+    # at the system level
+
     # redo nixpkgs to be stable
     nixpkgs = {
       from = {
@@ -11,7 +18,7 @@
         type = "github";
         owner = "NixOS";
         repo = "nixpkgs";
-        ref = "nixos-23.11"; # TODO: make this a variable somewhere
+        ref = "nixos-24.05"; # TODO: make this a variable somewhere
       };
     };
 

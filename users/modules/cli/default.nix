@@ -1,10 +1,9 @@
-inputs:
 { pkgs, config, ... }:
 {
   imports = [
     ./bash.nix
     ./starship.nix
-    (import ./neovim.nix inputs)
+    ./neovim.nix
     ./nix.nix
   ];
 
@@ -15,6 +14,7 @@ inputs:
       userName = "rutrum";
       extraConfig = {
         pull.rebase = false;
+        init.defaultBranch = "main";
       };
     };
 
@@ -35,24 +35,23 @@ inputs:
     };
   };
 
-  # GPG program for making PGP keys
-  programs.gpg.enable = true;
-  services.gpg-agent = {
-    pinentryPackage = pkgs.pinentry-curses;
-    enable = true;
-    enableBashIntegration = true;
-    enableSshSupport = true;
-  };
-
   home.packages = with pkgs; [
     just
+
+    # RIIR
     ripgrep
-    pandoc
-    tealdeer
     bat
-    fd
-    jq
     du-dust
+    fd
+    
+    # encryption
+    age
+    sops
+
+    tealdeer
+    fzf
+    jq # traverse json
+    pandoc # document conversion
     watchexec
     yt-dlp
     neofetch
@@ -62,7 +61,6 @@ inputs:
     wget
     cmus
     unzip
-    fzf
     yazi # terminal file browser
     ueberzugpp # for yazi terminal image previews
     python3

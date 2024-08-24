@@ -1,4 +1,3 @@
-{ nixpkgs-unstable, ... }:
 { config, lib, pkgs, ... }:
 let
   telescope = "require('telescope.builtin')";
