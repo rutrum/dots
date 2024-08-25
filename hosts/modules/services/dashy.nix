@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 {
   options.dashy.port = lib.mkOption {
     type = lib.types.int;

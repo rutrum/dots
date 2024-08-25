@@ -46,6 +46,7 @@
         modules = [
           ( import ./hosts/rumprism/configuration.nix )
         ];
+        specialArgs = { inherit inputs; };
       };
 
       nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
@@ -53,6 +54,7 @@
         modules = [
           ( import ./hosts/rumpi/configuration.nix )
         ];
+        specialArgs = { inherit inputs; };
       };
 
       nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
@@ -70,6 +72,7 @@
           inputs.flatpaks.nixosModules.default
           ( import ./hosts/rumnas/configuration.nix )
         ];
+        specialArgs = { inherit inputs; };
       };
 
       homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {

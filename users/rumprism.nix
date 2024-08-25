@@ -67,6 +67,7 @@
 
     # my flakes
     # inputs.wasm4
+    rustdesk
   ];
 
   home.stateVersion = "23.05";

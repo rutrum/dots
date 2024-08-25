@@ -1,9 +1,11 @@
-{ pkgs, ... }:
+{ ... }:
 {
   services.syncthing = {
     settings.devices = {
       rumbeta.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";
       rumprism.id = "RVLPXSV-2XJT3ZJ-LNTRNRB-XQWY372-EPLFFPB-Z74FVM6-SVIYHRF-6777ZQ6";
+      rumpixel.id = "3FRVZJQ-RG6QI2E-B2WIQ4W-7MIJ2LB-ZCHLSI4-WQVTTUS-SRFAOUS-JUAEVAI";
+      rumtower.id = "VAMK7HO-ILEHTIX-P53VEG3-ZLDD4XO-AJEIP7J-WMBTQCS-GMEZSQD-YFYLZAQ";
     };
   };
 }

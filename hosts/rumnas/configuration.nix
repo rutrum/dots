@@ -2,35 +2,34 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../modules/nix.nix
-      ../modules/hardware/8bitdo.nix
-      ../modules/ssh_server.nix
-      ../modules/docker.nix
-      ../modules/rustdesk_server.nix
-      ../modules/rustdesk_client.nix
-      ../modules/heimdall.nix
-      ../modules/dashy.nix
-      ../modules/nvidia.nix
-      ../modules/adguard-home.nix
-      ../modules/home-assistant.nix
-      ../modules/tailscale.nix
-      ../modules/games.nix
-      ../modules/nocodb.nix
-      ../modules/ai.nix
-      ../modules/tabby.nix
-    ];
+  imports = [ 
+    ../system.nix
+    ./hardware-configuration.nix
+
+    ../modules/gaming.nix
+
+    ../modules/docker.nix
+    ../modules/services/tabby.nix
+    ../modules/services/home-assistant.nix
+    ../modules/services/heimdall.nix
+    ../modules/services/rustdesk.nix
+    ../modules/services/adguard-home.nix
+    ../modules/services/dashy.nix
+    ../modules/services/nocodb.nix
+
+    ../modules/hardware/nvidia.nix
+    ../modules/hardware/8bitdo.nix
+  ];
+
+  networking.hostName = "rumnas";
 
   heimdall.port = 8081;
   dashy.port = 80;
 
-  # put this somewhere, required for BAR and openscad
-  services.flatpak.enable = true;
+  services.openssh.enable = true;
 
   # TODO: configure caddy for web services
 
@@ -55,8 +54,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "rumnas";
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -72,25 +69,7 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  networking.firewall.enable = false; # remove this sometime?
-
-  # Set your time zone.
-  time.timeZone = "America/Indiana/Indianapolis";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+  networking.firewall.enable = false; # remove this sometime? please uwu?
 
   # Configure keymap in X11
   services.xserver = {
@@ -107,14 +86,6 @@
   #services.gnome.core-utilities.enable =  false;
   # consider manually adding back certain utilities
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.rutrum = {
-    isNormalUser = true;
-    description = "rutrum";
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
-
   #user.users.borg = {
   #  isSystemUser = true;
   #  description = "Account for borgmatic";
@@ -123,14 +94,7 @@
   # Enable automatic login for the user.
   services.getty.autologinUser = "rutrum";
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-    home-manager
-    qjoypad
-  ];
+  environment.systemPackages = with pkgs; [];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -82,6 +82,8 @@
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
       discord
+
+      rustdesk
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       armcord
