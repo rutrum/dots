@@ -22,7 +22,7 @@
   # the containers
   virtualisation.oci-containers.containers = {
     nocodb = {
-      image = "nocodb/nocodb:latest";
+      image = "nocodb/nocodb:0.251.1";
       ports = [ "8081:8080" ];
       volumes = [
         "/mnt/barracuda/nocodb/data:/usr/app/data"

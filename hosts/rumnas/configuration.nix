@@ -24,9 +24,10 @@
       ../modules/nocodb.nix
       ../modules/ai.nix
       ../modules/tabby.nix
+      ../modules/freshrss.nix
     ];
 
-  heimdall.port = 8081;
+  heimdall.port = 8083;
   dashy.port = 80;
 
   # put this somewhere, required for BAR and openscad

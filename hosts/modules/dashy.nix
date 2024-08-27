@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 {
   options.dashy.port = lib.mkOption {
     type = lib.types.int;
@@ -12,10 +12,10 @@
         ports = [ "${toString config.dashy.port}:8080" ];
         autoStart = true;
         volumes = [
-          "/root/dashy_config.yml:/app/user-data/conf.yml"
+          "/root/dashy_config:/app/user-data"
         ];
         environment = {
-          NODE_ENV = "production";
+          #NODE_ENV = "production";
         };
       };
     };

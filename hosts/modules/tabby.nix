@@ -11,7 +11,7 @@
 
   virtualisation.oci-containers.containers = {
     tabbyml = {
-      image = "tabbyml/tabby";
+      image = "tabbyml/tabby:0.12.0";
       ports = [ "11029:8080" ];
       volumes = [
         "tabby:/data"
@@ -24,7 +24,7 @@
       cmd = [
         "serve"
         "--device" "cuda"
-        "--model" "StarCoder-3B"
+        "--model" "StarCoder2-3B"
       ];
     };
   };
