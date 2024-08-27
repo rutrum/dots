@@ -59,11 +59,14 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   fileSystems = {
-    #"/mnt/vault" = { 
-    #  device = "/dev/md127";
-    #  fsType = "btrfs";
-    #};
+    "/mnt/raid" = { 
+      device = "/dev/md127";
+      fsType = "btrfs";
+    };
   };
+
+  # raid
+  boot.swraid.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
