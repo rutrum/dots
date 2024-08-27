@@ -30,6 +30,7 @@ in {
       nix.enable = true; # .nix
       surround.enable = true;
       nvim-ufo.enable = false;
+      typst-vim.enable = true;
       cmp-tabby = {
         enable = true;
         settings.host = "http://localhost:11029";
@@ -39,6 +40,8 @@ in {
         servers = {
           # markdown
           marksman.enable = true;
+          # does this do anything?
+          typst-lsp.enable = true;
         };
       };
       which-key = {
