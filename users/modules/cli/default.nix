@@ -1,10 +1,9 @@
-inputs:
 { pkgs, config, ... }:
 {
   imports = [
     ./bash.nix
     ./starship.nix
-    (import ./neovim.nix inputs)
+    ./neovim.nix
     ./nix.nix
   ];
 
@@ -15,6 +14,7 @@ inputs:
       userName = "rutrum";
       extraConfig = {
         pull.rebase = false;
+        init.defaultBranch = "main";
       };
     };
 
@@ -24,17 +24,34 @@ inputs:
       enable = true;
       enableBashIntegration = true;
     };
+
+    zellij = {
+      enable = true;
+      # this enables zellij on shell startup
+      #enableBashIntegration = true;
+      settings = {
+        theme = "catppuccin-mocha";
+      };
+    };
   };
 
   home.packages = with pkgs; [
     just
+
+    # RIIR
     ripgrep
-    pandoc
-    tealdeer
     bat
-    fd
-    jq
     du-dust
+    fd
+    
+    # encryption
+    age
+    sops
+
+    tealdeer
+    fzf
+    jq # traverse json
+    pandoc # document conversion
     watchexec
     yt-dlp
     neofetch
@@ -44,7 +61,6 @@ inputs:
     wget
     cmus
     unzip
-    fzf
     yazi # terminal file browser
     ueberzugpp # for yazi terminal image previews
     python3

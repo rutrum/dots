@@ -1,8 +1,9 @@
-{ lib, ... }:
-{
+{ pkgs, lib, ... }: let
+in {
   programs.alacritty = {
     enable = true;
     settings = {
+      import = [ pkgs.alacritty-theme.catppuccin_mocha ];
       window = {
         opacity = 0.85;
         padding.x = 24;
@@ -11,7 +12,6 @@
       font = {
         normal.family = "Iosevka Nerd Font Mono";
       };
-      inherit (lib.importTOML ./catppuccin-mocha.toml) colors;
       keyboard.bindings = [
         { 
           key = "I";

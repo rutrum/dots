@@ -1,8 +1,12 @@
 { pkgs, config, ... }:
 {
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; };
+  hardware.opengl = { 
+    enable = true; 
+    driSupport = true; 
+    driSupport32Bit = true; 
+  };
 
   #hardware.nvidia-container-toolkit.enable = true;
   virtualisation.docker.enableNvidia = true;

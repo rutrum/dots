@@ -1,13 +1,12 @@
 { config, pkgs, inputs, ... }: 
 {
   imports = [
+    ./rutrum.nix
     ./modules/terminal
-    ./modules/office.nix
-    ./modules/ssh.nix
-    ./modules/3d_printing.nix
+    ./modules/production/3d.nix
+    ./modules/production/office.nix
     ./modules/flatpak.nix
-    (import ./modules/firefox.nix inputs)
-    (import ./modules/cli inputs)
+    ./modules/firefox.nix
   ];
 
   xdg.mimeApps = {
@@ -16,25 +15,6 @@
       "application/pdf" = "zathura.desktop";
     };
   };
-
-  bash.terminal = "alacritty"; # should probably find a better spot for this
-
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "rutrum";
-  home.homeDirectory = "/home/rutrum";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.05";
-
-  fonts.fontconfig.enable = true;
 
   # symlink my music directory
   #home.file.music = {
@@ -56,10 +36,6 @@
     videos = null;
   };
 
-  programs = {
-    home-manager.enable = true;
-  };
-
   home.packages = with pkgs; [
     # graphical applications
     #mullvad-browser
@@ -67,13 +43,11 @@
     #thunderbird
     zathura
     flameshot
-    gnome.simple-scan
     nextcloud-client
     #armcord
     sxiv
     #pavucontrol
     anki-bin
-    font-manager
     bitwarden
     vlc
     prismlauncher # minecraft
@@ -93,5 +67,8 @@
 
     # my flakes
     # inputs.wasm4
+    rustdesk
   ];
+
+  home.stateVersion = "23.05";
 }

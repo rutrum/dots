@@ -1,4 +1,3 @@
-{ nixpkgs-unstable, ... }:
 { config, lib, pkgs, ... }:
 let
   telescope = "require('telescope.builtin')";
@@ -9,6 +8,15 @@ in {
     vimAlias = true;
 
     clipboard.providers.wl-copy.enable = true;
+    clipboard.providers.xclip.enable = true;
+
+    colorschemes.catppuccin = {
+      enable = true;
+      settings = {
+        flavour = "frappe";
+        transparent_background = true;
+      };
+    };
 
     plugins = {
       # all grammars by default
@@ -19,8 +27,10 @@ in {
         enable = true;
         extensions.fzf-native.enable = true;
       };
+      nix.enable = true; # .nix
       surround.enable = true;
       nvim-ufo.enable = false;
+      typst-vim.enable = true;
       cmp-tabby = {
         enable = true;
         settings.host = "http://localhost:11029";
@@ -30,7 +40,13 @@ in {
         servers = {
           # markdown
           marksman.enable = true;
+          # does this do anything?
+          typst-lsp.enable = true;
         };
+      };
+      which-key = {
+        # popup that lists keybindings
+        enable = true;
       };
     };
     extraPlugins = with pkgs.vimPlugins; [
@@ -64,10 +80,12 @@ in {
       {
         action.__raw = "require('telescope.builtin').find_files";
         key = "<leader>ff";
+        options.desc = "Find files";
       }
       {
         action.__raw = "require('hop').hint_words";
         key = "<leader>w";
+        options.desc = "Hop to word";
       }
     ];
 

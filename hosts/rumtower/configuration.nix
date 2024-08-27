@@ -5,28 +5,28 @@
 
 {
   imports = [
+    ../system.nix
     ./hardware-configuration.nix
+    ./borg.nix
+
     ../modules/gnome.nix
-    ../modules/nvidia.nix
-    ../modules/games.nix
+    ../modules/gaming.nix
 
-    ../modules/nix.nix
-    ../modules/paperless.nix
-    ../modules/adguard-home.nix
     ../modules/printing.nix
-    ../modules/firefly.nix
-    ../modules/docker.nix
-    ../modules/jellyfin.nix
-    ../modules/8bitdo.nix
 
-    ../modules/mouse.nix
-    ../modules/tailscale.nix
-    ../modules/rustdesk_client.nix
-    ../modules/tabby.nix
-    ../modules/syncthing.nix
+    ../modules/docker.nix
+    ../modules/services/jellyfin.nix
+    ../modules/services/paperless.nix
+    ../modules/services/firefly.nix
+
+    ../modules/hardware/nvidia.nix
+    ../modules/hardware/8bitdo.nix
+    ../modules/hardware/mouse.nix
   ];
 
   networking.hostName = "rumtower";
+
+  virtualisation.waydroid.enable = true;
 
   # Fonts
   # This should be a module
@@ -81,7 +81,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  services.flatpak.enable = true;
+  environment.systemPackages = with pkgs; [];
 
   fileSystems = {
     #"/".device = "/dev/nvme0n1";
@@ -97,26 +97,6 @@
     #};
   };
 
-  # Set your time zone.
-  time.timeZone = "America/Indiana/Indianapolis";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  services.mullvad-vpn.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
     enable = true;
@@ -130,26 +110,12 @@
   #services.gnome.core-utilities.enable =  false;
   # consider manually adding back certain utilities
 
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.rutrum = {
-    isNormalUser = true;
-    description = "rutrum";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    neovim git home-manager
-  ];
 
   # List services that you want to enable:
   networking.firewall.enable = false;
   networking.nftables.enable = true;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
