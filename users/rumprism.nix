@@ -6,6 +6,7 @@
     ./modules/production/3d.nix
     ./modules/production/office.nix
     ./modules/flatpak.nix
+    ./modules/databases.nix
     ./modules/firefox.nix
   ];
 
