@@ -2,9 +2,13 @@
   backup_directory = "ssh://rutrum@rumnas/mnt/vault/backups";
   secrets = config.sops.secrets;
   paperless_job = {
-    paths = [ "/mnt/barracuda/paperless" ];
+    paths = [ 
+      "/mnt/barracuda/paperless" 
+      "/mnt/barracuda/notes" 
+      "/mnt/barracuda/docs" 
+      "/mnt/barracuda/calibre" 
+    ];
     #environment.BORG_RSH = "ssh -v";
-    repo = "${backup_directory}/paperless";
     compression = "auto,lzma";
     startAt = "daily";
     user = "rutrum";
