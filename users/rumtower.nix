@@ -17,6 +17,7 @@
     ./modules/networking.nix
 
     ./modules/firefox.nix
+    ./modules/reading.nix
   ];
 
   xdg.mimeApps = {
@@ -52,12 +53,11 @@
       nextcloud-client
       sxiv
       pavucontrol
-      anki-bin
       font-manager
+      anki-bin
       bitwarden
       qbittorrent
       jellyfin-media-player
-      calibre
       vlc
 
       # container and virtual machines
