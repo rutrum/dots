@@ -1,4 +1,4 @@
-{ pkgs, ... }: let
+{ pkgs, config, ... }: let
   network-name = "tube-archivist";
 in {
   systemd.services.init-tube-archivist-network = {

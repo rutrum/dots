@@ -18,6 +18,7 @@
     ../modules/services/jellyfin.nix
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix
+    ../modules/services/tabby.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
@@ -27,6 +28,8 @@
   networking.hostName = "rumtower";
 
   virtualisation.waydroid.enable = true;
+
+  programs.wireshark.enable = true;
 
   # Fonts
   # This should be a module
