@@ -32,7 +32,6 @@
   # This should be a module
   fonts.fontDir.enable = true;
 
-  # syncthing
   services.syncthing = {
     enable = true;
     user = "rutrum";
@@ -55,7 +54,7 @@
         notes = {
           id = "mqkjy-xoe93";
           path = "/mnt/barracuda/notes";
-          devices = [ "rumbeta" ];
+          devices = [ "rumbeta" "rumprism" ];
         };
         prism-instances = {
           id = "cdgrh-cn25a";
