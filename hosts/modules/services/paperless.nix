@@ -32,6 +32,9 @@
       ];
       environment = {
         PAPERLESS_REDIS = "redis://paperless-redis:6379";
+        # removed digital signatures for OCR
+        # see the original version of the document for unmodified version
+        PAPERLESS_OCR_USER_ARGS = ''{"invalidate_digital_signatures": true}'';
       };
       dependsOn = [ "paperless-redis" ];
       autoStart = true;
