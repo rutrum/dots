@@ -12,6 +12,7 @@
     ./modules/production/office.nix
 
     ./modules/games.nix
+    ./modules/fonts.nix
     ./modules/flatpak.nix
     ./modules/databases.nix
     ./modules/networking.nix
@@ -31,7 +32,6 @@
   # for home manager?
   nixpkgs.config.allowUnfree = true;
 
-  fonts.fontconfig.enable = true;
 
   # symlink my music directory
   #home.file.music = {
@@ -53,7 +53,6 @@
       nextcloud-client
       sxiv
       pavucontrol
-      font-manager
       anki-bin
       bitwarden
       qbittorrent
