@@ -8,6 +8,7 @@
     ./modules/production/photo.nix
     ./modules/flatpak.nix
     ./modules/databases.nix
+    ./modules/networking.nix
     ./modules/firefox.nix
     ./modules/fonts.nix
   ];
