@@ -2,40 +2,72 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [ 
     ../system.nix
     ./hardware-configuration.nix
 
-    ../modules/gaming.nix
+    #../modules/gnome.nix
+    #../modules/gaming.nix
 
     ../modules/docker.nix
     ../modules/services/tabby.nix
     ../modules/services/home-assistant.nix
-    ../modules/services/heimdall.nix
-    ../modules/services/rustdesk.nix
+    #../modules/services/heimdall.nix
+    #../modules/services/rustdesk.nix
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix
     ../modules/services/nocodb.nix
     #../modules/services/nextcloud.nix
+    ../modules/services/tube-archivist.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
   ];
 
+  # open webui
+  services.open-webui = {
+    host = "0.0.0.0";
+    package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.open-webui;
+    port = 8080;
+    enable = true;
+    openFirewall = true;
+  };
+  services.ollama = {
+    package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.ollama;
+    enable = true;
+    acceleration = false;
+  };
+
   networking.hostName = "rumnas";
 
-  heimdall.port = 8083;
+  # let's play with metabase
+  # will likely need to use container and add to noco
+  services.metabase = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  #heimdall.port = 8083;
   dashy.port = 80;
 
   services.openssh.enable = true;
 
   # TODO: configure caddy for web services
 
+  # let's play with a local binary cache
+  # https://nixos.wiki/wiki/Binary_Cache
+  services.nix-serve = {
+    enable = true;
+    # hoping I don't need this, since it should be local?
+    #secretKeyFile = "/var/cache-priv-key.pem";
+  };
+  networking.firewall.allowedTCPPorts = [ 5000 ];
+
   # allow x forwarding
-  programs.ssh.forwardX11 = true;
+  #programs.ssh.forwardX11 = true;
 
   # backups?
   services.borgbackup.repos.paperless = {
@@ -46,10 +78,10 @@
   };
 
   # stop sleeping/hibernating/suspend
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
+  #systemd.targets.sleep.enable = false;
+  #systemd.targets.suspend.enable = false;
+  #systemd.targets.hibernate.enable = false;
+  #systemd.targets.hybrid-sleep.enable = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -69,23 +101,19 @@
   # raid
   boot.swraid.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false;
-
   networking.firewall.enable = false; # remove this sometime? please uwu?
 
-  # Configure keymap in X11
+  #services.xserver.desktopManager.lxqt.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
+    #displayManager.gdm.enable = true;
     #desktopManager.gnome.enable = true;
-    desktopManager.cinnamon.enable = true;
-    layout = "us";
-    xkbVariant = "";
+    #desktopManager.cinnamon.enable = true;
   };
 
-  services.cinnamon.apps.enable = true;
+  #services.cinnamon.apps.enable = true;
 
   #services.gnome.core-utilities.enable =  false;
   # consider manually adding back certain utilities
@@ -96,7 +124,7 @@
   #};
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "rutrum";
+  #services.getty.autologinUser = "rutrum";
 
   environment.systemPackages = with pkgs; [];
 
