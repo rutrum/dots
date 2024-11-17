@@ -22,24 +22,11 @@
     ../modules/services/nocodb.nix
     #../modules/services/nextcloud.nix
     ../modules/services/tube-archivist.nix
+    ../modules/services/llm.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
   ];
-
-  # open webui
-  services.open-webui = {
-    host = "0.0.0.0";
-    package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.open-webui;
-    port = 8080;
-    enable = true;
-    openFirewall = true;
-  };
-  services.ollama = {
-    package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.ollama;
-    enable = true;
-    acceleration = false;
-  };
 
   networking.hostName = "rumnas";
 
