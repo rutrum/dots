@@ -21,7 +21,7 @@ in {
   virtualisation.oci-containers.containers = {
     tube-archivist = {
       image = "bbilly1/tubearchivist";
-      ports = [ "8088:8088" ];
+      ports = [ "8090:8000" ];
       volumes = [
         "tube-archivist-cache:/cache"
         "tube-archivist-media:/youtube"
@@ -29,6 +29,9 @@ in {
       environment = {
         ES_URL = "http://tube-archivist-elastic-search:9200";
         REDIS_HOST = "tube-archivist-redis";
+        TA_HOST = "192.168.50.3";
+        HOST_UID = "1000";
+        HOST_GID = "1000";
         TA_USERNAME = "admin";
         TA_PASSWORD = "admin";
         ELASTIC_PASSWORD = "admin";
@@ -52,16 +55,17 @@ in {
       ];
     };
     tube-archivist-elastic-search = {
-      image = "bbilly1/tubearchivist-es";
+      image = "library/elasticsearch:8.14.3";
       autoStart = true;
+      ports = [ "9200:9200" ];
       volumes = [
         "tube-archivist-elastic-search:/usr/share/elasticsearch/data"
       ];
       environment = {
         ELASTIC_PASSWORD = "admin";
         ES_JAVA_OPTS = "-Xms1g -Xmx1g";
-        "xpack.security.enabled" = true;
-        "disovery.type" = "single-node";
+        "xpack.security.enabled" = "true";
+        "discovery.type" = "single-node";
         "path.repo" = "/usr/share/elasticsearch/data/snapshot";
       };
       extraOptions = [

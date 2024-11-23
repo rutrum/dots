@@ -12,6 +12,11 @@
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
     # declaratively manage flatpaks
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
 
@@ -60,6 +65,7 @@
       nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.nixos-cosmic.nixosModules.default
           inputs.flatpaks.nixosModules.default
           ( import ./hosts/rumtower/configuration.nix )
         ];

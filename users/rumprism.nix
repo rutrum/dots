@@ -5,8 +5,12 @@
     ./modules/terminal
     ./modules/production/3d.nix
     ./modules/production/office.nix
+    ./modules/production/photo.nix
     ./modules/flatpak.nix
+    ./modules/databases.nix
+    ./modules/networking.nix
     ./modules/firefox.nix
+    ./modules/fonts.nix
   ];
 
   xdg.mimeApps = {
@@ -38,7 +42,7 @@
 
   home.packages = with pkgs; [
     # graphical applications
-    #mullvad-browser
+    mullvad-browser
     mullvad-vpn
     #thunderbird
     zathura

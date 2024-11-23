@@ -55,7 +55,10 @@ in {
         # print human readable sizes
         du = "du -h";
         df = "df -h";
-        ll = "ls -lhF";
+        ll = "ls -lhA";
+
+        # navigation
+        cdf = "cd $(fzf)";
 
         # nix shortcuts
         hms = "home-manager switch --flake ~/dots";

@@ -20,6 +20,11 @@
           path = "/home/rutrum/.local/share/PrismLauncher/instances";
           devices = [ "rumtower" ];
         };
+        notes = {
+          id = "mqkjy-xoe93";
+          path = "/home/rutrum/notes";
+          devices = [ "rumpixel" "rumtower" ];
+        };
       };
     };
   };
