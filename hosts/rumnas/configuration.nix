@@ -19,6 +19,7 @@
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix
     ../modules/services/nocodb.nix
+    ../modules/services/grafana.nix
     #../modules/services/nextcloud.nix
 
     ../modules/hardware/nvidia.nix
