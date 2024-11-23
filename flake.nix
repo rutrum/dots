@@ -18,7 +18,7 @@
     };
 
     # declaratively manage flatpaks
-    flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
+    flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
 
     # mount secrets at runtime from encrypted sops files
     sops-nix.url = "github:Mic92/sops-nix";
