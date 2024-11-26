@@ -20,7 +20,7 @@
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix
     ../modules/services/nocodb.nix
-    #../modules/services/grafana.nix
+    ../modules/services/grafana.nix
     #../modules/services/nextcloud.nix
     ../modules/services/tube-archivist.nix
     ../modules/services/llm.nix
@@ -33,10 +33,10 @@
 
   # let's play with metabase
   # will likely need to use container and add to noco
-  services.metabase = {
-    enable = true;
-    openFirewall = true;
-  };
+  #services.metabase = {
+  #  enable = true;
+  #  openFirewall = true;
+  #};
 
   #heimdall.port = 8083;
   dashy.port = 80;
