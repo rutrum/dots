@@ -21,6 +21,7 @@
     ../modules/services/dashy.nix
     ../modules/services/nocodb.nix
     ../modules/services/grafana.nix
+    ../modules/services/frigate.nix
     #../modules/services/nextcloud.nix
     ../modules/services/tube-archivist.nix
     ../modules/services/llm.nix
