@@ -25,6 +25,7 @@
     #../modules/services/nextcloud.nix
     ../modules/services/tube-archivist.nix
     ../modules/services/llm.nix
+    ../modules/services/mealie.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
