@@ -38,20 +38,31 @@
       enable = true;
       enableBashIntegration = true;
     };
+
+    htop = {
+      enable = true;
+      settings = {
+        hide_kernel_threads = true;
+        hide_userland_threads = true;
+        show_program_path = false;
+      };
+    };
   };
 
   home.packages = with pkgs; [
     just
 
-    # RIIR
     ripgrep
     bat
-    du-dust
     fd
     
     # encryption
     age
     sops
+
+    # disks
+    ncdu
+    du-dust
 
     tealdeer
     fzf
@@ -62,7 +73,6 @@
     neofetch
     tree
     trash-cli
-    htop
     wget
     cmus
     unzip
