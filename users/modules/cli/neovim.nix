@@ -20,9 +20,9 @@ in {
 
     plugins = {
       # all grammars by default
-      treesitter = {
-        enable = true;
-      };
+      #treesitter = {
+      #  enable = true;
+      #};
       telescope = {
         enable = true;
         extensions.fzf-native.enable = true;

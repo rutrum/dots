@@ -39,6 +39,13 @@
       enableBashIntegration = true;
     };
 
+    gitui = {
+      enable = true;
+      # TODO
+      keyConfig = ''
+      '';
+    };
+
     htop = {
       enable = true;
       # htop overwrites the file all the time, causing home manager

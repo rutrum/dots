@@ -49,7 +49,6 @@
       nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          inputs.flatpaks.nixosModules.declarative-flatpak
           ( import ./hosts/rumprism/configuration.nix )
         ];
         specialArgs = { inherit inputs; };
