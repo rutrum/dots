@@ -5,7 +5,7 @@
   # or WSL) which means there shouln't be any GUI applications
 
   imports = [
-    inputs.flatpaks.homeManagerModules.default
+    inputs.flatpaks.homeManagerModules.declarative-flatpak
     inputs.nixvim.homeManagerModules.nixvim
     ./modules/cli
     ./modules/ssh.nix

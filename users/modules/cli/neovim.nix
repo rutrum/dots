@@ -28,7 +28,7 @@ in {
         extensions.fzf-native.enable = true;
       };
       nix.enable = true; # .nix
-      surround.enable = true;
+      vim-surround.enable = true;
       nvim-ufo.enable = false;
       typst-vim.enable = true;
       cmp-tabby = {
@@ -41,9 +41,10 @@ in {
           # markdown
           marksman.enable = true;
           # does this do anything?
-          typst-lsp.enable = true;
+          typst_lsp.enable = true;
         };
       };
+      web-devicons.enable = true;
       which-key = {
         # popup that lists keybindings
         enable = true;

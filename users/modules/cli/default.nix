@@ -41,11 +41,13 @@
 
     htop = {
       enable = true;
-      settings = {
-        hide_kernel_threads = true;
-        hide_userland_threads = true;
-        show_program_path = false;
-      };
+      # htop overwrites the file all the time, causing home manager
+      # to write backups all the time
+      #settings = {
+      #  hide_kernel_threads = true;
+      #  hide_userland_threads = true;
+      #  show_program_path = false;
+      #};
     };
   };
 
