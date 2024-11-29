@@ -12,8 +12,13 @@
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
     # declaratively manage flatpaks
-    flatpaks.url = "github:GermanBread/declarative-flatpak/stable";
+    flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
 
     # mount secrets at runtime from encrypted sops files
     sops-nix.url = "github:Mic92/sops-nix";
@@ -44,6 +49,7 @@
       nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.flatpaks.nixosModules.declarative-flatpak
           ( import ./hosts/rumprism/configuration.nix )
         ];
         specialArgs = { inherit inputs; };
@@ -60,7 +66,8 @@
       nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          inputs.flatpaks.nixosModules.default
+          inputs.nixos-cosmic.nixosModules.default
+          inputs.flatpaks.nixosModules.declarative-flatpak
           ( import ./hosts/rumtower/configuration.nix )
         ];
         specialArgs = { inherit inputs; };
@@ -69,7 +76,7 @@
       nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          inputs.flatpaks.nixosModules.default
+          inputs.flatpaks.nixosModules.declarative-flatpak
           ( import ./hosts/rumnas/configuration.nix )
         ];
         specialArgs = { inherit inputs; };

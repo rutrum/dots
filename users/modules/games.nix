@@ -5,7 +5,9 @@
     steam
     superTuxKart
     prismlauncher
-    mindustry-wayland
+    mindustry
+    xonotic
+    retroarchFull
   ];
   services.flatpak.packages = [
     "flathub:app/info.beyondallreason.bar//stable"

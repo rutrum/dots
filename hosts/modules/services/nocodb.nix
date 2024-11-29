@@ -22,7 +22,7 @@
   # the containers
   virtualisation.oci-containers.containers = {
     nocodb = {
-      image = "nocodb/nocodb:0.251.1";
+      image = "nocodb/nocodb:0.257.0";
       ports = [ "8081:8080" ];
       volumes = [
         "/mnt/barracuda/nocodb/data:/usr/app/data"
@@ -39,6 +39,7 @@
     nocodb-db = {
       image = "library/postgres:latest"; # official docker images use "library/"
       volumes = [ "/mnt/barracuda/nocodb/db:/var/lib/postgresql/data" ];
+      ports = [ "5432:5432" ];
       autoStart = true;
       environment = {
         POSTGRES_DB = "root_db";

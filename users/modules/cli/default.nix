@@ -52,9 +52,21 @@
   home.packages = with pkgs; [
     just
 
+    # compression
+    ouch # all-in-one compression utility
+    unzip
+
+    # file system
+    gdu # tui to explore directory sizes
+    tree
+    yazi # terminal file browser
+    ueberzugpp # for yazi terminal image previews
+    fd
+    du-dust
+
+    # RIIR
     ripgrep
     bat
-    fd
     
     # encryption
     age
@@ -71,13 +83,9 @@
     watchexec
     yt-dlp
     neofetch
-    tree
     trash-cli
     wget
     cmus
-    unzip
-    yazi # terminal file browser
-    ueberzugpp # for yazi terminal image previews
     python3
   ];
 }

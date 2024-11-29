@@ -7,6 +7,7 @@
       "/mnt/barracuda/notes" 
       "/mnt/barracuda/docs" 
       "/mnt/barracuda/calibre" 
+      "/mnt/barracuda/system_exports" 
     ];
     #environment.BORG_RSH = "ssh -v";
     compression = "auto,lzma";
