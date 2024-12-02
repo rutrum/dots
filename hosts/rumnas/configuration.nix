@@ -8,9 +8,10 @@
   imports = [ 
     ../system.nix
     ./hardware-configuration.nix
+    #./samba.nix
 
     #../modules/gnome.nix
-    #../modules/gaming.nix
+    ../modules/gaming.nix
 
     ../modules/docker.nix
     ../modules/services/tabby.nix
@@ -94,14 +95,28 @@
   networking.firewall.enable = false; # remove this sometime? please uwu?
 
   #services.xserver.desktopManager.lxqt.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.cinnamon.enable = true;
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver = {
+  #  enable = true;
+  #  displayManager.gdm.enable = true;
+  #  desktopManager.gnome.enable = true;
+  #  #desktopManager.cinnamon.enable = true;
+  #};
+
   services.xserver = {
     enable = true;
-    #displayManager.gdm.enable = true;
-    #desktopManager.gnome.enable = true;
-    #desktopManager.cinnamon.enable = true;
+    desktopManager = {
+      #gnome.enable = true;
+      cinnamon.enable = true;
+    };
+    displayManager.lightdm = {
+      enable = true;
+    };
   };
+  services.displayManager.defaultSession = "cinnamon";
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.cinnamon.enable = true;
 
   #services.cinnamon.apps.enable = true;
 
