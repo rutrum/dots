@@ -43,6 +43,7 @@
     stable-packages = with pkgs; [
       # graphical applications
       mullvad-browser
+      ungoogled-chromium
 
       thunderbird
       protonmail-bridge-gui
