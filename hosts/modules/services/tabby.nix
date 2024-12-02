@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  # try this again in 24.11
   #services.tabby = {
   #  enable = true;
   #  port = 11029;
@@ -11,7 +12,7 @@
 
   virtualisation.oci-containers.containers = {
     tabbyml = {
-      image = "tabbyml/tabby:0.17.0";
+      image = "tabbyml/tabby:0.20.0";
       ports = [ "11029:8080" ];
       volumes = [
         "tabby:/data"
@@ -19,13 +20,13 @@
       environment = {};
       autoStart = true;
       extraOptions = [
-        "--gpus" "all"
+        "--gpus" "device=1" # 2060 super
       ];
       cmd = [
         "serve"
         "--device" "cuda"
         "--model" "DeepseekCoder-1.3B"
-        "--chat-model" "Qwen2-1.5B-Instruct"
+        "--chat-model" "Qwen2.5-Coder-1.5B-Instruct"
       ];
     };
   };
