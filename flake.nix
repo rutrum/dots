@@ -12,11 +12,6 @@
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
     # declaratively manage flatpaks
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
 
@@ -30,7 +25,7 @@
 
     # configure neovim and neovim plugins with nix
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };

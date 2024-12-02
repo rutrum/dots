@@ -23,12 +23,6 @@
     "/home/rutrum/.nix-profile/bin"
   ];
 
-  # symlink my music directory
-  #home.file.music = {
-  #  source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
-  #  target = "music";
-  #};
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
