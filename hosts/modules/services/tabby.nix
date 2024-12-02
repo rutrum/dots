@@ -4,11 +4,9 @@
   #services.tabby = {
   #  enable = true;
   #  port = 11029;
-  #  acceleration = "cuda"; # should default to cuda? maybe cpu
+  #  acceleration = "cuda"; 
   #};
   networking.firewall.allowedTCPPorts = [ 11029 ];
-
-  #environment.systemPackages = with pkgs; [ cuda
 
   virtualisation.oci-containers.containers = {
     tabbyml = {
@@ -20,13 +18,17 @@
       environment = {};
       autoStart = true;
       extraOptions = [
-        "--gpus" "device=1" # 2060 super
+        # docker run --rm -it --device=nvidia.com/gpu=1 ubuntu:latest nvidia-smi -L
+        # GPU 0: NVIDIA GeForce RTX 2060 SUPER (UUID: <REDACTED>)
+        "--device" "nvidia.com/gpu=1"
       ];
       cmd = [
         "serve"
         "--device" "cuda"
-        "--model" "DeepseekCoder-1.3B"
-        "--chat-model" "Qwen2.5-Coder-1.5B-Instruct"
+        "--model" "Qwen2.5-Coder-3B"
+        #"--model" "DeepseekCoder-6.7B"
+        # I'm not seeing why I would want this
+        #"--chat-model" "Qwen2.5-Coder-1.5B-Instruct"
       ];
     };
   };

@@ -8,7 +8,7 @@
   imports = [ 
     ../system.nix
     ./hardware-configuration.nix
-    #./samba.nix
+    ./samba.nix
 
     #../modules/gnome.nix
     ../modules/gaming.nix
@@ -34,14 +34,6 @@
 
   networking.hostName = "rumnas";
 
-  # let's play with metabase
-  # will likely need to use container and add to noco
-  #services.metabase = {
-  #  enable = true;
-  #  openFirewall = true;
-  #};
-
-  #heimdall.port = 8083;
   dashy.port = 80;
 
   services.openssh.enable = true;

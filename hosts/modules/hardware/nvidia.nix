@@ -8,6 +8,7 @@
   };
 
   hardware.nvidia-container-toolkit.enable = true;
+  # consider removing...test this
   virtualisation.docker.enableNvidia = true;
   #virtualisation.docker.daemon.settings = {
   #  runtimes.nvidia = {

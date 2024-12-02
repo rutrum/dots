@@ -11,10 +11,13 @@
       # You will still need to set up the user accounts to begin with:
       # $ sudo smbpasswd -a yourusername
 
-      shares.testshare = {
-        path = "/mnt/vault/testshare";
-        writable = "true";
-        comment = "Hello World!";
+      # wait until 24.11
+      settings = {
+        testshare = {
+          path = "/mnt/vault/testshare";
+          writable = "true";
+          comment = "Hello World!";
+        };
       };
 
       #shares = {
