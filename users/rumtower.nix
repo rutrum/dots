@@ -55,7 +55,6 @@
       pavucontrol
       anki-bin
       bitwarden
-      qbittorrent
       jellyfin-media-player
       vlc
 
@@ -85,8 +84,8 @@
       rustdesk
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
-      armcord
       freetube
+      qbittorrent
     ];
   in stable-packages ++ unstable-packages;
 

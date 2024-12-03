@@ -18,11 +18,11 @@
     ../modules/services/jellyfin.nix
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix
-    ../modules/services/tabby.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
     ../modules/hardware/mouse.nix
+    ../modules/qmk.nix
   ];
   # cosmic test
   #nix.settings = {

@@ -7,7 +7,7 @@
     prismlauncher
     mindustry
     xonotic
-    retroarchFull
+    #retroarchFull
   ];
   services.flatpak.packages = [
     "flathub:app/info.beyondallreason.bar//stable"
