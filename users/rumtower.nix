@@ -50,7 +50,7 @@
 
       zathura
       flameshot # x only?
-      gnome.simple-scan
+      simple-scan
       nextcloud-client
       sxiv
       pavucontrol

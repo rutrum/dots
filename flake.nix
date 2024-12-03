@@ -60,7 +60,6 @@
       nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          inputs.nixos-cosmic.nixosModules.default
           inputs.flatpaks.nixosModules.declarative-flatpak
           ( import ./hosts/rumtower/configuration.nix )
         ];

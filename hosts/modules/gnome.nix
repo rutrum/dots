@@ -6,10 +6,9 @@
   #environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = (with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
     forge
-    wintile-windows-10-window-tiling-for-gnome
     sound-output-device-chooser
   ]);
 }
