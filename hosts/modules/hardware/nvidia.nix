@@ -2,13 +2,13 @@
 {
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.opengl = { 
+  hardware.graphics = { 
     enable = true; 
-    driSupport = true; 
-    driSupport32Bit = true; 
+    enable32Bit = true; 
   };
 
   hardware.nvidia-container-toolkit.enable = true;
+  # consider removing...test this
   virtualisation.docker.enableNvidia = true;
   #virtualisation.docker.daemon.settings = {
   #  runtimes.nvidia = {

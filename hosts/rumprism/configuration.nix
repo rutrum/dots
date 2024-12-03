@@ -42,7 +42,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # GPU stuff
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -63,8 +63,6 @@
   '';
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
