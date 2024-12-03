@@ -70,7 +70,6 @@
       # hardware utilities
       acpi
       brightnessctl
-      psensor
 
       rustdesk
 

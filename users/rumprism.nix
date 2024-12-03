@@ -20,26 +20,6 @@
     };
   };
 
-  # symlink my music directory
-  #home.file.music = {
-  #  source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
-  #  target = "music";
-  #};
-
-  xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-
-    desktop = "${config.home.homeDirectory}/desktop";
-    documents = null;
-    download = "${config.home.homeDirectory}/downloads";
-    music = "${config.home.homeDirectory}/music";
-    pictures = null;
-    publicShare = null;
-    templates = null;
-    videos = null;
-  };
-
   home.packages = with pkgs; [
     # graphical applications
     mullvad-browser
@@ -64,7 +44,6 @@
     # hardware utilities
     acpi
     brightnessctl
-    psensor
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec

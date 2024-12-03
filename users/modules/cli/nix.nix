@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     nh
+    nix-tree # look at nix package dependencies
   ];
   nix.registry = {
     # TODO: something was done in 24.05 to add flake inputs as
