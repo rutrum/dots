@@ -22,7 +22,7 @@
   # the containers
   virtualisation.oci-containers.containers = {
     paperless = {
-      image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
+      image = "ghcr.io/paperless-ngx/paperless-ngx:2.13";
       ports = [ "8000:8000" ];
       volumes = [
         "/mnt/barracuda/paperless/data:/usr/src/paperless/data"
