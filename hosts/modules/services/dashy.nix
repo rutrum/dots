@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: let
   rumnas = "http://rumnas.lynx-chromatic.ts.net";
-  rumnas_ip = "http://192.168.50.3";
+  rumnas_ip = "http://192.168.50.3"; # shouldn't be necessary
   rumtower = "http://rumtower.lynx-chromatic.ts.net";
   rumpi_ip = "http://192.168.50.2";
 
@@ -78,7 +78,7 @@
             title = "Tube Archivist";
             description = "Local YouTube video library";
             icon = "hl-tube-archivist";
-            url = "${rumnas}:8090";
+            url = "${rumnas_ip}:8090";
           }
           {
             title = "Grafana";

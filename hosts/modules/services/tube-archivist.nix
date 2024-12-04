@@ -20,7 +20,7 @@ in {
   };
   virtualisation.oci-containers.containers = {
     tube-archivist = {
-      image = "bbilly1/tubearchivist";
+      image = "bbilly1/tubearchivist:v0.4.11";
       ports = [ "8090:8000" ];
       volumes = [
         "tube-archivist-cache:/cache"

@@ -3,7 +3,7 @@ in {
   programs.alacritty = {
     enable = true;
     settings = {
-      import = [ pkgs.alacritty-theme.catppuccin_mocha ];
+      general.import = [ pkgs.alacritty-theme.catppuccin_mocha ];
       window = {
         opacity = 0.85;
         padding.x = 24;
