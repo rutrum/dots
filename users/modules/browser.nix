@@ -1,5 +1,14 @@
 { config, pkgs, inputs, ... }:
 {
+  home.packages = [
+    pkgs.mullvad-browser
+  ];
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.ungoogled-chromium;
+  };
+
   programs.firefox = {
     enable = true;
     #package = nixpkgs-stable.legacyPackages.${pkgs.system}.firefox;
