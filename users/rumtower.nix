@@ -17,7 +17,7 @@
     ./modules/databases.nix
     ./modules/networking.nix
 
-    ./modules/firefox.nix
+    ./modules/browser.nix
     ./modules/reading.nix
   ];
 
@@ -42,9 +42,6 @@
   home.packages = let 
     stable-packages = with pkgs; [
       # graphical applications
-      mullvad-browser
-      ungoogled-chromium
-
       thunderbird
       protonmail-bridge-gui
 
@@ -61,12 +58,9 @@
 
       # container and virtual machines
       distrobox
-      # podman
-      # podman-compose
-
-      pods # ui for podman
 
       # hardware utilities
+      # move to system
       acpi
       brightnessctl
 
