@@ -19,7 +19,7 @@
   };
   virtualisation.oci-containers.containers = {
     home-assistant = {
-      image = "ghcr.io/home-assistant/home-assistant:stable";
+      image = "ghcr.io/home-assistant/home-assistant:2024.11";
       ports = [ "8082:8123" "1400:1400" ];
       volumes = [
         "/root/volumes/home-assistant/config:/config"
@@ -39,7 +39,7 @@
       ];
     };
     zwave-js = {
-      image = "kpine/zwave-js-server:latest";
+      image = "kpine/zwave-js-server:1.40.2-14.3.6-35e28517";
       # ports = [ "8083:3000" ]; # shouldn't be necessary, only home-assistant needs this
       environment = {
         S2_ACCESS_CONTROL_KEY = "7764841BC794A54442E324682A550CEF";
