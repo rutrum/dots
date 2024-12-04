@@ -28,16 +28,7 @@
     };
   };
 
-  # for nvidia drivers
-  # for home manager?
   nixpkgs.config.allowUnfree = true;
-
-
-  # symlink my music directory
-  #home.file.music = {
-  #  source = config.lib.file.mkOutOfStoreSymlink "/mnt/barracuda/media/music";
-  #  target = "music";
-  #};
 
   home.packages = let 
     stable-packages = with pkgs; [
@@ -55,6 +46,7 @@
       bitwarden
       jellyfin-media-player
       vlc
+      localsend
 
       # container and virtual machines
       distrobox
@@ -67,7 +59,6 @@
       rustdesk
 
       vscodium
-      localsend
 
       pdftk
 
