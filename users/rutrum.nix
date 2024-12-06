@@ -7,6 +7,7 @@
   imports = [
     inputs.flatpaks.homeManagerModules.declarative-flatpak
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./modules/cli
     ./modules/ssh.nix
   ];
@@ -17,6 +18,8 @@
   home.homeDirectory = "/home/rutrum";
 
   bash.terminal = "alacritty"; # should probably find a better spot for this
+
+  catppuccin.flavor = "mocha";
 
   # can this be removed?
   home.sessionPath = [

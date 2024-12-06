@@ -3,6 +3,9 @@
     enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
+
+    catppuccin.enable = true;
+
     settings = {
       format = ''
         $env_var$username$nix_shell$directory$character

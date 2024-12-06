@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    catppuccin.url = "github:catppuccin/nix";
 
     # declaratively manage flatpaks
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";

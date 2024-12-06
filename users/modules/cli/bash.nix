@@ -41,7 +41,7 @@ in {
       shellAliases = {
         v = "nvim";
         j = "just";
-        f = "thefuck";
+        f = "fuck";
         py = "python3";
 
         # prompt on file overwrite

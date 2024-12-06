@@ -9,7 +9,7 @@
     ./modules/joystick.nix
     ./modules/terminal
 
-    ./modules/firefox.nix
+    ./modules/browser.nix
   ];
 
   # for nvidia drivers
