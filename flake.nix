@@ -36,9 +36,7 @@
       pkgs = import nixpkgs-stable {
         inherit system;
         config.allowUnfree = true; # remove this
-        overlays = [ 
-          inputs.alacritty-theme.overlays.default
-        ];
+        overlays = [];
       };
     in {
       nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
