@@ -181,6 +181,17 @@
           }
         ];
       }
+      {
+        name = "Cameras";
+        items = [
+          {
+            title = "Doorbell";
+            description = "Front doorbell camera";
+            url = "192.168.50.100";
+            icon = "favicon";
+          }
+        ];
+      }
     ];
   };
 in {
