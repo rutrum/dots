@@ -9,7 +9,7 @@
     ./modules/flatpak.nix
     ./modules/databases.nix
     ./modules/networking.nix
-    ./modules/firefox.nix
+    ./modules/browser.nix
     ./modules/fonts.nix
   ];
 
@@ -22,7 +22,6 @@
 
   home.packages = with pkgs; [
     # graphical applications
-    mullvad-browser
     mullvad-vpn
     #thunderbird
     zathura
