@@ -8,7 +8,7 @@
 
     settings = {
       format = ''
-        $env_var$username$nix_shell$directory$character
+        $env_var$username$nix_shell$git_branch$directory$character
       '';
       add_newline = false;
       nix_shell = {
@@ -23,6 +23,9 @@
         truncation_symbol = "";
         read_only = " (ro)";
         read_only_style = "bold red";
+      };
+      git_branch = {
+        format = "[$branch]($style) ";
       };
 
       # for distrobox
