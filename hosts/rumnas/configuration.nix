@@ -22,11 +22,11 @@
     ../modules/services/dashy.nix
     ../modules/services/nocodb.nix
     ../modules/services/grafana.nix
-    ../modules/services/frigate.nix
     #../modules/services/nextcloud.nix
     ../modules/services/tube-archivist.nix
     ../modules/services/llm.nix
     ../modules/services/mealie.nix
+    ../modules/services/forgejo.nix
 
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
@@ -35,6 +35,13 @@
   networking.hostName = "rumnas";
 
   dashy.port = 80;
+  services.tailscale = {
+    useRoutingFeatures = "server";
+    extraUpFlags = [
+      "--advertise-exit-node" # allow clients to route traffic through nas
+      "--advertise-routes=192.168.50.0/24"
+    ];
+};
 
   services.openssh.enable = true;
 
