@@ -6,27 +6,37 @@
       enable = true;
       openFirewall = true;
       package = pkgs.samba4Full;
-      
-      #syncPasswordsByPam = true;
+
       # You will still need to set up the user accounts to begin with:
       # $ sudo smbpasswd -a yourusername
 
       # wait until 24.11
       settings = {
-        testshare = {
-          path = "/mnt/vault/testshare";
-          writable = "true";
-          comment = "Hello World!";
+        global = {
+          security = "user";
+          "workgroup" = "WORKGROUP";
+          "map to guest" = "Bad User";
+          "browseable" = "yes";
+        };
+        homes = {
+          "read only" = "no";
+          "inherit acls" = "yes";
+          "valid users" = "%S";
+          "path" = "/mnt/vault/home/%S";
+        };
+        "public" = {
+          "path" = "/mnt/vault/public";
+          "read only" = "no";
+          "guest ok" = "yes";
         };
       };
+    };
 
-      #shares = {
-      #  homes = {
-      #    browseable = "no";  # note: each home will be browseable; the "homes" share will not.
-      #    "read only" = "no";
-      #    "guest ok" = "no";
-      #  };
-      #};
+
+    # Below services are used for advertising the shares to Windows hosts
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
     };
 
     avahi = {
@@ -38,8 +48,7 @@
     };
   };
 
-  # To make SMB mounting easier on the command line
   environment.systemPackages = with pkgs; [
-    cifs-utils
+    cifs-utils # mount samba shares on cli
   ];
 }
