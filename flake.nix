@@ -28,6 +28,8 @@
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+
+    cura.url = "github:grumnix/cura5";
   };
 
   outputs = { home-manager, nixpkgs-stable, ... }@inputs:
