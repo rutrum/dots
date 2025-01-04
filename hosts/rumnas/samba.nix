@@ -2,6 +2,21 @@
 { pkgs, ... }:
 {
   services = {
+
+    # SFTP server
+    vsftpd = {
+      enable = true;
+      writeEnable = true;
+      localUsers = true; # local_enable=YES
+      # I do not like this module
+
+      # local_umask sets file permissions 644
+      extraConfig = ''
+        local_umask=0022
+      '';
+    };
+
+    # SMB server
     samba = {
       enable = true;
       openFirewall = true;
@@ -29,14 +44,18 @@
           "read only" = "no";
           "guest ok" = "yes";
         };
+        "reolink" = {
+          "path" = "/mnt/vault/reolink";
+          "read only" = "no";
+        };
       };
     };
-
 
     # Below services are used for advertising the shares to Windows hosts
     samba-wsdd = {
       enable = true;
       openFirewall = true;
+      discovery = true;
     };
 
     avahi = {
@@ -45,6 +64,7 @@
 
       publish.enable = true;
       publish.userServices = true;
+      nssmdns4 = true;
     };
   };
 
