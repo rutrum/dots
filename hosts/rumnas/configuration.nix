@@ -122,10 +122,17 @@
   #services.gnome.core-utilities.enable =  false;
   # consider manually adding back certain utilities
 
-  #user.users.borg = {
-  #  isSystemUser = true;
-  #  description = "Account for borgmatic";
-  #};
+  users = {
+    users.reolink = {
+      isSystemUser = true;
+      description = "Account for cameras to save recordings";
+      group = "reolink";
+      home = "/mnt/vault/reolink";
+      shell = pkgs.bashInteractive;
+    };
+    # normal users are part of "user" group by default
+    groups.reolink = {};
+  };
 
   # Enable automatic login for the user.
   #services.getty.autologinUser = "rutrum";
