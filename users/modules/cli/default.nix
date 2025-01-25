@@ -25,6 +25,15 @@
       enableBashIntegration = true;
     };
 
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+      config = {
+        global.hide_env_diff = true;
+      };
+    };
+
     zoxide = {
       enable = true;
       enableBashIntegration = true;
@@ -64,6 +73,15 @@
     yazi = {
       enable = true;
       catppuccin.enable = true;
+
+      settings = {
+        manager = {
+          ratio = [1 3 4];
+        };
+        preview = {
+          wrape = "yes";
+        };
+      };
     };
   };
 
