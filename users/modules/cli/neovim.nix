@@ -41,8 +41,23 @@ in {
           # markdown
           marksman.enable = true;
           # does this do anything?
-          typst_lsp.enable = true;
+          #typst_lsp.enable = true;
+
+          openscad_lsp = {
+            enable = true;
+            filetypes = ["scad"];
+          };
+
+          # html
+          superhtml = {
+            enable = false;
+            autostart = true;
+            package = pkgs.superhtml;
+          };
         };
+      };
+      openscad = {
+        enable = true;
       };
       web-devicons.enable = true;
       which-key = {
@@ -52,8 +67,7 @@ in {
     };
     extraPlugins = with pkgs.vimPlugins; [
       hop-nvim
-      #vim-nix
-      vim-markdown
+      nvim-treesitter-parsers.just
     ];
 
     globals = {
