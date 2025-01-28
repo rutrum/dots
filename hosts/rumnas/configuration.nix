@@ -16,7 +16,6 @@
     ../modules/docker.nix
     ../modules/services/tabby.nix
     ../modules/services/home-assistant.nix
-    #../modules/services/heimdall.nix
     #../modules/services/rustdesk.nix
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix

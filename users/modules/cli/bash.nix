@@ -1,4 +1,4 @@
-{ config, lib, ... }: 
+{ config, lib, pkgs, ... }: 
 with lib;
 let
   cfg = config.bash;
@@ -30,6 +30,11 @@ in {
         nrn () {
           nix run nixpkgs#"$1"
         }
+
+        # just completions
+        eval "$(${pkgs.just}/bin/just --completions bash)"
+        # j completions
+        complete -F _just -o bashdefault -o default j
       '';
       profileExtra = ''
         # add nix application desktop files

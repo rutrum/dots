@@ -35,11 +35,39 @@
   #};
   #hardware.pulseaudio.enable = false;
 
+  services.prometheus = {
+    enable = true;
+
+    exporters = {
+      node = {
+        enable = true;
+        port = 9000;
+        openFirewall = true;
+        enabledCollectors = [
+          "logind" 
+          "systemd"
+        ];
+      };
+    };
+
+    scrapeConfigs = [
+      {
+        job_name = "node";
+        static_configs = [{
+          targets = [ "localhost:9000" ];
+        }];
+      }
+    ];
+  };
+
   networking.hostName = "rumtower";
 
   virtualisation.waydroid.enable = true;
 
-  programs.wireshark.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark; # UI application
+  };
 
   # Fonts
   # This should be a module
@@ -69,11 +97,11 @@
           path = "/mnt/barracuda/notes";
           devices = [ "rumbeta" "rumprism" ];
         };
-        prism-instances = {
-          id = "cdgrh-cn25a";
-          path = "/home/rutrum/.local/share/PrismLauncher/instances";
-          devices = [ "rumprism" ];
-        };
+        #prism-instances = {
+        #  id = "cdgrh-cn25a";
+        #  path = "/home/rutrum/.local/share/PrismLauncher/instances";
+        #  devices = [ "rumprism" ];
+        #};
       };
     };
   };

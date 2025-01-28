@@ -8,7 +8,6 @@
   environment.systemPackages = (with pkgs; [
     gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
-    forge
-    sound-output-device-chooser
+    tactile
   ]);
 }

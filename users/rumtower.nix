@@ -35,9 +35,7 @@
       # graphical applications
       thunderbird
       protonmail-bridge-gui
-
       zathura
-      flameshot # x only?
       simple-scan
       nextcloud-client
       sxiv
@@ -62,6 +60,8 @@
 
       pdftk
 
+      dolphin
+
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
       discord
@@ -71,6 +71,7 @@
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       freetube
       qbittorrent
+      flameshot # x only?
     ];
   in stable-packages ++ unstable-packages;
 
