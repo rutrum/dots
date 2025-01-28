@@ -37,15 +37,15 @@
           "read only" = "no";
           "inherit acls" = "yes";
           "valid users" = "%S";
-          "path" = "/mnt/vault/home/%S";
+          "path" = "/mnt/raid/homes/%S";
         };
         "public" = {
-          "path" = "/mnt/vault/public";
+          "path" = "/mnt/raid/public";
           "read only" = "no";
           "guest ok" = "yes";
         };
         "reolink" = {
-          "path" = "/mnt/vault/reolink";
+          "path" = "/mnt/raid/reolink";
           "read only" = "no";
         };
       };
