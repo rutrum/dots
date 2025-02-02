@@ -33,10 +33,10 @@
             url = "${rumtower}:8096";
           }
           {
-            title = "TabbyML";
-            description = "AI code assistant";
-            icon = "https://raw.githubusercontent.com/TabbyML/tabby/main/website/static/img/favicon.ico";
-            url = "${rumnas}:11029";
+            title = "ErsatzTV";
+            description = "Stream TV channels";
+            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";
+            url = "${rumnas}:8409";
           }
           {
             title = "Octoprint";

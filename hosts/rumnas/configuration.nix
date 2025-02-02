@@ -14,7 +14,7 @@
     ../modules/gaming.nix
 
     ../modules/docker.nix
-    ../modules/services/tabby.nix
+    ../modules/services/ersatztv.nix
     ../modules/services/home-assistant.nix
     #../modules/services/rustdesk.nix
     ../modules/services/adguard-home.nix

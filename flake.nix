@@ -41,6 +41,13 @@
         overlays = [];
       };
     in {
+      devShells.${system}.default = pkgs.mkShell {
+        name = "dots";
+        buildInputs = with pkgs; [
+          sops
+          alejandra
+        ];
+      };
       nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
