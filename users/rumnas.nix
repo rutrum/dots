@@ -1,8 +1,12 @@
-{ config, pkgs, inputs, ... }: 
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./rutrum.nix
-    
+
     ./modules/cli
     ./modules/ssh.nix
     ./modules/games.nix

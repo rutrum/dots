@@ -1,4 +1,4 @@
-{ inputs, ... }: let
+{inputs, ...}: let
   unstable-unfree = import inputs.nixpkgs-unstable {
     system = "x86_64-linux";
     config.allowUnfree = true;

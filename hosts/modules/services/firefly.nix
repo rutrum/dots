@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # create network in systemd
   systemd.services.init-firefly-network = {
     description = "Create network for firefly containers.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig.type = "oneshot";
     script = let
@@ -23,12 +26,12 @@
   virtualisation.oci-containers.containers = {
     firefly = {
       image = "fireflyiii/core:version-6.1.24";
-      ports = [ "8080:8080" ];
+      ports = ["8080:8080"];
       volumes = [
         "/mnt/barracuda/firefly/upload:/var/www/html/storage/upload"
       ];
       environment = {};
-      dependsOn = [ "firefly-db" ];
+      dependsOn = ["firefly-db"];
       autoStart = true;
       environmentFiles = [
         # TODO: replace with sops
@@ -40,7 +43,7 @@
     };
     firefly-db = {
       image = "library/mariadb:latest"; # official docker images use "library/"
-      volumes = [ "/mnt/barracuda/firefly_db:/var/lib/mysql" ];
+      volumes = ["/mnt/barracuda/firefly_db:/var/lib/mysql"];
       autoStart = true;
       #ports = [ "3307:3306" ];
       environment = {

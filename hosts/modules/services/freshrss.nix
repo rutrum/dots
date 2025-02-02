@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   pg_user = "freshrss";
   pg_db = "freshrss";
   pg_pass = "secret_freshrss_password";
@@ -6,8 +10,8 @@ in {
   # create network in systemd
   systemd.services.init-freshrss-network = {
     description = "Create network for freshrss containers.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig.type = "oneshot";
     script = let
@@ -26,13 +30,13 @@ in {
   virtualisation.oci-containers.containers = {
     freshrss = {
       image = "freshrss/freshrss:1.24.1";
-      ports = [ "8084:80" ];
+      ports = ["8084:80"];
       volumes = [
         "/mnt/barracuda/freshrss/data:/var/www/FreshRSS/data"
         "/mnt/barracuda/freshrss/extensions:/var/www/FreshRSS/extensions"
       ];
       environment = {};
-      dependsOn = [ "freshrss-db" ];
+      dependsOn = ["freshrss-db"];
       autoStart = true;
       environment = {
         TZ = "US/Indiana/Indianapolis";
@@ -50,7 +54,7 @@ in {
     };
     freshrss-db = {
       image = "library/postgres:latest"; # official docker images use "library/"
-      volumes = [ "/mnt/barracuda/freshrss/db:/var/lib/postgres/data" ];
+      volumes = ["/mnt/barracuda/freshrss/db:/var/lib/postgres/data"];
       autoStart = true;
       environment = {
         POSTGRES_USER = pg_user;

@@ -1,7 +1,7 @@
 {
   programs.urxvt = {
     enable = true;
-    fonts = [ 
+    fonts = [
       "xft:Iosevka Nerd Font Mono:size=11" # nerdfont
       "xft:DroidSansM Nerd Font Mono:size=10" # nerdfont
       "xfg:Noto Color Emoji" # emoji

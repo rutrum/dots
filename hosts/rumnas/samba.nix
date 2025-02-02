@@ -1,8 +1,6 @@
 # https://gist.github.com/vy-let/a030c1079f09ecae4135aebf1e121ea6
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services = {
-
     # SFTP server
     vsftpd = {
       enable = true;

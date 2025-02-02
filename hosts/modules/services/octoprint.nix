@@ -1,12 +1,12 @@
-{ ... }: let
-    username = "octoprint";
+{...}: let
+  username = "octoprint";
 in {
-    services.octoprint = {
-        enable = true;
-        port = 5000;
-        openFirewall = true;
-        user = username;
-    };
+  services.octoprint = {
+    enable = true;
+    port = 5000;
+    openFirewall = true;
+    user = username;
+  };
 
-    users.users.${username}.extraGroups = [ "video" ];
+  users.users.${username}.extraGroups = ["video"];
 }

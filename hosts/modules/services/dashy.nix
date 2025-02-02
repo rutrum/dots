@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   rumnas = "http://rumnas.lynx-chromatic.ts.net";
   rumnas_ip = "http://192.168.50.3"; # shouldn't be necessary
   rumtower = "http://rumtower.lynx-chromatic.ts.net";
@@ -204,7 +209,7 @@ in {
     containers = {
       dashy = {
         image = "lissy93/dashy";
-        ports = [ "${toString config.dashy.port}:8080" ];
+        ports = ["${toString config.dashy.port}:8080"];
         autoStart = true;
         volumes = [
           "${dashy_conf}:/app/user-data/conf.yml"

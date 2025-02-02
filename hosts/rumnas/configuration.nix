@@ -1,11 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, inputs, ... }:
-
 {
-  imports = [ 
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
     ../system.nix
     ./hardware-configuration.nix
     ./samba.nix
@@ -40,7 +41,7 @@
       "--advertise-exit-node" # allow clients to route traffic through nas
       "--advertise-routes=192.168.50.0/24"
     ];
-};
+  };
 
   services.openssh.enable = true;
 
@@ -53,7 +54,7 @@
     # hoping I don't need this, since it should be local?
     #secretKeyFile = "/var/cache-priv-key.pem";
   };
-  networking.firewall.allowedTCPPorts = [ 5000 ];
+  networking.firewall.allowedTCPPorts = [5000];
 
   # allow x forwarding
   #programs.ssh.forwardX11 = true;
@@ -81,7 +82,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   fileSystems = {
-    "/mnt/raid" = { 
+    "/mnt/raid" = {
       device = "/dev/md127";
       fsType = "btrfs";
     };
@@ -145,5 +146,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

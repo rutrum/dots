@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./bash.nix
     ./starship.nix
@@ -86,7 +89,6 @@
   };
 
   home.packages = with pkgs; [
-
     just
 
     # compression
@@ -103,7 +105,7 @@
     # RIIR
     ripgrep
     bat
-    
+
     # encryption
     age
     sops

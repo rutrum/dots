@@ -1,5 +1,7 @@
-{ pkgs, terminal }:
-let 
+{
+  pkgs,
+  terminal,
+}: let
   mod = "Mod4";
 in {
   enable = true;
@@ -13,10 +15,8 @@ in {
     "${mod}-Shift-q" = "close";
   };
   mousebinds = {
-    
   };
   settings = {
-
   };
   # tags = { };
 }

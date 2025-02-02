@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
 in {
   programs.alacritty = {
     enable = true;
@@ -14,12 +18,12 @@ in {
         normal.family = "Iosevka Nerd Font Mono";
       };
       keyboard.bindings = [
-        { 
+        {
           key = "I";
           mods = "Alt";
           action = "IncreaseFontSize";
         }
-        { 
+        {
           key = "U";
           mods = "Alt";
           action = "DecreaseFontSize";

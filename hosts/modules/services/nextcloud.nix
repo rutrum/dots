@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # todo: replace with sops
   environment.etc."nextcloud-admin-pass".text = "exampleTest123";
 

@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }: 
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   _module.args.inputs = inputs; # this is huge
   imports = [
     ./rutrum.nix
@@ -30,7 +34,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = let 
+  home.packages = let
     stable-packages = with pkgs; [
       # graphical applications
       thunderbird
@@ -73,7 +77,8 @@
       qbittorrent
       flameshot # x only?
     ];
-  in stable-packages ++ unstable-packages;
+  in
+    stable-packages ++ unstable-packages;
 
   home.stateVersion = "23.05";
 }

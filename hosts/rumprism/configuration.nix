@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../system.nix
     ./hardware-configuration.nix
@@ -18,12 +21,12 @@
         prism-instances = {
           id = "cdgrh-cn25a";
           path = "/home/rutrum/.local/share/PrismLauncher/instances";
-          devices = [ "rumtower" ];
+          devices = ["rumtower"];
         };
         notes = {
           id = "mqkjy-xoe93";
           path = "/home/rutrum/notes";
-          devices = [ "rumpixel" "rumtower" ];
+          devices = ["rumpixel" "rumtower"];
         };
       };
     };
@@ -54,7 +57,7 @@
 
   # displaylink drivers for wavlink doc
   nixpkgs.config.allowUnfree = true;
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
 
   services.logind.extraConfig = ''
     IdleAction=hybrid-sleep
