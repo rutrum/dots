@@ -1,9 +1,12 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   systemd.services.init-rustdesk-network = {
     description = "Create network for rustdesk containers.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig.type = "oneshot";
     script = let
@@ -21,9 +24,9 @@
   virtualisation.oci-containers.containers = {
     rustdesk-hbbs = {
       image = "rustdesk/rustdesk-server:latest";
-      ports = [ "21115:21115" "21116:21116" "21116:21116/udp" "21118:21118" ];
-      dependsOn = [ "rustdesk-hbbr" ];
-      entrypoint = "hbbs"; 
+      ports = ["21115:21115" "21116:21116" "21116:21116/udp" "21118:21118"];
+      dependsOn = ["rustdesk-hbbr"];
+      entrypoint = "hbbs";
       cmd = ["-r" "rustdesk-hbbr:21117"];
       autoStart = true;
       extraOptions = [
@@ -34,7 +37,7 @@
       image = "rustdesk/rustdesk-server:latest";
       entrypoint = "hbbr";
       autoStart = true;
-      ports = [ "21117:21117" "21119:21119" ];
+      ports = ["21117:21117" "21119:21119"];
       extraOptions = [
         "--network=rustdesk"
       ];

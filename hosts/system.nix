@@ -1,5 +1,8 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   # Base system config for all NixOS configurations
 
   # TODO: create wayland/xorg/DE modules
@@ -30,7 +33,7 @@
     flatpak.enable = true;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -43,16 +46,16 @@
   users.users.rutrum = {
     isNormalUser = true;
     description = "rutrum";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
   };
 
   environment.systemPackages = with pkgs; [
-    neovim 
-    git 
+    neovim
+    git
     home-manager
     rxvt-unicode
   ];
-  
+
   # Locale settings
   time.timeZone = "America/Indiana/Indianapolis";
   i18n.defaultLocale = "en_US.UTF-8";

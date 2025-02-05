@@ -1,15 +1,19 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   #hardware.xpadneo.enable = true;
   #services.joycond.enable = true;
 
-# TODO: manually change some of the axis, see here
-# https://retropie.org.uk/docs/Universal-Controller-Calibration-&-Mapping-Using-xboxdrv/
-  
+  # TODO: manually change some of the axis, see here
+  # https://retropie.org.uk/docs/Universal-Controller-Calibration-&-Mapping-Using-xboxdrv/
+
   # Fix for using Xinput mode on 8bitdo Ultimate C controller
   # Inspired by https://aur.archlinux.org/packages/8bitdo-ultimate-controller-udev
-  environment.systemPackages = with pkgs; [ 
-      xboxdrv 
+  environment.systemPackages = with pkgs; [
+    xboxdrv
   ];
   # Udev rules to start or stop systemd service when controller is connected or disconnected
   services.udev.extraRules = ''

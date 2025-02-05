@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   telescope = "require('telescope.builtin')";
 in {
   programs.nixvim = {
@@ -152,7 +156,7 @@ in {
   #    vim-svelte # svelte
 
   #    #mason-nvim # for LSP?
-  #    #mason-lspconfig-nvim 
+  #    #mason-lspconfig-nvim
   #    #nvim-lspconfig
 
   #    #{ plugin = none-ls-nvim;
@@ -182,7 +186,6 @@ in {
   #    #     require("lualine").setup()
   #    #   '';
   #    # }
-
 
   #    # quickly comment lines or blocks of code
   #    { plugin = comment-nvim;

@@ -1,6 +1,10 @@
-{ config, lib, pkgs, ... }: 
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.bash;
 in {
   options = {

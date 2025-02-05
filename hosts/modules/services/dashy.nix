@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }: let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   rumnas = "http://rumnas.lynx-chromatic.ts.net";
   rumnas_ip = "http://192.168.50.3"; # shouldn't be necessary
   rumtower = "http://rumtower.lynx-chromatic.ts.net";
@@ -33,10 +38,10 @@
             url = "${rumtower}:8096";
           }
           {
-            title = "TabbyML";
-            description = "AI code assistant";
-            icon = "https://raw.githubusercontent.com/TabbyML/tabby/main/website/static/img/favicon.ico";
-            url = "${rumnas}:11029";
+            title = "ErsatzTV";
+            description = "Stream TV channels";
+            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";
+            url = "${rumnas}:8409";
           }
           {
             title = "Octoprint";
@@ -204,7 +209,7 @@ in {
     containers = {
       dashy = {
         image = "lissy93/dashy";
-        ports = [ "${toString config.dashy.port}:8080" ];
+        ports = ["${toString config.dashy.port}:8080"];
         autoStart = true;
         volumes = [
           "${dashy_conf}:/app/user-data/conf.yml"

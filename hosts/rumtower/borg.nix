@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   backup_directory = "ssh://rutrum@rumnas/mnt/vault/backups";
   secrets = config.sops.secrets;
   cloud_job = {
@@ -49,7 +53,6 @@ in {
       repo = "ssh://rutrum@rumnas/mnt/raid/homes/rutrum/backup";
       encryption.mode = "none";
     };
-  };
 
-  environment.systemPackages = [ pkgs.borgbackup ];
+  environment.systemPackages = [pkgs.borgbackup];
 }

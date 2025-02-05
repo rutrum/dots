@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   services = {
     # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
     flatpak = {

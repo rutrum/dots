@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }: 
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./rutrum.nix
     ./modules/terminal

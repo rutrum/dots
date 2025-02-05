@@ -1,10 +1,14 @@
-{ pkgs, config, ... }: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   network-name = "tube-archivist";
 in {
   systemd.services.init-tube-archivist-network = {
     description = "Create network for ${network-name} containers.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig.type = "oneshot";
     script = let
@@ -21,7 +25,7 @@ in {
   virtualisation.oci-containers.containers = {
     tube-archivist = {
       image = "bbilly1/tubearchivist:v0.4.11";
-      ports = [ "8090:8000" ];
+      ports = ["8090:8000"];
       volumes = [
         "tube-archivist-cache:/cache"
         "tube-archivist-media:/youtube"
@@ -37,7 +41,7 @@ in {
         ELASTIC_PASSWORD = "admin";
         TZ = "America/Chicago";
       };
-      dependsOn = [ "tube-archivist-redis" "tube-archivist-elastic-search" ];
+      dependsOn = ["tube-archivist-redis" "tube-archivist-elastic-search"];
       autoStart = true;
       extraOptions = [
         "--network=${network-name}"
@@ -46,7 +50,7 @@ in {
     tube-archivist-redis = {
       image = "redis/redis-stack-server";
       autoStart = true;
-      dependsOn = [ "tube-archivist-elastic-search" ];
+      dependsOn = ["tube-archivist-elastic-search"];
       volumes = [
         "tube-archivist-redis:/data"
       ];
@@ -57,7 +61,7 @@ in {
     tube-archivist-elastic-search = {
       image = "library/elasticsearch:8.14.3";
       autoStart = true;
-      ports = [ "9200:9200" ];
+      ports = ["9200:9200"];
       volumes = [
         "tube-archivist-elastic-search:/usr/share/elasticsearch/data"
       ];
@@ -73,5 +77,4 @@ in {
       ];
     };
   };
-  
 }

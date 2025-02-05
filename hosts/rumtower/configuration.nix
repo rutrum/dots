@@ -1,9 +1,11 @@
-# Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS 
+# Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS
 # manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../system.nix
     ./hardware-configuration.nix
@@ -58,7 +60,7 @@
         port = 9000;
         openFirewall = true;
         enabledCollectors = [
-          "logind" 
+          "logind"
           "systemd"
         ];
       };
@@ -67,9 +69,11 @@
     scrapeConfigs = [
       {
         job_name = "node";
-        static_configs = [{
-          targets = [ "localhost:9000" ];
-        }];
+        static_configs = [
+          {
+            targets = ["localhost:9000"];
+          }
+        ];
       }
     ];
   };
@@ -98,18 +102,18 @@
           id = "pcmtp-7hjbs";
           path = "/mnt/barracuda/media/music";
           type = "sendonly";
-          devices = [ "rumbeta" ];
+          devices = ["rumbeta"];
         };
         photos = {
           id = "pixel_6a_bde5-photos";
           path = "/mnt/barracuda/home_media/pictures/pixel6a_camera";
           type = "receiveonly";
-          devices = [ "rumbeta" ];
+          devices = ["rumbeta"];
         };
         notes = {
           id = "mqkjy-xoe93";
           path = "/mnt/barracuda/notes";
-          devices = [ "rumbeta" "rumprism" ];
+          devices = ["rumbeta" "rumprism"];
         };
         #prism-instances = {
         #  id = "cdgrh-cn25a";
@@ -128,7 +132,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  systemd.services.NetworkManager-ensure-profiles.after = [ "NetworkManager.service" ];
+  systemd.services.NetworkManager-ensure-profiles.after = ["NetworkManager.service"];
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Configure network proxy if necessary
@@ -178,5 +182,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

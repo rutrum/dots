@@ -1,9 +1,12 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   systemd.services.init-home-assistant-network = {
     description = "Create network for home-assistant containers.";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig.type = "oneshot";
     script = let
@@ -20,7 +23,7 @@
   virtualisation.oci-containers.containers = {
     home-assistant = {
       image = "ghcr.io/home-assistant/home-assistant:2024.11";
-      ports = [ "8082:8123" "1400:1400" ];
+      ports = ["8082:8123" "1400:1400"];
       volumes = [
         "/root/volumes/home-assistant/config:/config"
         "/etc/localtime:/etc/localtime:ro"

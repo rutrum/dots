@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.frigate = {
     enable = false;
     hostname = "rumnas.lynx-chromatic.ts.net"; # consider removing?

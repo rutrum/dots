@@ -1,10 +1,13 @@
-{ pkgs, config, ... }:
 {
-  services.xserver.videoDrivers = [ "nvidia" ];
+  pkgs,
+  config,
+  ...
+}: {
+  services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.graphics = { 
-    enable = true; 
-    enable32Bit = true; 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   hardware.nvidia-container-toolkit.enable = true;
@@ -28,5 +31,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = [ pkgs.nvtopPackages.nvidia ];
+  environment.systemPackages = [pkgs.nvtopPackages.nvidia];
 }

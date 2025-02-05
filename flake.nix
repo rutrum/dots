@@ -32,79 +32,89 @@
     cura.url = "github:grumnix/cura5";
   };
 
-  outputs = { home-manager, nixpkgs-stable, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs-stable {
-        inherit system;
-        config.allowUnfree = true; # remove this
-        overlays = [];
-      };
-    in {
-      nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ( import ./hosts/rumprism/configuration.nix )
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ( import ./hosts/rumpi/configuration.nix )
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.flatpaks.nixosModules.declarative-flatpak
-          ( import ./hosts/rumtower/configuration.nix )
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.flatpaks.nixosModules.declarative-flatpak
-          ( import ./hosts/rumnas/configuration.nix )
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ 
-          ./users/rutrum.nix 
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
-
-      homeConfigurations."rutrum@rumnas" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ 
-          ./users/rumnas.nix 
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
-
-      homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ 
-          ./users/rumtower.nix
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
-
-      homeConfigurations."rutrum@rumprism" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ 
-          ./users/rumprism.nix
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
+  outputs = {
+    home-manager,
+    nixpkgs-stable,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs-stable {
+      inherit system;
+      config.allowUnfree = true; # remove this
+      overlays = [];
     };
+  in {
+    devShells.${system}.default = pkgs.mkShell {
+      name = "dots";
+      buildInputs = with pkgs; [
+        sops
+        alejandra
+      ];
+    };
+    nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        (import ./hosts/rumprism/configuration.nix)
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        (import ./hosts/rumpi/configuration.nix)
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        inputs.flatpaks.nixosModules.declarative-flatpak
+        (import ./hosts/rumtower/configuration.nix)
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        inputs.flatpaks.nixosModules.declarative-flatpak
+        (import ./hosts/rumnas/configuration.nix)
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./users/rutrum.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
+    };
+
+    homeConfigurations."rutrum@rumnas" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./users/rumnas.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
+    };
+
+    homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./users/rumtower.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
+    };
+
+    homeConfigurations."rutrum@rumprism" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./users/rumprism.nix
+      ];
+      extraSpecialArgs = {inherit inputs;};
+    };
+  };
 }

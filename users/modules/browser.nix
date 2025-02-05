@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = [
     pkgs.mullvad-browser
   ];
@@ -33,7 +37,7 @@
         # geolocation
         "geo.provider.use_gpsd" = false;
         "geo.provider.use_geoclue" = false;
-        
+
         # locale
         "intl.accept_languages" = "en-US, en";
 
@@ -82,40 +86,65 @@
 
         engines = {
           "Searxng" = {
-            urls = [{
-              template = "https://etsi.me/search";
-              params = [{ name = "q"; value = "{searchTerms}"; }];
-            }];
-            definedAliases = [ "srx" ];
+            urls = [
+              {
+                template = "https://etsi.me/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["srx"];
           };
           "Nix Packages" = {
-            urls = [{
-              template = "https://search.nixos.org/packages";
-              params = [
-                { name = "type"; value = "packages"; }
-                { name = "query"; value = "{searchTerms}"; }
-              ];
-            }];
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
             # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "np" ];
+            definedAliases = ["np"];
           };
           "Home Manager Options" = {
-            urls = [{
-              template = "https://home-manager-options.extranix.com/";
-              params = [
-                { name = "query"; value = "{searchTerms}"; }
-              ];
-            }];
-            definedAliases = [ "hm" ];
+            urls = [
+              {
+                template = "https://home-manager-options.extranix.com/";
+                params = [
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["hm"];
           };
           "YouTube" = {
-            urls = [{
-              template = "https://www.youtube.com/results";
-              params = [
-                { name = "search_query"; value = "{searchTerms}"; }
-              ];
-            }];
-            definedAliases = [ "yt" ];
+            urls = [
+              {
+                template = "https://www.youtube.com/results";
+                params = [
+                  {
+                    name = "search_query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["yt"];
           };
 
           "Bing".metaData.hidden = true;

@@ -1,8 +1,6 @@
 # https://gist.github.com/vy-let/a030c1079f09ecae4135aebf1e121ea6
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services = {
-
     # SFTP server
     vsftpd = {
       enable = true;
@@ -37,15 +35,15 @@
           "read only" = "no";
           "inherit acls" = "yes";
           "valid users" = "%S";
-          "path" = "/mnt/vault/home/%S";
+          "path" = "/mnt/raid/homes/%S";
         };
         "public" = {
-          "path" = "/mnt/vault/public";
+          "path" = "/mnt/raid/public";
           "read only" = "no";
           "guest ok" = "yes";
         };
         "reolink" = {
-          "path" = "/mnt/vault/reolink";
+          "path" = "/mnt/raid/reolink";
           "read only" = "no";
         };
       };

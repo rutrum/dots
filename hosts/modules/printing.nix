@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # https://nixos.wiki/wiki/Printing
 
   environment.systemPackages = with pkgs; [
