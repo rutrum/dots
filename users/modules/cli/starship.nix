@@ -14,6 +14,7 @@
 
       nix_shell = {
         format = "[\\[$name\\]]($style) ";
+        heuristic = true;
       };
 
       character = {

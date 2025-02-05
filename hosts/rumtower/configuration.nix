@@ -16,6 +16,7 @@
 
     ../modules/docker.nix
     ../modules/services/jellyfin.nix
+    ../modules/services/immich.nix
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix
 
@@ -34,6 +35,19 @@
   #  displayManager.cosmic-greeter.enable = true;
   #};
   #hardware.pulseaudio.enable = false;
+
+  services.ollama = let 
+    unstable-unfree = import inputs.nixpkgs-unstable {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
+    };
+  in {
+    package = unstable-unfree.ollama;
+    host = "0.0.0.0";
+    port = 11434;
+    enable = true;
+    acceleration = "cuda";
+  };
 
   services.prometheus = {
     enable = true;
@@ -88,7 +102,7 @@
         };
         photos = {
           id = "pixel_6a_bde5-photos";
-          path = "/mnt/barracuda/media/pictures/pixel6a_camera";
+          path = "/mnt/barracuda/home_media/pictures/pixel6a_camera";
           type = "receiveonly";
           devices = [ "rumbeta" ];
         };
