@@ -17,6 +17,7 @@
     ../modules/docker.nix
     ../modules/services/ersatztv.nix
     ../modules/services/home-assistant.nix
+    ../modules/services/freshrss.nix
     #../modules/services/rustdesk.nix
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix
@@ -127,7 +128,7 @@
       isSystemUser = true;
       description = "Account for cameras to save recordings";
       group = "reolink";
-      home = "/mnt/vault/reolink";
+      home = "/mnt/raid/reolink";
       shell = pkgs.bashInteractive;
     };
     # normal users are part of "user" group by default

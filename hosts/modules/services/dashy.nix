@@ -103,6 +103,12 @@
             icon = "hl-mealie";
             url = "${rumnas}:9000";
           }
+          {
+            title = "FreshRSS";
+            description = "RSS feed aggregator";
+            icon = "hl-freshrss";
+            url = "${rumnas}:8084";
+          }
         ];
       }
       {

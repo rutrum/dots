@@ -6,6 +6,8 @@
   pg_user = "freshrss";
   pg_db = "freshrss";
   pg_pass = "secret_freshrss_password";
+
+  mount_dir = "/mnt/raid/services/freshrss";
 in {
   # create network in systemd
   systemd.services.init-freshrss-network = {
@@ -32,8 +34,8 @@ in {
       image = "freshrss/freshrss:1.24.1";
       ports = ["8084:80"];
       volumes = [
-        "/mnt/barracuda/freshrss/data:/var/www/FreshRSS/data"
-        "/mnt/barracuda/freshrss/extensions:/var/www/FreshRSS/extensions"
+        "${mount_dir}/data:/var/www/FreshRSS/data"
+        "${mount_dir}/extensions:/var/www/FreshRSS/extensions"
       ];
       environment = {};
       dependsOn = ["freshrss-db"];
@@ -54,7 +56,7 @@ in {
     };
     freshrss-db = {
       image = "library/postgres:latest"; # official docker images use "library/"
-      volumes = ["/mnt/barracuda/freshrss/db:/var/lib/postgres/data"];
+      volumes = ["${mount_dir}/db:/var/lib/postgres/data"];
       autoStart = true;
       environment = {
         POSTGRES_USER = pg_user;
