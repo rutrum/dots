@@ -123,5 +123,8 @@
     wget
     cmus
     python3
+    mediainfo
+    csvlens # csv tui
+    slumber # rest client
   ];
 }
