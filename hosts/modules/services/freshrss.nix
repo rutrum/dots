@@ -49,6 +49,7 @@ in {
         ADMIN_EMAIL = "dave@rutrum.net";
         ADMIN_PASSWORD = "freshrss";
         ADMIN_API_PASSWORD = "freshrss";
+        CRON_MIN = "13,43";
       };
       extraOptions = [
         "--network=freshrss"
