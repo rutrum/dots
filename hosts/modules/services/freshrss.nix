@@ -9,7 +9,6 @@
 
   mount_dir = "/mnt/raid/services/freshrss";
 in {
-  # create network in systemd
   systemd.services.init-freshrss-network = {
     description = "Create network for freshrss containers.";
     after = ["network.target"];
@@ -28,7 +27,6 @@ in {
     '';
   };
 
-  # the containers
   virtualisation.oci-containers.containers = {
     freshrss = {
       image = "freshrss/freshrss:1.24.1";

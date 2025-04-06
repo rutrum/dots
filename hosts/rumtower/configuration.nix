@@ -16,6 +16,7 @@
 
     ../modules/printing.nix
 
+
     ../modules/docker.nix
     ../modules/services/jellyfin.nix
     ../modules/services/immich.nix
@@ -115,11 +116,6 @@
           path = "/mnt/barracuda/notes";
           devices = ["rumbeta" "rumprism"];
         };
-        #prism-instances = {
-        #  id = "cdgrh-cn25a";
-        #  path = "/home/rutrum/.local/share/PrismLauncher/instances";
-        #  devices = [ "rumprism" ];
-        #};
       };
     };
   };
@@ -139,7 +135,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    beets
+  ];
 
   fileSystems = {
     #"/".device = "/dev/nvme0n1";
