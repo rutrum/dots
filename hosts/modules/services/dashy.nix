@@ -127,12 +127,6 @@
             url = "https://paradisus.day";
           }
           {
-            title = "Lemmy";
-            description = "Link aggregation platform";
-            icon = "hl-lemmy";
-            url = "https://lm.paradisus.day";
-          }
-          {
             title = "stringcase.org";
             url = "https://stringcase.org";
             icon = "favicon";
@@ -189,6 +183,12 @@
             description = "VPN service";
             icon = "favicon";
             url = "https://mullvad.net/en/account/login";
+          }
+          {
+            title = "BitWarden";
+            description = "Password manager";
+            icon = "hl-bitwarden";
+            url = "https://bitwarden.com/";
           }
         ];
       }

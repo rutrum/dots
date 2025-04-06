@@ -81,10 +81,24 @@
         # "webgl.force-enabled" = true;
       };
       search = {
-        default = "Searxng";
+        default = "DuckDuckGo";
         force = true;
 
         engines = {
+          "DuckDuckGo" = {
+            urls = [
+              {
+                template = "https://duckduckgo.com/";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["d"];
+          };
           "Searxng" = {
             urls = [
               {
