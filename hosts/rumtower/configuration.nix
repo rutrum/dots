@@ -39,6 +39,35 @@
   #};
   #hardware.pulseaudio.enable = false;
 
+  services = {
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "health" ];
+      ensureUsers = [
+        {
+          name = "grafana";
+        }
+        {
+          name = "admin";
+          ensureClauses.superuser = true;
+        }
+      ];
+      enableTCPIP = true;
+      authentication = ''
+        #type  database  DBuser  origin-address   auth-method
+        local  all       all                      trust
+        host   all       all     100.0.0.0/8      trust       # tailscale
+        host   all       all     192.168.50.0/24  trust       # local network
+      '';
+      initialScript = pkgs.writeText "init-sql-script" ''
+        ALTER USER grafana WITH PASSWORD 'grafana';
+      '';
+    };
+    postgresqlBackup = {
+      enable = true;
+    };
+  };
+
   services.ollama = let 
     unstable-unfree = import inputs.nixpkgs-unstable {
       system = "x86_64-linux";
