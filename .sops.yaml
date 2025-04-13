@@ -1,6 +1,7 @@
 keys:
   - &rumtower age1qfyrgusnydn54uf343qarlwhlax8rx6dj3uuvkaafj3y3ckmzassh9m9kz
   - &rumprism age1za78rel729f9g0snme0nwm6xt6pza7kgv024wuh440j4v5yv8s3qpdqd5l
+  - &rumnas age1ryjhgkrgaa0j2nep3333tpww42frkn6w2xqftljpawqtg6veusjsx4q79l
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
@@ -8,3 +9,4 @@ creation_rules:
       - age:
         - *rumtower
         - *rumprism
+        - *rumnas
