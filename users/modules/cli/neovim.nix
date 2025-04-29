@@ -102,6 +102,21 @@ in {
         options.desc = "Find files";
       }
       {
+        action.__raw = "require('telescope.builtin').live_grep";
+        key = "<leader>fg";
+        options.desc = "Grep files";
+      }
+      {
+        action.__raw = "require('telescope.builtin').buffers";
+        key = "<leader>fb";
+        options.desc = "Find buffers";
+      }
+      {
+        action.__raw = "require('telescope.builtin').help_tags";
+        key = "<leader>fh";
+        options.desc = "Find help";
+      }
+      {
         action.__raw = "require('hop').hint_words";
         key = "<leader>w";
         options.desc = "Hop to word";
