@@ -9,6 +9,11 @@
 
   mount_dir = "/mnt/raid/services/freshrss";
 in {
+  services.freshrss = {
+    enable = true;
+    baseUrl = "rumnas.lynx-chromatic.ts.net"
+  };
+
   systemd.services.init-freshrss-network = {
     description = "Create network for freshrss containers.";
     after = ["network.target"];
