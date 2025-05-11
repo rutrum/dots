@@ -68,6 +68,14 @@
     };
   };
 
+  services.tailscale = {
+    useRoutingFeatures = "server";
+    extraUpFlags = [
+      "--advertise-exit-node" # allow clients to route traffic through nas
+      "--advertise-routes=192.168.50.0/24"
+    ];
+  };
+
   services.ollama = let 
     unstable-unfree = import inputs.nixpkgs-unstable {
       system = "x86_64-linux";
