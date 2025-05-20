@@ -27,7 +27,7 @@
     unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --silent --type xbox360 --device-by-id %I --force-feedback --buttonmap A=B,B=A,X=Y,Y=X";
+      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --silent --type xbox360 --device-by-id %I --force-feedback --buttonmap A=B,B=A,X=Y,Y=X --axismap lt=y2,y2=x2,x2=lt";
     };
   };
 }
