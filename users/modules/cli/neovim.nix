@@ -35,10 +35,6 @@ in {
       vim-surround.enable = true;
       nvim-ufo.enable = false;
       typst-vim.enable = true;
-      cmp-tabby = {
-        enable = true;
-        settings.host = "http://localhost:11029";
-      };
       lsp = {
         enable = true;
         servers = {
