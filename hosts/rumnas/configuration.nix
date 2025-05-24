@@ -11,6 +11,7 @@
     ../system.nix
     ./hardware-configuration.nix
     ./samba.nix
+    ./cache.nix
 
     #../modules/gnome.nix
     ../modules/gaming.nix
@@ -33,6 +34,7 @@
     ../modules/hardware/nvidia.nix
     ../modules/hardware/8bitdo.nix
   ];
+
 
   services.hardware.openrgb = {
     enable = true;

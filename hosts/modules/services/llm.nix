@@ -21,7 +21,7 @@ in {
     package = unstable-unfree.ollama-cuda;
     host = "0.0.0.0";
     port = 11434;
-    enable = true;
+    enable = false;
     acceleration = "cuda";
   };
 }

@@ -76,7 +76,6 @@
       rustdesk
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
-      freetube
       qbittorrent
       flameshot # x only?
     ];
