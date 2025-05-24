@@ -22,6 +22,8 @@
     ./modules/networking.nix
     ./modules/zed.nix
 
+    ./modules/joystick.nix
+
     ./modules/browser.nix
     ./modules/reading.nix
   ];

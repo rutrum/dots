@@ -14,6 +14,7 @@
   # Inspired by https://aur.archlinux.org/packages/8bitdo-ultimate-controller-udev
   environment.systemPackages = with pkgs; [
     xboxdrv
+    usbutils
   ];
   # Udev rules to start or stop systemd service when controller is connected or disconnected
   services.udev.extraRules = ''
@@ -27,7 +28,7 @@
     unitConfig.Description = "8BitDo Ultimate Controller XInput mode xboxdrv daemon";
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --silent --type xbox360 --device-by-id %I --force-feedback --buttonmap A=B,B=A,X=Y,Y=X --axismap lt=y2,y2=x2,x2=lt";
+      ExecStart = "${pkgs.xboxdrv}/bin/xboxdrv --detach-kernel-driver --silent --type xbox360 --device-by-id %I --force-feedback --buttonmap A=B,B=A,X=Y,Y=X --axismap lt=y2,y2=x2,x2=lt";
     };
   };
 }

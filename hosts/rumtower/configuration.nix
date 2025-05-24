@@ -24,7 +24,7 @@
     ../modules/services/firefly.nix
 
     ../modules/hardware/nvidia.nix
-    ../modules/hardware/8bitdo.nix
+    # ../modules/hardware/8bitdo.nix
     ../modules/hardware/mouse.nix
     ../modules/qmk.nix
   ];
