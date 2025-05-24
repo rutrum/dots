@@ -67,8 +67,6 @@
 
       pdftk
 
-      dolphin
-
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
       discord

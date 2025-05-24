@@ -72,19 +72,6 @@
     ];
   };
 
-  services.ollama = let 
-    unstable-unfree = import inputs.nixpkgs-unstable {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
-    };
-  in {
-    package = unstable-unfree.ollama;
-    host = "0.0.0.0";
-    port = 11434;
-    enable = false;
-    acceleration = "cuda";
-  };
-
   services.prometheus = {
     enable = true;
 
