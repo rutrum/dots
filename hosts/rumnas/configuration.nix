@@ -17,7 +17,8 @@
     ../modules/gaming.nix
 
     ../modules/docker.nix
-    ../modules/services/ersatztv.nix
+    # TODO: this is failing due to nvidia issues
+    # ../modules/services/ersatztv.nix
     ../modules/services/home-assistant.nix
     ../modules/services/freshrss.nix
     #../modules/services/rustdesk.nix
@@ -32,7 +33,7 @@
     ../modules/services/forgejo.nix
 
     ../modules/hardware/nvidia.nix
-    ../modules/hardware/8bitdo.nix
+    # ../modules/hardware/8bitdo.nix
   ];
 
 

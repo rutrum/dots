@@ -20,7 +20,7 @@
     profiles.normal = {
       name = "normal";
       isDefault = true;
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
         bitwarden
         ublock-origin
         sponsorblock
@@ -81,11 +81,12 @@
         # "webgl.force-enabled" = true;
       };
       search = {
-        default = "DuckDuckGo";
+        default = "ddg";
         force = true;
 
         engines = {
-          "DuckDuckGo" = {
+          ddg = {
+            name = "DuckDuckGo";
             urls = [
               {
                 template = "https://duckduckgo.com/";
@@ -99,7 +100,8 @@
             ];
             definedAliases = ["d"];
           };
-          "Searxng" = {
+          searxng = {
+            name = "Searxng";
             urls = [
               {
                 template = "https://etsi.me/search";
@@ -113,7 +115,8 @@
             ];
             definedAliases = ["srx"];
           };
-          "Nix Packages" = {
+          nix-packages = {
+            name = "Nix Packages";
             urls = [
               {
                 template = "https://search.nixos.org/packages";
@@ -132,7 +135,8 @@
             # icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["np"];
           };
-          "Home Manager Options" = {
+          home-manager-options = {
+            name = "Home Manager Options";
             urls = [
               {
                 template = "https://home-manager-options.extranix.com/";
@@ -146,7 +150,8 @@
             ];
             definedAliases = ["hm"];
           };
-          "YouTube" = {
+          youtube = {
+            name = "YouTube";
             urls = [
               {
                 template = "https://www.youtube.com/results";
@@ -161,8 +166,8 @@
             definedAliases = ["yt"];
           };
 
-          "Bing".metaData.hidden = true;
-          "Google".metaData.hidden = true;
+          bing.metaData.hidden = true;
+          google.metaData.hidden = true;
         };
       };
     };

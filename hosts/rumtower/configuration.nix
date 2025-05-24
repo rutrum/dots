@@ -18,6 +18,7 @@
 
 
     ../modules/docker.nix
+    ../modules/services/llm.nix
     ../modules/services/jellyfin.nix
     ../modules/services/immich.nix
     ../modules/services/paperless.nix
@@ -28,16 +29,11 @@
     ../modules/hardware/mouse.nix
     ../modules/qmk.nix
   ];
-  # cosmic test
-  #nix.settings = {
-  #  substituters = [ "https://cosmic.cachix.org/" ];
-  #  trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-  #};
-  #services = {
-  #  desktopManager.cosmic.enable = true;
-  #  displayManager.cosmic-greeter.enable = true;
-  #};
-  #hardware.pulseaudio.enable = false;
+
+  # options for local modules
+  me = {
+    llm.enable-open-webui = false;
+  };
 
   services = {
     postgresql = {
