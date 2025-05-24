@@ -30,7 +30,7 @@
       "http://192.168.50.3:9999"
     ];
     trusted-public-keys = [
-      "key-name:f6gOmtnNBf/l9RE0josirVs25cV7TuJKVikSbcH/sO6fBv5v0MBDvg4R7MoI6M9ExcvCHwbZinqI2JmUofZJBQ=="
+      "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="
     ];
   };
 
