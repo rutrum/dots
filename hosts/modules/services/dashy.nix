@@ -38,6 +38,12 @@
             url = "${rumtower}:8096";
           }
           {
+            title = "New Jellyfin";
+            description = "Home media server";
+            icon = "hl-jellyfin";
+            url = "${rumnas}:8096";
+          }
+          {
             title = "ErsatzTV";
             description = "Stream TV channels";
             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";

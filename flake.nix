@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    # colorscheme
     catppuccin.url = "github:catppuccin/nix";
 
     # declaratively manage flatpaks

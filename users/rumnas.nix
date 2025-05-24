@@ -21,6 +21,7 @@
 
   home.packages = with pkgs; [
     mdadm # for raid
+    zathura
   ];
 
   home.stateVersion = "23.05";

@@ -4,6 +4,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -33,6 +34,12 @@
     ../modules/hardware/8bitdo.nix
   ];
 
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    motherboard = "amd";
+  };
+
   networking.hostName = "rumnas";
 
   dashy.port = 80;
@@ -43,6 +50,31 @@
       "--advertise-routes=192.168.50.0/24"
     ];
   };
+  
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    # package = inputs.nixpkgs-unstable.x86_64-linux.pkgs.jellyfin;
+  };
+
+  #sops.secrets = {
+  #  "freshrss/password".owner = "freshrss";
+  #};
+  #services.freshrss = {
+  #  enable = true;
+  #  passwordFile = config.sops.secrets."freshrss/password".path;
+  #  baseUrl = "http://192.168.50.3:9090";
+  #  virtualHost = "192.168.50.3:9090";
+  #  #webserver = "caddy";
+  #};
+  #services.caddy.virtualHosts = {
+  #  "http://192.168.50.3:9090" = {
+  #    serverAliases = [ "http://rumnas.lynx-chromatic.ts.net" ];
+  #    extraConfig = ''
+  #      reverse_proxy localhost:9090
+  #    '';
+  #  };
+  #};
 
   services.openssh.enable = true;
 
@@ -133,6 +165,7 @@
     };
     # normal users are part of "user" group by default
     groups.reolink = {};
+    users.rutrum.extraGroups = ["jellyfin"];
   };
 
   # Enable automatic login for the user.
