@@ -6,16 +6,15 @@
 }: {
   imports = [
     ./rutrum.nix
-    ./modules/terminal
     ./modules/production/3d.nix
     ./modules/production/office.nix
     ./modules/production/photo.nix
     ./modules/flatpak.nix
     ./modules/databases.nix
     ./modules/networking.nix
-    ./modules/browser.nix
-    ./modules/fonts.nix
   ];
+
+  me.ui.enable = true;
 
   xdg.mimeApps = {
     enable = false;
@@ -27,21 +26,11 @@
   home.packages = with pkgs; [
     # graphical applications
     mullvad-vpn
-    #thunderbird
     zathura
     flameshot
     nextcloud-client
-    #armcord
-    sxiv
-    #pavucontrol
-    anki-bin
-    bitwarden
-    vlc
-    prismlauncher # minecraft
-    localsend
 
     # container and virtual machines
-    distrobox
     xorg.xhost # for graphical apps
 
     # hardware utilities
@@ -55,6 +44,4 @@
     # inputs.wasm4
     rustdesk
   ];
-
-  home.stateVersion = "23.05";
 }

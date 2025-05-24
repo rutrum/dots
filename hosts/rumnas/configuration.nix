@@ -36,7 +36,6 @@
     # ../modules/hardware/8bitdo.nix
   ];
 
-
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
@@ -53,7 +52,7 @@
       "--advertise-routes=192.168.50.0/24"
     ];
   };
-  
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;

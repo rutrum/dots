@@ -1,10 +1,10 @@
 {
+  catppuccin.starship.enable = true;
+
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
-
-    catppuccin.enable = true;
 
     settings = {
       format = ''

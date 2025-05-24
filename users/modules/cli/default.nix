@@ -8,19 +8,15 @@
     ./starship.nix
     ./neovim.nix
     ./nix.nix
+    ./git.nix
   ];
 
-  programs = {
-    git = {
-      enable = true;
-      userEmail = "dave@rutrum.net";
-      userName = "rutrum";
-      extraConfig = {
-        pull.rebase = false;
-        init.defaultBranch = "main";
-      };
-    };
+  catppuccin = {
+    zellij.enable = true;
+    yazi.enable = true;
+  };
 
+  programs = {
     dircolors.enable = true;
 
     thefuck = {
@@ -42,22 +38,14 @@
 
     zellij = {
       enable = true;
-      # this enables zellij on shell startup
-      #enableBashIntegration = true;
-      catppuccin.enable = true;
-      #settings = {
-      #  theme = "catppuccin-mocha";
-      #};
+      settings = {
+        show_startup_tips = false;
+      };
     };
 
     atuin = {
       enable = true;
       enableBashIntegration = true;
-    };
-
-    gitui = {
-      enable = true;
-      catppuccin.enable = true;
     };
 
     htop = {
@@ -73,7 +61,6 @@
 
     yazi = {
       enable = true;
-      catppuccin.enable = true;
 
       settings = {
         manager = {

@@ -4,11 +4,11 @@
   ...
 }: let
 in {
+  catppuccin.alacritty.enable = true;
+
   programs.alacritty = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
-      #general.import = [ pkgs.alacritty-theme.catppuccin_mocha ];
       window = {
         opacity = 0.85;
         padding.x = 24;
