@@ -3,6 +3,7 @@
     nh
     nix-tree # look at nix package dependencies
   ];
+
   nix.registry = {
     # TODO: something was done in 24.05 to add flake inputs as
     # registries, so this may be unncessary...looks like this is
