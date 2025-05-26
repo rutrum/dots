@@ -11,6 +11,7 @@
     ./modules/ssh.nix
     ./modules/games.nix
     ./modules/joystick.nix
+    ./modules/fonts.nix
     ./modules/terminal
 
     ./modules/browser.nix
