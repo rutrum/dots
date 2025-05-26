@@ -14,7 +14,7 @@
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
 
   services.printing = {
-    enable = true;  # enables printing support via the CUPS daemon
+    enable = true; # enables printing support via the CUPS daemon
     drivers = with pkgs; [
       hplip
       gutenprint

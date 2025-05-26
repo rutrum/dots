@@ -17,13 +17,12 @@
     ./modules/browser.nix
   ];
 
+  me.ui.enable = true;
+
   # for nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     mdadm # for raid
-    zathura
   ];
-
-  home.stateVersion = "23.05";
 }

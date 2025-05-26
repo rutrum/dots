@@ -5,9 +5,10 @@
 }: {
   home.packages = with pkgs; [
     superTuxKart
-    prismlauncher
     mindustry
     xonotic
+    lumafly # hallow knight mod manager
+    prismlauncher # minecraft launcher
     airshipper # game launcher for veloren
   ];
   services.flatpak.packages = [

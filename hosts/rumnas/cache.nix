@@ -1,5 +1,7 @@
 {
-  config, pkgs, ...
+  config,
+  pkgs,
+  ...
 }: let
 in {
   sops.secrets."nix-serve/secret-key-file".owner = "root";

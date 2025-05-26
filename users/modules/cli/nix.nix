@@ -1,8 +1,12 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    nh
     nix-tree # look at nix package dependencies
   ];
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/rutrum/dots";
+  };
 
   nix.registry = {
     # TODO: something was done in 24.05 to add flake inputs as
@@ -19,7 +23,7 @@
         type = "github";
         owner = "NixOS";
         repo = "nixpkgs";
-        ref = "nixos-24.05"; # TODO: make this a variable somewhere
+        ref = "nixos-25.05"; # TODO: make this a variable somewhere
       };
     };
 

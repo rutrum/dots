@@ -33,25 +33,21 @@
       "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="
     ];
   };
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   services = {
     tailscale.enable = true;
-    mullvad-vpn = {
-      enable = true;
-      package = pkgs.mullvad-vpn; # includes GUI
-    };
+    mullvad-vpn.package = pkgs.mullvad-vpn; # default package excludes UI
+    mullvad-vpn.enable = true;
     flatpak.enable = true;
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  fonts.fontDir.enable = true;
 
+  # networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-ensure-profiles.after = ["NetworkManager.service"];
   systemd.services.NetworkManager-wait-online.enable = false;
-
-  programs.nh = {
-    enable = true;
-    flake = "/home/rutrum/dots";
-  };
 
   users.users.rutrum = {
     isNormalUser = true;
@@ -63,7 +59,6 @@
     neovim
     git
     home-manager
-    rxvt-unicode
   ];
 
   # Locale settings

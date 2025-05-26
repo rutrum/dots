@@ -1,4 +1,8 @@
-{pkgs, inputs, ...}: let 
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   unstable-pkgs = import inputs.nixpkgs-unstable {
     system = "x86_64-linux";
   };

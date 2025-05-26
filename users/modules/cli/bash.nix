@@ -3,13 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
-  cfg = config.bash;
-in {
-  options = {
-    bash.terminal = mkOption {
-      type = types.str;
+}: {
+  options.me = {
+    terminal = lib.mkOption {
+      type = lib.types.str;
       description = ''
         The default terminal.
       '';
@@ -75,7 +72,7 @@ in {
         snrs = "sudo nixos-rebuild switch --flake ~/dots";
         nd = "nix develop";
 
-        clone = "(pwd | ${cfg.terminal} & disown \$!)";
+        clone = "(pwd | ${config.me.terminal} & disown \$!)";
       };
     };
   };

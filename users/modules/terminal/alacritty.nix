@@ -4,9 +4,10 @@
   ...
 }: let
 in {
+  catppuccin.alacritty.enable = true;
+
   programs.alacritty = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       window = {
         opacity = 0.85;
