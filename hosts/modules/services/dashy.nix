@@ -115,6 +115,12 @@
             icon = "hl-freshrss";
             url = "${rumnas}:8084";
           }
+          {
+            title = "Calibre Web";
+            description = "Book browser";
+            icon = "hl-calibre-web";
+            url = "${rumtower}:8083";
+          }
         ];
       }
       {

@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ./borg.nix
     ./syncthing.nix
+    ./calibre.nix
 
     ../modules/cosmic.nix
     ../modules/gnome.nix
