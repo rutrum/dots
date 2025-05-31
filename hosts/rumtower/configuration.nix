@@ -70,8 +70,10 @@
 
   services.tailscale = {
     useRoutingFeatures = "server";
+    openFirewall = true;
     extraUpFlags = [
       "--advertise-exit-node" # allow clients to route traffic through nas
+      "--exit-node-allow-lan-access"
       "--advertise-routes=192.168.50.0/24"
     ];
   };

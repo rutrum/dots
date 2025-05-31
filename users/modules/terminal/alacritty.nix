@@ -15,7 +15,7 @@ in {
         padding.y = 24;
       };
       font = {
-        normal.family = "Iosevka Nerd Font Mono";
+        normal.family = "Iosevka Nerd Font";
       };
       keyboard.bindings = [
         {
