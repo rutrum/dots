@@ -57,6 +57,14 @@
       specialArgs = {inherit inputs;};
     };
 
+    nixosConfigurations."saibaman" = nixpkgs-stable.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        (import ./hosts/saibaman/configuration.nix)
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
     nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [

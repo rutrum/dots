@@ -22,6 +22,7 @@
   config = {
     me = {
       terminal = "alacritty";
+      ui.enable = false;
     };
 
     # Home Manager needs a bit of information about you and the
