@@ -14,10 +14,15 @@
   catppuccin = {
     zellij.enable = true;
     yazi.enable = true;
+    btop.enable = true;
   };
 
   programs = {
     dircolors.enable = true;
+
+    btop = {
+      enable = true;
+    };
 
     thefuck = {
       enable = true;
@@ -46,17 +51,6 @@
     atuin = {
       enable = true;
       enableBashIntegration = true;
-    };
-
-    htop = {
-      enable = true;
-      # htop overwrites the file all the time, causing home manager
-      # to write backups all the time
-      #settings = {
-      #  hide_kernel_threads = true;
-      #  hide_userland_threads = true;
-      #  show_program_path = false;
-      #};
     };
 
     yazi = {
