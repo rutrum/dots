@@ -17,25 +17,29 @@
     #../modules/gnome.nix
     ../modules/gaming.nix
 
-    ../modules/docker.nix
     # TODO: this is failing due to nvidia issues
     # ../modules/services/ersatztv.nix
-    ../modules/services/home-assistant.nix
-    ../modules/services/freshrss.nix
+
     ../modules/services/llama.nix
     #../modules/services/rustdesk.nix
-    ../modules/services/adguard-home.nix
-    ../modules/services/dashy.nix
-    ../modules/services/nocodb.nix
-    ../modules/services/grafana.nix
     #../modules/services/nextcloud.nix
-    ../modules/services/tube-archivist.nix
-    ../modules/services/llm.nix
-    ../modules/services/mealie.nix
-    ../modules/services/forgejo.nix
+    #../modules/services/forgejo.nix
+    #../modules/services/tube-archivist.nix
 
     ../modules/hardware/nvidia.nix
     # ../modules/hardware/8bitdo.nix
+
+    # bare metal
+    ../modules/services/dashy.nix
+    ../modules/services/grafana.nix
+    ../modules/services/llm.nix
+    ../modules/services/mealie.nix
+    ../modules/services/adguard-home.nix
+
+    # container services
+    ../modules/services/nocodb.nix
+    ../modules/services/home-assistant.nix
+    ../modules/services/freshrss.nix
   ];
 
   services.hardware.openrgb = {

@@ -11,7 +11,7 @@
 
     serviceConfig.type = "oneshot";
     script = let
-      dockercli = "${config.virtualisation.docker.package}/bin/docker";
+      dockercli = "${config.virtualisation.podman.package}/bin/podman";
     in ''
       check=$(${dockercli} network ls | grep "nocodb" || true)
       if [ -z "$check" ]; then
@@ -25,7 +25,7 @@
   # the containers
   virtualisation.oci-containers.containers = {
     nocodb = {
-      image = "nocodb/nocodb:0.258.3";
+      image = "nocodb/nocodb:0.264.2";
       ports = ["8081:8080"];
       volumes = [
         "/mnt/barracuda/nocodb/data:/usr/app/data"
@@ -40,7 +40,7 @@
       ];
     };
     nocodb-db = {
-      image = "library/postgres:latest"; # official docker images use "library/"
+      image = "library/postgres:16"; # official docker images use "library/"
       volumes = ["/mnt/barracuda/nocodb/db:/var/lib/postgresql/data"];
       ports = ["5432:5432"];
       autoStart = true;

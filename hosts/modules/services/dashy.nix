@@ -113,7 +113,7 @@
             title = "FreshRSS";
             description = "RSS feed aggregator";
             icon = "hl-freshrss";
-            url = "${rumnas}:8084";
+            url = "${rumnas}:8085";
           }
           {
             title = "Calibre Web";

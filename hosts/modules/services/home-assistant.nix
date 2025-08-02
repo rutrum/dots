@@ -10,7 +10,7 @@
 
     serviceConfig.type = "oneshot";
     script = let
-      dockercli = "${config.virtualisation.docker.package}/bin/docker";
+      dockercli = "${config.virtualisation.podman.package}/bin/podman";
     in ''
       check=$(${dockercli} network ls | grep "home-assistant" || true)
       if [ -z "$check" ]; then

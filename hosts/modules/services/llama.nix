@@ -24,11 +24,7 @@
           -hf bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
           --port 9999
   '';
-
-
 in {
-  # write config to store
-
   virtualisation.oci-containers.containers = {
     llama-swap = {
       image = "ghcr.io/mostlygeek/llama-swap:cuda";
