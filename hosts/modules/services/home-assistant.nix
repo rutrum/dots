@@ -22,7 +22,7 @@
   };
   virtualisation.oci-containers.containers = {
     home-assistant = {
-      image = "ghcr.io/home-assistant/home-assistant:2024.11";
+      image = "ghcr.io/home-assistant/home-assistant:2025.5";
       ports = ["8082:8123" "1400:1400"];
       volumes = [
         "/root/volumes/home-assistant/config:/config"

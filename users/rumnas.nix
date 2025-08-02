@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -17,7 +18,7 @@
     ./modules/browser.nix
   ];
 
-  me.ui.enable = true;
+  me.ui.enable = lib.mkForce true;
 
   # for nvidia drivers
   nixpkgs.config.allowUnfree = true;

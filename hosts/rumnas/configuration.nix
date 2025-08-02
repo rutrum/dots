@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  lib,
   inputs,
   config,
   ...
@@ -21,6 +22,7 @@
     # ../modules/services/ersatztv.nix
     ../modules/services/home-assistant.nix
     ../modules/services/freshrss.nix
+    ../modules/services/llama.nix
     #../modules/services/rustdesk.nix
     ../modules/services/adguard-home.nix
     ../modules/services/dashy.nix
@@ -45,14 +47,28 @@
   networking.hostName = "rumnas";
 
   dashy.port = 80;
+
   services.tailscale = {
     useRoutingFeatures = "server";
     openFirewall = true;
-    extraUpFlags = [
-      "--advertise-exit-node" # allow clients to route traffic through nas
+    extraSetFlags = [
+      "--advertise-exit-node"
       "--exit-node-allow-lan-access"
-      "--advertise-routes=192.168.50.0/24"
+      "--advertise-routes=192.168.50.100/32"
     ];
+  };
+  # optimization suggested by tailscale
+  # https://wiki.nixos.org/wiki/Tailscale#Optimize_the_performance_of_subnet_routers_and_exit_nodes
+  services = {
+    networkd-dispatcher = {
+      enable = true;
+      rules."50-tailscale" = {
+        onState = ["routable"];
+        script = ''
+          ${pkgs.ethtool} -K enp39s0 rx-udp-gro-forwarding on rx-gro-list off
+        '';
+      };
+    };
   };
 
   services.jellyfin = {
@@ -83,16 +99,6 @@
   services.openssh.enable = true;
 
   # TODO: configure caddy for web services
-
-  # let's play with a local binary cache
-  # https://nixos.wiki/wiki/Binary_Cache
-  services.nix-serve = {
-    enable = true;
-    # hoping I don't need this, since it should be local?
-    #secretKeyFile = "/var/cache-priv-key.pem";
-  };
-  networking.firewall.allowedTCPPorts = [5000];
-
   # allow x forwarding
   #programs.ssh.forwardX11 = true;
 
@@ -175,7 +181,10 @@
   # Enable automatic login for the user.
   #services.getty.autologinUser = "rutrum";
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    ethtool # for tailscale optimization
+    jellyfin-ffmpeg
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

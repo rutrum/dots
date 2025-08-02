@@ -7,7 +7,7 @@
 in {
   virtualisation.oci-containers.containers = {
     freshrss = {
-      image = "freshrss/freshrss:1.24.1";
+      image = "freshrss/freshrss:1.26.2";
       ports = ["8085:80"];
       volumes = [
         "${mount_dir}/data:/var/www/FreshRSS/data"

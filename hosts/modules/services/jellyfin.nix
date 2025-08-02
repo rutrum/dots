@@ -9,6 +9,10 @@
           "/mnt/barracuda/media:/media"
           "jellyfin_config:/config"
         ];
+        extraOptions = [
+          "--gpus"
+          "all"
+        ];
       };
     };
   };

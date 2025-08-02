@@ -50,6 +50,8 @@
         f = "fuck";
         py = "python3";
 
+        jf = "journalctl -f -u";
+
         # prompt on file overwrite
         cp = "cp -i";
         mv = "mv -i";
