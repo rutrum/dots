@@ -121,6 +121,12 @@
             icon = "hl-calibre-web";
             url = "${rumtower}:8083";
           }
+          {
+            title = "Linkwarden";
+            description = "Bookmarking";
+            icon = "hl-linkwarden";
+            url = "${rumnas}:8088";
+          }
         ];
       }
       {

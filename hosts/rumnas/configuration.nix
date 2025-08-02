@@ -40,6 +40,7 @@
     ../modules/services/nocodb.nix
     ../modules/services/home-assistant.nix
     ../modules/services/freshrss.nix
+    ../modules/services/linkwarden.nix
   ];
 
   services.hardware.openrgb = {
