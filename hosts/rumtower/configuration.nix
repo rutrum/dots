@@ -37,6 +37,8 @@
     llm.enable-open-webui = false;
   };
 
+  programs.nix-ld.enable = true;
+
   networking.hostName = "rumtower";
 
   services = {
@@ -68,13 +70,57 @@
     };
   };
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    applications.apps = [
+      {
+        name = "Blasphemous";
+        detached = [
+          "setsid steam steam://rungameid/774361"
+        ];
+      }
+      {
+        name = "Desktop";
+        image-path = "desktop.png";
+      }
+      {
+        name = "Low Res Desktop";
+        image-path = "desktop.png";
+        prep-cmd = [
+          {
+            do = "xrandr --output HDMI-1 --mode 1920x1080";
+            undo = "xrandr --output HDMI-1 --mode 1920x1200";
+          }
+        ];
+      }
+      {
+        name = "Steam Big Picture";
+        detached = [
+          "setsid steam steam://open/bigpicture"
+        ];
+        image-path = "steam.png";
+      }
+      
+    ];
+  };
+  networking.firewall = {
+    allowedTCPPorts = [ 47984 47989 47990 48010 ];
+    allowedUDPPortRanges = [
+      { from = 47998; to = 48000; }
+      #{ from = 8000; to = 8010; }
+    ];
+  };
+
   services.tailscale = {
     useRoutingFeatures = "server";
     openFirewall = true;
-    extraUpFlags = [
+    extraSetFlags = [
       "--advertise-exit-node" # allow clients to route traffic through nas
       "--exit-node-allow-lan-access"
-      "--advertise-routes=192.168.50.0/24"
+      "--advertise-routes=192.168.50.100/32"
     ];
   };
 

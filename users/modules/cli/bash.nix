@@ -51,6 +51,7 @@
         py = "python3";
 
         jf = "journalctl -f -u";
+        wt = "watchexec --clear=reset --restart -w";
 
         # prompt on file overwrite
         cp = "cp -i";

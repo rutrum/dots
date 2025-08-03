@@ -93,10 +93,14 @@
     ncdu
     du-dust
 
-    tealdeer
-    fzf
+    # data processing
     jq # traverse json
     pandoc # document conversion
+    duckdb
+    pandoc # document conversion
+
+    tealdeer
+    fzf
     watchexec
     yt-dlp
     neofetch

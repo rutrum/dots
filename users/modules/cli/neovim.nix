@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   telescope = "require('telescope.builtin')";
@@ -22,11 +23,76 @@ in {
       };
     };
 
+    lsp = {
+      keymaps = [
+        {
+          key = "gd";
+          lspBufAction = "definition";
+        }
+        {
+          key = "gD";
+          lspBufAction = "references";
+        }
+        {
+          key = "gt";
+          lspBufAction = "type_definition";
+        }
+        {
+          key = "gi";
+          lspBufAction = "implementation";
+        }
+        {
+          key = "K";
+          lspBufAction = "hover";
+        }
+        {
+          action = inputs.nixvim.lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+          key = "<leader>k";
+        }
+        {
+          action = inputs.nixvim.lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
+          key = "<leader>j";
+        }
+        {
+          action = "<CMD>LspStop<Enter>";
+          key = "<leader>lx";
+        }
+        {
+          action = "<CMD>LspStart<Enter>";
+          key = "<leader>ls";
+        }
+        {
+          action = "<CMD>LspRestart<Enter>";
+          key = "<leader>lr";
+        }
+        {
+          action = inputs.nixvim.lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
+          key = "gd";
+        }
+        {
+          action = "<CMD>Lspsaga hover_doc<Enter>";
+          key = "K";
+        }
+      ];
+      servers = {
+        # python
+        ruff.enable = true;
+        pyright.enable = true;
+
+        # nix
+        nixd.enable = true;
+
+        # typst
+        tinymist.enable = true;
+      };
+    };
+
     plugins = {
       # all grammars by default
       #treesitter = {
       #  enable = true;
       #};
+      lspsaga.enable = true;
       telescope = {
         enable = true;
         extensions.fzf-native.enable = true;
@@ -39,7 +105,7 @@ in {
         enable = true;
         servers = {
           # markdown
-          marksman.enable = true;
+          #marksman.enable = true;
           # does this do anything?
           #typst_lsp.enable = true;
 

@@ -45,7 +45,7 @@
       image = "library/mariadb:latest"; # official docker images use "library/"
       volumes = ["/mnt/barracuda/firefly_db:/var/lib/mysql"];
       autoStart = true;
-      #ports = [ "3307:3306" ];
+      ports = ["3307:3306"];
       environment = {
         MYSQL_ROOT_PASSWORD = "changeme";
         MYSQL_USER = "firefly";
