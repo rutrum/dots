@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    ./alacritty.nix
     ./urxvt.nix
+    ./alacritty.nix
   ];
 
   home.packages = with pkgs; [

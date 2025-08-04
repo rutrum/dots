@@ -19,9 +19,8 @@
 
     ../modules/printing.nix
 
-    ../modules/docker.nix
     ../modules/services/llm.nix
-    ../modules/services/jellyfin.nix
+    #../modules/services/jellyfin.nix
     ../modules/services/immich.nix
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix

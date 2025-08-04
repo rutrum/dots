@@ -11,11 +11,11 @@
 
     serviceConfig.type = "oneshot";
     script = let
-      dockercli = "${config.virtualisation.docker.package}/bin/docker";
+      podmancli = "${config.virtualisation.podman.package}/bin/podman";
     in ''
-      check=$(${dockercli} network ls | grep "firefly" || true)
+      check=$(${podmancli} network ls | grep "firefly" || true)
       if [ -z "$check" ]; then
-        ${dockercli} network create firefly
+        ${podmancli} network create firefly
       else
         echo "Network 'firefly' already exists."
       fi
@@ -25,7 +25,7 @@
   # the containers
   virtualisation.oci-containers.containers = {
     firefly = {
-      image = "fireflyiii/core:version-6.1.24";
+      image = "fireflyiii/core:version-6.2.21";
       ports = ["8080:8080"];
       volumes = [
         "/mnt/barracuda/firefly/upload:/var/www/html/storage/upload"
@@ -42,7 +42,7 @@
       ];
     };
     firefly-db = {
-      image = "library/mariadb:latest"; # official docker images use "library/"
+      image = "library/mariadb:11.4.7"; # official docker images use "library/"
       volumes = ["/mnt/barracuda/firefly_db:/var/lib/mysql"];
       autoStart = true;
       ports = ["3307:3306"];

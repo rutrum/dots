@@ -11,11 +11,11 @@
 
     serviceConfig.type = "oneshot";
     script = let
-      dockercli = "${config.virtualisation.docker.package}/bin/docker";
+      podmancli = "${config.virtualisation.podman.package}/bin/podman";
     in ''
-      check=$(${dockercli} network ls | grep "paperless" || true)
+      check=$(${podmancli} network ls | grep "paperless" || true)
       if [ -z "$check" ]; then
-        ${dockercli} network create paperless
+        ${podmancli} network create paperless
       else
         echo "Network 'paperless' already exists."
       fi

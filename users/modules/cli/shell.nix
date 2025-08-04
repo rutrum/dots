@@ -13,9 +13,52 @@
     };
   };
 
-  config = {
+  config = let 
+    shellAliases = {
+      v = "nvim";
+      j = "just";
+      f = "fuck";
+      py = "python3";
+
+      jf = "journalctl -f -u";
+      wt = "watchexec --clear=reset --restart -w";
+
+      # prompt on file overwrite
+      cp = "cp -i";
+      mv = "mv -i";
+
+      # colors
+      less = "less -R";
+      ls = "ls --color=auto";
+      grep = "grep --color=auto";
+
+      # print human readable sizes
+      du = "du -h";
+      df = "df -h";
+      ll = "ls -lhA";
+
+      # navigation
+      cdf = "cd $(fzf)";
+
+      # nix shortcuts
+      hms = "home-manager switch --flake ~/dots";
+      snrs = "sudo nixos-rebuild switch --flake ~/dots";
+      nd = "nix develop";
+    };
+  in {
+    programs.fish = {
+      enable = true;
+      inherit shellAliases;
+    };
+
+    programs.nushell = {
+      enable = true;
+    };
+
     programs.bash = {
       enable = true;
+      inherit shellAliases;
+
       initExtra = ''
         # Opens a file in the default program.
         open () {
@@ -44,39 +87,6 @@
         VISUAL='nvim'
         EDITOR='nvim'
       '';
-      shellAliases = {
-        v = "nvim";
-        j = "just";
-        f = "fuck";
-        py = "python3";
-
-        jf = "journalctl -f -u";
-        wt = "watchexec --clear=reset --restart -w";
-
-        # prompt on file overwrite
-        cp = "cp -i";
-        mv = "mv -i";
-
-        # colors
-        less = "less -R";
-        ls = "ls --color=auto";
-        grep = "grep --color=auto";
-
-        # print human readable sizes
-        du = "du -h";
-        df = "df -h";
-        ll = "ls -lhA";
-
-        # navigation
-        cdf = "cd $(fzf)";
-
-        # nix shortcuts
-        hms = "home-manager switch --flake ~/dots";
-        snrs = "sudo nixos-rebuild switch --flake ~/dots";
-        nd = "nix develop";
-
-        clone = "(pwd | ${config.me.terminal} & disown \$!)";
-      };
     };
   };
 }

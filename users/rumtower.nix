@@ -1,6 +1,6 @@
 {
-  config,
   pkgs,
+  lib,
   inputs,
   ...
 }: {
@@ -26,7 +26,7 @@
     ./modules/reading.nix
   ];
 
-  me.ui.enable = true;
+  me.ui.enable = lib.mkForce true;
 
   xdg.mimeApps = {
     enable = false;
