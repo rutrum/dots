@@ -12,9 +12,10 @@
   ];
 
   catppuccin = {
-    zellij.enable = true;
-    yazi.enable = true;
     btop.enable = true;
+    #eza.enable = true;
+    yazi.enable = true;
+    zellij.enable = true;
   };
 
   programs = {
@@ -23,6 +24,12 @@
     # todo: read more about how to set this up
     # https://github.com/nix-community/nix-index
     nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    eza = {
       enable = true;
       enableFishIntegration = true;
       enableBashIntegration = true;
