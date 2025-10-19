@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./bash.nix
+    ./shell.nix
     ./starship.nix
     ./neovim.nix
     ./nix.nix
@@ -12,13 +12,28 @@
   ];
 
   catppuccin = {
-    zellij.enable = true;
-    yazi.enable = true;
     btop.enable = true;
+    #eza.enable = true;
+    yazi.enable = true;
+    zellij.enable = true;
   };
 
   programs = {
     dircolors.enable = true;
+
+    # todo: read more about how to set this up
+    # https://github.com/nix-community/nix-index
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+    };
+
+    eza = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+    };
 
     btop = {
       enable = true;
@@ -27,6 +42,7 @@
     thefuck = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     direnv = {
@@ -39,6 +55,7 @@
     zoxide = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     zellij = {
@@ -51,10 +68,14 @@
     atuin = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     yazi = {
       enable = true;
+
+      enableFishIntegration = true;
+      enableBashIntegration = true;
 
       settings = {
         manager = {
@@ -93,10 +114,14 @@
     ncdu
     du-dust
 
-    tealdeer
-    fzf
+    # data processing
     jq # traverse json
     pandoc # document conversion
+    duckdb
+    pandoc # document conversion
+
+    tealdeer
+    fzf
     watchexec
     yt-dlp
     neofetch

@@ -27,15 +27,14 @@
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
-    home.username = "rutrum";
-    home.homeDirectory = "/home/rutrum";
+    home = {
+      username = "rutrum";
+      homeDirectory = "/home/rutrum";
+
+      shell.enableFishIntegration = true;
+    };
 
     catppuccin.flavor = "mocha";
-
-    # can this be removed?
-    home.sessionPath = [
-      "/home/rutrum/.nix-profile/bin"
-    ];
 
     xdg.userDirs = {
       enable = true;

@@ -11,7 +11,7 @@
     };
 
     # colorscheme
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix/release-25.05";
 
     # declaratively manage flatpaks
     flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
