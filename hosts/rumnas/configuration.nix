@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ./samba.nix
     ./cache.nix
+    ./openrgb.nix
 
     #../modules/gnome.nix
     ../modules/gaming.nix
@@ -20,7 +21,7 @@
     # TODO: this is failing due to nvidia issues
     # ../modules/services/ersatztv.nix
 
-    ../modules/services/llama.nix
+    #../modules/services/llama.nix
     #../modules/services/rustdesk.nix
     #../modules/services/nextcloud.nix
     #../modules/services/forgejo.nix
@@ -35,6 +36,7 @@
     ../modules/services/llm.nix
     ../modules/services/mealie.nix
     ../modules/services/adguard-home.nix
+    ../modules/services/immich.nix
 
     # container services
     ../modules/services/nocodb.nix
@@ -43,15 +45,23 @@
     ../modules/services/linkwarden.nix
   ];
 
-  services.hardware.openrgb = {
-    enable = true;
-    package = pkgs.openrgb-with-all-plugins;
-    motherboard = "amd";
-  };
-
   networking.hostName = "rumnas";
 
   dashy.port = 80;
+
+  services.qbittorrent = {
+    enable = true;
+    openFirewall = true;
+    webuiPort = 9009;
+  };
+
+  services.ntfy-sh = {
+    enable = true;
+    settings = {
+      base-url = "http://rumnas.lynx-chromatic.ts.net";
+      listen-http = ":8888";
+    };
+  };
 
   services.tailscale = {
     useRoutingFeatures = "server";
