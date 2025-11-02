@@ -24,8 +24,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # local binary cache
   nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+
+    # local binary cache
     substituters = [
       "http://192.168.50.3:9999"
     ];
@@ -33,7 +35,6 @@
       "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="
     ];
   };
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   services = {
     tailscale.enable = true;

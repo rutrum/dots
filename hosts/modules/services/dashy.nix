@@ -35,12 +35,6 @@
             title = "Jellyfin";
             description = "Home media server";
             icon = "hl-jellyfin";
-            url = "${rumtower}:8096";
-          }
-          {
-            title = "New Jellyfin";
-            description = "Home media server";
-            icon = "hl-jellyfin";
             url = "${rumnas}:8096";
           }
           {
