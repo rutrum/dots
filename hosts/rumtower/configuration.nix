@@ -13,6 +13,10 @@
     ./syncthing.nix
     ./calibre.nix
 
+    # containized
+    ./paperless.nix
+    ./firefly.nix
+
     ../modules/cosmic.nix
     ../modules/gnome.nix
     ../modules/gaming.nix
@@ -20,10 +24,6 @@
     ../modules/printing.nix
 
     ../modules/services/llm.nix
-    #../modules/services/jellyfin.nix
-    ../modules/services/immich.nix
-    ../modules/services/paperless.nix
-    ../modules/services/firefly.nix
 
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/mouse.nix
