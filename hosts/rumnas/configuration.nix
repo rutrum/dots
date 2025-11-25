@@ -20,8 +20,7 @@
     ./dashy.nix
     ./home-assistant.nix
 
-    #../modules/gnome.nix
-    ../modules/gaming.nix
+    ../../modules/nixos/gaming.nix
 
     # TODO: this is failing due to nvidia issues
     # ../modules/services/ersatztv.nix
