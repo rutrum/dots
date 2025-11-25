@@ -42,7 +42,8 @@
     ../modules/services/nocodb.nix
     ../modules/services/home-assistant.nix
     ../modules/services/freshrss.nix
-    ../modules/services/linkwarden.nix
+    # ../modules/services/linkwarden.nix
+    # ../modules/services/grist.nix
   ];
 
   networking.hostName = "rumnas";
@@ -139,14 +140,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  # raid
   fileSystems = {
     "/mnt/raid" = {
       device = "/dev/md127";
       fsType = "btrfs";
     };
   };
-
-  # raid
   boot.swraid.enable = true;
 
   networking.firewall.enable = false; # remove this sometime? please uwu?

@@ -1,5 +1,7 @@
-{ pkgs, ... }:
-{
+{ pkgs, inputs, ... }: let
+  # remove this on 25.11
+in {
+  nixpkgs.config.permittedInsecurePackages = [ "mbedtls-2.28.10" ];
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
@@ -24,4 +26,6 @@
     wants = [ "openrgb.service" ];
     wantedBy = [ "multi-user.target" ];
   };
+
+
 }

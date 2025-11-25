@@ -80,12 +80,6 @@
             url = "http://192.168.50.1";
           }
           {
-            title = "Tube Archivist";
-            description = "Local YouTube video library";
-            icon = "hl-tube-archivist";
-            url = "${rumnas_ip}:8090";
-          }
-          {
             title = "Grafana";
             description = "Data visualization";
             icon = "hl-grafana";
@@ -116,10 +110,16 @@
             url = "${rumtower}:8083";
           }
           {
-            title = "Linkwarden";
-            description = "Bookmarking";
-            icon = "hl-linkwarden";
-            url = "${rumnas}:8088";
+            title = "ntfy";
+            description = "Notifications";
+            icon = "hl-ntfy";
+            url = "${rumnas}:8888";
+          }
+          {
+            title = "Immich";
+            description = "Photo gallery";
+            icon = "hl-immich";
+            url = "${rumnas}:2283";
           }
         ];
       }

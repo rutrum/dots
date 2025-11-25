@@ -14,7 +14,7 @@
     catppuccin.url = "github:catppuccin/nix/release-25.05";
 
     # declaratively manage flatpaks
-    flatpaks.url = "github:GermanBread/declarative-flatpak/stable-v3";
+    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 
     # mount secrets at runtime from encrypted sops files
     sops-nix.url = "github:Mic92/sops-nix";
@@ -76,7 +76,7 @@
     nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        inputs.flatpaks.nixosModules.declarative-flatpak
+        inputs.flatpaks.nixosModules.default
         (import ./hosts/rumtower/configuration.nix)
       ];
       specialArgs = {inherit inputs;};
@@ -85,7 +85,7 @@
     nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        inputs.flatpaks.nixosModules.declarative-flatpak
+        inputs.flatpaks.nixosModules.default
         (import ./hosts/rumnas/configuration.nix)
       ];
       specialArgs = {inherit inputs;};
