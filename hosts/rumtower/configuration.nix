@@ -17,7 +17,6 @@
     ./paperless.nix
     ./firefly.nix
 
-    ../modules/cosmic.nix
     ../modules/gnome.nix
     ../modules/gaming.nix
 

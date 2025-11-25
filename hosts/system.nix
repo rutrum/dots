@@ -9,16 +9,12 @@
 
   imports = [
     inputs.sops-nix.nixosModules.sops
-    ./modules/syncthing.nix
+    ../modules/nixos/syncthing.nix
   ];
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
-
-  # does this need to be system configuration?
-  # it's for user applications afterall
-  #services.flatpak.enable = true;
 
   # TODO: consider removing
   # Allow unfree packages
@@ -57,6 +53,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # bare minimum to deploy a configuration
     neovim
     git
     home-manager

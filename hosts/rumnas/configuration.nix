@@ -12,11 +12,13 @@
     ./cache.nix
     ./openrgb.nix
     ./immich.nix
+    ./adguardhome.nix
 
     # containerized
     ./nocodb.nix
     ./freshrss.nix
     ./dashy.nix
+    ./home-assistant.nix
 
     #../modules/gnome.nix
     ../modules/gaming.nix
@@ -25,17 +27,13 @@
     # ../modules/services/ersatztv.nix
 
     #../modules/services/rustdesk.nix
-    #../modules/services/nextcloud.nix
-    #../modules/services/forgejo.nix
 
     ../../modules/nixos/nvidia.nix
 
     # bare metal
     ../modules/services/llm.nix
-    ../modules/services/adguard-home.nix
 
     # container services
-    ../modules/services/home-assistant.nix
     # ../modules/services/linkwarden.nix
   ];
 
