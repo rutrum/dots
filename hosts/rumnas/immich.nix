@@ -7,5 +7,5 @@
     accelerationDevices = null;
   };
 
-  users.users.immich.extraGroups = [ "video" "render" ];
+  users.users.immich.extraGroups = ["video" "render"];
 }

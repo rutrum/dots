@@ -1,4 +1,8 @@
-{ pkgs, config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   paths = [];
   secrets = config.sops.secrets;
 in {

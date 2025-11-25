@@ -1,7 +1,11 @@
-{ pkgs, inputs, ... }: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   # remove this on 25.11
 in {
-  nixpkgs.config.permittedInsecurePackages = [ "mbedtls-2.28.10" ];
+  nixpkgs.config.permittedInsecurePackages = ["mbedtls-2.28.10"];
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
@@ -11,8 +15,8 @@ in {
   # run color script on startup
   # https://gitlab.com/OpenRGBDevelopers/OpenRGB-Wiki/-/blob/stable/User-Documentation/Frequently-Asked-Questions.md#can-i-set-up-openrgb-as-a-systemd-service
   # https://wiki.nixos.org/wiki/OpenRGB
-  services.udev.packages = [ pkgs.openrgb ];
-  boot.kernelModules = [ "i2c-dev" ];
+  services.udev.packages = [pkgs.openrgb];
+  boot.kernelModules = ["i2c-dev"];
   hardware.i2c.enable = true;
 
   systemd.services.set-hardware-rgb = {
@@ -23,9 +27,7 @@ in {
     serviceConfig = {
       Type = "oneshot";
     };
-    wants = [ "openrgb.service" ];
-    wantedBy = [ "multi-user.target" ];
+    wants = ["openrgb.service"];
+    wantedBy = ["multi-user.target"];
   };
-
-
 }

@@ -12,7 +12,7 @@
     ./cache.nix
     ./openrgb.nix
     ./immich.nix
-    
+
     # containerized
     ./nocodb.nix
     ./freshrss.nix
@@ -136,16 +136,16 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
       ];
     };
-  xserver = {
-    enable = true;
-    desktopManager = {
-      #gnome.enable = true;
-      cinnamon.enable = true;
-    };
-    displayManager.lightdm = {
+    xserver = {
       enable = true;
+      desktopManager = {
+        #gnome.enable = true;
+        cinnamon.enable = true;
+      };
+      displayManager.lightdm = {
+        enable = true;
+      };
     };
-  };
   };
 
   # stop sleeping/hibernating/suspend
