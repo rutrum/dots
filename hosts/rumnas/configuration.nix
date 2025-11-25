@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
   lib,
@@ -14,6 +11,8 @@
     ./samba.nix
     ./cache.nix
     ./openrgb.nix
+    ./dashy.nix
+    ./freshrss.nix
 
     #../modules/gnome.nix
     ../modules/gaming.nix
@@ -21,39 +20,51 @@
     # TODO: this is failing due to nvidia issues
     # ../modules/services/ersatztv.nix
 
-    #../modules/services/llama.nix
     #../modules/services/rustdesk.nix
     #../modules/services/nextcloud.nix
     #../modules/services/forgejo.nix
     #../modules/services/tube-archivist.nix
 
-    ../modules/hardware/nvidia.nix
-    # ../modules/hardware/8bitdo.nix
+    ../../modules/nixos/nvidia.nix
 
     # bare metal
-    ../modules/services/dashy.nix
-    ../modules/services/grafana.nix
     ../modules/services/llm.nix
-    ../modules/services/mealie.nix
     ../modules/services/adguard-home.nix
     ../modules/services/immich.nix
 
     # container services
     ../modules/services/nocodb.nix
     ../modules/services/home-assistant.nix
-    ../modules/services/freshrss.nix
     # ../modules/services/linkwarden.nix
-    # ../modules/services/grist.nix
   ];
 
   networking.hostName = "rumnas";
-
-  dashy.port = 80;
 
   services.qbittorrent = {
     enable = true;
     openFirewall = true;
     webuiPort = 9009;
+  };
+
+  services.grafana = {
+    enable = true;
+    settings = {
+      server = {
+        http_addr = "0.0.0.0";
+        http_port = 3000;
+        domain = "rumtower.lynx-chromatic.ts.net";
+      };
+
+      security = {
+        allow_embedding = true;
+        cookie_samesite = "disabled";
+      };
+    };
+  };
+
+  services.mealie = {
+    enable = true;
+    port = 9000;
   };
 
   services.ntfy-sh = {

@@ -25,10 +25,9 @@
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix
 
-    ../modules/hardware/nvidia.nix
-    # ../modules/hardware/8bitdo.nix
-    ../modules/hardware/mouse.nix
-    ../modules/hardware/qmk.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/mouse.nix
+    ../../modules/nixos/qmk.nix
   ];
 
   # options for local modules

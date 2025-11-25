@@ -218,16 +218,11 @@
     ];
   };
 in {
-  options.dashy.port = lib.mkOption {
-    type = lib.types.int;
-    description = "The port to bound Dashy to.";
-  };
-
   config.virtualisation.oci-containers = {
     containers = {
       dashy = {
         image = "lissy93/dashy";
-        ports = ["${toString config.dashy.port}:8080"];
+        ports = ["80:8080"];
         autoStart = true;
         volumes = [
           "${dashy_conf}:/app/user-data/conf.yml"
