@@ -14,9 +14,9 @@
     inputs.nixvim.homeManagerModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
-    ./ui.nix
-    ./modules/cli
-    ./modules/ssh.nix
+    ../../users/ui.nix
+    ../../users/modules/cli
+    ../../users/modules/ssh.nix
   ];
 
   config = {

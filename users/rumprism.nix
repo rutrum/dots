@@ -5,7 +5,8 @@
   ...
 }: {
   imports = [
-    ./rutrum.nix
+    ../modules/home/rutrum.nix
+
     ./modules/production/3d.nix
     ./modules/production/office.nix
     ./modules/production/photo.nix
