@@ -12,6 +12,7 @@
     ./borg.nix
     ./syncthing.nix
     ./calibre.nix
+    ./local-ai.nix
 
     ../modules/cosmic.nix
     ../modules/gnome.nix
@@ -19,8 +20,6 @@
 
     ../modules/printing.nix
 
-    ../modules/services/llm.nix
-    #../modules/services/jellyfin.nix
     ../modules/services/immich.nix
     ../modules/services/paperless.nix
     ../modules/services/firefly.nix
@@ -31,9 +30,14 @@
     ../modules/hardware/qmk.nix
   ];
 
-  # options for local modules
-  me = {
-    llm.enable-open-webui = false;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ "rutrum" ];
+    };
   };
 
   programs.nix-ld.enable = true;

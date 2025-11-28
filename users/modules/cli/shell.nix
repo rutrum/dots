@@ -29,7 +29,7 @@
 
       # colors
       less = "less -R";
-      ls = "ls --color=auto";
+      ls = "eza";
       grep = "grep --color=auto";
 
       # print human readable sizes
@@ -54,6 +54,14 @@
 
       interactiveShellInit = ''
         set fish_greeting
+
+        function nsn
+          nix shell nixpkgs#"$argv"
+        end
+        function nrn
+          nix run nixpkgs#"$argv"
+        end
+
       '';
     };
 

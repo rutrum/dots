@@ -7,7 +7,7 @@
       base_keymap = "VSCode";
       buffer_font_size = 14;
       buffer_font_family = "IosevkaTerm Nerd Font";
-      buffer_line_height = "standard";
+      buffer_line_height = "comfortable";
       vim_mode = true;
       theme = {
         mode = "system";

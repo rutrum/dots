@@ -42,7 +42,7 @@
     nocodb-db = {
       image = "library/postgres:16"; # official docker images use "library/"
       volumes = ["/mnt/barracuda/nocodb/db:/var/lib/postgresql/data"];
-      ports = ["5432:5432"];
+      # ports = ["5432:5432"];
       autoStart = true;
       environment = {
         POSTGRES_DB = "root_db";

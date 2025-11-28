@@ -4,6 +4,10 @@
   inputs,
   ...
 }: {
+  services.flatpak.packages = [
+    "flathub:app/app.zen_browser.zen//stable"
+  ];
+
   home.packages = [
     pkgs.mullvad-browser
   ];

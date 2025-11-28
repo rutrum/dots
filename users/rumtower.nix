@@ -37,6 +37,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # soon
+  #services.local-ai = {
+  #  enable = true;
+  #};
+
   home.packages = let
     stable-packages = with pkgs; [
       # graphical applications
@@ -44,6 +49,8 @@
       protonmail-bridge-gui
       simple-scan
       nextcloud-client
+
+      local-ai
 
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec

@@ -9,9 +9,17 @@
 
     settings = {
       format = ''
-        $env_var$username$nix_shell$git_branch$directory$character
+        $env_var$username$hostname$nix_shell$git_branch$directory$character
       '';
       add_newline = false;
+
+      username = {
+        format = "[$user]($style)";
+      };
+
+      hostname = {
+        format = "@[$hostname]($style)";
+      };
 
       nix_shell = {
         format = "[\\[$name\\]]($style) ";
