@@ -35,12 +35,6 @@
             title = "Jellyfin";
             description = "Home media server";
             icon = "hl-jellyfin";
-            url = "${rumtower}:8096";
-          }
-          {
-            title = "New Jellyfin";
-            description = "Home media server";
-            icon = "hl-jellyfin";
             url = "${rumnas}:8096";
           }
           {
@@ -86,12 +80,6 @@
             url = "http://192.168.50.1";
           }
           {
-            title = "Tube Archivist";
-            description = "Local YouTube video library";
-            icon = "hl-tube-archivist";
-            url = "${rumnas_ip}:8090";
-          }
-          {
             title = "Grafana";
             description = "Data visualization";
             icon = "hl-grafana";
@@ -122,10 +110,16 @@
             url = "${rumtower}:8083";
           }
           {
-            title = "Linkwarden";
-            description = "Bookmarking";
-            icon = "hl-linkwarden";
-            url = "${rumnas}:8088";
+            title = "ntfy";
+            description = "Notifications";
+            icon = "hl-ntfy";
+            url = "${rumnas}:8888";
+          }
+          {
+            title = "Immich";
+            description = "Photo gallery";
+            icon = "hl-immich";
+            url = "${rumnas}:2283";
           }
         ];
       }
@@ -224,16 +218,11 @@
     ];
   };
 in {
-  options.dashy.port = lib.mkOption {
-    type = lib.types.int;
-    description = "The port to bound Dashy to.";
-  };
-
   config.virtualisation.oci-containers = {
     containers = {
       dashy = {
         image = "lissy93/dashy";
-        ports = ["${toString config.dashy.port}:8080"];
+        ports = ["80:8080"];
         autoStart = true;
         volumes = [
           "${dashy_conf}:/app/user-data/conf.yml"

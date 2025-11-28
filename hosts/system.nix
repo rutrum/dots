@@ -9,23 +9,21 @@
 
   imports = [
     inputs.sops-nix.nixosModules.sops
-    ./modules/syncthing.nix
+    ../modules/nixos/syncthing.nix
   ];
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
 
-  # does this need to be system configuration?
-  # it's for user applications afterall
-  #services.flatpak.enable = true;
-
   # TODO: consider removing
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # local binary cache
   nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+
+    # local binary cache
     substituters = [
       "http://192.168.50.3:9999"
     ];
@@ -33,7 +31,6 @@
       "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="
     ];
   };
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   services = {
     tailscale.enable = true;
@@ -56,6 +53,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # bare minimum to deploy a configuration
     neovim
     git
     home-manager

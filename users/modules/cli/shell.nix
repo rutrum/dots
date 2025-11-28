@@ -13,7 +13,7 @@
     };
   };
 
-  config = let 
+  config = let
     shellAliases = {
       v = "nvim";
       j = "just";

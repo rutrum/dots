@@ -6,7 +6,7 @@
 }: {
   _module.args.inputs = inputs; # this is huge
   imports = [
-    ./rutrum.nix
+    ../modules/home/rutrum.nix
 
     ./modules/terminal
 

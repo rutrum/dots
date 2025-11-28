@@ -1,5 +1,3 @@
-# Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS
-# manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -14,20 +12,20 @@
     ./calibre.nix
     ./local-ai.nix
 
-    ../modules/cosmic.nix
+    # containized
+    ./paperless.nix
+    ./firefly.nix
+
     ../modules/gnome.nix
-    ../modules/gaming.nix
+    ../../modules/nixos/gaming.nix
 
     ../modules/printing.nix
 
-    ../modules/services/immich.nix
-    ../modules/services/paperless.nix
-    ../modules/services/firefly.nix
+    ../modules/services/llm.nix
 
-    ../modules/hardware/nvidia.nix
-    # ../modules/hardware/8bitdo.nix
-    ../modules/hardware/mouse.nix
-    ../modules/hardware/qmk.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/mouse.nix
+    ../../modules/nixos/qmk.nix
   ];
 
   services.openssh = {
@@ -106,13 +104,15 @@
         ];
         image-path = "steam.png";
       }
-      
     ];
   };
   networking.firewall = {
-    allowedTCPPorts = [ 47984 47989 47990 48010 ];
+    allowedTCPPorts = [47984 47989 47990 48010];
     allowedUDPPortRanges = [
-      { from = 47998; to = 48000; }
+      {
+        from = 47998;
+        to = 48000;
+      }
       #{ from = 8000; to = 8010; }
     ];
   };

@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./rutrum.nix
+    ../modules/home/rutrum.nix
 
     ./modules/cli
     ./modules/ssh.nix
