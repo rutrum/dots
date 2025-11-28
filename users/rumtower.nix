@@ -7,16 +7,7 @@
   _module.args.inputs = inputs; # this is huge
   imports = [
     ../modules/home/rutrum.nix
-
-    ./modules/production/3d.nix
-    ./modules/production/video.nix
-    ./modules/production/photo.nix
-    ./modules/production/office.nix
-
     ./modules/games.nix
-    ./modules/zed.nix
-
-    ./modules/reading.nix
   ];
 
   me.ui.enable = lib.mkForce true;
@@ -30,10 +21,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # soon
-  #services.local-ai = {
-  #  enable = true;
-  #};
+  services.flatpak.packages = [
+    "flathub-beta:app/org.openscad.OpenSCAD//beta"
+  ];
 
   home.packages = let
     stable-packages = with pkgs; [
@@ -43,13 +33,32 @@
       simple-scan
       nextcloud-client
 
-      local-ai
-
       # dont exist yet with nixpkgs, but cargo install works
       #vtracer toml-cli ytop checkexec
       discord
 
       rustdesk
+
+      # image editing
+      gthumb
+      upscayl # ai upscaler
+      krita
+      gimp3
+
+      # 3d printing
+      orca-slicer
+
+      # office
+      drawio
+      libreoffice
+
+      # video production
+      losslesscut-bin
+      obs-studio
+
+      # reading
+      zotero
+      calibre
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       qbittorrent

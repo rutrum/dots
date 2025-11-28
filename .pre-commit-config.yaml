@@ -5,10 +5,10 @@ repos:
     # depending on what pre-requisites you have:
     hooks:
       # No prerequisites
-      - id: alejandra
+      #- id: alejandra
 
       # Requires Nix to be previously installed in the system
-      - id: alejandra-nix
+      #- id: alejandra-nix
 
       # Requires Alejandra to be previously installed in the system
       - id: alejandra-system

@@ -16,12 +16,10 @@
 
     ../../users/ui.nix
     ../../users/modules/cli
-    ../../users/modules/ssh.nix
   ];
 
   config = {
     me = {
-      terminal = "alacritty";
       ui.enable = false;
     };
 
@@ -36,8 +34,9 @@
 
     services = {
       # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
+
       flatpak = {
-        enableModule = true;
+        enable = true;
         remotes = {
           "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
           "flathub-beta" = "https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo";
@@ -63,13 +62,44 @@
 
     programs = {
       home-manager.enable = true;
+      ssh.enable = true;
 
-      ssh = {
+      nh = {
         enable = true;
-        matchBlocks = {
-          vultr = {
-            hostname = "45.63.65.162";
-          };
+        flake = "/home/rutrum/dots";
+      };
+    };
+
+    nix.registry = {
+      # TODO: something was done in 24.05 to add flake inputs as
+      # registries, so this may be unncessary...looks like this is
+      # at the system level
+
+      # redo nixpkgs to be stable
+      nixpkgs = {
+        from = {
+          type = "indirect";
+          id = "nixpkgs";
+        };
+        to = {
+          type = "github";
+          owner = "NixOS";
+          repo = "nixpkgs";
+          ref = "nixos-25.05"; # TODO: make this a variable somewhere
+        };
+      };
+
+      # add nixpkgs unstable
+      unstable = {
+        from = {
+          type = "indirect";
+          id = "unstable";
+        };
+        to = {
+          type = "github";
+          owner = "NixOS";
+          repo = "nixpkgs";
+          ref = "nixos-unstable";
         };
       };
     };
@@ -83,6 +113,15 @@
       dig
       dnsutils
       lftp # ftps client
+
+      # nix
+      nix-tree # look at nix package dependencies
+
+      # fonts
+      nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka-term-slab
+      noto-fonts-emoji
     ];
 
     # This value determines the Home Manager release that your

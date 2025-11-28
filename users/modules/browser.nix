@@ -19,7 +19,6 @@
 
   programs.firefox = {
     enable = true;
-    #package = nixpkgs-stable.legacyPackages.${pkgs.system}.firefox;
 
     profiles.normal = {
       name = "normal";

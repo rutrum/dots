@@ -30,6 +30,7 @@
         bitwarden
         sxiv
         rxvt-unicode
+        nextcloud-client
 
         # database client
         dbeaver-bin
@@ -42,16 +43,5 @@
       unstable-packages = [];
     in
       stable-packages ++ unstable-packages;
-
-    programs.vscode = {
-      enable = true;
-      #package = pkgs.vscodium-fhs;
-      package = pkgs.vscode-fhs;
-      profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
-          continue.continue
-        ];
-      };
-    };
   };
 }

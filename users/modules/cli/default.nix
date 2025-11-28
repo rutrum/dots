@@ -7,7 +7,6 @@
     ./shell.nix
     ./starship.nix
     ./neovim.nix
-    ./nix.nix
     ./git.nix
   ];
 
