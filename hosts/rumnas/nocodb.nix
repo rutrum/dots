@@ -4,6 +4,10 @@
   ...
 }: {
   # create network in systemd
+
+  # TODO: test if this works and then integrate
+  # systemd.services = lib.mkPodmanNetwork "nocodb";
+
   systemd.services.init-nocodb-network = {
     description = "Create network for nocodb containers.";
     after = ["network.target"];
