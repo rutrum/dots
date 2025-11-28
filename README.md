@@ -1,6 +1,6 @@
 # My Home-Manager Configuration
 
-My dotfiles are managed using [Home Manager](https://github.com/nix-community/home-manager).  All my computers (even my work laptop that utilizes WSL) run Home Manager using nix to specify my configuration files and installed user-space tools and applications.  Similarly, my linux machines run [NixOS](https://wiki.nixos.org/wiki/Overview_of_the_NixOS_Linux_distribution), an operating whose configuration is built on `nix`.  NixOS manages system configuration, like hardware drivers, firewall rules, systemd units, file systems, containers, and desktop environments.  
+My dotfiles are managed using [Home Manager](https://github.com/nix-community/home-manager).  All my computers (even my work laptop that utilizes WSL) run Home Manager using nix to specify my configuration files and installed user-space tools and applications.  Similarly, my linux machines run [NixOS](https://wiki.nixos.org/wiki/Overview_of_the_NixOS_Linux_distribution), an operating whose configuration is built on `nix`.  NixOS manages system configuration, like hardware drivers, firewall rules, systemd units, file systems, containers, and desktop environments.
 
 Together, these tools entirely define my home (and soon cloud) infrastructure and user-space configuration and tools.
 
@@ -17,7 +17,6 @@ cd ~/dots
 nixos-rebuild switch --extra-experimental-features flakes \
     --extra-experimental-features nix-command switch --flake .#<host>
 ```
-
 
 ### Home Manager
 

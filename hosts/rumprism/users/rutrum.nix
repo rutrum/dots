@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../modules/home/rutrum.nix
+    ../../../modules/home/rutrum.nix
   ];
 
   me.ui.enable = true;

@@ -5,23 +5,30 @@
   ...
 }: {
   options.me = {
-    gaming = lib.mkEnableOption "gaming";
+    gaming.enable = lib.mkEnableOption "gaming";
   };
 
-  home.packages = with pkgs;
-    [
-      # add things here
-    ]
-    ++ (optional config.me.gaming.enable [
-      superTuxKart
-      mindustry
-      xonotic
-      lumafly # hallow knight mod manager
-      prismlauncher # minecraft launcher
-      airshipper # game launcher for veloren
-      archipelago # utilities for archipelago servers
-    ]);
-  services.flatpak.packages = [
-    "flathub:app/info.beyondallreason.bar//stable"
+  config = lib.mkMerge [
+    {
+      home.packages = with pkgs; [
+        bitwarden
+      ];
+    }
+
+    (lib.mkIf config.me.gaming.enable {
+      home.packages = with pkgs; [
+        superTuxKart
+        mindustry
+        xonotic
+        lumafly # hallow knight mod manager
+        prismlauncher # minecraft launcher
+        airshipper # game launcher for veloren
+        archipelago # utilities for archipelago servers
+      ];
+
+      services.flatpak.packages = [
+        "flathub:app/info.beyondallreason.bar//stable"
+      ];
+    })
   ];
 }

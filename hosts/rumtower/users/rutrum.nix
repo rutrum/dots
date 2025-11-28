@@ -6,8 +6,8 @@
 }: {
   _module.args.inputs = inputs; # this is huge
   imports = [
-    ../modules/home/rutrum.nix
-    ./modules/games.nix
+    ../../../modules/home/rutrum.nix
+    ../../../users/modules/games.nix
   ];
 
   me.ui.enable = lib.mkForce true;
@@ -62,7 +62,6 @@
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       qbittorrent
-      flameshot # x only?
     ];
   in
     stable-packages ++ unstable-packages;

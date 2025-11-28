@@ -97,7 +97,7 @@
     homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
-        ./users/rutrum.nix
+        ./modules/home/rutrum.nix
       ];
       extraSpecialArgs = {inherit inputs;};
     };
@@ -113,7 +113,7 @@
     homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
-        ./users/rumtower.nix
+        ./hosts/rumtower/users/rutrum.nix
       ];
       extraSpecialArgs = {inherit inputs;};
     };

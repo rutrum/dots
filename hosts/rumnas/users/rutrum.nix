@@ -6,8 +6,8 @@
   ...
 }: {
   imports = [
-    ../modules/home/rutrum.nix
-    ./modules/games.nix
+    ../../../modules/home/rutrum.nix
+    ../../../users/modules/games.nix
   ];
 
   me.ui.enable = lib.mkForce true;

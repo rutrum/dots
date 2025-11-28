@@ -15,7 +15,8 @@
     inputs.catppuccin.homeModules.catppuccin
 
     ../../users/ui.nix
-    ../../users/modules/cli
+    ./cli
+    ./gui
   ];
 
   config = {
