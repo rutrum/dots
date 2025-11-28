@@ -40,10 +40,10 @@
     };
 
     open-webui = {
-      host = "0.0.0.0";
+      enable = true;
       package = pkgs.open-webui;
+      host = "0.0.0.0";
       port = 8080;
-      enable = config.me.llm.enable-open-webui;
       openFirewall = true;
     };
 
