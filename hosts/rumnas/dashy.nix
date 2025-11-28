@@ -121,6 +121,18 @@
             icon = "hl-immich";
             url = "${rumnas}:2283";
           }
+          {
+            title = "Local AI (rumtower)";
+            description = "AI model management";
+            icon = "sh-localai";
+            url = "${rumtower}:8089";
+          }
+          {
+            title = "Local AI (rumnas)";
+            description = "AI model management";
+            icon = "sh-localai";
+            url = "${rumnas}:8089";
+          }
         ];
       }
       {

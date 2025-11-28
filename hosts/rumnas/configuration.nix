@@ -23,6 +23,7 @@
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/controller.nix
     ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/local-ai.nix
 
     # TODO: this is failing due to nvidia issues
     # ./ersatztv.nix

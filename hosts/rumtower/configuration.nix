@@ -10,7 +10,7 @@
     ./borg.nix
     ./syncthing.nix
     ./calibre.nix
-    ./local-ai.nix
+    ../../modules/nixos/local-ai.nix
 
     # containized
     ./paperless.nix
