@@ -18,11 +18,6 @@
     openDefaultPorts = true;
     settings = {
       folders = {
-        prism-instances = {
-          id = "cdgrh-cn25a";
-          path = "/home/rutrum/.local/share/PrismLauncher/instances";
-          devices = ["rumtower"];
-        };
         notes = {
           id = "mqkjy-xoe93";
           path = "/home/rutrum/notes";

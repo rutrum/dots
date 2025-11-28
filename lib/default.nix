@@ -2,6 +2,7 @@
   flake,
   inputs,
 }: {
+  # Create a systemd service that creates a podman network if it doesn't exist.
   mkPodmanNetwork = name: {
     "init-${name}-network" = {
       description = "Create network for ${name} containers.";

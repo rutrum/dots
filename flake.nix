@@ -3,7 +3,13 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # for blueprint: I think I must rename this to just nixpkgs
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
+
+    blueprint = {
+      url = "github:numtide/blueprint";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -25,10 +31,10 @@
     };
 
     # configure neovim and neovim plugins with nix
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
-    };
+    nixvim.url = "github:nix-community/nixvim/nixos-25.05";
   };
+
+  # outputs = inputs: inputs.blueprint { inherit inputs; };
 
   outputs = {
     home-manager,
