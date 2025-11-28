@@ -14,16 +14,11 @@
     inputs.nixvim.homeManagerModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
-    ../../users/ui.nix
     ./cli
     ./gui
   ];
 
   config = {
-    me = {
-      ui.enable = false;
-    };
-
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     home = {

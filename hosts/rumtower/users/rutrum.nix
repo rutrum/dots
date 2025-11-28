@@ -7,10 +7,13 @@
   _module.args.inputs = inputs; # this is huge
   imports = [
     ../../../modules/home/rutrum.nix
-    ../../../users/modules/games.nix
   ];
 
-  me.ui.enable = lib.mkForce true;
+  me = {
+    gui.enable = true;
+    gaming.enable = true;
+    databases.enable = true;
+  };
 
   xdg.mimeApps = {
     enable = false;
