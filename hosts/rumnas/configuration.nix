@@ -21,13 +21,13 @@
     ./home-assistant.nix
 
     ../../modules/nixos/gaming.nix
+    ../../modules/nixos/controller.nix
+    ../../modules/nixos/nvidia.nix
 
     # TODO: this is failing due to nvidia issues
     # ../modules/services/ersatztv.nix
 
     #../modules/services/rustdesk.nix
-
-    ../../modules/nixos/nvidia.nix
 
     # bare metal
     ../modules/services/llm.nix

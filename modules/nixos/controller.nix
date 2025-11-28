@@ -17,6 +17,8 @@
   environment.systemPackages = with pkgs; [
     # xboxdrv
     usbutils
+    qjoypad
+    jstest-gtk
   ];
 
   # Udev rules to start or stop systemd service when controller is connected or disconnected

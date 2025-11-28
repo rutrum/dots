@@ -10,9 +10,6 @@
     ./modules/production/3d.nix
     ./modules/production/office.nix
     ./modules/production/photo.nix
-    ./modules/flatpak.nix
-    ./modules/databases.nix
-    ./modules/networking.nix
   ];
 
   me.ui.enable = true;

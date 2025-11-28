@@ -23,6 +23,7 @@
 
     ../modules/services/llm.nix
 
+    ../../modules/nixos/controller.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/mouse.nix
     ../../modules/nixos/qmk.nix
@@ -34,7 +35,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
-      AllowUsers = [ "rutrum" ];
+      AllowUsers = ["rutrum"];
     };
   };
 
@@ -186,7 +187,6 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    desktopManager.xfce.enable = true;
   };
 
   # Allow unfree packages

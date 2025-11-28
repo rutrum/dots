@@ -8,20 +8,13 @@
   imports = [
     ../modules/home/rutrum.nix
 
-    ./modules/terminal
-
     ./modules/production/3d.nix
     ./modules/production/video.nix
     ./modules/production/photo.nix
     ./modules/production/office.nix
 
     ./modules/games.nix
-    ./modules/flatpak.nix
-    ./modules/databases.nix
-    ./modules/networking.nix
     ./modules/zed.nix
-
-    ./modules/joystick.nix
 
     ./modules/reading.nix
   ];

@@ -7,9 +7,9 @@
   # user configuration for all UIs
 
   imports = [
-    ./modules/terminal
+    ./modules/terminal.nix
     ./modules/browser.nix
-    ./modules/fonts.nix
+    ./modules/ide.nix
   ];
 
   options.me = {
@@ -17,8 +17,11 @@
   };
 
   config = lib.mkIf config.me.ui.enable {
+    fonts.fontconfig.enable = true;
+
     home.packages = let
       stable-packages = with pkgs; [
+        font-manager
         vscodium # why not both?
         localsend
         zathura
@@ -27,6 +30,14 @@
         bitwarden
         sxiv
         rxvt-unicode
+
+        # database client
+        dbeaver-bin
+
+        # database drivers for common databases
+        sqlite-jdbc
+        postgresql_jdbc
+        mysql_jdbc
       ];
       unstable-packages = [];
     in
@@ -42,6 +53,5 @@
         ];
       };
     };
-
   };
 }

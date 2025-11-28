@@ -118,7 +118,6 @@
     jq # traverse json
     pandoc # document conversion
     duckdb
-    pandoc # document conversion
 
     tealdeer
     fzf

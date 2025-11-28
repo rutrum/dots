@@ -34,6 +34,17 @@
       shell.enableFishIntegration = true;
     };
 
+    services = {
+      # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
+      flatpak = {
+        enableModule = true;
+        remotes = {
+          "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+          "flathub-beta" = "https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo";
+        };
+      };
+    };
+
     catppuccin.flavor = "mocha";
 
     xdg.userDirs = {
@@ -52,12 +63,26 @@
 
     programs = {
       home-manager.enable = true;
+
+      ssh = {
+        enable = true;
+        matchBlocks = {
+          vultr = {
+            hostname = "45.63.65.162";
+          };
+        };
+      };
     };
 
     home.packages = with pkgs; [
       appimage-run
       distrobox
       pdftk
+
+      # networking
+      dig
+      dnsutils
+      lftp # ftps client
     ];
 
     # This value determines the Home Manager release that your

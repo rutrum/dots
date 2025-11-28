@@ -47,6 +47,7 @@
       buildInputs = with pkgs; [
         sops
         alejandra
+        pre-commit
       ];
     };
     nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
