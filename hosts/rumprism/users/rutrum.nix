@@ -8,7 +8,7 @@
     ../../../modules/home/rutrum.nix
   ];
 
-  me.ui.enable = true;
+  me.gui.enable = true;
 
   home.packages = with pkgs; [
     # hardware utilities

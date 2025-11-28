@@ -10,7 +10,7 @@
   imports = [
     ./system.nix
     ./hardware-configuration.nix
-    ../modules/octoprint.nix
+    ./octoprint.nix
   ];
 
   networking.hostName = "rumpi";

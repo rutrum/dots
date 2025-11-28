@@ -7,13 +7,11 @@
   imports = [
     ./ide.nix
     ./browser.nix
-    ./terminal.nix
   ];
 
   options.me = {
     gui.enable = lib.mkEnableOption "gui";
     gaming.enable = lib.mkEnableOption "gaming";
-    databases.enable = lib.mkEnableOption "databases";
   };
 
   config = lib.mkIf config.me.gui.enable (lib.mkMerge [
@@ -32,16 +30,34 @@
         rxvt-unicode
         nextcloud-client
       ];
-    }
 
-    (lib.mkIf config.me.databases.enable {
-      home.packages = with pkgs; [
-        dbeaver-bin
-        sqlite-jdbc
-        postgresql_jdbc
-        mysql_jdbc
-      ];
-    })
+      catppuccin.alacritty.enable = true;
+      programs.alacritty = {
+        enable = true;
+        settings = {
+          window = {
+            opacity = 0.85;
+            padding.x = 24;
+            padding.y = 24;
+          };
+          font = {
+            normal.family = "Iosevka Nerd Font";
+          };
+          keyboard.bindings = [
+            {
+              key = "I";
+              mods = "Alt";
+              action = "IncreaseFontSize";
+            }
+            {
+              key = "U";
+              mods = "Alt";
+              action = "DecreaseFontSize";
+            }
+          ];
+        };
+      };
+    }
 
     (lib.mkIf config.me.gaming.enable {
       home.packages = with pkgs; [

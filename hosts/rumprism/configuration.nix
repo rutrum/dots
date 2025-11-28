@@ -6,7 +6,7 @@
   imports = [
     ../system.nix
     ./hardware-configuration.nix
-    ../modules/printing.nix
+    ../../modules/nixos/printing.nix
   ];
 
   networking.hostName = "rumprism";

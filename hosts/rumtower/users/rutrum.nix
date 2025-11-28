@@ -12,7 +12,6 @@
   me = {
     gui.enable = true;
     gaming.enable = true;
-    databases.enable = true;
   };
 
   xdg.mimeApps = {
@@ -62,6 +61,12 @@
       # reading
       zotero
       calibre
+
+      # databases
+      dbeaver-bin
+      sqlite-jdbc
+      postgresql_jdbc
+      mysql_jdbc
     ];
     unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
       qbittorrent

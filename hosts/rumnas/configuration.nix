@@ -25,15 +25,9 @@
     ../../modules/nixos/nvidia.nix
 
     # TODO: this is failing due to nvidia issues
-    # ../modules/services/ersatztv.nix
-
-    #../modules/services/rustdesk.nix
-
-    # bare metal
-    ../modules/services/llm.nix
-
-    # container services
-    # ../modules/services/linkwarden.nix
+    # ./ersatztv.nix
+    # ./frigate.nix
+    # ./linkwarden.nix
   ];
 
   networking.hostName = "rumnas";
@@ -43,6 +37,14 @@
       enable = true;
       openFirewall = true;
       webuiPort = 9009;
+    };
+
+    open-webui = {
+      host = "0.0.0.0";
+      package = pkgs.open-webui;
+      port = 8080;
+      enable = config.me.llm.enable-open-webui;
+      openFirewall = true;
     };
 
     grafana = {

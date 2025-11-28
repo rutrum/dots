@@ -16,17 +16,13 @@
     ./paperless.nix
     ./firefly.nix
 
-    ../modules/gnome.nix
     ../../modules/nixos/gaming.nix
-
-    ../modules/printing.nix
-
-    ../modules/services/llm.nix
 
     ../../modules/nixos/controller.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/mouse.nix
     ../../modules/nixos/qmk.nix
+    ../../modules/nixos/printing.nix
   ];
 
   services.openssh = {
@@ -166,6 +162,8 @@
 
   environment.systemPackages = with pkgs; [
     beets
+    gnome-tweaks
+    gnomeExtensions.tactile
   ];
 
   fileSystems = {
