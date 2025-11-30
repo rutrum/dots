@@ -1,5 +1,3 @@
-# Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS
-# manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -12,30 +10,32 @@
     ./borg.nix
     ./syncthing.nix
     ./calibre.nix
+    ../../modules/nixos/local-ai.nix
 
-    ../modules/cosmic.nix
-    ../modules/gnome.nix
-    ../modules/gaming.nix
+    # containized
+    ./paperless.nix
+    ./firefly.nix
 
-    ../modules/printing.nix
+    ../../modules/nixos/gaming.nix
 
-    ../modules/docker.nix
-    ../modules/services/llm.nix
-    ../modules/services/jellyfin.nix
-    ../modules/services/immich.nix
-    ../modules/services/paperless.nix
-    ../modules/services/firefly.nix
-
-    ../modules/hardware/nvidia.nix
-    # ../modules/hardware/8bitdo.nix
-    ../modules/hardware/mouse.nix
-    ../modules/hardware/qmk.nix
+    ../../modules/nixos/controller.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/mouse.nix
+    ../../modules/nixos/qmk.nix
+    ../../modules/nixos/printing.nix
   ];
 
-  # options for local modules
-  me = {
-    llm.enable-open-webui = false;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = ["rutrum"];
+    };
   };
+
+  programs.nix-ld.enable = true;
 
   networking.hostName = "rumtower";
 
@@ -68,13 +68,59 @@
     };
   };
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+    applications.apps = [
+      {
+        name = "Blasphemous";
+        detached = [
+          "setsid steam steam://rungameid/774361"
+        ];
+      }
+      {
+        name = "Desktop";
+        image-path = "desktop.png";
+      }
+      {
+        name = "Low Res Desktop";
+        image-path = "desktop.png";
+        prep-cmd = [
+          {
+            do = "xrandr --output HDMI-1 --mode 1920x1080";
+            undo = "xrandr --output HDMI-1 --mode 1920x1200";
+          }
+        ];
+      }
+      {
+        name = "Steam Big Picture";
+        detached = [
+          "setsid steam steam://open/bigpicture"
+        ];
+        image-path = "steam.png";
+      }
+    ];
+  };
+  networking.firewall = {
+    allowedTCPPorts = [47984 47989 47990 48010];
+    allowedUDPPortRanges = [
+      {
+        from = 47998;
+        to = 48000;
+      }
+      #{ from = 8000; to = 8010; }
+    ];
+  };
+
   services.tailscale = {
     useRoutingFeatures = "server";
     openFirewall = true;
-    extraUpFlags = [
+    extraSetFlags = [
       "--advertise-exit-node" # allow clients to route traffic through nas
       "--exit-node-allow-lan-access"
-      "--advertise-routes=192.168.50.0/24"
+      "--advertise-routes=192.168.50.100/32"
     ];
   };
 
@@ -116,6 +162,8 @@
 
   environment.systemPackages = with pkgs; [
     beets
+    gnome-tweaks
+    gnomeExtensions.tactile
   ];
 
   fileSystems = {
@@ -137,7 +185,6 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    desktopManager.xfce.enable = true;
   };
 
   # Allow unfree packages

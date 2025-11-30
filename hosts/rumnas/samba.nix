@@ -37,10 +37,11 @@
           "valid users" = "%S";
           "path" = "/mnt/raid/homes/%S";
         };
-        "public" = {
-          "path" = "/mnt/raid/public";
+        "shared" = {
+          "path" = "/mnt/raid/shared";
           "read only" = "no";
-          "guest ok" = "yes";
+          "valid users" = "@users";
+          "browseable" = "yes";
         };
         "reolink" = {
           "path" = "/mnt/raid/reolink";
