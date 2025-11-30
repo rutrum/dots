@@ -32,6 +32,16 @@
     };
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -55,6 +65,10 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
+  # new wayland wm stuff
+  programs.niri.enable = true;
+  programs.waybar.enable = true;
+
   # displaylink drivers for wavlink doc
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["modesetting"];
@@ -77,7 +91,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    fuzzel # app launcher for wayland
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
