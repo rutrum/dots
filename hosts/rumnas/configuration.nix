@@ -19,6 +19,7 @@
     ./freshrss.nix
     ./dashy.nix
     ./home-assistant.nix
+    ./ersatztv.nix
 
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/controller.nix
@@ -26,7 +27,6 @@
     ../../modules/nixos/local-ai.nix
 
     # TODO: this is failing due to nvidia issues
-    # ./ersatztv.nix
     # ./frigate.nix
     # ./linkwarden.nix
   ];
@@ -48,13 +48,22 @@
       openFirewall = true;
     };
 
+    karakeep = {
+      enable = true;
+      browser.enable = true;
+      meilisearch.enable = true;
+      extraEnvironment = {
+        PORT = "8090";
+      };
+    };
+
     grafana = {
       enable = true;
       settings = {
         server = {
           http_addr = "0.0.0.0";
           http_port = 3000;
-          domain = "rumtower.lynx-chromatic.ts.net";
+          domain = "rumnas.lynx-chromatic.ts.net";
         };
 
         security = {

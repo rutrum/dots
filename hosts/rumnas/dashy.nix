@@ -133,6 +133,12 @@
             icon = "sh-localai";
             url = "${rumnas}:8089";
           }
+          {
+            title = "Karakeep";
+            description = "Bookmarks";
+            icon = "hl-karakeep";
+            url = "${rumnas}:8090";
+          }
         ];
       }
       {
@@ -152,12 +158,13 @@
           }
           {
             title = "stringcase.org";
+            description = "Multiword identifiers";
             url = "https://stringcase.org";
             icon = "favicon";
           }
           {
             title = "rutrum.net";
-            description = "Dave's personal site";
+            description = "Personal website";
             url = "https://rutrum.net";
             icon = "favicon";
           }
