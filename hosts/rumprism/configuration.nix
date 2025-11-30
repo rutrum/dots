@@ -21,7 +21,7 @@
         notes = {
           id = "mqkjy-xoe93";
           path = "/home/rutrum/notes";
-          devices = ["rumpixel" "rumtower"];
+          devices = ["pixel7" "rumtower"];
         };
       };
     };
@@ -53,10 +53,8 @@
   hardware.graphics.enable = true;
 
   # Enable the X11 windowing system.
+  # Look into wayland display manager
   services.xserver.enable = true;
-
-  # Do this stuff with home-manager
-  # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
