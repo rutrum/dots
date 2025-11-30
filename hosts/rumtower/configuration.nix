@@ -10,7 +10,6 @@
     ./borg.nix
     ./syncthing.nix
     ./calibre.nix
-    ../../modules/nixos/local-ai.nix
 
     # containized
     ./paperless.nix
@@ -23,6 +22,7 @@
     ../../modules/nixos/mouse.nix
     ../../modules/nixos/qmk.nix
     ../../modules/nixos/printing.nix
+    ../../modules/nixos/local-ai.nix
   ];
 
   services.openssh = {
@@ -66,52 +66,6 @@
     postgresqlBackup = {
       enable = true;
     };
-  };
-
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true;
-    openFirewall = true;
-    applications.apps = [
-      {
-        name = "Blasphemous";
-        detached = [
-          "setsid steam steam://rungameid/774361"
-        ];
-      }
-      {
-        name = "Desktop";
-        image-path = "desktop.png";
-      }
-      {
-        name = "Low Res Desktop";
-        image-path = "desktop.png";
-        prep-cmd = [
-          {
-            do = "xrandr --output HDMI-1 --mode 1920x1080";
-            undo = "xrandr --output HDMI-1 --mode 1920x1200";
-          }
-        ];
-      }
-      {
-        name = "Steam Big Picture";
-        detached = [
-          "setsid steam steam://open/bigpicture"
-        ];
-        image-path = "steam.png";
-      }
-    ];
-  };
-  networking.firewall = {
-    allowedTCPPorts = [47984 47989 47990 48010];
-    allowedUDPPortRanges = [
-      {
-        from = 47998;
-        to = 48000;
-      }
-      #{ from = 8000; to = 8010; }
-    ];
   };
 
   services.tailscale = {
