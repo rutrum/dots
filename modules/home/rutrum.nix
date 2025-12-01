@@ -11,7 +11,7 @@
 
   imports = [
     inputs.flatpaks.homeModules.default
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
     ./cli
@@ -81,7 +81,7 @@
           type = "github";
           owner = "NixOS";
           repo = "nixpkgs";
-          ref = "nixos-25.05"; # TODO: make this a variable somewhere
+          ref = "nixos-25.11"; # TODO: make this a variable somewhere
         };
       };
 
@@ -100,6 +100,7 @@
       };
     };
 
+    # TODO: these should probably all be in cli/default
     home.packages = with pkgs; [
       appimage-run
       distrobox
@@ -107,7 +108,7 @@
 
       # networking
       dig
-      dnsutils
+      #dnsutils
       lftp # ftps client
 
       # nix
@@ -117,9 +118,10 @@
       nerd-fonts.iosevka
       nerd-fonts.iosevka-term
       nerd-fonts.iosevka-term-slab
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
 
+    # TODO: this should be removed
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards

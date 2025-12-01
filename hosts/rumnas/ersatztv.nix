@@ -1,4 +1,6 @@
 {...}: {
+  # consider nixos module???
+  # 25.8.0
   virtualisation.oci-containers.containers = {
     ersatztv = {
       image = "jasongdove/ersatztv:v25.9.0";

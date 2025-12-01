@@ -4,16 +4,16 @@
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # for blueprint: I think I must rename this to just nixpkgs
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
 
     blueprint = {
       url = "github:numtide/blueprint";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # colorscheme
@@ -27,22 +27,22 @@
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # configure neovim and neovim plugins with nix
-    nixvim.url = "github:nix-community/nixvim/nixos-25.05";
+    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
   };
 
   # outputs = inputs: inputs.blueprint { inherit inputs; };
 
   outputs = {
     home-manager,
-    nixpkgs-stable,
+    nixpkgs,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs = import nixpkgs-stable {
+    pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true; # remove this
       overlays = [];
@@ -58,7 +58,7 @@
         pre-commit
       ];
     };
-    nixosConfigurations."rumprism" = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations."rumprism" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         (import ./hosts/rumprism/configuration.nix)
@@ -66,7 +66,7 @@
       specialArgs = {inherit inputs;};
     };
 
-    nixosConfigurations."saibaman" = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations."saibaman" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         (import ./hosts/saibaman/configuration.nix)
@@ -74,7 +74,7 @@
       specialArgs = {inherit inputs;};
     };
 
-    nixosConfigurations."rumpi" = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations."rumpi" = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         (import ./hosts/rumpi/configuration.nix)
@@ -82,7 +82,7 @@
       specialArgs = {inherit inputs;};
     };
 
-    nixosConfigurations."rumtower" = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations."rumtower" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         inputs.flatpaks.nixosModules.default
@@ -91,7 +91,7 @@
       specialArgs = {inherit inputs;};
     };
 
-    nixosConfigurations."rumnas" = nixpkgs-stable.lib.nixosSystem {
+    nixosConfigurations."rumnas" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         inputs.flatpaks.nixosModules.default

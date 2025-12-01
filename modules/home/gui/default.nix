@@ -25,7 +25,7 @@
         zathura
         vlc
         anki-bin
-        bitwarden
+        bitwarden-desktop
         sxiv
         rxvt-unicode
         nextcloud-client
@@ -59,6 +59,7 @@
       };
     }
 
+    # gaming module
     (lib.mkIf config.me.gaming.enable {
       home.packages = with pkgs; [
         superTuxKart

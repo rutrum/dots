@@ -21,8 +21,18 @@
         notes = {
           id = "mqkjy-xoe93";
           path = "/home/rutrum/notes";
-          devices = ["rumpixel" "rumtower"];
+          devices = ["pixel7" "rumtower"];
         };
+      };
+    };
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      Policy = {
+        AutoEnable = true;
       };
     };
   };
@@ -43,12 +53,14 @@
   hardware.graphics.enable = true;
 
   # Enable the X11 windowing system.
+  # Look into wayland display manager
   services.xserver.enable = true;
-
-  # Do this stuff with home-manager
-  # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
+
+  # new wayland wm stuff
+  programs.niri.enable = true;
+  programs.waybar.enable = true;
 
   # displaylink drivers for wavlink doc
   nixpkgs.config.allowUnfree = true;
@@ -72,7 +84,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    fuzzel # app launcher for wayland
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
