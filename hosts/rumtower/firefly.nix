@@ -22,10 +22,9 @@
     '';
   };
 
-  # the containers
   virtualisation.oci-containers.containers = {
     firefly = {
-      image = "fireflyiii/core:version-6.2.21";
+      image = "fireflyiii/core:version-6.4.9";
       ports = ["8080:8080"];
       volumes = [
         "/mnt/barracuda/firefly/upload:/var/www/html/storage/upload"

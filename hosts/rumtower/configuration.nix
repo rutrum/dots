@@ -9,9 +9,9 @@
     ./hardware-configuration.nix
     ./borg.nix
     ./syncthing.nix
-    ./calibre.nix
 
     # containized
+    # consider using nixos modules for these
     ./paperless.nix
     ./firefly.nix
 
@@ -25,21 +25,27 @@
     ../../modules/nixos/local-ai.nix
   ];
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-      AllowUsers = ["rutrum"];
-    };
-  };
-
-  programs.nix-ld.enable = true;
-
   networking.hostName = "rumtower";
 
   services = {
+    xserver.enable = true;
+    # maybe revisit when cursor bug is fixed
+    #displayManager.gdm.enable = true;
+    #desktopManager.gnome.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    desktopManager.plasma6.enable = true;
+
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = ["rutrum"];
+      };
+    };
+
     postgresql = {
       enable = true;
       ensureDatabases = ["health"];
@@ -66,48 +72,67 @@
     postgresqlBackup = {
       enable = true;
     };
-  };
 
-  services.tailscale = {
-    useRoutingFeatures = "server";
-    openFirewall = true;
-    extraSetFlags = [
-      "--advertise-exit-node" # allow clients to route traffic through nas
-      "--exit-node-allow-lan-access"
-      "--advertise-routes=192.168.50.100/32"
-    ];
-  };
-
-  services.prometheus = {
-    enable = true;
-
-    exporters = {
-      node = {
-        enable = true;
-        port = 9000;
-        openFirewall = true;
-        enabledCollectors = [
-          "logind"
-          "systemd"
-        ];
-      };
+    tailscale = {
+      useRoutingFeatures = "server";
+      openFirewall = true;
+      extraSetFlags = [
+        "--advertise-exit-node" # allow clients to route traffic through nas
+        "--exit-node-allow-lan-access"
+        "--advertise-routes=192.168.50.100/32"
+      ];
     };
 
-    scrapeConfigs = [
-      {
-        job_name = "node";
-        static_configs = [
-          {
-            targets = ["localhost:9000"];
-          }
-        ];
-      }
-    ];
+    calibre-server = {
+      enable = true;
+      openFirewall = true;
+      libraries = [
+        "/mnt/barracuda/calibre"
+      ];
+      port = 8081;
+    };
+    calibre-web = {
+      enable = true;
+      openFirewall = true;
+      listen.ip = "0.0.0.0";
+    };
+
+    prometheus = {
+      enable = true;
+
+      exporters = {
+        node = {
+          enable = true;
+          port = 9000;
+          openFirewall = true;
+          enabledCollectors = [
+            "logind"
+            "systemd"
+          ];
+        };
+      };
+
+      scrapeConfigs = [
+        {
+          job_name = "node";
+          static_configs = [
+            {
+              targets = ["localhost:9000"];
+            }
+          ];
+        }
+      ];
+    };
   };
 
-  programs.wireshark = {
-    enable = true;
-    package = pkgs.wireshark; # UI application
+  programs = {
+    nix-ld.enable = true;
+    xwayland.enable = true;
+
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark; # UI application
+    };
   };
 
   # Bootloader.
@@ -118,6 +143,8 @@
     beets
     gnome-tweaks
     gnomeExtensions.tactile
+    adwaita-icon-theme
+    adwaita-fonts
   ];
 
   fileSystems = {
@@ -132,13 +159,6 @@
     #  fsType = "nfs";
     #  options = [ "x-systemd.automount" "noauto" ];
     #};
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
   };
 
   # Allow unfree packages
