@@ -8,7 +8,7 @@
   imports = [
     ../system.nix
     ./hardware-configuration.nix
-    ./samba.nix
+    ./fileserver.nix
     ./cache.nix
     ./openrgb.nix
     ./immich.nix
@@ -19,16 +19,13 @@
     ./freshrss.nix
     ./dashy.nix
     ./home-assistant.nix
-    ./ersatztv.nix
 
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/controller.nix
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/local-ai.nix
 
-    # TODO: this is failing due to nvidia issues
     # ./frigate.nix
-    # ./linkwarden.nix
   ];
 
   networking.hostName = "rumnas";
@@ -49,7 +46,7 @@
     };
 
     karakeep = {
-      enable = true;
+      enable = false;
       browser.enable = true;
       meilisearch.enable = true;
       extraEnvironment = {
@@ -110,7 +107,13 @@
     jellyfin = {
       enable = true;
       openFirewall = true;
-      # package = inputs.nixpkgs-unstable.x86_64-linux.pkgs.jellyfin;
+    };
+    ersatztv = {
+      enable = true;
+      openFirewall = true;
+      environment = {
+        ETV_UI_PORT = "8409";
+      };
     };
 
     #sops.secrets = {
@@ -135,10 +138,8 @@
     openssh.enable = true;
 
     # TODO: configure caddy for web services
-    # allow x forwarding
-    #programs.ssh.forwardX11 = true;
 
-    # backups?
+    # TODO: create borg user with read-only everywhere permissions
     borgbackup = {
       repos.paperless = {
         path = "/mnt/vault/backups/paperless";
@@ -147,20 +148,22 @@
         ];
       };
       jobs = {
+        # backs up immich from rumnas -> rumtower
         local-rumtower = {
           paths = [
             # https://docs.immich.app/administration/backup-and-restore/#filesystem
             "/var/lib/immich/library"
             "/var/lib/immich/upload"
             "/var/lib/immich/profile"
+            "/var/lib/immich/backups" # postgres dumps
           ];
           compression = "auto,lzma";
           startAt = "daily";
           user = "root";
           doInit = false;
           repo = "ssh://rutrum@rumtower/mnt/barracuda/backup/immich";
-          environment = { 
-            BORG_RSH = "ssh -i /home/rutrum/.ssh/id_ed25519"; 
+          environment = {
+            BORG_RSH = "ssh -i /home/rutrum/.ssh/id_ed25519";
             BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
           };
           encryption.mode = "none";
@@ -170,12 +173,8 @@
 
     xserver = {
       enable = true;
-      desktopManager = {
-        cinnamon.enable = true;
-      };
-      displayManager.lightdm = {
-        enable = true;
-      };
+      desktopManager.cinnamon.enable = true;
+      displayManager.lightdm.enable = true;
     };
   };
 
@@ -204,21 +203,7 @@
 
   networking.firewall.enable = false; # remove this sometime? please uwu?
 
-  #services.xserver.desktopManager.lxqt.enable = true;
-  #services.xserver.desktopManager.cinnamon.enable = true;
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver = {
-  #  enable = true;
-  #  displayManager.gdm.enable = true;
-  #  desktopManager.gnome.enable = true;
-  #  #desktopManager.cinnamon.enable = true;
-  #};
-
   services.displayManager.defaultSession = "cinnamon";
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.cinnamon.enable = true;
-
-  #services.cinnamon.apps.enable = true;
 
   users = {
     users.reolink = {
@@ -228,13 +213,10 @@
       home = "/mnt/raid/reolink";
       shell = pkgs.bashInteractive;
     };
-    # normal users are part of "user" group by default
     groups.reolink = {};
+
     users.rutrum.extraGroups = ["jellyfin"];
   };
-
-  # Enable automatic login for the user.
-  #services.getty.autologinUser = "rutrum";
 
   environment.systemPackages = with pkgs; [
     ethtool # for tailscale optimization

@@ -16,8 +16,6 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
 
-  # TODO: consider removing
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
@@ -30,6 +28,14 @@
     trusted-public-keys = [
       "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="
     ];
+  };
+
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
   };
 
   services = {
@@ -49,7 +55,7 @@
   users.users.rutrum = {
     isNormalUser = true;
     description = "rutrum";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "podman"];
   };
 
   environment.systemPackages = with pkgs; [
@@ -57,6 +63,7 @@
     neovim
     git
     home-manager
+    isd
   ];
 
   # Locale settings

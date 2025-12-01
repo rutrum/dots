@@ -20,10 +20,6 @@
       openFirewall = true;
       package = pkgs.samba4Full;
 
-      # You will still need to set up the user accounts to begin with:
-      # $ sudo smbpasswd -a yourusername
-
-      # wait until 24.11
       settings = {
         global = {
           security = "user";
