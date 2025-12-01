@@ -2,9 +2,9 @@
   programs.git = {
     enable = true;
     # TODO: set these in config and reference
-    userEmail = "dave@rutrum.net";
-    userName = "rutrum";
-    extraConfig = {
+    settings = {
+      user.email = "dave@rutrum.net";
+      user.name = "rutrum";
       pull.rebase = false;
       init.defaultBranch = "main";
     };

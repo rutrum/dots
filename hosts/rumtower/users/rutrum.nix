@@ -31,7 +31,6 @@
     stable-packages = with pkgs; [
       # graphical applications
       thunderbird
-      protonmail-bridge-gui
       simple-scan
       nextcloud-client
 

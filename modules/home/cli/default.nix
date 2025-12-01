@@ -38,7 +38,7 @@
       enable = true;
     };
 
-    thefuck = {
+    pay-respects = {
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
@@ -99,7 +99,6 @@
     tree
     ueberzugpp # for yazi terminal image previews
     fd
-    du-dust
 
     # RIIR
     ripgrep
@@ -111,7 +110,7 @@
 
     # disks
     ncdu
-    du-dust
+    dust
 
     # data processing
     jq # traverse json
