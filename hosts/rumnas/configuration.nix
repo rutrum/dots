@@ -139,12 +139,35 @@
     #programs.ssh.forwardX11 = true;
 
     # backups?
-    borgbackup.repos.paperless = {
-      path = "/mnt/vault/backups/paperless";
-      authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
-      ];
+    borgbackup = {
+      repos.paperless = {
+        path = "/mnt/vault/backups/paperless";
+        authorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
+        ];
+      };
+      jobs = {
+        local-rumtower = {
+          paths = [
+            # https://docs.immich.app/administration/backup-and-restore/#filesystem
+            "/var/lib/immich/library"
+            "/var/lib/immich/upload"
+            "/var/lib/immich/profile"
+          ];
+          compression = "auto,lzma";
+          startAt = "daily";
+          user = "root";
+          doInit = false;
+          repo = "ssh://rutrum@rumtower/mnt/barracuda/backup/immich";
+          environment = { 
+            BORG_RSH = "ssh -i /home/rutrum/.ssh/id_ed25519"; 
+            BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
+          };
+          encryption.mode = "none";
+        };
+      };
     };
+
     xserver = {
       enable = true;
       desktopManager = {
