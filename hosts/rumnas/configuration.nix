@@ -152,10 +152,10 @@
         local-rumtower = {
           paths = [
             # https://docs.immich.app/administration/backup-and-restore/#filesystem
-            "/var/lib/immich/library"
-            "/var/lib/immich/upload"
-            "/var/lib/immich/profile"
-            "/var/lib/immich/backups" # postgres dumps
+            "/mnt/raid/immich/library"
+            "/mnt/raid/immich/upload"
+            "/mnt/raid/immich/profile"
+            "/mnt/raid/immich/backups" # postgres dumps
           ];
           compression = "auto,lzma";
           startAt = "daily";

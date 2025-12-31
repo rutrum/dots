@@ -6,6 +6,8 @@
     port = 2283;
     openFirewall = true;
     accelerationDevices = null;
+
+    mediaLocation = "/mnt/raid/immich";
   };
 
   users.users.immich.extraGroups = ["video" "render"];
