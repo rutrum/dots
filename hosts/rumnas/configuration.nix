@@ -16,6 +16,7 @@
 
     # containerized
     ./nocodb.nix
+    ./romm.nix
     ./freshrss.nix
     ./dashy.nix
     ./home-assistant.nix
