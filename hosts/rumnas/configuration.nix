@@ -156,6 +156,7 @@
             "/mnt/raid/immich/upload"
             "/mnt/raid/immich/profile"
             "/mnt/raid/immich/backups" # postgres dumps
+            "/mnt/raid/homes/rutrum/media/home_video"
           ];
           compression = "auto,lzma";
           startAt = "daily";

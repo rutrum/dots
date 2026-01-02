@@ -21,5 +21,6 @@
 
   home.packages = with pkgs; [
     mdadm # for raid
+    immich-cli
   ];
 }
