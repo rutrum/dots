@@ -16,6 +16,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # isolate a single process to use a vpn
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
     # colorscheme
     catppuccin.url = "github:catppuccin/nix/release-25.05";
 

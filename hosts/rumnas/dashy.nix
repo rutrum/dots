@@ -145,6 +145,12 @@
             icon = "hl-romm";
             url = "${rumnas}:8087";
           }
+          {
+            title = "qBittorrent";
+            description = "Torrent client";
+            icon = "hl-qbittorrent";
+            url = "${rumnas}:9009";
+          }
         ];
       }
       {
