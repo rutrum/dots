@@ -139,6 +139,12 @@
             icon = "hl-karakeep";
             url = "${rumnas}:8090";
           }
+          {
+            title = "RomM";
+            description = "Game manager";
+            icon = "hl-romm";
+            url = "${rumnas}:8087";
+          }
         ];
       }
       {

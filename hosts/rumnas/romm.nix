@@ -46,10 +46,13 @@ in {
         "romm-redis:/redis-data"
       ];
       environment = {
-        DB_HOST = "romm-db"; 
+        DB_HOST = "romm-db";
         DB_NAME = db-name;
         DB_USER = db-user;
         DB_PASSWD = db-pass;
+        HASHEOUS_API_ENABLED = "true";
+        LAUNCHBOX_API_ENABLED = "true";
+        ENABLE_SCHEDULED_UPDATE_LAUNCHBOX_METADATA = "true";
       };
       environmentFiles = [
         "${secrets."romm/env".path}"
@@ -63,12 +66,12 @@ in {
       volumes = ["romm-db:/var/lib/mysql"];
       autoStart = true;
       environment = {
-        MARIADB_ROOT_PASSWORD="password";
-        MARIADB_DATABASE="romm";
-        MARIADB_USER=db-user;
-        MARIADB_PASSWORD=db-pass;
+        MARIADB_ROOT_PASSWORD = "password";
+        MARIADB_DATABASE = "romm";
+        MARIADB_USER = db-user;
+        MARIADB_PASSWORD = db-pass;
       };
-      networks=["romm"];
+      networks = ["romm"];
     };
   };
 }
