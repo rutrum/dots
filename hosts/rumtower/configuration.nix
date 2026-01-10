@@ -140,7 +140,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   environment.systemPackages = with pkgs; [
-    beets
     gnome-tweaks
     gnomeExtensions.tactile
     adwaita-icon-theme

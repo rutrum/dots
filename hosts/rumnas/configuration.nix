@@ -219,6 +219,7 @@
   environment.systemPackages = with pkgs; [
     ethtool # for tailscale optimization
     jellyfin-ffmpeg
+    beets
   ];
 
   # This value determines the NixOS release from which the default
