@@ -53,6 +53,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   users.users.rutrum = {
+    uid = 1000;
     isNormalUser = true;
     description = "rutrum";
     extraGroups = ["networkmanager" "wheel" "docker" "podman"];

@@ -45,6 +45,7 @@
       upscayl # ai upscaler
       krita
       gimp3
+      inkscape
 
       # 3d printing
       orca-slicer

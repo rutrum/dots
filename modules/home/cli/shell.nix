@@ -26,7 +26,7 @@
       # print human readable sizes
       du = "du -h";
       df = "df -h";
-      ll = "ls -lhA";
+      ll = "ls -lhgA";
 
       # navigation
       cdf = "cd $(fzf)";

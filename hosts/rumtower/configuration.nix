@@ -145,7 +145,10 @@
     gnomeExtensions.tactile
     adwaita-icon-theme
     adwaita-fonts
+    cifs-utils # mount samba share
   ];
+
+  sops.secrets."smb_credentials".owner = "root";
 
   fileSystems = {
     #"/".device = "/dev/nvme0n1";
@@ -154,11 +157,17 @@
       fsType = "ext4";
     };
 
-    #"/mnt/nfs_dave" = {
-    #  device = "192.168.50.90:/dave";
-    #  fsType = "nfs";
-    #  options = [ "x-systemd.automount" "noauto" ];
-    #};
+    "/mnt/rumnas" = {
+      device = "//nas.home/homes";
+      fsType = "cifs";
+      options = let
+        uid = config.users.users.rutrum.uid;
+        gid = config.users.groups.users.gid;
+        creds_path = config.sops.secrets."smb_credentials".path;
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
+      in ["${automount_opts},uid=${toString uid},gid=${toString gid},credentials=${creds_path}" "nofail"];
+    };
   };
 
   # Allow unfree packages
