@@ -161,7 +161,8 @@
       device = "//nas.home/homes";
       fsType = "cifs";
       options = let
-        uid = config.users.users.rutrum.uid;
+        # uid = config.users.users.rutrum.uid;
+        uid = 1000;
         gid = config.users.groups.users.gid;
         creds_path = config.sops.secrets."smb_credentials".path;
         # this line prevents hanging on network split

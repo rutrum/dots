@@ -6,9 +6,9 @@
   ...
 }: {
   config = lib.mkIf config.me.gui.enable {
-    services.flatpak.packages = [
-      "flathub:app/app.zen_browser.zen//stable"
-    ];
+    #services.flatpak.packages = [
+    #  "flathub:app/app.zen_browser.zen//stable"
+    #];
 
     home.packages = [
       pkgs.mullvad-browser

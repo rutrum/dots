@@ -71,9 +71,9 @@
         archipelago # utilities for archipelago servers
       ];
 
-      services.flatpak.packages = [
-        "flathub:app/info.beyondallreason.bar//stable"
-      ];
+      #services.flatpak.packages = [
+      #  "flathub:app/info.beyondallreason.bar//stable"
+      #];
     })
   ]);
 }

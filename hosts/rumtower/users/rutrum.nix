@@ -23,9 +23,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.flatpak.packages = [
-    "flathub-beta:app/org.openscad.OpenSCAD//beta"
-  ];
+  #services.flatpak.packages = [
+  #  "flathub-beta:app/org.openscad.OpenSCAD//beta"
+  #];
 
   home.packages = let
     stable-packages = with pkgs; [

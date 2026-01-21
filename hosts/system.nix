@@ -53,7 +53,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   users.users.rutrum = {
-    uid = 1000;
+    # uid = 1000; break flatpak and my internet bandwidth
     isNormalUser = true;
     description = "rutrum";
     extraGroups = ["networkmanager" "wheel" "docker" "podman"];

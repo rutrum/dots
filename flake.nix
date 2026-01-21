@@ -85,7 +85,7 @@
     nixosConfigurations."rumtower" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        inputs.flatpaks.nixosModules.default
+        #inputs.flatpaks.nixosModules.default
         (import ./hosts/rumtower/configuration.nix)
       ];
       specialArgs = {inherit inputs;};
