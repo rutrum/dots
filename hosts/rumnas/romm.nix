@@ -50,6 +50,9 @@ in {
         DB_NAME = db-name;
         DB_USER = db-user;
         DB_PASSWD = db-pass;
+        HASHEOUS_API_ENABLED = "true";
+        LAUNCHBOX_API_ENABLED = "true";
+        ENABLE_SCHEDULED_UPDATE_LAUNCHBOX_METADATA = "true";
       };
       environmentFiles = [
         "${secrets."romm/env".path}"

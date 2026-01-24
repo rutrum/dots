@@ -139,6 +139,18 @@
             icon = "hl-karakeep";
             url = "${rumnas}:8090";
           }
+          {
+            title = "RomM";
+            description = "Game manager";
+            icon = "hl-romm";
+            url = "${rumnas}:8087";
+          }
+          {
+            title = "qBittorrent";
+            description = "Torrent client";
+            icon = "hl-qbittorrent";
+            url = "${rumnas}:9009";
+          }
         ];
       }
       {

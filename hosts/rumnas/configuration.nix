@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    inputs.vpn-confinement.nixosModules.default
     ../system.nix
     ./hardware-configuration.nix
     ./fileserver.nix
@@ -13,6 +14,7 @@
     ./openrgb.nix
     ./immich.nix
     ./adguardhome.nix
+    ./qbittorrent.nix
 
     # containerized
     ./nocodb.nix
@@ -32,12 +34,6 @@
   networking.hostName = "rumnas";
 
   services = {
-    qbittorrent = {
-      enable = true;
-      openFirewall = true;
-      webuiPort = 9009;
-    };
-
     open-webui = {
       enable = true;
       package = pkgs.open-webui;
@@ -223,6 +219,7 @@
   environment.systemPackages = with pkgs; [
     ethtool # for tailscale optimization
     jellyfin-ffmpeg
+    beets
   ];
 
   # This value determines the NixOS release from which the default
