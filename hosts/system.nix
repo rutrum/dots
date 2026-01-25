@@ -9,6 +9,7 @@
 
   imports = [
     inputs.sops-nix.nixosModules.sops
+    inputs.flatpaks.nixosModules.default
     ../modules/nixos/syncthing.nix
   ];
 

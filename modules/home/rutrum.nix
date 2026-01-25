@@ -10,7 +10,7 @@
   # or WSL) which means there shouln't be any GUI applications
 
   imports = [
-    #inputs.flatpaks.homeModules.default
+    inputs.flatpaks.homeModules.default
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
 
@@ -30,14 +30,13 @@
 
     services = {
       # flatpak stuff: https://github.com/GermanBread/declarative-flatpak/blob/dev/docs/definition.md
-
-      #flatpak = {
-      #  enable = true;
-      #  remotes = {
-      #    "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-      #    "flathub-beta" = "https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo";
-      #  };
-      #};
+      flatpak = {
+        enable = true;
+        remotes = {
+          "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+          "flathub-beta" = "https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo";
+        };
+      };
     };
 
     catppuccin.flavor = "mocha";

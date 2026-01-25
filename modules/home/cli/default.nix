@@ -70,6 +70,14 @@
       enableFishIntegration = true;
     };
 
+    claude-code = {
+      enable = true;
+    };
+
+    opencode = {
+      enable = true;
+    };
+
     yazi = {
       enable = true;
 
