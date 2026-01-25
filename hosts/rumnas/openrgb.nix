@@ -21,8 +21,8 @@
   systemd.services.set-hardware-rgb = {
     enable = true;
     script = ''
-      # ${pkgs.openrgb}/bin/openrgb --mode static --color FFFFFF
-      ${pkgs.openrgb}/bin/openrgb --config /home/rutrum/.config/OpenRGB/ -p christmas
+      ${pkgs.openrgb}/bin/openrgb --mode static --color FFFFFF
+      # ${pkgs.openrgb}/bin/openrgb --config /home/rutrum/.config/OpenRGB/ -p christmas
     '';
     serviceConfig = {
       Type = "oneshot";
