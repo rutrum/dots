@@ -1,15 +1,13 @@
-{
-  flake,
-  inputs,
-}: {
+{...}: {
   # Create a systemd service that creates a podman network if it doesn't exist.
-  mkPodmanNetwork = name: {
+  # Usage: systemd.services = inputs.self.lib.mkPodmanNetwork config "networkname";
+  mkPodmanNetwork = config: name: {
     "init-${name}-network" = {
       description = "Create podman network for ${name} containers.";
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
 
-      serviceConfig.type = "oneshot";
+      serviceConfig.Type = "oneshot";
       script = let
         podmancli = "${config.virtualisation.podman.package}/bin/podman";
       in ''

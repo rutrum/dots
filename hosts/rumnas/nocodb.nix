@@ -1,30 +1,10 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
-  # create network in systemd
-
-  # TODO: test if this works and then integrate
-  # systemd.services = lib.mkPodmanNetwork "nocodb";
-
-  systemd.services.init-nocodb-network = {
-    description = "Create network for nocodb containers.";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-
-    serviceConfig.type = "oneshot";
-    script = let
-      dockercli = "${config.virtualisation.podman.package}/bin/podman";
-    in ''
-      check=$(${dockercli} network ls | grep "nocodb" || true)
-      if [ -z "$check" ]; then
-        ${dockercli} network create nocodb
-      else
-        echo "Network 'nocodb' already exists."
-      fi
-    '';
-  };
+  systemd.services = inputs.self.lib.mkPodmanNetwork config "nocodb";
 
   # the containers
   virtualisation.oci-containers.containers = {

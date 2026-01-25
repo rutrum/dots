@@ -10,10 +10,10 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.flatpaks.nixosModules.default
-    ../modules/nixos/syncthing.nix
+    ./syncthing.nix
   ];
 
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
 

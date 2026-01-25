@@ -1,26 +1,10 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
-  # create network in systemd
-  systemd.services.init-firefly-network = {
-    description = "Create network for firefly containers.";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-
-    serviceConfig.type = "oneshot";
-    script = let
-      podmancli = "${config.virtualisation.podman.package}/bin/podman";
-    in ''
-      check=$(${podmancli} network ls | grep "firefly" || true)
-      if [ -z "$check" ]; then
-        ${podmancli} network create firefly
-      else
-        echo "Network 'firefly' already exists."
-      fi
-    '';
-  };
+  systemd.services = inputs.self.lib.mkPodmanNetwork config "firefly";
 
   virtualisation.oci-containers.containers = {
     firefly = {

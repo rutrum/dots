@@ -1,26 +1,10 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
-  # create network in systemd
-  systemd.services.init-paperless-network = {
-    description = "Create network for paperless containers.";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-
-    serviceConfig.type = "oneshot";
-    script = let
-      podmancli = "${config.virtualisation.podman.package}/bin/podman";
-    in ''
-      check=$(${podmancli} network ls | grep "paperless" || true)
-      if [ -z "$check" ]; then
-        ${podmancli} network create paperless
-      else
-        echo "Network 'paperless' already exists."
-      fi
-    '';
-  };
+  systemd.services = inputs.self.lib.mkPodmanNetwork config "paperless";
 
   # the containers
   virtualisation.oci-containers.containers = {

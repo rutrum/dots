@@ -1,25 +1,11 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
-  systemd.services.init-home-assistant-network = {
-    description = "Create network for home-assistant containers.";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
+  systemd.services = inputs.self.lib.mkPodmanNetwork config "home-assistant";
 
-    serviceConfig.type = "oneshot";
-    script = let
-      dockercli = "${config.virtualisation.podman.package}/bin/podman";
-    in ''
-      check=$(${dockercli} network ls | grep "home-assistant" || true)
-      if [ -z "$check" ]; then
-        ${dockercli} network create home-assistant
-      else
-        echo "Network 'home-assistant' already exists."
-      fi
-    '';
-  };
   virtualisation.oci-containers.containers = {
     home-assistant = {
       image = "ghcr.io/home-assistant/home-assistant:2025.5";

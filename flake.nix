@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # for blueprint: I think I must rename this to just nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
 
     blueprint = {
@@ -37,100 +36,14 @@
     nixvim.url = "github:nix-community/nixvim/nixos-25.11";
   };
 
-  # outputs = inputs: inputs.blueprint { inherit inputs; };
+  outputs = inputs:
+    inputs.blueprint {
+      inherit inputs;
 
-  outputs = {
-    home-manager,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true; # remove this
-      overlays = [];
-    };
-  in {
-    devShells.${system}.default = pkgs.mkShell {
-      name = "dots";
-      buildInputs = with pkgs; [
-        sops
-        alejandra
+      systems = ["x86_64-linux" "aarch64-linux"];
 
-        # TODO: use nix https://github.com/cachix/git-hooks.nix
-        pre-commit
-      ];
+      nixpkgs.config = {
+        allowUnfree = true;
+      };
     };
-    nixosConfigurations."rumprism" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (import ./hosts/rumprism/configuration.nix)
-      ];
-      specialArgs = {inherit inputs;};
-    };
-
-    nixosConfigurations."saibaman" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        (import ./hosts/saibaman/configuration.nix)
-      ];
-      specialArgs = {inherit inputs;};
-    };
-
-    nixosConfigurations."rumpi" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        (import ./hosts/rumpi/configuration.nix)
-      ];
-      specialArgs = {inherit inputs;};
-    };
-
-    nixosConfigurations."rumtower" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (import ./hosts/rumtower/configuration.nix)
-      ];
-      specialArgs = {inherit inputs;};
-    };
-
-    nixosConfigurations."rumnas" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (import ./hosts/rumnas/configuration.nix)
-      ];
-      specialArgs = {inherit inputs;};
-    };
-
-    homeConfigurations."rutrum" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [
-        ./modules/home/rutrum.nix
-      ];
-      extraSpecialArgs = {inherit inputs;};
-    };
-
-    homeConfigurations."rutrum@rumnas" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [
-        ./hosts/rumnas/users/rutrum.nix
-      ];
-      extraSpecialArgs = {inherit inputs;};
-    };
-
-    homeConfigurations."rutrum@rumtower" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [
-        ./hosts/rumtower/users/rutrum.nix
-      ];
-      extraSpecialArgs = {inherit inputs;};
-    };
-
-    homeConfigurations."rutrum@rumprism" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = [
-        ./hosts/rumprism/users/rutrum.nix
-      ];
-      extraSpecialArgs = {inherit inputs;};
-    };
-  };
 }

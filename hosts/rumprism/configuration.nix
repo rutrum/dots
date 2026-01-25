@@ -1,12 +1,13 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
-    ../system.nix
+    inputs.self.nixosModules.system
     ./hardware-configuration.nix
-    ../../modules/nixos/printing.nix
+    inputs.self.nixosModules.printing
   ];
 
   networking.hostName = "rumprism";

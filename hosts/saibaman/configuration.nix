@@ -4,13 +4,14 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     ./borg.nix
 
-    ../system.nix
+    inputs.self.nixosModules.system
   ];
 
   services.openssh = {

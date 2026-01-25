@@ -4,9 +4,8 @@
   inputs,
   ...
 }: {
-  _module.args.inputs = inputs; # this is huge
   imports = [
-    ../../../modules/home/rutrum.nix
+    inputs.self.homeModules.rutrum
   ];
 
   me = {

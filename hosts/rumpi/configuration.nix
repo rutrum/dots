@@ -5,10 +5,11 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
-    ./system.nix
+    inputs.self.nixosModules.system
     ./hardware-configuration.nix
     ./octoprint.nix
   ];

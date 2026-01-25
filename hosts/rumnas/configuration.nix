@@ -7,7 +7,7 @@
 }: {
   imports = [
     inputs.vpn-confinement.nixosModules.default
-    ../system.nix
+    inputs.self.nixosModules.system
     ./hardware-configuration.nix
     ./fileserver.nix
     ./cache.nix
@@ -23,10 +23,10 @@
     ./dashy.nix
     ./home-assistant.nix
 
-    ../../modules/nixos/gaming.nix
-    ../../modules/nixos/controller.nix
-    ../../modules/nixos/nvidia.nix
-    ../../modules/nixos/local-ai.nix
+    inputs.self.nixosModules.gaming
+    inputs.self.nixosModules.controller
+    inputs.self.nixosModules.nvidia
+    inputs.self.nixosModules.local-ai
 
     # ./frigate.nix
   ];

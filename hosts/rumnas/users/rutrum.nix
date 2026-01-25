@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ../../../modules/home/rutrum.nix
+    inputs.self.homeModules.rutrum
   ];
 
   me = {
