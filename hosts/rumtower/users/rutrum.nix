@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  perSystem,
   ...
 }: {
   imports = [
@@ -19,8 +20,6 @@
       "application/pdf" = "zathura.desktop";
     };
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   #services.flatpak.packages = [
   #  "flathub-beta:app/org.openscad.OpenSCAD//beta"
@@ -67,7 +66,7 @@
       postgresql_jdbc
       mysql_jdbc
     ];
-    unstable-packages = with inputs.nixpkgs-unstable.legacyPackages.x86_64-linux; [
+    unstable-packages = with perSystem.nixpkgs-unstable; [
       qbittorrent
     ];
   in

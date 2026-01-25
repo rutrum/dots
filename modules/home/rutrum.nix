@@ -57,7 +57,12 @@
 
     programs = {
       home-manager.enable = true;
-      ssh.enable = true;
+
+      ssh = {
+        enable = true;
+        # Opt out of deprecated default config behavior
+        enableDefaultConfig = false;
+      };
 
       nh = {
         enable = true;

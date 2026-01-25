@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  perSystem,
   ...
 }: {
   config = lib.mkIf config.me.gui.enable {
@@ -20,7 +21,7 @@
 
       zed-editor = {
         enable = true;
-        package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.zed-editor;
+        package = perSystem.nixpkgs-unstable.zed-editor;
         extensions = ["nix" "justfile" "toml" "catppuccin" "typst" "html"];
 
         #userSettings = {
