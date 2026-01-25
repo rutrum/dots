@@ -19,9 +19,7 @@
       };
       dependsOn = ["nocodb-db"];
       autoStart = true;
-      extraOptions = [
-        "--network=nocodb"
-      ];
+      networks = ["nocodb"];
     };
     nocodb-db = {
       image = "library/postgres:16"; # official docker images use "library/"
@@ -33,9 +31,7 @@
         POSTGRES_USER = "postgres";
         POSTGRES_PASSWORD = "password";
       };
-      extraOptions = [
-        "--network=nocodb"
-      ];
+      networks = ["nocodb"];
     };
   };
 }

@@ -111,6 +111,7 @@
     # RIIR
     ripgrep
     bat
+    typos # source code spell checker
 
     # encryption
     age

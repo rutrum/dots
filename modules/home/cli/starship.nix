@@ -14,11 +14,17 @@
       add_newline = false;
 
       username = {
+        # only show if different from logged-in user or on ssh
+        show_always = false;
         format = "[$user]($style)";
+        style_user = "bold yellow";
       };
 
       hostname = {
-        format = "@[$hostname]($style)";
+        # show on ssh connections
+        ssh_only = true;
+        format = "[@$hostname]($style) ";
+        style = "bold yellow";
       };
 
       nix_shell = {

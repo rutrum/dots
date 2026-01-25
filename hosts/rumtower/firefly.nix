@@ -20,9 +20,7 @@
         # TODO: replace with sops
         /home/rutrum/secrets/firefly.env
       ];
-      extraOptions = [
-        "--network=firefly"
-      ];
+      networks = ["firefly"];
     };
     firefly-db = {
       image = "library/mariadb:11.4.7"; # official docker images use "library/"
@@ -35,9 +33,7 @@
         MYSQL_PASSWORD = "secret_firefly_password";
         MYSQL_DATABASE = "firefly";
       };
-      extraOptions = [
-        "--network=firefly"
-      ];
+      networks = ["firefly"];
     };
   };
 }

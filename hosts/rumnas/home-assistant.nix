@@ -24,8 +24,8 @@
         #"--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if00-port0"
         #"--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if01-port0"
         "--privileged" # try this instead
-        "--network=home-assistant"
       ];
+      networks = ["home-assistant"];
     };
     zwave-js = {
       image = "kpine/zwave-js-server:1.40.2-14.3.6-35e28517";
@@ -41,8 +41,8 @@
         # HubZ -> /dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0
         #"--device=/home/rutrum/HubZ:/dev/zwave"
         "--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if00-port0:/dev/zwave"
-        "--network=home-assistant"
       ];
+      networks = ["home-assistant"];
     };
   };
 }

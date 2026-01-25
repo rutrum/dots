@@ -32,7 +32,6 @@
       cdf = "cd $(fzf)";
 
       # nix shortcuts
-      hms = "home-manager switch --flake ~/dots";
       snrs = "sudo nixos-rebuild switch --flake ~/dots";
       nd = "nix develop";
     };
@@ -90,9 +89,6 @@
           complete -F _just -o bashdefault -o default j
         '';
         profileExtra = ''
-          # add nix application desktop files
-          XDG_DATA_DIRS=$HOME/.nix-profile/share:"''${XDG_DATA_DIRS}"
-          PATH=/home/rutrum/.nix-profile/bin:$PATH
           VISUAL='nvim'
           EDITOR='nvim'
         '';

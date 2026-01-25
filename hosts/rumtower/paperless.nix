@@ -26,18 +26,14 @@
       dependsOn = ["paperless-redis"];
       autoStart = true;
       #user = "1000";
-      extraOptions = [
-        "--network=paperless"
-      ];
+      networks = ["paperless"];
     };
     paperless-redis = {
       image = "library/redis:latest"; # official docker images use "library/"
       volumes = ["redisdata:/data"];
       autoStart = true;
       #user = "1000";
-      extraOptions = [
-        "--network=paperless"
-      ];
+      networks = ["paperless"];
     };
   };
 }
