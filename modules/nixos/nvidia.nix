@@ -20,7 +20,5 @@
     nvidiaSettings = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = [pkgs.nvtopPackages.nvidia];
 }

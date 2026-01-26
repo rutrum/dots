@@ -63,8 +63,6 @@
   programs.niri.enable = true;
   programs.waybar.enable = true;
 
-  # displaylink drivers for wavlink doc
-  nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["modesetting"];
 
   services.logind.extraConfig = ''

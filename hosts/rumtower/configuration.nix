@@ -169,9 +169,6 @@
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   networking.firewall.enable = false;
   networking.nftables.enable = true;
 
