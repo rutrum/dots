@@ -134,8 +134,11 @@
             "/mnt/raid/immich/backups" # postgres dumps
             "/mnt/raid/homes/rutrum/media/home_video"
           ];
+          patterns = [
+            "- **/.direnv" # this needs tested to see if it works after creation
+          ];
           compression = "auto,lzma";
-          startAt = "daily";
+          startAt = "daily"; # if goal is to turn rumtower off at night, might have this run more often
           user = "root";
           doInit = false;
           repo = "ssh://rutrum@rumtower/mnt/barracuda/backup/immich";

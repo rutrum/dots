@@ -16,6 +16,9 @@
       "/home/rutrum/Zotero"
     ];
     #environment.BORG_RSH = "ssh -v";
+    patterns = [
+      "- **/.direnv" # this needs tested to see if it works after creation
+    ];
     compression = "auto,lzma";
     startAt = "daily";
     user = "rutrum";
