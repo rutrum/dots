@@ -1,10 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  # remove this on 25.11
-  #nixpkgs.config.permittedInsecurePackages = ["mbedtls-2.28.10"];
+{pkgs, ...}: {
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;

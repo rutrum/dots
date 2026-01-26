@@ -27,8 +27,6 @@
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
     inputs.self.nixosModules.local-ai
-
-    # ./frigate.nix
   ];
 
   networking.hostName = "rumnas";
@@ -112,25 +110,6 @@
         ETV_UI_PORT = "8409";
       };
     };
-
-    #sops.secrets = {
-    #  "freshrss/password".owner = "freshrss";
-    #};
-    #freshrss = {
-    #  enable = true;
-    #  passwordFile = config.sops.secrets."freshrss/password".path;
-    #  baseUrl = "http://192.168.50.3:9090";
-    #  virtualHost = "192.168.50.3:9090";
-    #  #webserver = "caddy";
-    #};
-    #caddy.virtualHosts = {
-    #  "http://192.168.50.3:9090" = {
-    #    serverAliases = [ "http://rumnas.lynx-chromatic.ts.net" ];
-    #    extraConfig = ''
-    #      reverse_proxy localhost:9090
-    #    '';
-    #  };
-    #};
 
     openssh.enable = true;
 
