@@ -4,9 +4,6 @@
   lib,
   ...
 }: let
-  rumnas = "http://rumnas.lynx-chromatic.ts.net";
-  rumnas_ip = "http://192.168.50.3"; # shouldn't be necessary
-  rumtower = "http://rumtower.lynx-chromatic.ts.net";
   rumpi_ip = "http://192.168.50.2";
 
   dashy_conf = pkgs.writers.writeYAML "conf.yml" {
@@ -29,19 +26,19 @@
             title = "AdGuard Home";
             description = "Local DNS and ad blocker";
             icon = "hl-adguard-home";
-            url = "${rumnas_ip}:3001"; # tailscale address doesn't work for this one?
+            url = "http://adguard.rum.internal";
           }
           {
             title = "Jellyfin";
             description = "Home media server";
             icon = "hl-jellyfin";
-            url = "${rumnas}:8096";
+            url = "http://jellyfin.rum.internal";
           }
           {
             title = "ErsatzTV";
             description = "Stream TV channels";
             icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";
-            url = "${rumnas}:8409";
+            url = "http://ersatztv.rum.internal";
           }
           {
             title = "Octoprint";
@@ -53,25 +50,25 @@
             title = "NocoDB";
             description = "No code database";
             icon = "https://raw.githubusercontent.com/nocodb/nocodb/refs/heads/develop/packages/nc-gui/assets/img/icons/64x64.png";
-            url = "${rumnas}:8081";
+            url = "http://nocodb.rum.internal";
           }
           {
             title = "Home Assistant";
             description = "Home automation";
             icon = "hl-home-assistant";
-            url = "${rumnas}:8082";
+            url = "http://hass.rum.internal";
           }
           {
             title = "Paperless";
             description = "Document organization";
             icon = "hl-paperless";
-            url = "${rumtower}:8000";
+            url = "http://paperless.rum.internal";
           }
           {
             title = "Firefly";
             description = "Personal finance tracker";
             icon = "hl-firefly";
-            url = "${rumtower}:8080";
+            url = "http://firefly.rum.internal";
           }
           {
             title = "Router";
@@ -83,73 +80,55 @@
             title = "Grafana";
             description = "Data visualization";
             icon = "hl-grafana";
-            url = "${rumnas}:3000";
+            url = "http://grafana.rum.internal";
           }
           {
             title = "Open WebUI";
             description = "LLM chat interface";
             icon = "hl-open-webui";
-            url = "${rumnas}:8080";
+            url = "http://openwebui.rum.internal";
           }
           {
             title = "Mealie";
             description = "Recipe manager";
             icon = "hl-mealie";
-            url = "${rumnas}:9000";
+            url = "http://mealie.rum.internal";
           }
           {
             title = "FreshRSS";
             description = "RSS feed aggregator";
             icon = "hl-freshrss";
-            url = "${rumnas}:8085";
+            url = "http://freshrss.rum.internal";
           }
           {
             title = "Calibre Web";
             description = "Book browser";
             icon = "hl-calibre-web";
-            url = "${rumtower}:8083";
+            url = "http://calibre-web.rum.internal";
           }
           {
             title = "ntfy";
             description = "Notifications";
             icon = "hl-ntfy";
-            url = "${rumnas}:8888";
+            url = "http://ntfy.rum.internal";
           }
           {
             title = "Immich";
             description = "Photo gallery";
             icon = "hl-immich";
-            url = "${rumnas}:2283";
-          }
-          {
-            title = "Local AI (rumtower)";
-            description = "AI model management";
-            icon = "sh-localai";
-            url = "${rumtower}:8089";
-          }
-          {
-            title = "Local AI (rumnas)";
-            description = "AI model management";
-            icon = "sh-localai";
-            url = "${rumnas}:8089";
-          }
-          {
-            title = "Karakeep";
-            description = "Bookmarks";
-            icon = "hl-karakeep";
-            url = "${rumnas}:8090";
+            url = "http://immich.rum.internal";
           }
           {
             title = "RomM";
             description = "Game manager";
             icon = "hl-romm";
-            url = "${rumnas}:8087";
+            url = "http://romm.rum.internal";
           }
           {
             title = "qBittorrent";
             description = "Torrent client";
             icon = "hl-qbittorrent";
-            url = "${rumnas}:9009";
+            url = "http://qbittorrent.rum.internal";
           }
         ];
       }
@@ -249,11 +228,18 @@
     ];
   };
 in {
+  config.services.caddyProxy.services.dashy.port = 8180;
+
+  # Make rum.home (bare domain) go to Dashy
+  config.services.caddy.virtualHosts."http://rum.internal".extraConfig = ''
+    reverse_proxy localhost:8180
+  '';
+
   config.virtualisation.oci-containers = {
     containers = {
       dashy = {
         image = "lissy93/dashy";
-        ports = ["80:8080"];
+        ports = ["8180:8080"];
         autoStart = true;
         volumes = [
           "${dashy_conf}:/app/user-data/conf.yml"

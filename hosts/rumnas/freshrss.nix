@@ -5,6 +5,8 @@
 }: let
   mount_dir = "/mnt/raid/services/freshrss";
 in {
+  services.caddyProxy.services.freshrss.port = 8085;
+
   virtualisation.oci-containers.containers = {
     freshrss = {
       image = "freshrss/freshrss:1.26.2";

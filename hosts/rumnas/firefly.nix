@@ -35,7 +35,7 @@ in {
     settings = {
       APP_ENV = "production";
       APP_KEY_FILE = secrets."firefly/app-key".path;
-      APP_URL = "http://rumnas:8084";
+      APP_URL = "http://firefly.rumnas.local";
 
       DB_CONNECTION = "pgsql";
       DB_HOST = "/run/postgresql";
@@ -55,17 +55,12 @@ in {
   };
 
   # Caddy reverse proxy to PHP-FPM sockets
-  services.caddy = {
-    enable = true;
-    virtualHosts.":8084".extraConfig = ''
-      root * ${config.services.firefly-iii.package}/public
-      php_fastcgi unix/${config.services.phpfpm.pools.firefly-iii.socket}
-      file_server
-    '';
-    virtualHosts.":8086".extraConfig = ''
-      root * ${config.services.firefly-iii-data-importer.package}/public
-      php_fastcgi unix/${config.services.phpfpm.pools.firefly-iii-data-importer.socket}
-      file_server
-    '';
+  services.caddyProxy.services.firefly = {
+    phpSocket = config.services.phpfpm.pools.firefly-iii.socket;
+    root = "${config.services.firefly-iii.package}/public";
+  };
+  services.caddyProxy.services.firefly-importer = {
+    phpSocket = config.services.phpfpm.pools.firefly-iii-data-importer.socket;
+    root = "${config.services.firefly-iii-data-importer.package}/public";
   };
 }

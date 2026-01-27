@@ -4,6 +4,8 @@
   inputs,
   ...
 }: {
+  services.caddyProxy.services.nocodb.port = 8081;
+
   systemd.services = inputs.self.lib.mkPodmanNetwork config "nocodb";
 
   # the containers

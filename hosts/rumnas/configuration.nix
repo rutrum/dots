@@ -27,6 +27,7 @@
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
     inputs.self.nixosModules.local-ai
+    inputs.self.nixosModules.caddy-proxy
   ];
 
   networking.hostName = "rumnas";
@@ -113,7 +114,29 @@
 
     openssh.enable = true;
 
-    # TODO: configure caddy for web services
+    caddyProxy = {
+      enable = true;
+      # domain defaults to "rum.home"
+      services = {
+        # rumnas services defined in their own files (immich.nix, etc.)
+        # services defined here don't have dedicated files on rumnas
+        openwebui.port = 8080;
+        grafana.port = 3000;
+        mealie.port = 9000;
+        ntfy.port = 8888;
+        jellyfin.port = 8096;
+        ersatztv.port = 8409;
+        # rumtower services (proxied remotely)
+        paperless = { port = 8000; host = "rumtower"; };
+        calibre = { port = 8081; host = "rumtower"; };
+        calibre-web = { port = 8083; host = "rumtower"; };
+      };
+    };
+
+    # Make rum.internal (bare domain) go to Dashy
+    caddy.virtualHosts."http://rum.internal".extraConfig = ''
+      reverse_proxy localhost:8180
+    '';
 
     # TODO: create borg user with read-only everywhere permissions
     borgbackup = {

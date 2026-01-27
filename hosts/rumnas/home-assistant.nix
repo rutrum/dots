@@ -4,6 +4,8 @@
   inputs,
   ...
 }: {
+  services.caddyProxy.services.hass.port = 8082;
+
   systemd.services = inputs.self.lib.mkPodmanNetwork config "home-assistant";
 
   virtualisation.oci-containers.containers = {

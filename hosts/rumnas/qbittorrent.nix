@@ -1,8 +1,9 @@
 { pkgs, config, ... }:
-let 
+let
   vpnNamespace = "wg";
   webuiPort = 9009;
 in {
+  services.caddyProxy.services.qbittorrent.port = webuiPort;
   sops.secrets.wireguard_config.owner = "root";
 
   vpnNamespaces.${vpnNamespace} = {

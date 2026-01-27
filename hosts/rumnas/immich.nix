@@ -1,4 +1,7 @@
 {...}: {
+  services.caddyProxy.services.immich.port = 2283;
+  services.caddyProxy.services.kiosk.port = 9019;
+
   services.immich = {
     enable = true;
 

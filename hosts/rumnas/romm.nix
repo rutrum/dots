@@ -9,6 +9,8 @@
   db-pass = "12hbefjk3df2jkl3kdf";
   secrets = config.sops.secrets;
 in {
+  services.caddyProxy.services.romm.port = 8087;
+
   sops.secrets = {
     "romm/env".owner = "root";
   };
