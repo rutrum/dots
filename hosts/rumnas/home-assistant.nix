@@ -3,7 +3,15 @@
   config,
   inputs,
   ...
-}: {
+}: let
+  httpConfig = pkgs.writeText "http.yaml" ''
+    http:
+      use_x_forwarded_for: true
+      trusted_proxies:
+        - 127.0.0.1
+        - 10.89.0.0/16
+  '';
+in {
   services.caddyProxy.services.hass.port = 8082;
 
   systemd.services = inputs.self.lib.mkPodmanNetwork config "home-assistant";
@@ -15,6 +23,7 @@
       volumes = [
         "/root/volumes/home-assistant/config:/config"
         "/etc/localtime:/etc/localtime:ro"
+        "${httpConfig}:/config/packages/http.yaml:ro"
       ];
       # doens't feel necessary when /localtime is mapped
       #environment = {
