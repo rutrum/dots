@@ -1,4 +1,6 @@
 {perSystem, ...}: {
+  networking.firewall.allowedTCPPorts = [8000];
+
   services.paperless = {
     enable = true;
     package = perSystem.nixpkgs-unstable.paperless-ngx;
