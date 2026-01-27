@@ -65,11 +65,11 @@
 
   services.xserver.videoDrivers = ["modesetting"];
 
-  services.logind.extraConfig = ''
-    IdleAction=hybrid-sleep
-    IdleActionSec=30min
-    HandlePowerKey=ignore
-  '';
+  services.logind.settings.Login = {
+    IdleAction ="hybrid-sleep";
+    IdleActionSec="30min";
+    HandlePowerKey="ignore";
+  };
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
