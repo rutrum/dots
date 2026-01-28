@@ -3,6 +3,17 @@
   pkgs,
   ...
 }: {
+  # AdGuard Home exporter (no native NixOS module, so containerized)
+  virtualisation.oci-containers.containers.adguard-exporter = {
+    image = "ghcr.io/henrywhitaker3/adguard-exporter:latest";
+    ports = ["9618:9618"];
+    environment = {
+      ADGUARD_SERVERS = "http://localhost:3001";
+      INTERVAL = "30s";
+    };
+    extraOptions = ["--network=host"];
+    autoStart = true;
+  };
   services.prometheus = {
     enable = true;
     port = 9090;
@@ -32,6 +43,21 @@
         port = 9835;
         openFirewall = true;
       };
+
+      blackbox = {
+        enable = true;
+        port = 9115;
+        openFirewall = true;
+        configFile = pkgs.writeText "blackbox.yml" ''
+          modules:
+            icmp:
+              prober: icmp
+              timeout: 5s
+            http_2xx:
+              prober: http
+              timeout: 5s
+        '';
+      };
     };
 
     scrapeConfigs = [
@@ -60,6 +86,46 @@
         static_configs = [
           { targets = ["localhost:9835"]; labels = { host = "rumnas"; }; }
           { targets = ["rumtower:9835"]; labels = { host = "rumtower"; }; }
+        ];
+      }
+      # Blackbox ICMP ping monitoring
+      {
+        job_name = "blackbox-icmp";
+        metrics_path = "/probe";
+        params = { module = ["icmp"]; };
+        static_configs = [
+          { targets = ["192.168.50.1" "1.1.1.1" "8.8.8.8"]; }
+        ];
+        relabel_configs = [
+          { source_labels = ["__address__"]; target_label = "__param_target"; }
+          { source_labels = ["__param_target"]; target_label = "instance"; }
+          { target_label = "__address__"; replacement = "localhost:9115"; }
+        ];
+      }
+      # Blackbox HTTP service health checks
+      {
+        job_name = "blackbox-http";
+        metrics_path = "/probe";
+        params = { module = ["http_2xx"]; };
+        static_configs = [
+          { targets = [
+              "http://localhost:8096"   # Jellyfin
+              "http://localhost:2283"   # Immich
+              "http://localhost:8082"   # Home Assistant
+            ];
+          }
+        ];
+        relabel_configs = [
+          { source_labels = ["__address__"]; target_label = "__param_target"; }
+          { source_labels = ["__param_target"]; target_label = "instance"; }
+          { target_label = "__address__"; replacement = "localhost:9115"; }
+        ];
+      }
+      # AdGuard Home DNS statistics
+      {
+        job_name = "adguard";
+        static_configs = [
+          { targets = ["localhost:9618"]; }
         ];
       }
     ];
