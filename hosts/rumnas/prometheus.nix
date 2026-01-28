@@ -31,6 +31,106 @@
     port = 9090;
     retentionTime = "30d";
 
+    # Alertmanager configuration
+    alertmanager = {
+      enable = true;
+      port = 9093;
+      configuration = {
+        global = {
+          resolve_timeout = "5m";
+        };
+        route = {
+          receiver = "ntfy";
+          group_by = ["alertname" "host"];
+          group_wait = "30s";
+          group_interval = "5m";
+          repeat_interval = "4h";
+        };
+        receivers = [
+          {
+            name = "ntfy";
+            webhook_configs = [
+              {
+                url = "http://localhost:8888/alertmanager";
+                send_resolved = true;
+              }
+            ];
+          }
+        ];
+      };
+    };
+
+    alertmanagers = [
+      {
+        static_configs = [
+          { targets = ["localhost:9093"]; }
+        ];
+      }
+    ];
+
+    # Alert rules
+    rules = [
+      (builtins.toJSON {
+        groups = [
+          {
+            name = "hardware";
+            rules = [
+              {
+                alert = "HostDown";
+                expr = "up == 0";
+                for = "2m";
+                labels = { severity = "critical"; };
+                annotations = {
+                  summary = "Host {{ $labels.host }} is down";
+                  description = "{{ $labels.job }} on {{ $labels.instance }} has been down for more than 2 minutes.";
+                };
+              }
+              {
+                alert = "DiskSpaceLow";
+                expr = "(1 - node_filesystem_avail_bytes{fstype!~\"tmpfs|overlay\"} / node_filesystem_size_bytes{fstype!~\"tmpfs|overlay\"}) > 0.85";
+                for = "5m";
+                labels = { severity = "warning"; };
+                annotations = {
+                  summary = "Disk space low on {{ $labels.host }}";
+                  description = "Filesystem {{ $labels.mountpoint }} on {{ $labels.host }} is over 85% full.";
+                };
+              }
+              {
+                alert = "DiskHealthBad";
+                expr = "smartctl_device_smart_healthy != 1";
+                for = "1m";
+                labels = { severity = "critical"; };
+                annotations = {
+                  summary = "SMART health check failed";
+                  description = "Disk {{ $labels.device }} on {{ $labels.host }} is reporting unhealthy SMART status.";
+                };
+              }
+              {
+                alert = "HighMemoryUsage";
+                expr = "(1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 0.9";
+                for = "5m";
+                labels = { severity = "warning"; };
+                annotations = {
+                  summary = "High memory usage on {{ $labels.host }}";
+                  description = "Memory usage on {{ $labels.host }} is above 90%.";
+                };
+              }
+              {
+                alert = "ServiceDown";
+                expr = "probe_success == 0";
+                for = "2m";
+                labels = { severity = "critical"; };
+                annotations = {
+                  summary = "Service {{ $labels.instance }} is down";
+                  description = "HTTP probe to {{ $labels.instance }} has been failing for more than 2 minutes.";
+                };
+              }
+            ];
+          }
+        ];
+      })
+    ];
+
     exporters = {
       node = {
         enable = true;

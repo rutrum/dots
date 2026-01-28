@@ -89,6 +89,12 @@
             url = "http://prometheus.rum.internal";
           }
           {
+            title = "Alertmanager";
+            description = "Alert routing";
+            icon = "hl-prometheus";
+            url = "http://alertmanager.rum.internal";
+          }
+          {
             title = "Open WebUI";
             description = "LLM chat interface";
             icon = "hl-open-webui";

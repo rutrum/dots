@@ -128,6 +128,7 @@
         openwebui.port = 8080;
         grafana.port = 3000;
         prometheus.port = 9090;
+        alertmanager.port = 9093;
         mealie.port = 9000;
         ntfy.port = 8888;
         jellyfin.port = 8096;
