@@ -23,6 +23,9 @@
     ./dashy.nix
     ./home-assistant.nix
 
+    # monitoring
+    ./prometheus.nix
+
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia

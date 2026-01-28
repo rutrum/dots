@@ -96,30 +96,14 @@
       listen.ip = "0.0.0.0";
     };
 
-    prometheus = {
+    # Prometheus server moved to rumnas; keep only node exporter here
+    prometheus.exporters.node = {
       enable = true;
-
-      exporters = {
-        node = {
-          enable = true;
-          port = 9000;
-          openFirewall = true;
-          enabledCollectors = [
-            "logind"
-            "systemd"
-          ];
-        };
-      };
-
-      scrapeConfigs = [
-        {
-          job_name = "node";
-          static_configs = [
-            {
-              targets = ["localhost:9000"];
-            }
-          ];
-        }
+      port = 9100;
+      openFirewall = true;
+      enabledCollectors = [
+        "logind"
+        "systemd"
       ];
     };
   };
