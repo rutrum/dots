@@ -125,6 +125,7 @@
         # services defined here don't have dedicated files on rumnas
         openwebui.port = 8080;
         grafana.port = 3000;
+        prometheus.port = 9090;
         mealie.port = 9000;
         ntfy.port = 8888;
         jellyfin.port = 8096;

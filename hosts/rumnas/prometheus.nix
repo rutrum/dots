@@ -3,15 +3,27 @@
   pkgs,
   ...
 }: {
+  # Sops secrets for AdGuard exporter
+  sops.secrets."adguard/user" = {};
+  sops.secrets."adguard/pass" = {};
+
+  # Generate environment file for the container from sops secrets
+  sops.templates."adguard-exporter.env".content = ''
+    ADGUARD_SERVERS=http://host.containers.internal:3001
+    ADGUARD_USERNAMES=${config.sops.placeholder."adguard/user"}
+    ADGUARD_PASSWORDS=${config.sops.placeholder."adguard/pass"}
+    INTERVAL=30s
+  '';
+
   # AdGuard Home exporter (no native NixOS module, so containerized)
+  # Uses host.containers.internal to reach AdGuard on the host
   virtualisation.oci-containers.containers.adguard-exporter = {
     image = "ghcr.io/henrywhitaker3/adguard-exporter:latest";
     ports = ["9618:9618"];
-    environment = {
-      ADGUARD_SERVERS = "http://localhost:3001";
-      INTERVAL = "30s";
-    };
-    extraOptions = ["--network=host"];
+    environmentFiles = [
+      config.sops.templates."adguard-exporter.env".path
+    ];
+    extraOptions = ["--add-host=host.containers.internal:host-gateway"];
     autoStart = true;
   };
   services.prometheus = {

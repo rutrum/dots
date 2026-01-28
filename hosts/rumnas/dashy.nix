@@ -83,6 +83,12 @@
             url = "http://grafana.rum.internal";
           }
           {
+            title = "Prometheus";
+            description = "Metrics database";
+            icon = "hl-prometheus";
+            url = "http://prometheus.rum.internal";
+          }
+          {
             title = "Open WebUI";
             description = "LLM chat interface";
             icon = "hl-open-webui";
