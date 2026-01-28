@@ -25,6 +25,7 @@
     inputs.self.nixosModules.qmk
     inputs.self.nixosModules.printing
     inputs.self.nixosModules.local-ai
+    inputs.self.nixosModules.alloy
   ];
 
   networking.hostName = "rumtower";

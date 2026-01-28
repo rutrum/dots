@@ -35,4 +35,10 @@
       openFirewall = true;
     };
   };
+
+  # Ship logs to Loki on rumnas
+  services.rumAlloy = {
+    enable = true;
+    lokiUrl = "http://rumnas:3100";
+  };
 }

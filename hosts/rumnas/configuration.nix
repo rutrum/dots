@@ -25,12 +25,14 @@
 
     # monitoring
     ./prometheus.nix
+    ./loki.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
     inputs.self.nixosModules.local-ai
     inputs.self.nixosModules.caddy-proxy
+    inputs.self.nixosModules.alloy
   ];
 
   networking.hostName = "rumnas";

@@ -121,9 +121,16 @@
         params = { module = ["http_2xx"]; };
         static_configs = [
           { targets = [
-              "http://localhost:8096"   # Jellyfin
-              "http://localhost:2283"   # Immich
-              "http://localhost:8082"   # Home Assistant
+              "http://jellyfin.rum.internal"
+              "http://immich.rum.internal"
+              "http://hass.rum.internal"
+              "http://grafana.rum.internal"
+              "http://prometheus.rum.internal"
+              "http://adguard.rum.internal"
+              "http://mealie.rum.internal"
+              "http://freshrss.rum.internal"
+              "http://nocodb.rum.internal"
+              "http://openwebui.rum.internal"
             ];
           }
         ];
