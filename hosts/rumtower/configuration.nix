@@ -15,6 +15,9 @@
     ./paperless.nix
     ./firefly.nix
 
+    # monitoring
+    ./prometheus.nix
+
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
@@ -96,16 +99,6 @@
       listen.ip = "0.0.0.0";
     };
 
-    # Prometheus server moved to rumnas; keep only node exporter here
-    prometheus.exporters.node = {
-      enable = true;
-      port = 9100;
-      openFirewall = true;
-      enabledCollectors = [
-        "logind"
-        "systemd"
-      ];
-    };
   };
 
   programs = {
