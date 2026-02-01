@@ -22,6 +22,7 @@
     ./freshrss.nix
     ./dashy.nix
     ./home-assistant.nix
+    ./paperless.nix
 
     # monitoring
     ./prometheus.nix
@@ -36,6 +37,9 @@
   ];
 
   networking.hostName = "rumnas";
+
+  # Secret for BorgBase backup passphrase
+  sops.secrets."borg/rumnas_borgbase_passphrase".owner = "root";
 
   services = {
     open-webui = {
@@ -134,7 +138,7 @@
         jellyfin.port = 8096;
         ersatztv.port = 8409;
         # rumtower services (proxied remotely)
-        paperless = { port = 8000; host = "rumtower"; };
+        paperless.port = 8000;
         calibre = { port = 8081; host = "rumtower"; };
         calibre-web = { port = 8083; host = "rumtower"; };
       };
@@ -146,14 +150,7 @@
     '';
 
     # TODO: create borg user with read-only everywhere permissions
-    borgbackup = {
-      repos.paperless = {
-        path = "/mnt/vault/backups/paperless";
-        authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower"
-        ];
-      };
-      jobs = {
+    borgbackup.jobs = {
         # backs up immich from rumnas -> rumtower
         local-rumtower = {
           paths = [
@@ -168,7 +165,7 @@
             "- **/.direnv" # this needs tested to see if it works after creation
           ];
           compression = "auto,lzma";
-          startAt = "daily"; # if goal is to turn rumtower off at night, might have this run more often
+          startAt = []; # Disabled - triggered by rumtower boot via backup-immich-cooldown
           user = "root";
           doInit = false;
           repo = "ssh://rutrum@rumtower/mnt/barracuda/backup/immich";
@@ -178,14 +175,74 @@
           };
           encryption.mode = "none";
         };
+
+        # Offsite backup to BorgBase for critical data
+        cloud-borgbase = {
+          paths = [
+            "/mnt/raid/services/paperless"
+            # TODO: Add sensitive folders from /mnt/raid/homes/rutrum/ as needed
+          ];
+          patterns = ["- **/.direnv"];
+          compression = "auto,lzma";
+          startAt = "daily";
+          user = "root";
+          doInit = false;
+          repo = "ssh://jju2y3ar@jju2y3ar.repo.borgbase.com/./repo";
+          encryption = {
+            mode = "repokey-blake2";
+            passCommand = "cat ${config.sops.secrets."borg/rumnas_borgbase_passphrase".path}";
+          };
+        };
       };
-    };
 
     xserver = {
       enable = true;
       desktopManager.cinnamon.enable = true;
       displayManager.lightdm.enable = true;
     };
+  };
+
+  # Wrapper service for Immich backup with 24h cooldown
+  # Triggered by rumtower on boot via SSH
+  systemd.services.backup-immich-cooldown = {
+    description = "Backup Immich to rumtower (with 24h cooldown)";
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+
+    path = with pkgs; [coreutils systemd curl];
+
+    script = ''
+      STAMP_FILE="/var/lib/backup-stamps/immich-rumtower"
+      MIN_INTERVAL=$((24 * 60 * 60))
+
+      mkdir -p "$(dirname "$STAMP_FILE")"
+
+      # Check cooldown
+      if [ -f "$STAMP_FILE" ]; then
+        LAST=$(cat "$STAMP_FILE")
+        NOW=$(date +%s)
+        DIFF=$((NOW - LAST))
+        if [ $DIFF -lt $MIN_INTERVAL ]; then
+          echo "Last backup was $((DIFF / 3600)) hours ago (min: 24h), skipping"
+          exit 0
+        fi
+      fi
+
+      # Run the NixOS-managed backup job
+      if systemctl start borgbackup-job-local-rumtower.service; then
+        date +%s > "$STAMP_FILE"
+        echo "Backup completed"
+      else
+        # Send ntfy notification on failure
+        curl -d "Immich backup to rumtower failed" ntfy.rum.internal/alerts || true
+        exit 1
+      fi
+    '';
   };
 
   # stop sleeping/hibernating/suspend
@@ -212,6 +269,15 @@
   boot.swraid.enable = true;
 
   networking.firewall.enable = false; # remove this sometime? please uwu?
+
+  # Allow rutrum to trigger the backup service via SSH from rumtower
+  security.sudo.extraRules = [{
+    users = ["rutrum"];
+    commands = [{
+      command = "${pkgs.systemd}/bin/systemctl start backup-immich-cooldown.service";
+      options = ["NOPASSWD"];
+    }];
+  }];
 
   services.displayManager.defaultSession = "cinnamon";
 

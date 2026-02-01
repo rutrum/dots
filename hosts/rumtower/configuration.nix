@@ -7,7 +7,6 @@
   imports = [
     inputs.self.nixosModules.system
     ./hardware-configuration.nix
-    ./borg.nix
     ./syncthing.nix
 
     # containized
@@ -149,6 +148,28 @@
 
   networking.firewall.enable = false;
   networking.nftables.enable = true;
+
+  # Signal rumnas to run Immich backup when rumtower boots
+  systemd.services.signal-rumnas-backup = {
+    description = "Signal rumnas to run Immich backup";
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+    wantedBy = ["multi-user.target"];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      User = "rutrum";
+    };
+
+    path = with pkgs; [openssh];
+
+    script = ''
+      sleep 60  # Wait for network stability
+      ssh -o ConnectTimeout=10 rutrum@rumnas \
+        'sudo ${pkgs.systemd}/bin/systemctl start backup-immich-cooldown.service' || true
+    '';
+  };
 
   system.stateVersion = "23.11";
 }
