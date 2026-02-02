@@ -170,7 +170,7 @@
           doInit = false;
           repo = "ssh://rutrum@rumtower/mnt/barracuda/backup/immich";
           environment = {
-            BORG_RSH = "ssh -i /home/rutrum/.ssh/id_ed25519";
+            BORG_RSH = "ssh -i /home/rutrum/.ssh/id_ed25519_borgbase";
             BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "yes";
           };
           encryption.mode = "none";

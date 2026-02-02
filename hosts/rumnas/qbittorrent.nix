@@ -3,7 +3,10 @@ let
   vpnNamespace = "wg";
   webuiPort = 9009;
 in {
-  services.caddyProxy.services.qbittorrent.port = webuiPort;
+  services.caddyProxy.services.qbittorrent = {
+    port = webuiPort;
+    host = "192.168.15.1";
+  };
   sops.secrets.wireguard_config.owner = "root";
 
   vpnNamespaces.${vpnNamespace} = {
