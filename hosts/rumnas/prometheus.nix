@@ -76,16 +76,6 @@
             name = "hardware";
             rules = [
               {
-                alert = "HostDown";
-                expr = "up == 0";
-                for = "2m";
-                labels = { severity = "critical"; };
-                annotations = {
-                  summary = "Host {{ $labels.host }} is down";
-                  description = "{{ $labels.job }} on {{ $labels.instance }} has been down for more than 2 minutes.";
-                };
-              }
-              {
                 alert = "DiskSpaceLow";
                 expr = "(1 - node_filesystem_avail_bytes{fstype!~\"tmpfs|overlay\"} / node_filesystem_size_bytes{fstype!~\"tmpfs|overlay\"}) > 0.85";
                 for = "5m";
@@ -107,12 +97,32 @@
               }
               {
                 alert = "HighMemoryUsage";
-                expr = "(1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 0.9";
+                expr = "(1 - node_memory_MemAvailable_bytes{host=\"rumnas\"} / node_memory_MemTotal_bytes{host=\"rumnas\"}) > 0.9";
                 for = "5m";
                 labels = { severity = "warning"; };
                 annotations = {
                   summary = "High memory usage on {{ $labels.host }}";
                   description = "Memory usage on {{ $labels.host }} is above 90%.";
+                };
+              }
+              {
+                alert = "HighBandwidthRate";
+                expr = "rate(node_network_receive_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[5m]) + rate(node_network_transmit_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[5m]) > 6250000";
+                for = "30m";
+                labels = { severity = "warning"; };
+                annotations = {
+                  summary = "High sustained bandwidth on {{ $labels.host }}";
+                  description = "Network bandwidth on {{ $labels.host }} has exceeded 50 Mbps for 30 minutes.";
+                };
+              }
+              {
+                alert = "HighDailyBandwidth";
+                expr = "increase(node_network_receive_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[24h]) + increase(node_network_transmit_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[24h]) > 25000000000";
+                for = "5m";
+                labels = { severity = "warning"; };
+                annotations = {
+                  summary = "High daily bandwidth on {{ $labels.host }}";
+                  description = "Network usage on {{ $labels.host }} has exceeded 25 GB in the last 24 hours.";
                 };
               }
               {
@@ -231,6 +241,12 @@
               "http://freshrss.rum.internal"
               "http://nocodb.rum.internal"
               "http://openwebui.rum.internal"
+              "http://ersatztv.rum.internal"
+              "http://paperless.rum.internal"
+              "http://alertmanager.rum.internal"
+              "http://ntfy.rum.internal"
+              "http://romm.rum.internal"
+              "http://qbittorrent.rum.internal"
             ];
           }
         ];
