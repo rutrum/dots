@@ -26,6 +26,24 @@
     extraOptions = ["--add-host=host.containers.internal:host-gateway"];
     autoStart = true;
   };
+  services.prometheus.alertmanager-ntfy = {
+    enable = true;
+    settings = {
+      http.addr = ":9095";
+      ntfy = {
+        baseurl = "http://localhost:8888";
+        notification = {
+          topic = "monitoring";
+          templates = {
+            title = ''{{ if eq .Status "resolved" }}Resolved: {{ else }}ALERT: {{ end }}{{ index .Annotations "summary" }}'';
+            description = ''{{ index .Annotations "description" }}'';
+          };
+          priority = ''status == "firing" ? "high" : "default"'';
+        };
+      };
+    };
+  };
+
   services.prometheus = {
     enable = true;
     port = 9090;
@@ -51,7 +69,7 @@
             name = "ntfy";
             webhook_configs = [
               {
-                url = "http://localhost:8888/alertmanager";
+                url = "http://localhost:9095";
                 send_resolved = true;
               }
             ];
