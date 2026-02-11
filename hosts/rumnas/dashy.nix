@@ -156,7 +156,7 @@
           {
             title = "Paradisus Docs";
             description = "Minecraft server documentation";
-            icon = "hl-minecraft";
+            icon = "https://paradisus.day/paradisus-logo-128x128.png";
             url = "https://paradisus.day";
           }
           {
