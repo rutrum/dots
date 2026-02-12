@@ -16,6 +16,7 @@
 
     # monitoring
     ./prometheus.nix
+    ./poweroff.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
