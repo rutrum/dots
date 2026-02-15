@@ -99,7 +99,6 @@
       openFirewall = true;
       listen.ip = "0.0.0.0";
     };
-
   };
 
   programs = {
@@ -134,7 +133,7 @@
     };
 
     "/mnt/rumnas" = {
-      device = "//nas.home/homes";
+      device = "//rum.internal/homes";
       fsType = "cifs";
       options = let
         # uid = config.users.users.rutrum.uid;

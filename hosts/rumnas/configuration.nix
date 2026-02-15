@@ -139,8 +139,14 @@
         ersatztv.port = 8409;
         # rumtower services (proxied remotely)
         paperless.port = 8000;
-        calibre = { port = 8081; host = "rumtower"; };
-        calibre-web = { port = 8083; host = "rumtower"; };
+        calibre = {
+          port = 8081;
+          host = "rumtower";
+        };
+        calibre-web = {
+          port = 8083;
+          host = "rumtower";
+        };
       };
     };
 
@@ -182,13 +188,17 @@
   networking.firewall.enable = false; # remove this sometime? please uwu?
 
   # Allow rutrum to trigger the backup service via SSH from rumtower
-  security.sudo.extraRules = [{
-    users = ["rutrum"];
-    commands = [{
-      command = "${pkgs.systemd}/bin/systemctl start backup-immich-cooldown.service";
-      options = ["NOPASSWD"];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = ["rutrum"];
+      commands = [
+        {
+          command = "${pkgs.systemd}/bin/systemctl start backup-immich-cooldown.service";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
 
   services.displayManager.defaultSession = "cinnamon";
 
@@ -202,7 +212,10 @@
     };
     groups.reolink = {};
 
-    users.rutrum.extraGroups = ["jellyfin"];
+    users.rutrum.extraGroups = [
+      "jellyfin" # media directory
+      "paperless" # consume directory
+    ];
   };
 
   environment.systemPackages = with pkgs; [

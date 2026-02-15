@@ -2,14 +2,20 @@
   # Webhook service for remote shutdown
   services.webhook = {
     enable = true;
-    port = 8080;
+    port = 8082;
     openFirewall = true;
     hooks = {
       shutdown = {
         execute-command = "/run/wrappers/bin/sudo";
         pass-arguments-to-command = [
-          {source = "string"; name = "systemctl";}
-          {source = "string"; name = "poweroff";}
+          {
+            source = "string";
+            name = "systemctl";
+          }
+          {
+            source = "string";
+            name = "poweroff";
+          }
         ];
         response-message = "Shutting down rumtower...";
       };
@@ -39,7 +45,7 @@
         -H "Title: Shutdown Reminder" \
         -H "Priority: high" \
         -H "Tags: computer,warning" \
-        -H "Actions: http, Shutdown, http://rumtower:8080/hooks/shutdown, method=POST, clear=true" \
+        -H "Actions: http, Shutdown, http://rumtower:8082/hooks/shutdown, method=POST, clear=true" \
         -d "rumtower is still running at 9 PM. Shut it down?" \
         http://rumnas:8888/monitoring
     '';
