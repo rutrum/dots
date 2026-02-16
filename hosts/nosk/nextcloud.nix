@@ -5,7 +5,7 @@
 }: {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud30;
+    package = pkgs.nextcloud31;
     hostName = "cloud.rutrum.net";
 
     # Use HTTPS
@@ -16,9 +16,9 @@
     config = {
       dbtype = "pgsql";
       adminuser = "admin";
-      # adminpassFile not needed - Nextcloud will generate a password on first setup
-      # You can view it in /var/lib/nextcloud/config/config.php
-      # Or reset it with: nextcloud-occ user:resetpassword admin
+      # adminpassFile is required - create a simple password file
+      # You can change the password later via web UI or occ command
+      adminpassFile = toString (pkgs.writeText "nextcloud-admin-pass" "CHANGE_ME_ON_FIRST_LOGIN");
     };
 
     # PHP settings
@@ -65,8 +65,19 @@
     user = "nextcloud";
   };
 
-  # Add Nextcloud virtual host to Caddy
+  # Nextcloud uses nginx internally, listening on a unix socket by default
+  # We need to make nginx listen on a TCP port so Caddy can proxy to it
+  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+    listen = [
+      {
+        addr = "127.0.0.1";
+        port = 8080;
+      }
+    ];
+  };
+
+  # Configure Caddy to proxy to nginx
   services.caddy.virtualHosts."cloud.rutrum.net".extraConfig = ''
-    reverse_proxy localhost:${toString config.services.nextcloud.port}
+    reverse_proxy http://127.0.0.1:8080
   '';
 }
