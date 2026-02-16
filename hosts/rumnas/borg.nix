@@ -31,7 +31,7 @@ in {
         "/mnt/raid/immich/backups"
         "/mnt/raid/homes/rutrum/media/home_video"
       ];
-      patterns = [ "- **/.direnv" ];
+      patterns = ["- **/.direnv"];
       compression = "auto,lzma";
       startAt = []; # Triggered by backup-immich-cooldown
       user = "borg";
@@ -49,7 +49,7 @@ in {
       paths = [
         "/mnt/raid/services/paperless"
       ];
-      patterns = [ "- **/.direnv" ];
+      patterns = ["- **/.direnv"];
       compression = "auto,lzma";
       startAt = "daily";
       user = "borg";
@@ -67,21 +67,21 @@ in {
 
   # Grant CAP_DAC_READ_SEARCH to borg backup services
   # This allows the borg user to read all files without needing ACLs
-  systemd.services.borgbackup-job-local-rumtower.serviceConfig.AmbientCapabilities = [ "CAP_DAC_READ_SEARCH" ];
-  systemd.services.borgbackup-job-cloud-borgbase.serviceConfig.AmbientCapabilities = [ "CAP_DAC_READ_SEARCH" ];
+  systemd.services.borgbackup-job-local-rumtower.serviceConfig.AmbientCapabilities = ["CAP_DAC_READ_SEARCH"];
+  systemd.services.borgbackup-job-cloud-borgbase.serviceConfig.AmbientCapabilities = ["CAP_DAC_READ_SEARCH"];
 
   # Wrapper service with 24h cooldown (triggered by rumtower on boot)
   systemd.services.backup-immich-cooldown = {
     description = "Backup Immich to rumtower (with 24h cooldown)";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
 
     serviceConfig = {
       Type = "oneshot";
       User = "root";
     };
 
-    path = with pkgs; [ coreutils systemd curl ];
+    path = with pkgs; [coreutils systemd curl];
 
     script = ''
       STAMP_FILE="/var/lib/backup-stamps/immich-rumtower"

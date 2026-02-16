@@ -5,8 +5,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.services.rumAlloy;
 
   alloyConfig = pkgs.writeText "config.alloy" ''

@@ -28,7 +28,7 @@
     enable = true;
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = "no";
+      PermitRootLogin = "prohibit-password"; # Allow root with SSH key only
     };
   };
 
@@ -54,10 +54,6 @@
     zola
   ];
 
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # From nixos-infect
 
   # Workaround for https://github.com/NixOS/nix/issues/8502
@@ -65,6 +61,7 @@
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
+  networking.domain = "";
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb4sr8jfAagDEYJQg1Xa9WN1i+jQFzEnSvU/e1X4oed rutrum@rumtower''];
   system.stateVersion = "23.11";
 }

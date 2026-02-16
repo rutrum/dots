@@ -21,10 +21,12 @@ in {
   # PostgreSQL database setup
   services.postgresql = {
     ensureDatabases = ["firefly"];
-    ensureUsers = [{
-      name = "firefly-iii";
-      ensureDBOwnership = true;
-    }];
+    ensureUsers = [
+      {
+        name = "firefly-iii";
+        ensureDBOwnership = true;
+      }
+    ];
   };
 
   services.firefly-iii = {

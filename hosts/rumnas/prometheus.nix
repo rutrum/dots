@@ -81,7 +81,7 @@
     alertmanagers = [
       {
         static_configs = [
-          { targets = ["localhost:9093"]; }
+          {targets = ["localhost:9093"];}
         ];
       }
     ];
@@ -97,7 +97,7 @@
                 alert = "DiskSpaceLow";
                 expr = "(1 - node_filesystem_avail_bytes{fstype!~\"tmpfs|overlay\"} / node_filesystem_size_bytes{fstype!~\"tmpfs|overlay\"}) > 0.85";
                 for = "5m";
-                labels = { severity = "warning"; };
+                labels = {severity = "warning";};
                 annotations = {
                   summary = "Disk space low on {{ $labels.host }}";
                   description = "Filesystem {{ $labels.mountpoint }} on {{ $labels.host }} is over 85% full.";
@@ -107,7 +107,7 @@
                 alert = "DiskHealthBad";
                 expr = "smartctl_device_smart_healthy != 1";
                 for = "1m";
-                labels = { severity = "critical"; };
+                labels = {severity = "critical";};
                 annotations = {
                   summary = "SMART health check failed";
                   description = "Disk {{ $labels.device }} on {{ $labels.host }} is reporting unhealthy SMART status.";
@@ -117,7 +117,7 @@
                 alert = "HighMemoryUsage";
                 expr = "(1 - node_memory_MemAvailable_bytes{host=\"rumnas\"} / node_memory_MemTotal_bytes{host=\"rumnas\"}) > 0.9";
                 for = "5m";
-                labels = { severity = "warning"; };
+                labels = {severity = "warning";};
                 annotations = {
                   summary = "High memory usage on {{ $labels.host }}";
                   description = "Memory usage on {{ $labels.host }} is above 90%.";
@@ -127,7 +127,7 @@
                 alert = "HighBandwidthRate";
                 expr = "rate(node_network_receive_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[5m]) + rate(node_network_transmit_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[5m]) > 6250000";
                 for = "30m";
-                labels = { severity = "warning"; };
+                labels = {severity = "warning";};
                 annotations = {
                   summary = "High sustained bandwidth on {{ $labels.host }}";
                   description = "Network bandwidth on {{ $labels.host }} has exceeded 50 Mbps for 30 minutes.";
@@ -137,7 +137,7 @@
                 alert = "HighDailyBandwidth";
                 expr = "increase(node_network_receive_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[24h]) + increase(node_network_transmit_bytes_total{device=\"enp39s0\",host=\"rumnas\"}[24h]) > 25000000000";
                 for = "5m";
-                labels = { severity = "warning"; };
+                labels = {severity = "warning";};
                 annotations = {
                   summary = "High daily bandwidth on {{ $labels.host }}";
                   description = "Network usage on {{ $labels.host }} has exceeded 25 GB in the last 24 hours.";
@@ -147,7 +147,7 @@
                 alert = "ServiceDown";
                 expr = "probe_success == 0";
                 for = "2m";
-                labels = { severity = "critical"; };
+                labels = {severity = "critical";};
                 annotations = {
                   summary = "Service {{ $labels.instance }} is down";
                   description = "HTTP probe to {{ $labels.instance }} has been failing for more than 2 minutes.";
@@ -204,51 +204,79 @@
       {
         job_name = "node";
         static_configs = [
-          { targets = ["localhost:9100"]; labels = { host = "rumnas"; }; }
-          { targets = ["rumtower:9100"]; labels = { host = "rumtower"; }; }
+          {
+            targets = ["localhost:9100"];
+            labels = {host = "rumnas";};
+          }
+          {
+            targets = ["rumtower:9100"];
+            labels = {host = "rumtower";};
+          }
         ];
       }
       {
         job_name = "smartctl";
         static_configs = [
-          { targets = ["localhost:9633"]; labels = { host = "rumnas"; }; }
-          { targets = ["rumtower:9633"]; labels = { host = "rumtower"; }; }
+          {
+            targets = ["localhost:9633"];
+            labels = {host = "rumnas";};
+          }
+          {
+            targets = ["rumtower:9633"];
+            labels = {host = "rumtower";};
+          }
         ];
       }
       {
         job_name = "postgres";
         static_configs = [
-          { targets = ["rumtower:9187"]; }
+          {targets = ["rumtower:9187"];}
         ];
       }
       {
         job_name = "nvidia";
         static_configs = [
-          { targets = ["localhost:9835"]; labels = { host = "rumnas"; }; }
-          { targets = ["rumtower:9835"]; labels = { host = "rumtower"; }; }
+          {
+            targets = ["localhost:9835"];
+            labels = {host = "rumnas";};
+          }
+          {
+            targets = ["rumtower:9835"];
+            labels = {host = "rumtower";};
+          }
         ];
       }
       # Blackbox ICMP ping monitoring
       {
         job_name = "blackbox-icmp";
         metrics_path = "/probe";
-        params = { module = ["icmp"]; };
+        params = {module = ["icmp"];};
         static_configs = [
-          { targets = ["192.168.50.1" "1.1.1.1" "8.8.8.8"]; }
+          {targets = ["192.168.50.1" "1.1.1.1" "8.8.8.8"];}
         ];
         relabel_configs = [
-          { source_labels = ["__address__"]; target_label = "__param_target"; }
-          { source_labels = ["__param_target"]; target_label = "instance"; }
-          { target_label = "__address__"; replacement = "localhost:9115"; }
+          {
+            source_labels = ["__address__"];
+            target_label = "__param_target";
+          }
+          {
+            source_labels = ["__param_target"];
+            target_label = "instance";
+          }
+          {
+            target_label = "__address__";
+            replacement = "localhost:9115";
+          }
         ];
       }
       # Blackbox HTTP service health checks
       {
         job_name = "blackbox-http";
         metrics_path = "/probe";
-        params = { module = ["http_2xx"]; };
+        params = {module = ["http_2xx"];};
         static_configs = [
-          { targets = [
+          {
+            targets = [
               "http://jellyfin.rum.internal"
               "http://immich.rum.internal"
               "http://hass.rum.internal"
@@ -269,16 +297,25 @@
           }
         ];
         relabel_configs = [
-          { source_labels = ["__address__"]; target_label = "__param_target"; }
-          { source_labels = ["__param_target"]; target_label = "instance"; }
-          { target_label = "__address__"; replacement = "localhost:9115"; }
+          {
+            source_labels = ["__address__"];
+            target_label = "__param_target";
+          }
+          {
+            source_labels = ["__param_target"];
+            target_label = "instance";
+          }
+          {
+            target_label = "__address__";
+            replacement = "localhost:9115";
+          }
         ];
       }
       # AdGuard Home DNS statistics
       {
         job_name = "adguard";
         static_configs = [
-          { targets = ["localhost:9618"]; }
+          {targets = ["localhost:9618"];}
         ];
       }
     ];

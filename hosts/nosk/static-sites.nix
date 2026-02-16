@@ -20,8 +20,8 @@
               # Pull latest changes
               ${pkgs.git}/bin/git pull
 
-              # Build with Hugo
-              ${pkgs.hugo}/bin/hugo --destination /srv/http/rutrum-net/
+              # Build with Zola (rutrum.net uses Zola)
+              ${pkgs.zola}/bin/zola build --output-dir /srv/http/rutrum-net/
 
               echo "Successfully built rutrum.net"
             '';
@@ -43,8 +43,11 @@
               # Pull latest changes
               ${pkgs.git}/bin/git pull
 
-              # Build with Zola
-              ${pkgs.zola}/bin/zola build --output-dir /srv/http/stringcase-org/
+              # Update git submodules (for Hugo themes)
+              ${pkgs.git}/bin/git submodule update --init --recursive
+
+              # Build with Hugo (stringcase.org uses Hugo)
+              ${pkgs.hugo}/bin/hugo --destination /srv/http/stringcase-org/
 
               echo "Successfully built stringcase.org"
             '';
@@ -70,11 +73,6 @@
         root * /srv/http/stringcase-org
         file_server
         encode gzip
-      }
-
-      # Webhook endpoint
-      rutrum.net:9000 {
-        reverse_proxy localhost:9000
       }
     '';
   };

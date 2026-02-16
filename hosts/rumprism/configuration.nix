@@ -66,9 +66,9 @@
   services.xserver.videoDrivers = ["modesetting"];
 
   services.logind.settings.Login = {
-    IdleAction ="hybrid-sleep";
-    IdleActionSec="30min";
-    HandlePowerKey="ignore";
+    IdleAction = "hybrid-sleep";
+    IdleActionSec = "30min";
+    HandlePowerKey = "ignore";
   };
 
   # Enable sound with pipewire.

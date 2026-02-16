@@ -37,7 +37,7 @@
     # Enable some useful apps
     extraAppsEnable = true;
     extraApps = with config.services.nextcloud.package.packages.apps; {
-      inherit calendar contacts tasks notes;
+      inherit calendar contacts tasks bookmarks notes;
     };
 
     settings = {

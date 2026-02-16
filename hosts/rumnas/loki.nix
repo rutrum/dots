@@ -23,16 +23,18 @@
         ring.kvstore.store = "inmemory";
       };
 
-      schema_config.configs = [{
-        from = "2024-01-01";
-        store = "tsdb";
-        object_store = "filesystem";
-        schema = "v13";
-        index = {
-          prefix = "index_";
-          period = "24h";
-        };
-      }];
+      schema_config.configs = [
+        {
+          from = "2024-01-01";
+          store = "tsdb";
+          object_store = "filesystem";
+          schema = "v13";
+          index = {
+            prefix = "index_";
+            period = "24h";
+          };
+        }
+      ];
 
       limits_config = {
         retention_period = "168h"; # 7 days - start conservative, increase if needed
@@ -40,11 +42,11 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 3100 ];
+  networking.firewall.allowedTCPPorts = [3100];
 
   # Enable Alloy to ship local logs to Loki
   services.rumAlloy = {
     enable = true;
-    lokiUrl = "http://localhost:3100";  # Loki is local on rumnas
+    lokiUrl = "http://localhost:3100"; # Loki is local on rumnas
   };
 }

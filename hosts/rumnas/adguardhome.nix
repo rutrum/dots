@@ -10,12 +10,12 @@
     settings = {
       dns = {
         bind_hosts = [
-          "192.168.50.3"  # LAN
+          "192.168.50.3" # LAN
           "100.73.14.110" # Tailscale
         ];
         port = 53;
         bootstrap_dns = [
-          "9.9.9.9"        # Quad9
+          "9.9.9.9" # Quad9
           "208.67.222.222" # OpenDNS
         ];
       };
