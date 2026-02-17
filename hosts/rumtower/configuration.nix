@@ -141,7 +141,7 @@
         gid = config.users.groups.users.gid;
         creds_path = config.sops.secrets."smb_credentials".path;
         # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=30s,x-systemd.mount-timeout=30s,soft,user,users";
       in ["${automount_opts},uid=${toString uid},gid=${toString gid},credentials=${creds_path}" "nofail"];
     };
   };

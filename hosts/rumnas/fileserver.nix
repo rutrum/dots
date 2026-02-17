@@ -26,6 +26,9 @@
           "workgroup" = "WORKGROUP";
           "map to guest" = "Bad User";
           "browseable" = "yes";
+          "follow symlinks" = "yes";
+          "wide links" = "yes";
+          "unix extensions" = "no";
         };
         homes = {
           "read only" = "no";
