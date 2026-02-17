@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   vpnNamespace = "wg";
   webuiPort = 9009;
 in {
@@ -14,7 +17,10 @@ in {
     wireguardConfigFile = config.sops.secrets.wireguard_config.path;
 
     portMappings = [
-      { from = webuiPort; to = webuiPort; }
+      {
+        from = webuiPort;
+        to = webuiPort;
+      }
     ];
     accessibleFrom = [
       "192.168.50.0/24"
@@ -24,7 +30,7 @@ in {
   services.qbittorrent = {
     enable = true;
     openFirewall = true;
-    group = "users";  # not good
+    group = "users"; # not good
     inherit webuiPort;
   };
 
