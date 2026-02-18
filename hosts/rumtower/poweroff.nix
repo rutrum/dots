@@ -47,7 +47,7 @@
         -H "Tags: computer,warning" \
         -H "Actions: http, Shutdown, http://rumtower:8082/hooks/shutdown, method=POST, clear=true" \
         -d "rumtower is still running at 9 PM. Shut it down?" \
-        http://rumnas:8888/monitoring
+        http://ntfy.rum.internal/monitoring
     '';
   };
 

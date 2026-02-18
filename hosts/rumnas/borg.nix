@@ -48,6 +48,7 @@ in {
     cloud-borgbase = {
       paths = [
         "/mnt/raid/services/paperless"
+        "/mnt/raid/services/freshrss"
       ];
       patterns = ["- **/.direnv"];
       compression = "auto,lzma";
