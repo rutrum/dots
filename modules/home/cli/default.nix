@@ -139,4 +139,8 @@
     csvlens # csv tui
     slumber # rest client
   ];
+
+  home.sessionVariables = {
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
+  };
 }
