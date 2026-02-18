@@ -49,6 +49,10 @@ in {
       paths = [
         "/mnt/raid/services/paperless"
         "/mnt/raid/services/freshrss"
+        "/mnt/raid/immich/library"
+        "/mnt/raid/immich/upload"
+        "/mnt/raid/immich/profile"
+        "/mnt/raid/immich/backups"
       ];
       patterns = ["- **/.direnv"];
       compression = "auto,lzma";
