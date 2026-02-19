@@ -29,6 +29,7 @@
   ];
 
   networking.hostName = "rumtower";
+  networking.hosts."192.168.50.3" = ["rumnas" "rum.internal"];
 
   services = {
     xserver.enable = true;
