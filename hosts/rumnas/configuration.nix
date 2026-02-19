@@ -147,6 +147,10 @@
           port = 8083;
           host = "rumtower";
         };
+        "rumtower.webhooks" = {
+          port = 8082;
+          host = "rumtower";
+        };
       };
     };
 
