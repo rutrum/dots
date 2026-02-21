@@ -10,7 +10,15 @@
         pass-arguments-to-command = [
           {
             source = "string";
-            name = "systemctl";
+            name = "systemd-run";
+          }
+          {
+            source = "string";
+            name = "--on-active=2";
+          }
+          {
+            source = "string";
+            name = "/run/current-system/sw/bin/systemctl";
           }
           {
             source = "string";
@@ -28,7 +36,7 @@
       users = ["webhook"];
       commands = [
         {
-          command = "/run/current-system/sw/bin/systemctl poweroff";
+          command = "/run/current-system/sw/bin/systemd-run";
           options = ["NOPASSWD"];
         }
       ];
