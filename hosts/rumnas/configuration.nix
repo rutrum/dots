@@ -121,6 +121,15 @@
       };
     };
 
+    calibre-web = {
+      enable = true;
+      openFirewall = true;
+      listen.ip = "0.0.0.0";
+      options = {
+        calibreLibrary = "/mnt/raid/homes/rutrum/books";
+      };
+    };
+
     openssh.enable = true;
 
     caddyProxy = {
@@ -139,14 +148,7 @@
         ersatztv.port = 8409;
         # rumtower services (proxied remotely)
         paperless.port = 8000;
-        calibre = {
-          port = 8081;
-          host = "rumtower";
-        };
-        calibre-web = {
-          port = 8083;
-          host = "rumtower";
-        };
+        calibre-web.port = 8083;
         "rumtower.webhooks" = {
           port = 8082;
           host = "rumtower";
