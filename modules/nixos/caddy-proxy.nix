@@ -8,7 +8,7 @@
   mkVirtualHost = name: svc: let
     backend =
       if svc.host != null
-      then "${svc.host}:${toString svc.port}"
+      then "http://${svc.host}:${toString svc.port}"
       else "localhost:${toString svc.port}";
     proxyConfig =
       if svc.phpSocket != null
