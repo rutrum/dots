@@ -31,6 +31,9 @@
   networking.hostName = "rumtower";
   networking.hosts."192.168.50.3" = ["rumnas" "rum.internal"];
 
+  # Disable Baloo file indexing - causes repeated crashes
+  environment.plasma6.enableBalooFileIndex = false;
+
   services = {
     xserver.enable = true;
     # maybe revisit when cursor bug is fixed
