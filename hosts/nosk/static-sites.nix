@@ -17,11 +17,14 @@
               #!/bin/sh
               set -e
 
+              # Set cache dir so nix can write to it
+              export XDG_CACHE_HOME=/tmp
+
               # Pull latest changes
               ${pkgs.git}/bin/git pull
 
-              # Build with Zola (rutrum.net uses Zola)
-              ${pkgs.zola}/bin/zola build --output-dir /srv/http/rutrum-net/
+              # Build with nix and copy to serve directory
+              ${pkgs.nix}/bin/nix build --no-link --print-out-paths | xargs -I{} cp -rT {} /srv/http/rutrum-net/
 
               echo "Successfully built rutrum.net"
             '';
@@ -61,10 +64,15 @@
   services.caddy = {
     enable = true;
     extraConfig = ''
-      # rutrum.net - Hugo static site
+      # rutrum.net - Zola static site
       rutrum.net {
-        root * /srv/http/rutrum-net
-        file_server
+        handle /hooks/* {
+          reverse_proxy localhost:9000
+        }
+        handle {
+          root * /srv/http/rutrum-net
+          file_server
+        }
         encode gzip
       }
 

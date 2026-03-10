@@ -38,7 +38,6 @@
     allowedTCPPorts = [
       80 # HTTP
       443 # HTTPS
-      9000 # Webhooks
     ];
   };
 
