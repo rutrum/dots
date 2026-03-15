@@ -28,7 +28,6 @@
         bitwarden-desktop
         sxiv
         rxvt-unicode
-        nextcloud-client
       ];
 
       catppuccin.alacritty.enable = true;

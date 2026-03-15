@@ -23,10 +23,36 @@
               # Pull latest changes
               ${pkgs.git}/bin/git pull
 
-              # Build with nix and copy to serve directory
-              ${pkgs.nix}/bin/nix build --no-link --print-out-paths | xargs -I{} cp -rT {} /srv/http/rutrum-net/
+              # Build with nix and copy to serve directory (rsync deletes stale files)
+              ${pkgs.nix}/bin/nix build --no-link --print-out-paths | xargs -I{} ${pkgs.rsync}/bin/rsync -a --delete {}/ /srv/http/rutrum-net/
 
               echo "Successfully built rutrum.net"
+            '';
+          };
+        in "${script}";
+      };
+
+      build-typeset = {
+        command-working-directory = "/srv/git/typeset";
+        include-command-output-in-response = true;
+        execute-command = let
+          script = pkgs.writeTextFile {
+            name = "build-typeset.sh";
+            executable = true;
+            text = ''
+              #!/bin/sh
+              set -e
+
+              # Set cache dir so nix can write to it
+              export XDG_CACHE_HOME=/tmp
+
+              # Pull latest changes
+              ${pkgs.git}/bin/git pull
+
+              # Build with nix and copy to serve directory (rsync deletes stale files)
+              ${pkgs.nix}/bin/nix build --no-link --print-out-paths | xargs -I{} ${pkgs.rsync}/bin/rsync -a --delete {}/ /srv/http/typeset/
+
+              echo "Successfully built typeset.rutrum.net"
             '';
           };
         in "${script}";
@@ -76,6 +102,13 @@
         encode gzip
       }
 
+      # typeset.rutrum.net - Zola theme demo site
+      typeset.rutrum.net {
+        root * /srv/http/typeset
+        file_server
+        encode gzip
+      }
+
       # stringcase.org - Zola static site
       stringcase.org {
         root * /srv/http/stringcase-org
@@ -90,8 +123,10 @@
     "d /srv/git 0755 webhook webhook -"
     "d /srv/http 0775 webhook caddy -"
     "d /srv/git/rutrum-net 0755 webhook webhook -"
-    "d /srv/git/stringcase-org 0755 webhook webhook -"
     "d /srv/http/rutrum-net 0775 webhook caddy -"
+    "d /srv/git/stringcase-org 0755 webhook webhook -"
     "d /srv/http/stringcase-org 0775 webhook caddy -"
+    "d /srv/git/typeset 0755 webhook webhook -"
+    "d /srv/http/typeset 0775 webhook caddy -"
   ];
 }
