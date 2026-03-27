@@ -34,6 +34,12 @@
 
     # configure neovim and neovim plugins with nix
     nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+
+    # google fonts and other font sources
+    nix-fonts.url = "github:rutrum/nix-fonts";
+
+    # ai spec generation
+    openspec.url = "github:Fission-AI/OpenSpec";
   };
 
   outputs = inputs:

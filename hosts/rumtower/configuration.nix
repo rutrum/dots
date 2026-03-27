@@ -6,12 +6,12 @@
 }: {
   imports = [
     inputs.self.nixosModules.system
+    inputs.nix-fonts.nixosModules.default
     ./hardware-configuration.nix
     ./syncthing.nix
 
     # containized
     # consider using nixos modules for these
-    ./paperless.nix
     ./firefly.nix
 
     # monitoring
@@ -81,7 +81,7 @@
       useRoutingFeatures = "server";
       openFirewall = true;
       extraSetFlags = [
-        "--advertise-exit-node" # allow clients to route traffic through nas
+        "--advertise-exit-node" # allow clients to route traffic through rumtower
         "--exit-node-allow-lan-access"
         "--advertise-routes=192.168.50.100/32"
       ];
@@ -161,6 +161,22 @@
       OnBootSec = "2min";
       Unit = "signal-rumnas-backup.service";
     };
+  };
+
+  nix-fonts = {
+    enable = true;
+    googleFonts = [
+      {
+        name = "danfo";
+        sha256 = "sha256-MCqvtgh+7qvjNcFkGD1EDgZuzqjpzDCh8GG52Z9wCWM=";
+      }
+    ];
+    dafont = [
+      {
+        name = "vanilla_whale";
+        sha256 = "sha256-Sqca7j6BFkMsUL+REj27B16fTXOnb2m3OlMoHQC08dQ=";
+      }
+    ];
   };
 
   system.stateVersion = "23.11";

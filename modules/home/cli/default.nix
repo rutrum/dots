@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -72,6 +73,7 @@
 
     claude-code = {
       enable = true;
+      package = pkgs-unstable.claude-code;
     };
 
     opencode = {
@@ -129,7 +131,7 @@
     tealdeer
     fzf
     watchexec
-    yt-dlp
+    pkgs-unstable.yt-dlp
     neofetch
     trash-cli
     wget

@@ -13,9 +13,17 @@
     inputs.flatpaks.homeModules.default
     inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
+    inputs.nix-fonts.homeModules.default
 
     ./cli
     ./gui
+
+    {
+      _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    }
   ];
 
   config = {
@@ -40,6 +48,22 @@
     };
 
     catppuccin.flavor = "mocha";
+
+    nix-fonts = {
+      enable = true;
+      googleFonts = [
+        {
+          name = "tiny5";
+          sha256 = "sha256-K2OIO+7/Epc1JhQv/Oe1IeH5OMR+yXa1wUibmT7CtK8=";
+        }
+      ];
+      dafont = [
+        {
+          name = "texas_tango";
+          sha256 = "sha256-FaeVTLLGRysyzp1M5sleKHCBcsl58f+IzaNR9ZUMNKE=";
+        }
+      ];
+    };
 
     xdg.userDirs = {
       enable = true;

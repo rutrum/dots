@@ -55,6 +55,7 @@
       # video production
       losslesscut-bin
       obs-studio
+      audacity
 
       # reading
       zotero
@@ -69,6 +70,9 @@
     unstable-packages = with perSystem.nixpkgs-unstable; [
       qbittorrent
     ];
+    other-packages = [
+      perSystem.openspec.default
+    ];
   in
-    stable-packages ++ unstable-packages;
+    stable-packages ++ unstable-packages ++ other-packages;
 }
