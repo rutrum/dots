@@ -3,12 +3,9 @@
   pkgs,
   inputs,
   lib,
+  flake,
   ...
 }: {
-  # This is the base rutrum config that all other rutrum_system configs include.
-  # It is also a standalone headless user configuration (such as raspberry pi servers
-  # or WSL) which means there shouln't be any GUI applications
-
   imports = [
     inputs.flatpaks.homeModules.default
     inputs.nixvim.homeModules.nixvim

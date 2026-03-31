@@ -9,6 +9,7 @@
     ./starship.nix
     ./neovim.nix
     ./git.nix
+    ./agents.nix
   ];
 
   catppuccin = {
@@ -69,15 +70,6 @@
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
-    };
-
-    claude-code = {
-      enable = true;
-      package = pkgs-unstable.claude-code;
-    };
-
-    opencode = {
-      enable = true;
     };
 
     yazi = {
@@ -143,6 +135,5 @@
   ];
 
   home.sessionVariables = {
-    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
   };
 }

@@ -38,4 +38,14 @@ in {
     enable = true;
     inherit vpnNamespace;
   };
+
+  systemd.services.qbittorrent-watcher = {
+    description = "Start qbittorrent when VPN is available";
+    wantedBy = ["wg.service"];
+    after = ["wg.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl start qbittorrent.service";
+    };
+  };
 }

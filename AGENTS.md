@@ -21,9 +21,9 @@ In home-manager modules, use `pkgs-unstable.<package>` (provided via `_module.ar
   ];
 
   # Or for programs with a package option
-  programs.claude-code = {
+  programs.opencode = {
     enable = true;
-    package = pkgs-unstable.claude-code;
+    package = pkgs-unstable.opencode;
   };
 }
 ```
