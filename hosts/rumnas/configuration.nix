@@ -42,14 +42,6 @@
   networking.hostName = "rumnas";
 
   services = {
-    open-webui = {
-      enable = true;
-      package = pkgs.open-webui;
-      host = "0.0.0.0";
-      port = 8080;
-      openFirewall = true;
-    };
-
     karakeep = {
       enable = false;
       browser.enable = true;
@@ -130,6 +122,12 @@
       };
     };
 
+    lubelogger = {
+      enable = true;
+      port = 8084;
+      openFirewall = true;
+    };
+
     openssh.enable = true;
 
     caddyProxy = {
@@ -138,7 +136,6 @@
       services = {
         # rumnas services defined in their own files (immich.nix, etc.)
         # services defined here don't have dedicated files on rumnas
-        openwebui.port = 8080;
         grafana.port = 3000;
         prometheus.port = 9090;
         alertmanager.port = 9093;
@@ -146,6 +143,7 @@
         ntfy.port = 8888;
         jellyfin.port = 8096;
         ersatztv.port = 8409;
+        lubelogger.port = 8084;
         # rumtower services (proxied remotely)
         paperless.port = 8000;
         calibre-web.port = 8083;

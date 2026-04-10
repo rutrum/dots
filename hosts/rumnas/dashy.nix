@@ -95,12 +95,6 @@
             url = "http://alertmanager.rum.internal";
           }
           {
-            title = "Open WebUI";
-            description = "LLM chat interface";
-            icon = "hl-open-webui";
-            url = "http://openwebui.rum.internal";
-          }
-          {
             title = "Mealie";
             description = "Recipe manager";
             icon = "hl-mealie";

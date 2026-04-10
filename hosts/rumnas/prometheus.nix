@@ -286,7 +286,6 @@
               "http://mealie.rum.internal"
               "http://freshrss.rum.internal"
               "http://nocodb.rum.internal"
-              "http://openwebui.rum.internal"
               "http://ersatztv.rum.internal"
               "http://paperless.rum.internal"
               "http://alertmanager.rum.internal"
