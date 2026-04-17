@@ -7,6 +7,7 @@
   imports = [
     inputs.self.nixosModules.system
     inputs.nix-fonts.nixosModules.default
+    inputs.pipances.nixosModules.pipances
     ./hardware-configuration.nix
     ./syncthing.nix
 
@@ -32,6 +33,12 @@
   networking.hosts."192.168.50.3" = ["rumnas" "rum.internal"];
 
   services = {
+    pipances = {
+      enable = true;
+      package = inputs.pipances.packages.x86_64-linux.pipances;
+      port = 10555;
+    };
+
     xserver.enable = true;
     # maybe revisit when cursor bug is fixed
     #displayManager.gdm.enable = true;

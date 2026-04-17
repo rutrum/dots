@@ -40,6 +40,9 @@
 
     # ai spec generation
     openspec.url = "github:Fission-AI/OpenSpec";
+
+    # personal finance management
+    pipances.url = "github:rutrum/pipances";
   };
 
   outputs = inputs:

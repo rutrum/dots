@@ -40,6 +40,25 @@
         "type": "github"
       }
     },
+    "blueprint_3": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_7",
+        "systems": "systems_6"
+      },
+      "locked": {
+        "lastModified": 1771437256,
+        "narHash": "sha256-bLqwib+rtyBRRVBWhMuBXPCL/OThfokA+j6+uH7jDGU=",
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "06ee7190dc2620ea98af9eb225aa9627b68b0e33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -72,6 +91,18 @@
         "owner": "ipetkov",
         "repo": "crane",
         "type": "github"
+      }
+    },
+    "daisyui-css": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-BrNYp/4ryp8yVz/O1MmgQW9rHgNIlN8KTJmYLaCizOQ=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css"
       }
     },
     "firefox-addons": {
@@ -172,6 +203,30 @@
         "type": "github"
       }
     },
+    "htmx-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-nm6avZuEBg67SSyyZUhjpXVNstHHgUxrtBHqJgowU08=",
+        "type": "file",
+        "url": "https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"
+      }
+    },
+    "htmx-response-targets-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-VUdGsfIgtXRz8I/8Twf57Ig3mjNQM/WxEVAqJx4fl8s=",
+        "type": "file",
+        "url": "https://unpkg.com/htmx-ext-response-targets@2.0.2/response-targets.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://unpkg.com/htmx-ext-response-targets@2.0.2/response-targets.js"
+      }
+    },
     "ixx": {
       "inputs": {
         "flake-utils": [
@@ -198,6 +253,18 @@
         "ref": "v0.1.1",
         "repo": "ixx",
         "type": "github"
+      }
+    },
+    "lucide-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-W9tg40ZpsMBHy2V9XpUiRbzRHqf/3sicHNCEsTAg59A=",
+        "type": "file",
+        "url": "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"
       }
     },
     "nix-fonts": {
@@ -335,6 +402,38 @@
     },
     "nixpkgs_7": {
       "locked": {
+        "lastModified": 1741513245,
+        "narHash": "sha256-7rTAMNTY1xoBwz0h7ZMtEcd8LELk9R5TzBPoHuhNSCk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e3e32b642a31e6714ec1b712de8c91a3352ce7e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_8": {
+      "locked": {
+        "lastModified": 1773628058,
+        "narHash": "sha256-hpXH0z3K9xv0fHaje136KY872VT2T5uwxtezlAskQgY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f8573b9c935cfaa162dd62cc9e75ae2db86f85df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_9": {
+      "locked": {
         "lastModified": 1775126147,
         "narHash": "sha256-J0dZU4atgcfo4QvM9D92uQ0Oe1eLTxBVXjJzdEMQpD0=",
         "owner": "NixOS",
@@ -412,6 +511,85 @@
         "type": "github"
       }
     },
+    "pipances": {
+      "inputs": {
+        "blueprint": "blueprint_3",
+        "daisyui-css": "daisyui-css",
+        "htmx-js": "htmx-js",
+        "htmx-response-targets-js": "htmx-response-targets-js",
+        "lucide-js": "lucide-js",
+        "nixpkgs": "nixpkgs_8",
+        "pyproject-build-systems": "pyproject-build-systems",
+        "pyproject-nix": "pyproject-nix",
+        "uv2nix": "uv2nix",
+        "vega-embed-js": "vega-embed-js",
+        "vega-js": "vega-js",
+        "vega-lite-js": "vega-lite-js"
+      },
+      "locked": {
+        "lastModified": 1775991638,
+        "narHash": "sha256-u1I3PIVN9QBK8uIcMwZQ80//O04lFCYuovmoxfktulM=",
+        "owner": "rutrum",
+        "repo": "pipances",
+        "rev": "8fde4d5ce39c4a64e8d96364daf94dfa910b575f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rutrum",
+        "repo": "pipances",
+        "type": "github"
+      }
+    },
+    "pyproject-build-systems": {
+      "inputs": {
+        "nixpkgs": [
+          "pipances",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "pipances",
+          "pyproject-nix"
+        ],
+        "uv2nix": [
+          "pipances",
+          "uv2nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773870109,
+        "narHash": "sha256-ZoTdqZP03DcdoyxvpFHCAek4bkPUTUPUF3oCCgc3dP4=",
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "rev": "b6e74f433b02fa4b8a7965ee24680f4867e2926f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "type": "github"
+      }
+    },
+    "pyproject-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "pipances",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773909723,
+        "narHash": "sha256-HmcZQ/hMPHR22Ri/6Sl7Z0B5J8nZa9bRnZJtDFInM7I=",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "rev": "d37dcf34ac7194eac4b0d10520d01298c434267d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "blueprint": "blueprint",
@@ -424,13 +602,14 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "openspec": "openspec",
+        "pipances": "pipances",
         "sops-nix": "sops-nix",
         "vpn-confinement": "vpn-confinement"
       }
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_7"
+        "nixpkgs": "nixpkgs_9"
       },
       "locked": {
         "lastModified": 1775682595,
@@ -519,6 +698,82 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "systems_6": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "uv2nix": {
+      "inputs": {
+        "nixpkgs": [
+          "pipances",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "pipances",
+          "pyproject-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773958975,
+        "narHash": "sha256-Lr2k67KFPxPLqMtCWvwfg30S8huAEpEY9UcXHfi1Q+4=",
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "rev": "ffd52b90f29babbc4f309c29f2a2cdd6547be443",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "type": "github"
+      }
+    },
+    "vega-embed-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-rOzLkTwFpdItHJLjWIpVdH2voaANv+/Wm1ZBX0ZApcQ=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js"
+      }
+    },
+    "vega-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-AjCcAjVbblqPa2JjWutf+6TVf+74kyHnKhScwEXKEYI=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js"
+      }
+    },
+    "vega-lite-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-kiBlWn//UFjjhubudlGYxiTagZ+WILsw6fd4J1uQdns=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js"
       }
     },
     "vpn-confinement": {
