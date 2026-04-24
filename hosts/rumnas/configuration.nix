@@ -14,7 +14,7 @@
     ./openrgb.nix
     ./immich.nix
     ./adguardhome.nix
-    ./qbittorrent.nix
+    ./arr.nix
 
     # containerized
     ./nocodb.nix
@@ -144,6 +144,7 @@
         jellyfin.port = 8096;
         ersatztv.port = 8409;
         lubelogger.port = 8084;
+
         # rumtower services (proxied remotely)
         paperless.port = 8000;
         calibre-web.port = 8083;

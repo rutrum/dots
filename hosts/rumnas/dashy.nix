@@ -136,6 +136,18 @@
             icon = "hl-qbittorrent";
             url = "http://qbittorrent.rum.internal";
           }
+          {
+            title = "Prowlarr";
+            description = "Indexer";
+            icon = "hl-prowlarr";
+            url = "http://prowlarr.rum.internal";
+          }
+          {
+            title = "Sonarr";
+            description = "TV fetcher";
+            icon = "hl-sonarr";
+            url = "http://sonarr.rum.internal";
+          }
         ];
       }
       {
