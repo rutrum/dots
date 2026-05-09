@@ -29,18 +29,6 @@
             url = "http://adguard.rum.internal";
           }
           {
-            title = "Jellyfin";
-            description = "Home media server";
-            icon = "hl-jellyfin";
-            url = "http://jellyfin.rum.internal";
-          }
-          {
-            title = "ErsatzTV";
-            description = "Stream TV channels";
-            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";
-            url = "http://ersatztv.rum.internal";
-          }
-          {
             title = "Octoprint";
             description = "3D printing";
             icon = "hl-octoprint";
@@ -130,11 +118,28 @@
             icon = "hl-romm";
             url = "http://romm.rum.internal";
           }
+        ];
+      }
+      {
+        name = "Media";
+        items = [
           {
-            title = "qBittorrent";
-            description = "Torrent client";
-            icon = "hl-qbittorrent";
-            url = "http://qbittorrent.rum.internal";
+            title = "Jellyfin";
+            description = "Home media server";
+            icon = "hl-jellyfin";
+            url = "http://jellyfin.rum.internal";
+          }
+          {
+            title = "ErsatzTV";
+            description = "Stream TV channels";
+            icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ersatztv.svg";
+            url = "http://ersatztv.rum.internal";
+          }
+          {
+            title = "Sonarr";
+            description = "TV fetcher";
+            icon = "hl-sonarr";
+            url = "http://sonarr.rum.internal";
           }
           {
             title = "Prowlarr";
@@ -143,10 +148,10 @@
             url = "http://prowlarr.rum.internal";
           }
           {
-            title = "Sonarr";
-            description = "TV fetcher";
-            icon = "hl-sonarr";
-            url = "http://sonarr.rum.internal";
+            title = "qBittorrent";
+            description = "Torrent client";
+            icon = "hl-qbittorrent";
+            url = "http://qbittorrent.rum.internal";
           }
         ];
       }

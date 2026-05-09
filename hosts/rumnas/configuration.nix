@@ -216,11 +216,14 @@
       shell = pkgs.bashInteractive;
     };
     groups.reolink = {};
+    groups.media = {}; # shared group for all media-related services
 
     users.rutrum.extraGroups = [
-      "jellyfin" # media directory
+      "media"
       "paperless" # consume directory
     ];
+
+    users.jellyfin.extraGroups = ["media"];
   };
 
   environment.systemPackages = with pkgs; [
