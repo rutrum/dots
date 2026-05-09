@@ -106,3 +106,4 @@ In home-manager modules, use `pkgs-unstable.<package>` (provided via `_module.ar
 ```
 
 In NixOS modules, use `perSystem.nixpkgs-unstable.<package>` (note: this does not have `allowUnfree` configured).
+
