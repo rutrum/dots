@@ -16,6 +16,7 @@
   hostServices = {
     prowlarr.webuiPort = 9696;
     sonarr.webuiPort = 8989;
+    radarr.webuiPort = 7878;
     flaresolverr.webuiPort = 8191;
   };
 
@@ -68,6 +69,11 @@ in {
     openFirewall = true;
   };
 
+  services.radarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.flaresolverr = {
     enable = true;
     openFirewall = true;
@@ -88,6 +94,7 @@ in {
       hostServices);
 
   users.users.sonarr.extraGroups = ["media"];
+  users.users.radarr.extraGroups = ["media"];
   users.users.qbittorrent.extraGroups = ["media"];
 
   systemd.tmpfiles.rules = [
@@ -95,6 +102,7 @@ in {
     "d /mnt/raid/homes/rutrum/downloads/torrents             0775 rutrum media -"
     "d /mnt/raid/homes/rutrum/downloads/torrents/sonarr      0775 rutrum media -"
     "d /mnt/raid/homes/rutrum/downloads/torrents/unsorted    0775 rutrum media -"
+    "d /mnt/raid/homes/rutrum/downloads/torrents/radarr      0775 rutrum media -"
   ];
 
   systemd.services =

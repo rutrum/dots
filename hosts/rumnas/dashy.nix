@@ -136,10 +136,22 @@
             url = "http://ersatztv.rum.internal";
           }
           {
+            title = "WeatherStar 4000+";
+            description = "Retro 90s Weather Channel";
+            icon = "https://weatherstar.netbymatt.com/logos/app-icon-180.png";
+            url = "http://weatherstar.rum.internal";
+          }
+          {
             title = "Sonarr";
             description = "TV fetcher";
             icon = "hl-sonarr";
             url = "http://sonarr.rum.internal";
+          }
+          {
+            title = "Radarr";
+            description = "Movie fetcher";
+            icon = "hl-radarr";
+            url = "http://radarr.rum.internal";
           }
           {
             title = "Prowlarr";
