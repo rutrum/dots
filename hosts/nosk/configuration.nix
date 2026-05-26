@@ -65,7 +65,6 @@
   environment.systemPackages = with pkgs; [
     git
     neovim
-    home-manager
     hugo
     zola
   ];

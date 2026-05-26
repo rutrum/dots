@@ -31,8 +31,9 @@
             # Pull latest changes
             ${pkgs.git}/bin/git pull
 
-            # Build with nix and copy to serve directory (rsync deletes stale files)
-            ${pkgs.nix}/bin/nix build --no-link --print-out-paths | xargs -I{} ${pkgs.rsync}/bin/rsync -a --delete {}/ /srv/http/admin-docs/
+            # Build with nix and copy to serve directory
+            OUT_PATH=$(${pkgs.nix}/bin/nix build --no-link --print-out-paths --refresh)
+            cp -r "$OUT_PATH"/* /srv/http/admin-docs/
 
             echo "Successfully built admin-docs"
           '';

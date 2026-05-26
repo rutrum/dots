@@ -24,7 +24,7 @@
 
     # local binary cache
     substituters = [
-      "http://192.168.50.3:9999"
+      #"http://192.168.50.3:9999"
     ];
     trusted-public-keys = [
       "key-name:tXEK2NB+ic7kY8f+FgQ2kqZ/aY8HLuDdLsvKB68cuKU="

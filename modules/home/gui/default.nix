@@ -66,6 +66,7 @@
         xonotic
         lumafly # hallow knight mod manager
         prismlauncher # minecraft launcher
+        javaPackages.compiler.temurin-bin.jre-25
         airshipper # game launcher for veloren
         archipelago # utilities for archipelago servers
       ];
