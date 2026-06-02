@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "alpine-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-puJBvBaHVqKaKYCngvzz+Y8rUF99evd+UCtGuXd3YMY=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
+      }
+    },
     "blueprint": {
       "inputs": {
         "nixpkgs": [
@@ -511,14 +523,37 @@
         "type": "github"
       }
     },
+    "openspec_2": {
+      "inputs": {
+        "nixpkgs": [
+          "pipances",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778774456,
+        "narHash": "sha256-4V35mdLWax+GfuUK6hv2Vgri6N/vAJApjuCB3ROOY6w=",
+        "owner": "Fission-AI",
+        "repo": "OpenSpec",
+        "rev": "8498042fe8a738e8ad6facd94a5fc7f5025bf81d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Fission-AI",
+        "repo": "OpenSpec",
+        "type": "github"
+      }
+    },
     "pipances": {
       "inputs": {
+        "alpine-js": "alpine-js",
         "blueprint": "blueprint_3",
         "daisyui-css": "daisyui-css",
         "htmx-js": "htmx-js",
         "htmx-response-targets-js": "htmx-response-targets-js",
         "lucide-js": "lucide-js",
         "nixpkgs": "nixpkgs_8",
+        "openspec": "openspec_2",
         "pyproject-build-systems": "pyproject-build-systems",
         "pyproject-nix": "pyproject-nix",
         "uv2nix": "uv2nix",
@@ -527,11 +562,11 @@
         "vega-lite-js": "vega-lite-js"
       },
       "locked": {
-        "lastModified": 1775991638,
-        "narHash": "sha256-u1I3PIVN9QBK8uIcMwZQ80//O04lFCYuovmoxfktulM=",
+        "lastModified": 1779795299,
+        "narHash": "sha256-kr4PbXp/PxR5X5IchZKjibfadQHlye0f0tGnPDNf4rE=",
         "owner": "rutrum",
         "repo": "pipances",
-        "rev": "8fde4d5ce39c4a64e8d96364daf94dfa910b575f",
+        "rev": "6844ddc15d45ee76c57e4d558f9d1e9e14807562",
         "type": "github"
       },
       "original": {
