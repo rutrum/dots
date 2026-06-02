@@ -25,7 +25,6 @@
         zathura
         vlc
         anki-bin
-        bitwarden-desktop
         sxiv
         rxvt-unicode
       ];
@@ -61,7 +60,7 @@
     # gaming module
     (lib.mkIf config.me.gaming.enable {
       home.packages = with pkgs; [
-        superTuxKart
+        supertuxkart
         mindustry
         xonotic
         lumafly # hallow knight mod manager

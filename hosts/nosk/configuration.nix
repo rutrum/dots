@@ -25,8 +25,6 @@
     trusted-users = ["rutrum"];
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   # Locale settings
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";

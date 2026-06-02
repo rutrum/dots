@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
 
     blueprint = {
       url = "github:numtide/blueprint";
@@ -11,7 +11,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,7 +19,7 @@
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
 
     # colorscheme
-    catppuccin.url = "github:catppuccin/nix/release-25.05";
+    catppuccin.url = "github:catppuccin/nix/release-26.05";
 
     # declaratively manage flatpaks
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
@@ -33,7 +33,7 @@
     };
 
     # configure neovim and neovim plugins with nix
-    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
     # google fonts and other font sources
     nix-fonts.url = "github:rutrum/nix-fonts";

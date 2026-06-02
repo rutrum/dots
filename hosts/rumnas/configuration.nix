@@ -201,6 +201,7 @@
     };
   };
   boot.swraid.enable = true;
+  boot.swraid.mdadmConf = "PROGRAM /run/current-system/sw/bin/true";
 
   networking.firewall.enable = false; # remove this sometime? please uwu?
 

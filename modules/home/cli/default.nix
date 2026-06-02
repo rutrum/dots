@@ -74,6 +74,7 @@
 
     yazi = {
       enable = true;
+      shellWrapperName = "yy";
 
       enableFishIntegration = true;
       enableBashIntegration = true;
@@ -124,7 +125,7 @@
     fzf
     watchexec
     pkgs-unstable.yt-dlp
-    neofetch
+    fastfetch
     trash-cli
     wget
     cmus

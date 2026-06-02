@@ -17,8 +17,6 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/rutrum/.config/sops/age/keys.txt";
 
-  nixpkgs.config.allowUnfree = true;
-
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
 

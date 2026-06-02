@@ -21,6 +21,7 @@
 
     programs.firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
 
       profiles.normal = {
         name = "normal";
