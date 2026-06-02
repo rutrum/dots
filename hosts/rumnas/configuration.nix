@@ -36,6 +36,7 @@
     inputs.self.nixosModules.nvidia
     inputs.self.nixosModules.local-ai
     inputs.self.nixosModules.caddy-proxy
+    inputs.self.nixosModules.weatherstar
     inputs.self.nixosModules.alloy
   ];
 
@@ -128,6 +129,10 @@
       openFirewall = true;
     };
 
+    weatherstar = {
+      enable = true;
+    };
+
     openssh.enable = true;
 
     caddyProxy = {
@@ -144,6 +149,7 @@
         jellyfin.port = 8096;
         ersatztv.port = 8409;
         lubelogger.port = 8084;
+        weatherstar.port = 8086;
 
         # rumtower services (proxied remotely)
         paperless.port = 8000;

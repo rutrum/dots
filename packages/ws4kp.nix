@@ -22,7 +22,7 @@ pkgs.buildNpmPackage {
 
     mkdir -p $out/lib/ws4kp $out/bin
 
-    cp -r server datagenerators proxy src index.mjs package.json node_modules \
+    cp -r server datagenerators proxy src views index.mjs package.json node_modules \
       $out/lib/ws4kp/
 
     # The app reads data files with relative paths, so pin the working directory
