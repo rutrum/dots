@@ -63,6 +63,7 @@
         security = {
           allow_embedding = true;
           cookie_samesite = "disabled";
+          secret_key = "$__file{${config.sops.secrets."grafana/secret_key".path}}";
         };
       };
     };
@@ -165,6 +166,11 @@
       desktopManager.cinnamon.enable = true;
       displayManager.lightdm.enable = true;
     };
+  };
+
+  sops.secrets."grafana/secret_key" = {
+    owner = "grafana";
+    restartUnits = ["grafana.service"];
   };
 
   # stop sleeping/hibernating/suspend
