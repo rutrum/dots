@@ -113,10 +113,22 @@
             url = "http://immich.rum.internal";
           }
           {
+            title = "LubeLogger";
+            description = "Vehicle maintenance tracker";
+            icon = "https://raw.githubusercontent.com/hargata/lubelogger/master/static/pwa/icons/icon-512x512.png";
+            url = "http://lubelogger.rum.internal";
+          }
+          {
             title = "RomM";
             description = "Game manager";
             icon = "hl-romm";
             url = "http://romm.rum.internal";
+          }
+          {
+            title = "ConvertX";
+            description = "Online file converter";
+            icon = "favicon";
+            url = "http://convertx.rum.internal";
           }
         ];
       }
@@ -158,6 +170,12 @@
             description = "Indexer";
             icon = "hl-prowlarr";
             url = "http://prowlarr.rum.internal";
+          }
+          {
+            title = "Lidarr";
+            description = "Music fetcher";
+            icon = "hl-lidarr";
+            url = "http://lidarr.rum.internal";
           }
           {
             title = "qBittorrent";

@@ -136,6 +136,7 @@
       dig
       #dnsutils
       lftp # ftps client
+      lynx # terminal browser for xdg-open
 
       # nix
       nix-tree # look at nix package dependencies

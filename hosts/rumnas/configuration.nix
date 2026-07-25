@@ -18,6 +18,7 @@
 
     # containerized
     ./nocodb.nix
+    ./calibre-web.nix
     ./romm.nix
     ./freshrss.nix
     ./dashy.nix
@@ -38,6 +39,7 @@
     inputs.self.nixosModules.caddy-proxy
     inputs.self.nixosModules.weatherstar
     inputs.self.nixosModules.alloy
+    inputs.self.nixosModules.convertx
   ];
 
   networking.hostName = "rumnas";
@@ -115,15 +117,6 @@
       };
     };
 
-    calibre-web = {
-      enable = true;
-      openFirewall = true;
-      listen.ip = "0.0.0.0";
-      options = {
-        calibreLibrary = "/mnt/raid/homes/rutrum/books";
-      };
-    };
-
     lubelogger = {
       enable = true;
       port = 8084;
@@ -132,6 +125,18 @@
 
     weatherstar = {
       enable = true;
+    };
+
+    convertx = {
+      enable = true;
+      openFirewall = true;
+      dataDir = "/mnt/raid/services/convertx";
+      environment = {
+        ACCOUNT_REGISTRATION = "false";
+        HTTP_ALLOWED = "true";
+        ALLOW_UNAUTHENTICATED = "false";
+        AUTO_DELETE_EVERY_N_HOURS = "24";
+      };
     };
 
     openssh.enable = true;
@@ -151,6 +156,7 @@
         ersatztv.port = 8409;
         lubelogger.port = 8084;
         weatherstar.port = 8086;
+        convertx.port = 3000;
 
         # rumtower services (proxied remotely)
         paperless.port = 8000;
