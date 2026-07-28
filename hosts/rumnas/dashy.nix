@@ -115,7 +115,7 @@
           {
             title = "LubeLogger";
             description = "Vehicle maintenance tracker";
-            icon = "https://raw.githubusercontent.com/hargata/lubelogger/master/static/pwa/icons/icon-512x512.png";
+            icon = "favicon";
             url = "http://lubelogger.rum.internal";
           }
           {
@@ -129,6 +129,12 @@
             description = "Online file converter";
             icon = "favicon";
             url = "http://convertx.rum.internal";
+          }
+          {
+            title = "LocalAI";
+            description = "Local LLM inference server";
+            icon = "favicon";
+            url = "http://local-ai.rum.internal";
           }
         ];
       }
@@ -150,7 +156,7 @@
           {
             title = "WeatherStar 4000+";
             description = "Retro 90s Weather Channel";
-            icon = "https://weatherstar.netbymatt.com/logos/app-icon-180.png";
+            icon = "favicon";
             url = "http://weatherstar.rum.internal";
           }
           {
@@ -232,14 +238,14 @@
           {
             title = "Tailscale";
             description = "Mesh VPN service";
+            icon = "hl-tailscale";
             url = "https://login.tailscale.com/login";
-            icon = "favicon";
           }
           {
             title = "Proton";
             description = "Email provider";
+            icon = "hl-proton";
             url = "https://account.proton.me/login";
-            icon = "favicon";
           }
           {
             title = "BorgBase";

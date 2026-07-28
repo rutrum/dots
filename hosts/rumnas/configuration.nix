@@ -39,7 +39,7 @@
     inputs.self.nixosModules.caddy-proxy
     inputs.self.nixosModules.weatherstar
     inputs.self.nixosModules.alloy
-    inputs.self.nixosModules.convertx
+    #inputs.self.nixosModules.convertx
   ];
 
   networking.hostName = "rumnas";
@@ -74,6 +74,13 @@
     mealie = {
       enable = true;
       port = 9000;
+      settings = {
+        OPENAI_BASE_URL = "http://local-ai.rum.internal/v1";
+        OPENAI_API_KEY = "local-ai-dummy-key";
+        OPENAI_MODEL = "gemma-4-12b-it-qat-q4_0";
+        OPENAI_WORKERS = "2";
+        OPENAI_ENABLE_IMAGE_SERVICES = "true";
+      };
     };
 
     ntfy-sh = {
@@ -127,17 +134,18 @@
       enable = true;
     };
 
-    convertx = {
-      enable = true;
-      openFirewall = true;
-      dataDir = "/mnt/raid/services/convertx";
-      environment = {
-        ACCOUNT_REGISTRATION = "false";
-        HTTP_ALLOWED = "true";
-        ALLOW_UNAUTHENTICATED = "false";
-        AUTO_DELETE_EVERY_N_HOURS = "24";
-      };
-    };
+    #convertx = {
+    #enable = true;
+    #openFirewall = true;
+    #port = 8099;
+    #dataDir = "/mnt/raid/services/convertx";
+    #environment = {
+    #ACCOUNT_REGISTRATION = "false";
+    #HTTP_ALLOWED = "true";
+    #ALLOW_UNAUTHENTICATED = "false";
+    #AUTO_DELETE_EVERY_N_HOURS = "24";
+    #};
+    #};
 
     openssh.enable = true;
 
@@ -156,7 +164,8 @@
         ersatztv.port = 8409;
         lubelogger.port = 8084;
         weatherstar.port = 8086;
-        convertx.port = 3000;
+        #convertx.port = 8099;
+        local-ai.port = 8089;
 
         # rumtower services (proxied remotely)
         paperless.port = 8000;
