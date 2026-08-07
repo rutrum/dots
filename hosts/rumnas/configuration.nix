@@ -64,7 +64,7 @@
         server = {
           http_addr = "0.0.0.0";
           http_port = 3000;
-          domain = "rumnas.lynx-chromatic.ts.net";
+          domain = "grafana.rum.internal";
         };
 
         security = {
@@ -90,7 +90,7 @@
     ntfy-sh = {
       enable = true;
       settings = {
-        base-url = "http://rumnas.lynx-chromatic.ts.net";
+        base-url = "http://ntfy.rum.internal";
         listen-http = ":8888";
       };
     };
@@ -118,11 +118,11 @@
 
     jellyfin = {
       enable = true;
-      openFirewall = true;
+      # openFirewall = true; # Caddy-only: reached via jellyfin.rum.internal
     };
     ersatztv = {
       enable = true;
-      openFirewall = true;
+      # openFirewall = true; # Caddy-only
       environment = {
         ETV_UI_PORT = "8409";
       };
@@ -131,7 +131,7 @@
     lubelogger = {
       enable = true;
       port = 8084;
-      openFirewall = true;
+      # openFirewall = true; # Caddy-only (binds loopback anyway)
     };
 
     weatherstar = {
@@ -231,7 +231,17 @@
   boot.swraid.enable = true;
   boot.swraid.mdadmConf = "PROGRAM /run/current-system/sw/bin/true";
 
-  networking.firewall.enable = false; # remove this sometime? please uwu?
+  # Lockdown: only Caddy (:80) + DNS + infrastructure ports are exposed to the
+  # LAN/tailnet. All web UIs are reached via *.rum.internal through Caddy.
+  networking.firewall = {
+    enable = true;
+    # Tailnet traffic and the VPN namespace bridge (arr <-> qBittorrent) are trusted.
+    trustedInterfaces = ["tailscale0" "wg-br"];
+    # Avoid rp_filter drops with 5 podman bridges + exit-node forwarding.
+    checkReversePath = "loose";
+    # AdGuard DNS-over-TCP (clients fall back to TCP on large/truncated responses).
+    allowedTCPPorts = [53];
+  };
 
   # Allow rutrum to trigger the backup service via SSH from rumtower
   security.sudo.extraRules = [

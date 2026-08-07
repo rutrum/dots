@@ -8,7 +8,7 @@
 in {
   services.calibre-web = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only: reached via calibre-web.rum.internal
     listen.ip = "0.0.0.0";
     group = "media";
     options = {

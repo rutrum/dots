@@ -21,7 +21,7 @@ in {
   virtualisation.oci-containers.containers = {
     romm = {
       image = "rommapp/romm:4.5.0";
-      ports = ["8087:8080"];
+      ports = ["127.0.0.1:8087:8080"]; # loopback-only: Caddy proxies to it
       volumes = [
         "/mnt/raid/homes/rutrum/romm/library:/romm/library"
         "/mnt/raid/homes/rutrum/romm/assets:/romm/assets"

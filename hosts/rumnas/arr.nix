@@ -56,33 +56,33 @@ in {
 
   services.qbittorrent = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only: reached via wg-br trusted bridge
     webuiPort = vpnServices.qbittorrent.webuiPort;
   };
 
   services.prowlarr = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only
   };
 
   services.sonarr = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only
   };
 
   services.radarr = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only
   };
 
   services.lidarr = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only
   };
 
   services.flaresolverr = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only
     port = hostServices.flaresolverr.webuiPort;
   };
 

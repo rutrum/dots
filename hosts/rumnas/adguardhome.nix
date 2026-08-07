@@ -3,7 +3,7 @@
 
   services.adguardhome = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false; # Caddy-only: web UI via adguard.rum.internal; DNS port 53 opened explicitly below
     mutableSettings = false;
     host = "0.0.0.0";
     port = 3001;
@@ -31,7 +31,9 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [3001]; # web interface
+    # Web UI is Caddy-only (adguard.rum.internal -> 3001); TCP 53 kept for
+    # DNS-over-TCP fallback (large/truncated responses).
+    allowedTCPPorts = [53]; # dns over tcp
     allowedUDPPorts = [53]; # dns
   };
 }

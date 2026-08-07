@@ -12,7 +12,7 @@
   virtualisation.oci-containers.containers = {
     nocodb = {
       image = "nocodb/nocodb:0.264.2";
-      ports = ["8081:8080"];
+      ports = ["127.0.0.1:8081:8080"]; # loopback-only: Caddy proxies to it
       volumes = [
         "/mnt/barracuda/nocodb/data:/usr/app/data"
       ];
