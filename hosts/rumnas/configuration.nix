@@ -9,6 +9,7 @@
     inputs.vpn-confinement.nixosModules.default
     inputs.self.nixosModules.system
     ./hardware-configuration.nix
+    ./syncthing.nix
     ./fileserver.nix
     ./cache.nix
     ./openrgb.nix
@@ -21,7 +22,7 @@
     ./calibre-web.nix
     ./romm.nix
     ./freshrss.nix
-    ./dashy.nix
+    ./homepage.nix
     ./home-assistant.nix
     ./paperless.nix
 
@@ -31,6 +32,9 @@
 
     # backup
     ./borg.nix
+
+    # AI agent
+    ./hermes.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
@@ -177,9 +181,18 @@
       };
     };
 
-    # Make rum.internal (bare domain) go to Dashy
+    # Make rum.internal (bare domain) go to Homepage
     caddy.virtualHosts."http://rum.internal".extraConfig = ''
-      reverse_proxy localhost:8180
+      reverse_proxy localhost:8181
+    '';
+
+    # Hermes dashboard — override Host & Origin headers so the DNS-rebinding
+    # guard and WebSocket origin check on 127.0.0.1 accept requests from Caddy
+    caddy.virtualHosts."http://hermes.rum.internal".extraConfig = ''
+      reverse_proxy localhost:9119 {
+        header_up Host localhost
+        header_up Origin http://localhost:9119
+      }
     '';
 
     xserver = {
@@ -248,7 +261,8 @@
 
     users.rutrum.extraGroups = [
       "media"
-      "paperless" # consume directory
+      "paperless"
+      "hermes"
     ];
 
     users.jellyfin.extraGroups = ["media"];

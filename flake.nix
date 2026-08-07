@@ -43,6 +43,9 @@
 
     # personal finance management
     pipances.url = "github:rutrum/pipances";
+
+    # autonomous AI agent
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs = inputs:

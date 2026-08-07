@@ -8,8 +8,8 @@
       folders = {
         notes = {
           id = "mqkjy-xoe93";
-          path = "/mnt/barracuda/notes";
-          devices = ["pixel7" "rumprism" "rumnas"];
+          path = "/mnt/raid/homes/rutrum/notes";
+          devices = ["pixel7" "rumtower" "rumprism"];
         };
       };
     };

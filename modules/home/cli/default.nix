@@ -129,7 +129,8 @@
     trash-cli
     wget
     cmus
-    python3
+    uv
+    bun
     mediainfo
     csvlens # csv tui
     slumber # rest client

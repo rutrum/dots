@@ -11,6 +11,7 @@
       volumes = [
         "/mnt/raid/services/local-ai/models:/models"
         "/mnt/raid/services/local-ai/data:/data"
+        "/mnt/raid/services/local-ai/backends:/backends"
       ];
       extraOptions = [
         "--device"
