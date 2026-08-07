@@ -25,54 +25,47 @@
   #  "flathub-beta:app/org.openscad.OpenSCAD//beta"
   #];
 
-  home.packages = let
-    stable-packages = with pkgs; [
-      # graphical applications
-      thunderbird
-      simple-scan
-      nextcloud-client
+  home.packages = with pkgs; [
+    # graphical applications
+    thunderbird
+    simple-scan
+    nextcloud-client
 
-      # dont exist yet with nixpkgs, but cargo install works
-      #vtracer toml-cli ytop checkexec
-      discord
+    # dont exist yet with nixpkgs, but cargo install works
+    #vtracer toml-cli ytop checkexec
+    discord
 
-      rustdesk
+    rustdesk
 
-      # image editing
-      gthumb
-      upscayl # ai upscaler
-      krita
-      gimp3
-      inkscape
+    # image editing
+    gthumb
+    upscayl # ai upscaler
+    krita
+    gimp3
+    inkscape
 
-      # 3d printing
-      orca-slicer
+    # 3d printing
+    orca-slicer
 
-      # office
-      drawio
-      libreoffice
+    # office
+    drawio
+    libreoffice
 
-      # video production
-      losslesscut-bin
-      obs-studio
-      audacity
+    # video production
+    losslesscut-bin
+    obs-studio
+    audacity
 
-      # reading
-      zotero
-      calibre
+    # reading
+    zotero
+    calibre
 
-      # databases
-      dbeaver-bin
-      sqlite-jdbc
-      postgresql_jdbc
-      mysql_jdbc
-    ];
-    unstable-packages = with perSystem.nixpkgs-unstable; [
-      qbittorrent
-    ];
-    other-packages = [
-      perSystem.openspec.default
-    ];
-  in
-    stable-packages ++ unstable-packages ++ other-packages;
+    # databases
+    dbeaver-bin
+    sqlite-jdbc
+    postgresql_jdbc
+    mysql_jdbc
+
+    perSystem.openspec.default
+  ];
 }

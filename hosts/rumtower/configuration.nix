@@ -32,6 +32,16 @@
   networking.hostName = "rumtower";
   networking.hosts."192.168.50.3" = ["rumnas" "rum.internal"];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
+
   services = {
     pipances = {
       enable = true;
@@ -46,6 +56,8 @@
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
     desktopManager.plasma6.enable = true;
+
+    desktopManager.cosmic.enable = true;
 
     openssh = {
       enable = true;

@@ -68,6 +68,15 @@
         javaPackages.compiler.temurin-bin.jre-25
         airshipper # game launcher for veloren
         archipelago # utilities for archipelago servers
+        (retroarch.withCores (cores:
+          with cores; [
+            mupen64plus # n64
+            nestopia # nes
+            mgba # game boy advance
+            melonds # ds
+            dolphin # gamecube
+            dosbox-pure # dos + windows 3.x
+          ]))
       ];
 
       services.flatpak.packages = [
