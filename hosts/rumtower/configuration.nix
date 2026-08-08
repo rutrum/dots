@@ -19,13 +19,14 @@
     ./prometheus.nix
     ./poweroff.nix
 
+    ./local-ai.nix
+
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
     inputs.self.nixosModules.mouse
     inputs.self.nixosModules.qmk
     inputs.self.nixosModules.printing
-    inputs.self.nixosModules.local-ai
     inputs.self.nixosModules.alloy
   ];
 

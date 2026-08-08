@@ -33,13 +33,13 @@
     # backup
     ./borg.nix
 
-    # AI agent
+    # llms
     ./hermes.nix
+    ./local-ai.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller
     inputs.self.nixosModules.nvidia
-    inputs.self.nixosModules.local-ai
     inputs.self.nixosModules.caddy-proxy
     inputs.self.nixosModules.weatherstar
     inputs.self.nixosModules.alloy
@@ -170,6 +170,11 @@
         weatherstar.port = 8086;
         #convertx.port = 8099;
         local-ai.port = 8089;
+        "rumnas.local-ai".port = 8089;
+        "rumtower.local-ai" = {
+          port = 8089;
+          host = "rumtower";
+        };
 
         # rumtower services (proxied remotely)
         paperless.port = 8000;
