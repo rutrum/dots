@@ -73,9 +73,86 @@ All services accessible via `*.rum.internal` through Caddy. Key endpoints:
 - Dashboard: `rum.internal`
 - Grafana: `grafana.rum.internal`
 
-### Secrets
+## Managing SOPS Secrets
 
 SOPS-nix with age encryption. Keys at: `/home/rutrum/.config/sops/age/keys.txt`
+
+Secrets live in `/secrets/` as SOPS-encrypted YAML files. The default shared file is `secrets.yaml` (used by most hosts). Per-host files exist for hosts with distinct secrets (e.g. `nosk.yaml`, `saibaman.yaml`).
+
+### Adding a new secret
+
+**The AI must never run `sops` to edit encrypted files - only the user does that.**
+
+The AI can:
+1. Define the secret reference in a Nix module
+2. Wire it into configs, env vars, etc.
+
+The user then runs:
+```bash
+sops edit secrets/secrets.yaml
+```
+And adds the new entry in YAML format. 
+
+### Using secrets in Nix configs
+
+There are three common patterns in this repo:
+
+#### Pattern 1: Secret value as a file path (app reads the file)
+
+The secret contains the raw value. The Nix config passes the decrypted file path to the application.
+
+```nix
+# Define the secret
+sops.secrets."firefly/app-key" = {};
+
+# Reference the decrypted file path
+APP_KEY_FILE = secrets."firefly/app-key".path;
+```
+
+The sops file entry for this would be:
+```yaml
+firefly:
+    app-key: <encrypted-value>
+```
+
+#### Pattern 2: Environment file (KEY=VALUE format)
+
+The secret is stored as `KEY=VALUE` lines. Used in podman containers via `environmentFiles`.
+
+```nix
+# Define the secret
+sops.secrets."romm/env" = {};
+
+# In the container config
+environmentFiles = [
+  "\${secrets."romm/env".path}"
+];
+```
+
+The sops file entry for this would be:
+```yaml
+romm:
+    env: |
+        KEY1=value1
+        KEY2=value2
+```
+
+#### Pattern 3: Secret in a command string
+
+Used for things like backup passphrases where the secret value is passed via shell substitution.
+
+```nix
+sops.secrets."borg/rumnas_borgbase_passphrase".owner = "borg";
+
+passCommand = "cat \${secrets."borg/rumnas_borgbase_passphrase".path}";
+```
+
+### Important rules
+
+- **The AI never edits `.yaml` files in `/secrets/`.** Those are SOPS-encrypted and must be opened with `sops` by the user.
+- The AI defines the Nix module side (the `sops.secrets."..."` references and how they're wired in).
+- Secret ownership (`owner`) should match the user/group that needs to read it at runtime.
+- The decrypted files appear at `/run/secrets/<path>` at activation time.
 
 ## Common Workflows
 
@@ -106,4 +183,3 @@ In home-manager modules, use `pkgs-unstable.<package>` (provided via `_module.ar
 ```
 
 In NixOS modules, use `perSystem.nixpkgs-unstable.<package>` (note: this does not have `allowUnfree` configured).
-
