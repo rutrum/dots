@@ -10,7 +10,7 @@ in {
   virtualisation.oci-containers.containers = {
     freshrss = {
       image = "freshrss/freshrss:1.26.2";
-      ports = ["8085:80"];
+      ports = ["127.0.0.1:8085:80"]; # loopback-only: Caddy proxies to it
       volumes = [
         "${mount_dir}/data:/var/www/FreshRSS/data"
         "${mount_dir}/extensions:/var/www/FreshRSS/extensions"

@@ -19,7 +19,7 @@ in {
   virtualisation.oci-containers.containers = {
     home-assistant = {
       image = "ghcr.io/home-assistant/home-assistant:2025.5";
-      ports = ["8082:8123" "1400:1400"];
+      ports = ["127.0.0.1:8082:8123" "127.0.0.1:1400:1400"]; # loopback-only: Caddy proxies to 8082
       volumes = [
         "/root/volumes/home-assistant/config:/config"
         "/etc/localtime:/etc/localtime:ro"

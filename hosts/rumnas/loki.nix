@@ -42,6 +42,8 @@
     };
   };
 
+  # Machine-to-machine: rumtower's Alloy pushes logs here directly over LAN.
+  # Not a web UI — intentionally kept open (only listener is the Loki API).
   networking.firewall.allowedTCPPorts = [3100];
 
   # Enable Alloy to ship local logs to Loki

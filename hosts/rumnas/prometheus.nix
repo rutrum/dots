@@ -19,7 +19,7 @@
   # Uses host.containers.internal to reach AdGuard on the host
   virtualisation.oci-containers.containers.adguard-exporter = {
     image = "ghcr.io/henrywhitaker3/adguard-exporter:latest";
-    ports = ["9618:9618"];
+    ports = ["127.0.0.1:9618:9618"]; # loopback-only: prometheus scrapes locally
     environmentFiles = [
       config.sops.templates."adguard-exporter.env".path
     ];
@@ -163,7 +163,7 @@
       node = {
         enable = true;
         port = 9100;
-        openFirewall = true;
+        # openFirewall = true; # Caddy-only: prometheus scrapes locally
         enabledCollectors = [
           "systemd"
           "logind"
@@ -175,19 +175,19 @@
       smartctl = {
         enable = true;
         port = 9633;
-        openFirewall = true;
+        # openFirewall = true; # Caddy-only: prometheus scrapes locally
       };
 
       nvidia-gpu = {
         enable = true;
         port = 9835;
-        openFirewall = true;
+        # openFirewall = true; # Caddy-only: prometheus scrapes locally
       };
 
       blackbox = {
         enable = true;
         port = 9115;
-        openFirewall = true;
+        # openFirewall = true; # Caddy-only: prometheus scrapes locally
         configFile = pkgs.writeText "blackbox.yml" ''
           modules:
             icmp:

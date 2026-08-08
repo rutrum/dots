@@ -1,5 +1,5 @@
 {perSystem, ...}: {
-  networking.firewall.allowedTCPPorts = [8000];
+  # openFirewall removed: Caddy-only, reached via paperless.rum.internal
 
   services.paperless = {
     enable = true;

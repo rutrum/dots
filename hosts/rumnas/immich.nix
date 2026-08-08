@@ -7,7 +7,7 @@
 
     host = "0.0.0.0";
     port = 2283;
-    openFirewall = true;
+    # openFirewall = true; # Caddy-only: reached via immich.rum.internal
     accelerationDevices = null;
 
     mediaLocation = "/mnt/raid/immich";
@@ -18,7 +18,7 @@
   virtualisation.oci-containers.containers = {
     immich-kiosk = {
       image = "ghcr.io/damongolding/immich-kiosk:latest";
-      ports = ["9019:3000"];
+      ports = ["127.0.0.1:9019:3000"]; # loopback-only: Caddy proxies to it
       environment = {
         KIOSK_IMMICH_URL = "http://host.containers.internal:2283";
         KIOSK_IMMICH_API_KEY = "F1rt9bxYZu3WIcIHMatbpkNWU9fsmPHwUhDfEY4HRNQ";
