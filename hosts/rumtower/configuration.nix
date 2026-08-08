@@ -19,7 +19,8 @@
     ./prometheus.nix
     ./poweroff.nix
 
-    ./local-ai.nix
+    # one day for federation
+    # ./local-ai.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller

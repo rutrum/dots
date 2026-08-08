@@ -1,16 +1,12 @@
-{...}: {
+{config, ...}: let
+  secrets = config.sops.secrets;
+in {
   virtualisation.oci-containers.containers.local-ai = {
     image = "localai/localai:latest-gpu-nvidia-cuda-13";
     autoStart = true;
-    environment = {
-      THREADS = "16";
-      DEBUG = "false";
-      LOCALAI_ADDRESS = ":8089";
-    };
-    volumes = [
-      "/home/rutrum/local-ai/models:/models"
-      "/home/rutrum/local-ai/data:/data"
-      "/home/rutrum/local-ai/backends:/backends"
+    cmd = ["worker" "p2p-llama-cpp-rpc"];
+    environmentFiles = [
+      "${secrets."local-ai/env".path}"
     ];
     extraOptions = [
       "--network=host"
@@ -18,4 +14,6 @@
       "nvidia.com/gpu=all"
     ];
   };
+
+  sops.secrets."local-ai/env" = {};
 }

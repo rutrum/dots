@@ -1,4 +1,4 @@
-{...}: {
+{}: {
   virtualisation.oci-containers.containers.local-ai = {
     image = "localai/localai:latest-gpu-nvidia-cuda-13";
     autoStart = true;
@@ -6,6 +6,7 @@
       THREADS = "8";
       DEBUG = "false";
       LOCALAI_ADDRESS = ":8089";
+      LOCALAI_P2P = "true";
     };
     volumes = [
       "/mnt/raid/services/local-ai/models:/models"
