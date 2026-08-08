@@ -156,9 +156,16 @@
         {
           AI = [
             {
-              LocalAI = {
+              "LocalAI (rumnas)" = {
                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/localai.webp";
                 href = "http://local-ai.rum.internal";
+                description = "Local LLM inference server";
+              };
+            }
+            {
+              "LocalAI (rumtower)" = {
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/localai.webp";
+                href = "http://rumtower.local-ai.rum.internal";
                 description = "Local LLM inference server";
               };
             }
