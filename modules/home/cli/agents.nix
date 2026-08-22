@@ -14,6 +14,13 @@ in {
 
   home.sessionPath = ["${config.home.homeDirectory}/.npm-global/bin"];
 
+  home.file.".pi/agent/settings.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/settings.json";
+  home.file.".pi/agent/models.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/models.json";
+  home.file.".agents/skills".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/skills";
+
   programs = {
     opencode = {
       enable = true;
