@@ -26,6 +26,7 @@ in {
       pkgs-unstable.beads
       pkgs-unstable.pi-coding-agent
       nodejs
+      flake.inputs.llm-agents.packages.${pkgs.system}.qmd
     ]
     ++ lib.optionals gui.enable [
       flake.packages.${pkgs.system}.agent-browser

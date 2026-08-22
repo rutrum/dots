@@ -37,6 +37,8 @@
 
     rustdesk
 
+    forgejo-cli
+
     # image editing
     gthumb
     upscayl # ai upscaler

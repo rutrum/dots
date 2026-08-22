@@ -1,4 +1,4 @@
-{}: {
+{...}: {
   virtualisation.oci-containers.containers.local-ai = {
     image = "localai/localai:latest-gpu-nvidia-cuda-13";
     autoStart = true;

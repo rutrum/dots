@@ -49,6 +49,7 @@ in {
       paths = [
         "/mnt/raid/services/paperless"
         "/mnt/raid/services/freshrss"
+        "/mnt/raid/backups/forgejo"
         "/mnt/raid/immich/library"
         "/mnt/raid/immich/upload"
         "/mnt/raid/immich/profile"

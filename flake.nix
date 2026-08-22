@@ -46,6 +46,9 @@
 
     # autonomous AI agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
+
+    # packages for ai coding agents and tools
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs = inputs:

@@ -100,9 +100,16 @@
             }
             {
               ConvertX = {
-                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/convertx.webp";
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/main/webp/convertx.webp";
                 href = "http://convertx.rum.internal";
                 description = "Online file converter";
+              };
+            }
+            {
+              Forgejo = {
+                icon = "forgejo";
+                href = "http://forgejo.rum.internal";
+                description = "Git forge";
               };
             }
           ];

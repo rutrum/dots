@@ -25,6 +25,7 @@
     ./homepage.nix
     ./home-assistant.nix
     ./paperless.nix
+    ./forgejo.nix
 
     # monitoring
     ./prometheus.nix
