@@ -1,0 +1,9 @@
+{
+  "name": "git-block",
+  "dependencies": {
+    "unbash": "^4.0.10"
+  },
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}

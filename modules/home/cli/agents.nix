@@ -19,6 +19,8 @@ in {
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/settings.json";
   home.file.".pi/agent/models.json".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/models.json";
+  home.file.".pi/agent/extensions".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/extensions";
   home.file.".agents/skills".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/skills";
 
