@@ -84,9 +84,9 @@
           }
 
           # just completions
-          eval "$(${pkgs.just}/bin/just --completions bash)"
+          eval "$(JUST_COMPLETE=bash ${pkgs.just}/bin/just)"
           # j completions
-          complete -F _just -o bashdefault -o default j
+          complete -F _clap_complete_just -o bashdefault -o default j
         '';
         profileExtra = ''
           VISUAL='nvim'

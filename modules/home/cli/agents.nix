@@ -4,6 +4,7 @@
   pkgs-unstable,
   lib,
   flake,
+  inputs,
   ...
 }: let
   inherit (config.me) gui;
@@ -30,8 +31,7 @@ in {
 
   home.packages = with pkgs;
     [
-      pkgs-unstable.beads
-      pkgs-unstable.pi-coding-agent
+      inputs.llm-agents.packages.${pkgs.system}.pi
       nodejs
       flake.inputs.llm-agents.packages.${pkgs.system}.qmd
     ]
