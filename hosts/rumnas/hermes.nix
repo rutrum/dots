@@ -2,13 +2,31 @@
   config,
   lib,
   pkgs,
+  flake,
   inputs,
   ...
-}: {
-  imports = [inputs.hermes-agent.nixosModules.default];
+}: let
+  hermes-base = inputs.hermes-agent.packages.${pkgs.system}.default;
+
+  patched-adapter = pkgs.runCommand "patched-simplex-adapter" {} ''
+    mkdir -p $out/share/hermes-agent/plugins/platforms/simplex
+    cat ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/adapter.py \
+      | ${pkgs.python3}/bin/python3 ${../../packages/patch-simplex-adapter.py} \
+      > $out/share/hermes-agent/plugins/platforms/simplex/adapter.py
+    cp ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/__init__.py \
+       $out/share/hermes-agent/plugins/platforms/simplex/__init__.py
+    cp ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/plugin.yaml \
+       $out/share/hermes-agent/plugins/platforms/simplex/plugin.yaml
+  '';
+in {
+  imports = [
+    inputs.hermes-agent.nixosModules.default
+    inputs.self.nixosModules.simplex-chat
+  ];
 
   services.hermes-agent = {
     enable = true;
+    package = hermes-base;
 
     settings = {
       model = {
@@ -19,7 +37,6 @@
       };
       terminal.backend = "local";
       toolsets = ["all"];
-      # Enable the gateway's OpenAI-compatible API server on localhost
       gateway.api_server = {
         enabled = true;
         host = "127.0.0.1";
@@ -27,10 +44,32 @@
       };
     };
 
+    environment = {
+      SIMPLEX_WS_URL = "ws://127.0.0.1:5225";
+      SIMPLEX_ALLOWED_USERS = "StirringZaniness";
+      SIMPLEX_HOME_CHANNEL = "StirringZaniness";
+    };
+
+    extraPackages = [flake.packages.${pkgs.system}.simplex-chat pkgs.uv];
+
     addToSystemPackages = true;
   };
 
-  # Hermes web dashboard (separate from the gateway service)
+  systemd.services.hermes-agent = {
+    serviceConfig.BindReadOnlyPaths = [
+      "${patched-adapter}/share/hermes-agent/plugins/platforms/simplex/adapter.py:${hermes-base}/share/hermes-agent/plugins/platforms/simplex/adapter.py"
+    ];
+  };
+
+  services.simplex-chat = {
+    enable = true;
+    user = "hermes";
+    group = "hermes";
+    dataDir = "/var/lib/hermes/.simplex";
+  };
+
+  environment.systemPackages = [flake.packages.${pkgs.system}.simplex-chat];
+
   systemd.services.hermes-dashboard = {
     description = "Hermes Agent Web Dashboard";
     after = ["hermes-agent.service" "network.target"];
