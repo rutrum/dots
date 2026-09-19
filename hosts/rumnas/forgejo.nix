@@ -13,12 +13,6 @@ in {
     ];
   };
 
-  # TODO: Move Forgejo data to RAID for redundancy:
-  #   1. sudo systemctl stop forgejo.service
-  #   2. sudo mkdir -p /mnt/raid/services/forgejo
-  #   3. sudo cp -a /var/lib/forgejo/* /mnt/raid/services/forgejo/
-  #   4. sudo chown -R forgejo:forgejo /mnt/raid/services/forgejo
-  #   5. Uncomment stateDir below and rebuild
   services.forgejo = {
     enable = true;
     stateDir = "/mnt/raid/services/forgejo";

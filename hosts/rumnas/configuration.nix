@@ -208,6 +208,10 @@
     };
   };
 
+  programs = {
+    mosh.enable = true;
+  };
+
   sops.secrets."grafana/secret_key" = {
     owner = "grafana";
     restartUnits = ["grafana.service"];

@@ -31,10 +31,8 @@ in {
       #};
       autoStart = true;
       extraOptions = [
-        # not working
-        #"--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if00-port0"
-        #"--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if01-port0"
-        "--privileged" # try this instead
+        # Zigbee (EZSP) radio for ZHA
+        "--device=/dev/serial/by-id/usb-Silicon_Labs_HubZ_Smart_Home_Controller_6160054B-if01-port0:/dev/ttyUSB1"
       ];
       networks = ["home-assistant"];
     };

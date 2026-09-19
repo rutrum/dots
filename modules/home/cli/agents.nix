@@ -24,16 +24,10 @@ in {
   home.file.".agents/skills".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/pi/skills";
 
-  programs = {
-    opencode = {
-      enable = true;
-      package = pkgs-unstable.opencode;
-    };
-  };
-
   home.packages = with pkgs;
     [
       inputs.llm-agents.packages.${pkgs.system}.pi
+      inputs.llm-agents.packages.${pkgs.system}.opencode
       nodejs
       flake.inputs.llm-agents.packages.${pkgs.system}.qmd
     ]
