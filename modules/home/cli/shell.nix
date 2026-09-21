@@ -48,6 +48,11 @@
         interactiveShellInit = ''
           set fish_greeting
 
+          # just completions
+          ${pkgs.just}/bin/just --completions fish | source
+          # j completions (fish aliases are functions)
+          complete -c j -w just
+
           function nsn
           nix shell nixpkgs#"$argv"
           end
@@ -82,11 +87,6 @@
           nrn () {
           nix run nixpkgs#"$1"
           }
-
-          # just completions
-          eval "$(JUST_COMPLETE=bash ${pkgs.just}/bin/just)"
-          # j completions
-          complete -F _clap_complete_just -o bashdefault -o default j
         '';
         profileExtra = ''
           VISUAL='nvim'

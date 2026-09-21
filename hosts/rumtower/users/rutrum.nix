@@ -35,6 +35,8 @@
     #vtracer toml-cli ytop checkexec
     discord
 
+    affine
+
     rustdesk
 
     forgejo-cli
