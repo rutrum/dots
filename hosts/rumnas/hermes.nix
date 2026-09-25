@@ -32,7 +32,8 @@ in {
       model = {
         provider = "custom";
         default = "gemma-4-12b-it-qat-q4_0";
-        base_url = "http://local-ai.rum.internal:8089/v1";
+        base_url = "http://litellm.rum.internal/v1";
+        key_env = "LITELLM_API_KEY";
         context_length = 64000;
       };
       terminal.backend = "local";
@@ -50,6 +51,8 @@ in {
       SIMPLEX_HOME_CHANNEL = "StirringZaniness";
     };
 
+    environmentFiles = [config.sops.secrets."hermes/env".path];
+
     extraPackages = [flake.packages.${pkgs.system}.simplex-chat pkgs.uv];
 
     addToSystemPackages = true;
@@ -66,6 +69,11 @@ in {
     user = "hermes";
     group = "hermes";
     dataDir = "/var/lib/hermes/.simplex";
+  };
+
+  sops.secrets."hermes/env" = {
+    owner = "hermes";
+    restartUnits = ["hermes-agent.service"];
   };
 
   environment.systemPackages = [flake.packages.${pkgs.system}.simplex-chat];

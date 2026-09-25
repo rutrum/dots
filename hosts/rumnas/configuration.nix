@@ -37,6 +37,7 @@
     # llms
     ./hermes.nix
     ./local-ai.nix
+    ./litellm.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller

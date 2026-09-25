@@ -183,6 +183,13 @@
                 description = "Local AI agent";
               };
             }
+            {
+              LiteLLM = {
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/litellm.webp";
+                href = "http://litellm.rum.internal";
+                description = "AI gateway";
+              };
+            }
           ];
         }
         {

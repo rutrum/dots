@@ -49,7 +49,6 @@
   # networking
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-ensure-profiles.after = ["NetworkManager.service"];
-  systemd.services.NetworkManager-wait-online.enable = false;
 
   users.users.rutrum = {
     # uid = 1000; break flatpak and my internet bandwidth

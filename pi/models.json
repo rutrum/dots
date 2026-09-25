@@ -1,9 +1,11 @@
 {
   "providers": {
+    "openrouter": {
+      "baseUrl": "http://litellm.rum.internal/v1"
+    },
     "local": {
-      "baseUrl": "http://local-ai.rum.internal/v1",
+      "baseUrl": "http://litellm.rum.internal/v1",
       "api": "openai-completions",
-      "apiKey": "local",
       "compat": {
         "supportsDeveloperRole": false,
         "maxTokensField": "max_tokens"
@@ -19,12 +21,21 @@
           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
         },
         {
-          "id": "qwen3.5-9b-dflash",
-          "name": "Qwen 3.5 9B DFlash",
+          "id": "openrouter/deepseek/deepseek-v4.1-flash",
+          "name": "DeepSeek V4.1 Flash (via LiteLLM)",
           "reasoning": true,
           "input": ["text"],
-          "contextWindow": 32768,
-          "maxTokens": 8192,
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
+        },
+        {
+          "id": "openrouter/inclusionai/ling-3.0-flash",
+          "name": "Ling 3.0 Flash (via LiteLLM)",
+          "reasoning": false,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 }
         }
       ]
