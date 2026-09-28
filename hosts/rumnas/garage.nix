@@ -36,9 +36,7 @@
       };
     };
 
-    extraEnvironment = {
-      GARAGE_RPC_SECRET = config.sops.secrets."notesnook/garage-rpc-secret".value;
-    };
+    environmentFile = config.sops.secrets."notesnook/garage-rpc-secret".path;
 
     logLevel = "warn";
   };
