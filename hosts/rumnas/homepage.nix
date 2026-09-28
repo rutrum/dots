@@ -211,6 +211,24 @@
           ];
         }
         {
+          Notesnook = [
+            {
+              "Notesnook API" = {
+                icon = "notesnook";
+                href = "https://api.notesnook.rum.internal";
+                description = "Sync server API";
+              };
+            }
+            {
+              "Notesnook Monograph" = {
+                icon = "notesnook";
+                href = "https://monograph.notesnook.rum.internal";
+                description = "Note editor";
+              };
+            }
+          ];
+        }
+        {
           "Libraries & Life Admin" = [
             {
               Immich = {
