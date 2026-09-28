@@ -218,7 +218,6 @@
   # Autoheal
   virtualisation.oci-containers.containers.notesnook-autoheal = {
     image = "willfarrell/autoheal:latest";
-    tty = true;
     environment = {
       AUTOHEAL_INTERVAL = "60";
       AUTOHEAL_START_PERIOD = "300";
