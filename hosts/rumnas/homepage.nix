@@ -193,6 +193,24 @@
           ];
         }
         {
+          Storage = [
+            {
+              Garage = {
+                icon = "database";
+                href = "http://garage.rum.internal";
+                description = "S3 object storage";
+              };
+            }
+            {
+              "Garage Web UI" = {
+                icon = "database";
+                href = "http://garage-web.rum.internal";
+                description = "Garage admin interface";
+              };
+            }
+          ];
+        }
+        {
           "Libraries & Life Admin" = [
             {
               Immich = {

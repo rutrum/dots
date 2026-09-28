@@ -26,6 +26,7 @@
     ./home-assistant.nix
     ./paperless.nix
     ./forgejo.nix
+    ./garage.nix
 
     # monitoring
     ./prometheus.nix
@@ -216,6 +217,10 @@
   sops.secrets."grafana/secret_key" = {
     owner = "grafana";
     restartUnits = ["grafana.service"];
+  };
+
+  sops.secrets."notesnook/garage-rpc-secret" = {
+    owner = "root";
   };
 
   # stop sleeping/hibernating/suspend
