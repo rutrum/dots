@@ -27,6 +27,10 @@
     # mount secrets at runtime from encrypted sops files
     sops-nix.url = "github:Mic92/sops-nix";
 
+    # pin individual packages to the exact nixpkgs revision that shipped a
+    # given version (see hosts/rumnas/paperless.nix)
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";

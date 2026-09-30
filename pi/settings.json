@@ -4,7 +4,14 @@
   "defaultModel": "deepseek/deepseek-v4.1-flash",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": true,
-  "packages": ["npm:pi-web-access"],
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-post"
+  ],
   "theme": "dark",
-  "enabledModels": ["local/*", "openrouter/*"]
+  "enabledModels": [
+    "local/gemma-4-12b-it-qat-q4_0",
+    "openrouter/deepseek/deepseek-v4.1-flash",
+    "openrouter/inclusionai/ling-3.0-flash"
+  ]
 }

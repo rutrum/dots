@@ -58,11 +58,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1771437256,
-        "narHash": "sha256-bLqwib+rtyBRRVBWhMuBXPCL/OThfokA+j6+uH7jDGU=",
+        "lastModified": 1788342924,
+        "narHash": "sha256-Sfyygt2dL88+160d014gaXMlWTGIL2HGxlIzLGsGPvE=",
         "owner": "numtide",
         "repo": "blueprint",
-        "rev": "06ee7190dc2620ea98af9eb225aa9627b68b0e33",
+        "rev": "8be75245e274a789b87cc4df542abbcd8c5e7f93",
         "type": "github"
       },
       "original": {
@@ -142,7 +142,7 @@
     "daisyui-css": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-BrNYp/4ryp8yVz/O1MmgQW9rHgNIlN8KTJmYLaCizOQ=",
+        "narHash": "sha256-7r39HN9hkNCNG5PcGJ1MGX7wRhmstc+Mj/mVjs8CgVU=",
         "type": "file",
         "url": "https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css"
       },
@@ -354,6 +354,21 @@
         "url": "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"
       }
     },
+    "multiverse": {
+      "locked": {
+        "lastModified": 1790783800,
+        "narHash": "sha256-7JVyOzhE9UfwRnNAy51UU779YEhVfbh1n0a7r16UYSo=",
+        "owner": "fzakaria",
+        "repo": "nixpkgs-multiverse",
+        "rev": "47fbf9ca887fcf4623fbe8f2898ba4a63146e176",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fzakaria",
+        "repo": "nixpkgs-multiverse",
+        "type": "github"
+      }
+    },
     "nix-fonts": {
       "inputs": {
         "blueprint": "blueprint_2",
@@ -390,11 +405,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1782723713,
-        "narHash": "sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=",
+        "lastModified": 1790689126,
+        "narHash": "sha256-ilerN1WLSvF+HMjziC/Wv99J5y02maDH+6hZPwsORKg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b5aa0fbd538984f6e3d201be0005b4463d8b09f8",
+        "rev": "b4fd65b198c599cbe814fcb9f42d25d021595ec9",
         "type": "github"
       },
       "original": {
@@ -406,11 +421,11 @@
     },
     "nixpkgs_10": {
       "locked": {
-        "lastModified": 1773628058,
-        "narHash": "sha256-hpXH0z3K9xv0fHaje136KY872VT2T5uwxtezlAskQgY=",
+        "lastModified": 1789960332,
+        "narHash": "sha256-MQ5my6vvo0z2iVQcKqrysutFWvsNw3/ynNxzjJon4yc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f8573b9c935cfaa162dd62cc9e75ae2db86f85df",
+        "rev": "35e212742ceab4ae1dcfbfd9039a39215c816e8e",
         "type": "github"
       },
       "original": {
@@ -624,27 +639,6 @@
         "type": "github"
       }
     },
-    "openspec_2": {
-      "inputs": {
-        "nixpkgs": [
-          "pipances",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778774456,
-        "narHash": "sha256-4V35mdLWax+GfuUK6hv2Vgri6N/vAJApjuCB3ROOY6w=",
-        "owner": "Fission-AI",
-        "repo": "OpenSpec",
-        "rev": "8498042fe8a738e8ad6facd94a5fc7f5025bf81d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Fission-AI",
-        "repo": "OpenSpec",
-        "type": "github"
-      }
-    },
     "pipances": {
       "inputs": {
         "alpine-js": "alpine-js",
@@ -654,20 +648,23 @@
         "htmx-response-targets-js": "htmx-response-targets-js",
         "lucide-js": "lucide-js",
         "nixpkgs": "nixpkgs_10",
-        "openspec": "openspec_2",
         "pyproject-build-systems": "pyproject-build-systems_2",
         "pyproject-nix": "pyproject-nix_2",
+        "tabulator-css": "tabulator-css",
+        "tabulator-js": "tabulator-js",
+        "tom-select-css": "tom-select-css",
+        "tom-select-js": "tom-select-js",
         "uv2nix": "uv2nix_2",
         "vega-embed-js": "vega-embed-js",
         "vega-js": "vega-js",
         "vega-lite-js": "vega-lite-js"
       },
       "locked": {
-        "lastModified": 1779795299,
-        "narHash": "sha256-kr4PbXp/PxR5X5IchZKjibfadQHlye0f0tGnPDNf4rE=",
+        "lastModified": 1790332835,
+        "narHash": "sha256-vWykP4zMh+UU6ZOqzIC9QtPfeuMMCffYpr0MeRA+sJM=",
         "owner": "rutrum",
         "repo": "pipances",
-        "rev": "6844ddc15d45ee76c57e4d558f9d1e9e14807562",
+        "rev": "6a9df3e50cc9c49b5997de8254a3442019e794fa",
         "type": "github"
       },
       "original": {
@@ -721,11 +718,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773870109,
-        "narHash": "sha256-ZoTdqZP03DcdoyxvpFHCAek4bkPUTUPUF3oCCgc3dP4=",
+        "lastModified": 1789963190,
+        "narHash": "sha256-mj5BLUKECIHv3rwkBXL6xQp45gIBJV7ZOYgT46LXwho=",
         "owner": "pyproject-nix",
         "repo": "build-system-pkgs",
-        "rev": "b6e74f433b02fa4b8a7965ee24680f4867e2926f",
+        "rev": "14b45373ea9a14ed2fcd0abf3ed35c8e3c430020",
         "type": "github"
       },
       "original": {
@@ -763,11 +760,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773909723,
-        "narHash": "sha256-HmcZQ/hMPHR22Ri/6Sl7Z0B5J8nZa9bRnZJtDFInM7I=",
+        "lastModified": 1788394333,
+        "narHash": "sha256-xYOP0Xym1eVGUaHFx+eJEaycFGoiCbst3fZf0xFHP78=",
         "owner": "pyproject-nix",
         "repo": "pyproject.nix",
-        "rev": "d37dcf34ac7194eac4b0d10520d01298c434267d",
+        "rev": "6a8a7881d75b6f98967e7b8069f4ead331384301",
         "type": "github"
       },
       "original": {
@@ -785,6 +782,7 @@
         "hermes-agent": "hermes-agent",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
+        "multiverse": "multiverse",
         "nix-fonts": "nix-fonts",
         "nixpkgs": "nixpkgs_6",
         "nixpkgs-unstable": "nixpkgs-unstable",
@@ -903,6 +901,54 @@
         "type": "github"
       }
     },
+    "tabulator-css": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-QTPGbZfgZWxAW6uQc7A0xtSKHHHDv5mPYYytuMa+ZWY=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tabulator-tables@6.5.0/dist/css/tabulator.min.css"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tabulator-tables@6.5.0/dist/css/tabulator.min.css"
+      }
+    },
+    "tabulator-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-WGCm/t9+CfPh1yiTg6IEP563f9b3h+wnyZG/PgHut8c=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tabulator-tables@6.5.0/dist/js/tabulator.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tabulator-tables@6.5.0/dist/js/tabulator.min.js"
+      }
+    },
+    "tom-select-css": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-sD+suzF8ksbqM2n/G6QR7YyDBW42kuqaG5jB7QmfGQo=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.min.css"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.min.css"
+      }
+    },
+    "tom-select-js": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-8wZiLEvuMhEY/m0EigOADgSS0Qe5HoI9jOChf6CmddU=",
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -961,11 +1007,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773958975,
-        "narHash": "sha256-Lr2k67KFPxPLqMtCWvwfg30S8huAEpEY9UcXHfi1Q+4=",
+        "lastModified": 1789383061,
+        "narHash": "sha256-+DkygIVr/+RtXnsjd07BzFFB0ihwmjjLuYh1fyc/bCg=",
         "owner": "pyproject-nix",
         "repo": "uv2nix",
-        "rev": "ffd52b90f29babbc4f309c29f2a2cdd6547be443",
+        "rev": "079be4e68c529c4cbc44dbf1afc692e4b30695b3",
         "type": "github"
       },
       "original": {
@@ -977,37 +1023,37 @@
     "vega-embed-js": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-rOzLkTwFpdItHJLjWIpVdH2voaANv+/Wm1ZBX0ZApcQ=",
+        "narHash": "sha256-dqwuHsPQ+l0rubGkrdk+zUIRngjkcNMTGZj4wNFlFcQ=",
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega-embed@7.3.0/build/vega-embed.min.js"
       },
       "original": {
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega-embed@6.29.0/build/vega-embed.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega-embed@7.3.0/build/vega-embed.min.js"
       }
     },
     "vega-js": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-AjCcAjVbblqPa2JjWutf+6TVf+74kyHnKhScwEXKEYI=",
+        "narHash": "sha256-HNvicpIfpr8FCeTCMFHIDSr/Xzd9H1hyvTbXweu2zaY=",
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega@6.4.0/build/vega.min.js"
       },
       "original": {
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega@5.33.1/build/vega.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega@6.4.0/build/vega.min.js"
       }
     },
     "vega-lite-js": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-kiBlWn//UFjjhubudlGYxiTagZ+WILsw6fd4J1uQdns=",
+        "narHash": "sha256-KYHpIpBrUsl6ueg2I4N5xRm/oLCwILfSq7a6X0s+VLQ=",
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega-lite@6.4.3/build/vega-lite.min.js"
       },
       "original": {
         "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/vega-lite@5.23.0/build/vega-lite.min.js"
+        "url": "https://cdn.jsdelivr.net/npm/vega-lite@6.4.3/build/vega-lite.min.js"
       }
     },
     "vpn-confinement": {

@@ -26,7 +26,7 @@
     ./home-assistant.nix
     ./paperless.nix
     ./forgejo.nix
-    ./notesnook.nix
+    ./joplin.nix
 
     # monitoring
     ./prometheus.nix

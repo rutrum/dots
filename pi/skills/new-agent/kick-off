@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: kick-off [options] <message|@file|-> [tab-name]
+
+Launch a pi coding agent in a new zellij tab.
+
+Options:
+  -c, --cwd <dir>     Working directory for the new agent (default: $PWD)
+      --report        Ask the agent to send its final report back to this
+                      session when its gate passes (default: off)
+      --report-to <t> Send the report to <t> instead of this session
+  -h, --help          Show this help
+
+<message> may be literal text, @path to read a file, or - to read stdin.
+EOF
+}
+
+CWD="$PWD"
+REPORT=0
+REPORT_TO=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -c|--cwd)    CWD="${2:?--cwd needs a directory}"; shift 2 ;;
+    --report)    REPORT=1; shift ;;
+    --report-to) REPORT=1; REPORT_TO="${2:?--report-to needs a target}"; shift 2 ;;
+    -h|--help)   usage; exit 0 ;;
+    --)          shift; break ;;
+    *)           break ;;
+  esac
+done
+
+MESSAGE="${1:-}"
+if [[ -z "$MESSAGE" ]]; then usage; exit 1; fi
+TAB_NAME="${2:-pi}"
+
+case "$MESSAGE" in
+  @*) MESSAGE="$(cat "${MESSAGE#@}")" ;;
+  -)  MESSAGE="$(cat)" ;;
+esac
+
+if [[ -z "${ZELLIJ:-}" ]]; then
+  echo "kick-off: not inside a zellij session (ZELLIJ is unset)" >&2
+  exit 1
+fi
+[[ -d "$CWD" ]] || { echo "kick-off: no such directory: $CWD" >&2; exit 1; }
+
+PI_ARGS=(--name "$TAB_NAME")
+
+if [[ "$REPORT" == 1 ]]; then
+  # PI_SESSION_ADDRESS is set by the pi-post extension; PI_SESSION_ID is core
+  # pi and works as a fallback target for send_message.
+  REPLY_TARGET="${REPORT_TO:-${PI_SESSION_ADDRESS:-${PI_SESSION_ID:-}}}"
+  if [[ -n "$REPLY_TARGET" ]]; then
+    PI_ARGS+=(--append-system-prompt \
+      "You are a worker session. When your task's gate passes, send your final report to the orchestrator via the send_message tool with to=\"$REPLY_TARGET\": files changed, exact test/lint output, final status, and any blocker. Send nothing else and do not reply to acknowledgements.")
+    echo "kick-off: report target $REPLY_TARGET" >&2
+  else
+    echo "kick-off: --report given but no PI_SESSION_ADDRESS/PI_SESSION_ID; launching without it" >&2
+  fi
+fi
+
+zellij action new-tab --name "$TAB_NAME" --cwd "$CWD" -- pi "${PI_ARGS[@]}" -- "$MESSAGE"

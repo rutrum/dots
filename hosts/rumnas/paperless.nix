@@ -1,9 +1,21 @@
-{perSystem, ...}: {
+{inputs, ...}: {
   # openFirewall removed: Caddy-only, reached via paperless.rum.internal
+
+  # Pin paperless-ngx to the exact version the host was running (2.20.15) while
+  # staying on nixpkgs-unstable for everything else. The unstable package was
+  # bumped to 3.2.1, a major upgrade that drops NLTK and needs a DB migration.
+  # nixpkgs-multiverse resolves the version against whichever nixpkgs revision
+  # last shipped it, so this is a real pin, not a backport.
+  # NOTE: the PAPERLESS_AI_* settings below are 3.x-only and are ignored on 2.x.
+  nixpkgs.overlays = [
+    (inputs.multiverse.lib.pinOverlay {
+      config.allowUnfree = true;
+      pins.paperless-ngx = "2.20.15";
+    })
+  ];
 
   services.paperless = {
     enable = true;
-    package = perSystem.nixpkgs-unstable.paperless-ngx;
     address = "0.0.0.0";
     port = 8000;
     dataDir = "/mnt/raid/services/paperless";

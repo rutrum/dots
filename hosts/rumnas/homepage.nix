@@ -193,37 +193,12 @@
           ];
         }
         {
-          Storage = [
+          Joplin = [
             {
-              Garage = {
-                icon = "database";
-                href = "http://garage.rum.internal";
-                description = "S3 object storage";
-              };
-            }
-            {
-              "Garage Web UI" = {
-                icon = "database";
-                href = "http://garage-web.rum.internal";
-                description = "Garage admin interface";
-              };
-            }
-          ];
-        }
-        {
-          Notesnook = [
-            {
-              "Notesnook API" = {
-                icon = "notesnook";
-                href = "https://api.notesnook.rum.internal";
-                description = "Sync server API";
-              };
-            }
-            {
-              "Notesnook Monograph" = {
-                icon = "notesnook";
-                href = "https://monograph.notesnook.rum.internal";
-                description = "Note editor";
+              "Joplin Server" = {
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/joplin.webp";
+                href = "http://joplin.rum.internal";
+                description = "Note sync server";
               };
             }
           ];

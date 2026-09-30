@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   lib,
   inputs,
   perSystem,
@@ -21,9 +22,11 @@
     };
   };
 
-  #services.flatpak.packages = [
-  #  "flathub-beta:app/org.openscad.OpenSCAD//beta"
-  #];
+  # Joplin client via declarative-flatpak (nixpkgs joplin-desktop is broken
+  # and pinned to 3.6.16; Flathub tracks the 3.7.x line the server needs).
+  services.flatpak.packages = [
+    "flathub:app/net.cozic.joplin_desktop//stable"
+  ];
 
   home.packages = with pkgs; [
     # graphical applications
