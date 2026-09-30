@@ -54,10 +54,14 @@ in {
       User = "postgres";
       Group = "postgres";
     };
+    # Feed the statement over stdin: psql only performs variable interpolation
+    # (`:'pw'`) for input it parses itself, not for a `-c` string. The `\set`
+    # backquote form also keeps the password out of psql's argv (`ps`).
     script = ''
-      psql -v ON_ERROR_STOP=1 \
-        -v pw="$(cat ${secrets."joplin/postgres_password".path})" \
-        -d postgres -c "ALTER ROLE joplin WITH PASSWORD :'pw';"
+      psql -v ON_ERROR_STOP=1 -d postgres <<'SQL'
+      \set pw `cat ${secrets."joplin/postgres_password".path}`
+      ALTER ROLE joplin WITH PASSWORD :'pw';
+      SQL
     '';
   };
 
