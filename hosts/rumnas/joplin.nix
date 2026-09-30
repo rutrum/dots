@@ -92,6 +92,12 @@ in {
       POSTGRES_PORT = "5432";
       POSTGRES_DATABASE = "joplin";
       POSTGRES_USER = "joplin";
+      # Joplin rewrites POSTGRES_HOST=127.0.0.1 to `host.docker.internal` whenever
+      # RUNNING_IN_DOCKER is truthy (its image sets RUNNING_IN_DOCKER=1), which
+      # resolves to the LAN IP where PostgreSQL is not listening. We use host
+      # networking, so loopback really is the host: tell Joplin it is not in a
+      # container and 127.0.0.1 is used as-is.
+      RUNNING_IN_DOCKER = "0";
       STORAGE_DRIVER = "Type=Filesystem; Path=/var/lib/joplin-server/storage";
     };
     environmentFiles = [config.sops.templates."joplin.env".path];
