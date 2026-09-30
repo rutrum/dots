@@ -5,11 +5,18 @@
 }: let
   # Joplin Server: official container + native PostgreSQL (option 2).
   #
-  # The image's built-in non-root user is uid 1000, which is `rutrum` on the
-  # host (rootful podman, no userns), so the data dir is owned by rutrum.
+  # The image's built-in non-root user is uid/gid 1001 (its Dockerfile adds a
+  # `joplin` user on top of a base image where `node` already owns 1000), and
+  # that user owns the parts of the image the app writes to (`/home/joplin`,
+  # PM2's `/opt/pm2`). We therefore keep the container's own uid and map it onto
+  # a dedicated host account with the uid/gid map below, so everything the app
+  # writes is owned by `joplin` here — see the map's comment.
   dataDir = "/mnt/raid/services/joplin";
   backupDir = "/mnt/raid/backups/joplin";
   serverVersion = "3.7.2"; # keep the minor in lockstep with joplin-desktop
+  # Host ids used for the container's *other* uids. Kept clear of rutrum's
+  # rootless subuid range (100000-165535) and of the normal/system ranges.
+  usernsBase = 300000;
   secrets = config.sops.secrets;
 in {
   # joplin.rum.internal -> 127.0.0.1:22300
@@ -65,16 +72,32 @@ in {
     '';
   };
 
-  # Data directory owned by the container's uid (1000 = rutrum on the host).
+  # The container runs with its own uid/gid 1001 mapped onto this account, so
+  # the data dir is owned by `joplin` while the image's internal /home/joplin
+  # and /opt/pm2 stay owned by "1001" inside the container. (Running the
+  # container as another uid with --user instead would break exactly those
+  # paths: PM2's home and the /home/joplin/packages/server/logs directory the
+  # app creates at startup both end up unwritable.)
+  users.users.joplin = {
+    isSystemUser = true;
+    uid = 993;
+    group = "joplin";
+    home = dataDir;
+    description = "Joplin Server container user";
+  };
+  users.groups.joplin = {
+    gid = 993;
+  };
+
   systemd.tmpfiles.settings."10-joplin-data" = {
     "${dataDir}".d = {
-      user = "rutrum";
-      group = "users";
+      user = "joplin";
+      group = "joplin";
       mode = "0750";
     };
     "${dataDir}/storage".d = {
-      user = "rutrum";
-      group = "users";
+      user = "joplin";
+      group = "joplin";
       mode = "0750";
     };
   };
@@ -83,7 +106,21 @@ in {
   # 127.0.0.1; no published ports (Caddy proxies to localhost:22300).
   virtualisation.oci-containers.containers.joplin-server = {
     image = "docker.io/joplin/server:${serverVersion}";
-    extraOptions = ["--network=host"];
+    # Map the image's own uid/gid 1001 (its `joplin` user) to the host joplin
+    # account, and everything else to an unused host range. Rootful --uidmap is
+    # a direct host<->container mapping, so this needs no /etc/subuid entries.
+    # The map has to cover 0-65535 completely: with a partial map podman's
+    # idmapped overlay mount fails with "creating overlay mount ... permission
+    # denied" (verified on rumnas).
+    extraOptions = [
+      "--network=host"
+      "--uidmap=0:${toString usernsBase}:1001"
+      "--uidmap=1001:${toString config.users.users.joplin.uid}:1"
+      "--uidmap=1002:${toString (usernsBase + 1002)}:${toString (65536 - 1002)}"
+      "--gidmap=0:${toString usernsBase}:1001"
+      "--gidmap=1001:${toString config.users.groups.joplin.gid}:1"
+      "--gidmap=1002:${toString (usernsBase + 1002)}:${toString (65536 - 1002)}"
+    ];
     environment = {
       APP_BASE_URL = "http://joplin.rum.internal";
       APP_PORT = "22300";
