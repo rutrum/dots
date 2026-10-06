@@ -122,7 +122,10 @@ in {
       "--gidmap=1002:${toString (usernsBase + 1002)}:${toString (65536 - 1002)}"
     ];
     environment = {
-      APP_BASE_URL = "http://joplin.rum.internal";
+      # Public HTTPS endpoint served by Caddy with the internal wildcard
+      # certificate (joplin.internal.rutrum.net -> localhost:22300). iOS
+      # requires HTTPS here, so this must match the URL clients are given.
+      APP_BASE_URL = "https://joplin.internal.rutrum.net";
       APP_PORT = "22300";
       DB_CLIENT = "pg";
       POSTGRES_HOST = "127.0.0.1";

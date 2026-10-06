@@ -27,6 +27,7 @@
     ./paperless.nix
     ./forgejo.nix
     ./joplin.nix
+    ./acme.nix
 
     # monitoring
     ./prometheus.nix
@@ -193,6 +194,10 @@
     caddy.virtualHosts."http://rum.internal".extraConfig = ''
       reverse_proxy localhost:8181
     '';
+    caddy.virtualHosts."internal.rutrum.net" = {
+      useACMEHost = "internal.rutrum.net";
+      extraConfig = "reverse_proxy localhost:8181";
+    };
 
     # Hermes dashboard — override Host & Origin headers so the DNS-rebinding
     # guard and WebSocket origin check on 127.0.0.1 accept requests from Caddy
@@ -202,6 +207,15 @@
         header_up Origin http://localhost:9119
       }
     '';
+    caddy.virtualHosts."hermes.internal.rutrum.net" = {
+      useACMEHost = "internal.rutrum.net";
+      extraConfig = ''
+        reverse_proxy localhost:9119 {
+          header_up Host localhost
+          header_up Origin http://localhost:9119
+        }
+      '';
+    };
 
     xserver = {
       enable = true;

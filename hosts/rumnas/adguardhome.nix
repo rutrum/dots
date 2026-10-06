@@ -26,6 +26,15 @@
         # Tailscale clients get Tailscale IP
         "||rum.internal^$dnsrewrite=NOERROR;A;100.73.14.110,client=100.0.0.0/8"
         "||*.rum.internal^$dnsrewrite=NOERROR;A;100.73.14.110,client=100.0.0.0/8"
+
+        # Public HTTPS namespace (real Let's Encrypt cert via DNS-01).
+        # Same split-horizon treatment: LAN -> .3, tailnet -> Tailscale IP.
+        # Tailscale split-DNS forwards *.internal.rutrum.net here, so the
+        # tailnet rule is what answers remote clients.
+        "||internal.rutrum.net^$dnsrewrite=NOERROR;A;192.168.50.3,client=192.168.50.0/24"
+        "||*.internal.rutrum.net^$dnsrewrite=NOERROR;A;192.168.50.3,client=192.168.50.0/24"
+        "||internal.rutrum.net^$dnsrewrite=NOERROR;A;100.73.14.110,client=100.0.0.0/8"
+        "||*.internal.rutrum.net^$dnsrewrite=NOERROR;A;100.73.14.110,client=100.0.0.0/8"
       ];
     };
   };
