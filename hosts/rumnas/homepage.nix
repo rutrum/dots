@@ -193,22 +193,18 @@
           ];
         }
         {
-          Joplin = [
-            {
-              "Joplin Server" = {
-                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/joplin.webp";
-                href = "http://joplin.rum.internal";
-                description = "Note sync server";
-              };
-            }
-          ];
-        }
-        {
-          "Libraries & Life Admin" = [
+          Libraries = [
             {
               Immich = {
                 icon = "immich";
                 href = "http://immich.rum.internal";
+                description = "Photo gallery";
+              };
+            }
+            {
+              Pipances = {
+                icon = "pipances";
+                href = "http://pipances.rum.internal";
                 description = "Photo gallery";
               };
             }
@@ -275,6 +271,13 @@
                 description = "Vehicle maintenance tracker";
               };
             }
+            {
+              "Joplin Server" = {
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/joplin.webp";
+                href = "http://joplin.rum.internal";
+                description = "Notes sync server";
+              };
+            }
           ];
         }
         {
@@ -320,6 +323,13 @@
               Namecheap = {
                 icon = "namecheap";
                 href = "https://www.namecheap.com/myaccount/login";
+                description = "DNS registrar";
+              };
+            }
+            {
+              Porkbun = {
+                icon = "porkbun";
+                href = "https://porkbun.com/account/domainsSpeedy";
                 description = "DNS registrar";
               };
             }

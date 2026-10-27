@@ -187,6 +187,10 @@
           port = 8082;
           host = "rumtower";
         };
+        pipances = {
+          port = 10555;
+          host = "rumtower";
+        };
       };
     };
 

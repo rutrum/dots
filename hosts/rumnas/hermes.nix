@@ -29,11 +29,14 @@ in {
     package = hermes-base;
 
     settings = {
-      model = {
-        provider = "custom";
-        default = "gemma-4-12b-it-qat-q4_0";
+      providers.litellm = {
         base_url = "http://litellm.rum.internal/v1";
         key_env = "LITELLM_API_KEY";
+        default_model = "gemma-4-12b-it-qat-q4_0";
+      };
+      model = {
+        provider = "custom:litellm";
+        default = "gemma-4-12b-it-qat-q4_0";
         context_length = 64000;
       };
       terminal.backend = "local";
