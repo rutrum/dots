@@ -46,7 +46,7 @@
     openspec.url = "github:Fission-AI/OpenSpec";
 
     # personal finance management
-    pipances.url = "github:rutrum/pipances";
+    pipances.url = "github:rutrum/pipances?tag=v0.3.0";
 
     # autonomous AI agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
@@ -63,6 +63,13 @@
 
       nixpkgs.config = {
         allowUnfree = true;
+        # Nextcloud 32.0.15 is the final 32.x release and nixpkgs marks it
+        # EOL/insecure. nosk keeps it temporarily so we can ship the PHP 8.4.27
+        # CVE fix (CVE-2026-109618 / CVE-2026-109619) without a simultaneous
+        # Nextcloud major upgrade. Remove once nosk is bumped to 33 or later.
+        permittedInsecurePackages = [
+          "nextcloud-32.0.15"
+        ];
       };
     };
 }

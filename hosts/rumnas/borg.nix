@@ -49,7 +49,8 @@ in {
       paths = [
         "/mnt/raid/services/paperless"
         "/mnt/raid/services/freshrss"
-        "/mnt/raid/services/joplin"
+        # Joplin's item storage is a podman volume (see hosts/rumnas/joplin.nix).
+        "/var/lib/containers/storage/volumes/joplin-data/_data"
         "/mnt/raid/backups/forgejo"
         "/mnt/raid/backups/joplin"
         "/mnt/raid/immich/library"

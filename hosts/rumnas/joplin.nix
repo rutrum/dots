@@ -5,18 +5,15 @@
 }: let
   # Joplin Server: official container + native PostgreSQL (option 2).
   #
-  # The image's built-in non-root user is uid/gid 1001 (its Dockerfile adds a
-  # `joplin` user on top of a base image where `node` already owns 1000), and
-  # that user owns the parts of the image the app writes to (`/home/joplin`,
-  # PM2's `/opt/pm2`). We therefore keep the container's own uid and map it onto
-  # a dedicated host account with the uid/gid map below, so everything the app
-  # writes is owned by `joplin` here — see the map's comment.
-  dataDir = "/mnt/raid/services/joplin";
+  # Item storage lives in the podman volume `joplin-data` rather than a bind
+  # mount. The image runs as its own non-root uid 1001 and owns the paths it
+  # writes to (/home/joplin, PM2's /opt/pm2), and podman gives a named volume the
+  # ownership of the image directory it covers — so neither a host account, a
+  # uid map nor a tmpfiles rule is needed for write access. Borg backs the
+  # volume up by path; see hosts/rumnas/borg.nix.
+  backVolume = "joplin-data";
   backupDir = "/mnt/raid/backups/joplin";
   serverVersion = "3.7.2"; # keep the minor in lockstep with joplin-desktop
-  # Host ids used for the container's *other* uids. Kept clear of rutrum's
-  # rootless subuid range (100000-165535) and of the normal/system ranges.
-  usernsBase = 300000;
   secrets = config.sops.secrets;
 in {
   # joplin.rum.internal -> 127.0.0.1:22300
@@ -72,55 +69,11 @@ in {
     '';
   };
 
-  # The container runs with its own uid/gid 1001 mapped onto this account, so
-  # the data dir is owned by `joplin` while the image's internal /home/joplin
-  # and /opt/pm2 stay owned by "1001" inside the container. (Running the
-  # container as another uid with --user instead would break exactly those
-  # paths: PM2's home and the /home/joplin/packages/server/logs directory the
-  # app creates at startup both end up unwritable.)
-  users.users.joplin = {
-    isSystemUser = true;
-    uid = 993;
-    group = "joplin";
-    home = dataDir;
-    description = "Joplin Server container user";
-  };
-  users.groups.joplin = {
-    gid = 993;
-  };
-
-  systemd.tmpfiles.settings."10-joplin-data" = {
-    "${dataDir}".d = {
-      user = "joplin";
-      group = "joplin";
-      mode = "0750";
-    };
-    "${dataDir}/storage".d = {
-      user = "joplin";
-      group = "joplin";
-      mode = "0750";
-    };
-  };
-
   # Joplin Server container. Host networking lets it reach native PostgreSQL on
   # 127.0.0.1; no published ports (Caddy proxies to localhost:22300).
   virtualisation.oci-containers.containers.joplin-server = {
     image = "docker.io/joplin/server:${serverVersion}";
-    # Map the image's own uid/gid 1001 (its `joplin` user) to the host joplin
-    # account, and everything else to an unused host range. Rootful --uidmap is
-    # a direct host<->container mapping, so this needs no /etc/subuid entries.
-    # The map has to cover 0-65535 completely: with a partial map podman's
-    # idmapped overlay mount fails with "creating overlay mount ... permission
-    # denied" (verified on rumnas).
-    extraOptions = [
-      "--network=host"
-      "--uidmap=0:${toString usernsBase}:1001"
-      "--uidmap=1001:${toString config.users.users.joplin.uid}:1"
-      "--uidmap=1002:${toString (usernsBase + 1002)}:${toString (65536 - 1002)}"
-      "--gidmap=0:${toString usernsBase}:1001"
-      "--gidmap=1001:${toString config.users.groups.joplin.gid}:1"
-      "--gidmap=1002:${toString (usernsBase + 1002)}:${toString (65536 - 1002)}"
-    ];
+    extraOptions = ["--network=host"];
     environment = {
       # Public HTTPS endpoint served by Caddy with the internal wildcard
       # certificate (joplin.internal.rutrum.net -> localhost:22300). iOS
@@ -141,7 +94,7 @@ in {
       STORAGE_DRIVER = "Type=Filesystem; Path=/var/lib/joplin-server/storage";
     };
     environmentFiles = [config.sops.templates."joplin.env".path];
-    volumes = ["${dataDir}:/var/lib/joplin-server"];
+    volumes = ["${backVolume}:/var/lib/joplin-server"];
     autoStart = true;
   };
 
@@ -151,8 +104,8 @@ in {
     requires = ["joplin-db-password.service"];
   };
 
-  # Daily logical dump for backups. (Filesystem item storage is backed up
-  # directly via the data dir.)
+  # Daily logical dump for backups. (Filesystem item storage lives in the
+  # podman volume and is backed up from there; see borg.nix.)
   services.postgresqlBackup = {
     enable = true;
     databases = ["joplin"];

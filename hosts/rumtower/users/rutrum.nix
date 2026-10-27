@@ -29,6 +29,9 @@
   ];
 
   home.packages = with pkgs; [
+    # wayland cli tools
+    wl-clipboard
+
     # graphical applications
     thunderbird
     simple-scan
