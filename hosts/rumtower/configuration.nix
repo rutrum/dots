@@ -13,7 +13,7 @@
 
     # containized
     # consider using nixos modules for these
-    ./firefly.nix
+    #./firefly.nix
 
     # monitoring
     ./prometheus.nix

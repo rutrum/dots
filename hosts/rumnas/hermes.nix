@@ -21,6 +21,7 @@
 in {
   imports = [
     inputs.hermes-agent.nixosModules.default
+    inputs.hermes-webui.nixosModules.default
     inputs.self.nixosModules.simplex-chat
   ];
 
@@ -80,6 +81,23 @@ in {
   };
 
   environment.systemPackages = [flake.packages.${pkgs.system}.simplex-chat];
+
+  # Browser UI for the same agent. Runs as the hermes user so it can read the
+  # agent's HERMES_HOME (/var/lib/hermes/.hermes) and reuse its venv/state.
+  services.hermes-webui = {
+    enable = true;
+    user = "hermes";
+    group = "hermes";
+    host = "127.0.0.1";
+    port = 8787;
+    hermesHome = "${config.services.hermes-agent.stateDir}/.hermes";
+    agent = {
+      # hermes-agent exposes passthru.hermesVenv (-> HERMES_WEBUI_PYTHON) but
+      # not passthru.hermesAgentDir, so point the WebUI at the agent source tree.
+      package = hermes-base;
+      dir = "${hermes-base}/share/hermes-agent";
+    };
+  };
 
   systemd.services.hermes-dashboard = {
     description = "Hermes Agent Web Dashboard";

@@ -46,10 +46,13 @@
     openspec.url = "github:Fission-AI/OpenSpec";
 
     # personal finance management
-    pipances.url = "github:rutrum/pipances?tag=v0.3.0";
+    pipances.url = "github:rutrum/pipances/v0.3.1";
 
     # autonomous AI agent
     hermes-agent.url = "github:NousResearch/hermes-agent";
+
+    # web UI for the hermes agent
+    hermes-webui.url = "github:nesquena/hermes-webui";
 
     # packages for ai coding agents and tools
     llm-agents.url = "github:numtide/llm-agents.nix";

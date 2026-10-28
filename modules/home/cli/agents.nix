@@ -29,6 +29,7 @@ in {
       inputs.llm-agents.packages.${pkgs.system}.pi
       inputs.llm-agents.packages.${pkgs.system}.opencode
       nodejs
+      tera-cli
       flake.inputs.llm-agents.packages.${pkgs.system}.qmd
     ]
     ++ lib.optionals gui.enable [

@@ -3,43 +3,60 @@ set -euo pipefail
 
 usage() {
   cat >&2 <<'EOF'
-Usage: kick-off [options] <message|@file|-> [tab-name]
+Usage: GOAL=<text> [CONTEXT=<text>] kick-off [options]
 
-Launch a pi coding agent in a new zellij tab.
+Launch a pi coding agent in a new zellij tab with a templated brief.
+
+Environment:
+  GOAL       Required. The problem or goal for the worker.
+  CONTEXT    Optional. User-defined constraints or relevant information
+             already in context.
 
 Options:
   -c, --cwd <dir>     Working directory for the new agent (default: $PWD)
+  -n, --name <name>   Tab and pi session name (default: pi)
       --report        Ask the agent to send its final report back to this
                       session when its gate passes (default: off)
       --report-to <t> Send the report to <t> instead of this session
   -h, --help          Show this help
 
-<message> may be literal text, @path to read a file, or - to read stdin.
+The brief is rendered from brief.md.tera behind the scenes; callers never
+read or edit that template.
 EOF
 }
 
 CWD="$PWD"
 REPORT=0
 REPORT_TO=""
+TAB_NAME="pi"
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -c|--cwd)    CWD="${2:?--cwd needs a directory}"; shift 2 ;;
+    -n|--name)   TAB_NAME="${2:?--name needs a value}"; shift 2 ;;
     --report)    REPORT=1; shift ;;
     --report-to) REPORT=1; REPORT_TO="${2:?--report-to needs a target}"; shift 2 ;;
     -h|--help)   usage; exit 0 ;;
     --)          shift; break ;;
-    *)           break ;;
+    *)           echo "kick-off: unexpected argument: $1" >&2; usage; exit 1 ;;
   esac
 done
+[[ $# -eq 0 ]] || { echo "kick-off: unexpected argument: $1" >&2; usage; exit 1; }
 
-MESSAGE="${1:-}"
-if [[ -z "$MESSAGE" ]]; then usage; exit 1; fi
-TAB_NAME="${2:-pi}"
+if [[ -z "${GOAL:-}" ]]; then
+  echo "kick-off: GOAL is required" >&2
+  usage
+  exit 1
+fi
 
-case "$MESSAGE" in
-  @*) MESSAGE="$(cat "${MESSAGE#@}")" ;;
-  -)  MESSAGE="$(cat)" ;;
-esac
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMPLATE="$SCRIPT_DIR/brief.md.tera"
+[[ -f "$TEMPLATE" ]] || { echo "kick-off: template not found: $TEMPLATE" >&2; exit 1; }
+command -v tera >/dev/null 2>&1 || {
+  echo "kick-off: 'tera' not found; add tera-cli to home.packages" >&2
+  exit 1
+}
+
+MESSAGE="$(tera --template "$TEMPLATE" --env-only)"
 
 if [[ -z "${ZELLIJ:-}" ]]; then
   echo "kick-off: not inside a zellij session (ZELLIJ is unset)" >&2

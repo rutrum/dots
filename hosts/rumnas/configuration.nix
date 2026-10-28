@@ -174,6 +174,7 @@
         weatherstar.port = 8086;
         #convertx.port = 8099;
         local-ai.port = 8089;
+        hermes-webui.port = 8787;
         "rumnas.local-ai".port = 8089;
         "rumtower.local-ai" = {
           port = 8089;

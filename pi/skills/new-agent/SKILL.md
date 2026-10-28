@@ -15,17 +15,22 @@ Launches a pi coding agent (a "worker") in a new zellij tab.
 ## Usage
 
 ```
-kick-off [options] <message|@file|-> [tab-name]
+GOAL=<text> [CONTEXT=<text>] ./kick-off [options]
 ```
 
-- `message` — initial prompt/context for pi (required). Use `@path` to read it
-  from a file, or `-` to read stdin (handy for long briefs).
-- `tab-name` — name for the new zellij tab and the pi session (defaults to `pi`).
+- `GOAL` (required) — the problem/goal for the worker.
+- `CONTEXT` (optional) — user-defined constraints or relevant information
+  already in context.
+- Don't pre-read files in the target repo to write the brief — discovering
+  versions, changelogs, test commands, and so on is the worker's job, not yours.
+- The brief is rendered from `brief.md.tera` behind the scenes. Don't read or
+  edit that template; just set the variables.
 
 ## Options
 
 - `-c, --cwd <dir>` — working directory for the worker (default: the caller's
   `$PWD`). Without this, the tab inherits the zellij session cwd.
+- `-n, --name <name>` — tab and pi session name (defaults to `pi`).
 - `--report` — ask the worker to send its final report back to this session via
   pi-post (`send_message`) when its gate passes. Off by default.
 - `--report-to <target>` — report to a specific session address instead of this

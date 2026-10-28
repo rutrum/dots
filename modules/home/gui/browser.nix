@@ -10,10 +10,6 @@
       "flathub:app/app.zen_browser.zen//stable"
     ];
 
-    home.packages = [
-      pkgs.mullvad-browser
-    ];
-
     programs.chromium = {
       enable = true;
       package = pkgs.ungoogled-chromium;

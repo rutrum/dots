@@ -33,17 +33,16 @@
     wl-clipboard
 
     # graphical applications
-    thunderbird
     simple-scan
-    nextcloud-client
 
     # dont exist yet with nixpkgs, but cargo install works
     #vtracer toml-cli ytop checkexec
     discord
 
-    affine
-
-    rustdesk
+    # nixpkgs' default `electron` is built from Chromium source. Use the
+    # prebuilt binary so a rebuild doesn't compile Chromium from scratch.
+    # Keep the major version in sync with pkgs.electron.
+    (affine.override {electron = pkgs.electron_43-bin;})
 
     forgejo-cli
 
@@ -58,7 +57,8 @@
     orca-slicer
 
     # office
-    drawio
+    # see note above re: prebuilt electron
+    (drawio.override {electron = pkgs.electron_43-bin;})
     libreoffice
 
     # video production
@@ -67,7 +67,6 @@
     audacity
 
     # reading
-    zotero
     calibre
 
     # databases
@@ -75,7 +74,5 @@
     sqlite-jdbc
     postgresql_jdbc
     mysql_jdbc
-
-    perSystem.openspec.default
   ];
 }

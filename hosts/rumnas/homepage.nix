@@ -184,6 +184,13 @@
               };
             }
             {
+              "Hermes WebUI" = {
+                icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/hermes-agent.webp";
+                href = "http://hermes-webui.rum.internal";
+                description = "Web chat UI for the Hermes agent";
+              };
+            }
+            {
               LiteLLM = {
                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/litellm.webp";
                 href = "http://litellm.rum.internal";

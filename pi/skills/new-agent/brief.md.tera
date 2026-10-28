@@ -1,0 +1,3 @@
+{{ GOAL }}{% if CONTEXT is defined and CONTEXT %}
+
+{{ CONTEXT }}{% endif %}
