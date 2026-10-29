@@ -28,6 +28,22 @@ in {
           };
         }
         {
+          # Everything the rumtower LocalAI serves. Ask for it as
+          # "rumtower/<model>" (e.g. "rumtower/qwen3.5-9b-dflash"); LiteLLM
+          # strips the "rumtower/" prefix before the upstream call, so a model
+          # added in rumtower's WebUI works with no config change here.
+          # LiteLLM sorts wildcards by specificity, so this wins over "*".
+          model_name = "rumtower/*";
+          litellm_params = {
+            model = "openai/*";
+            api_base = "http://rumtower.local-ai.rum.internal:8089/v1";
+            api_key = "local-ai-dummy-key"; # local-ai does not authenticate
+          };
+          model_info = {
+            discoverable = false;
+          };
+        }
+        {
           model_name = "openrouter/*";
           litellm_params = {
             model = "openrouter/*"; # enable them all

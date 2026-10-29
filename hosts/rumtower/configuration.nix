@@ -19,8 +19,9 @@
     ./prometheus.nix
     ./poweroff.nix
 
-    # one day for federation
-    # ./local-ai.nix
+    # Standalone LocalAI server on the RTX 4070. Its models are published to
+    # consumers through the LiteLLM gateway on rumnas. Not a P2P worker.
+    ./local-ai.nix
 
     inputs.self.nixosModules.gaming
     inputs.self.nixosModules.controller

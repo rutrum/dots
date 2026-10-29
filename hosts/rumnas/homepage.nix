@@ -173,7 +173,7 @@
               "LocalAI (rumtower)" = {
                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/localai.webp";
                 href = "http://rumtower.local-ai.rum.internal";
-                description = "Local LLM inference server";
+                description = "Local LLM inference server (RTX 4070)";
               };
             }
             {
@@ -193,7 +193,7 @@
             {
               LiteLLM = {
                 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/litellm.webp";
-                href = "http://litellm.rum.internal";
+                href = "http://litellm.rum.internal/ui";
                 description = "AI gateway";
               };
             }
