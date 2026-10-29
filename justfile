@@ -1,5 +1,3 @@
-# dots justfile
-
 # List available recipes
 default:
     @just --list

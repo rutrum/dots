@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  perSystem,
   ...
 }: {
   config = lib.mkIf config.me.gui.enable {
@@ -17,6 +18,10 @@
 
     programs.firefox = {
       enable = true;
+      # release-26.05's firefox 158.0.1 is not in the binary cache yet, and its
+      # LTO link OOMs this host. nixpkgs-unstable's identical 158.0.1 is cached.
+      # TODO: move to stable on 26.11 release
+      package = perSystem.nixpkgs-unstable.firefox;
       configPath = "${config.xdg.configHome}/mozilla/firefox";
 
       profiles.normal = {

@@ -7,17 +7,6 @@
   ...
 }: let
   hermes-base = inputs.hermes-agent.packages.${pkgs.system}.default;
-
-  patched-adapter = pkgs.runCommand "patched-simplex-adapter" {} ''
-    mkdir -p $out/share/hermes-agent/plugins/platforms/simplex
-    cat ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/adapter.py \
-      | ${pkgs.python3}/bin/python3 ${../../packages/patch-simplex-adapter.py} \
-      > $out/share/hermes-agent/plugins/platforms/simplex/adapter.py
-    cp ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/__init__.py \
-       $out/share/hermes-agent/plugins/platforms/simplex/__init__.py
-    cp ${hermes-base}/share/hermes-agent/plugins/platforms/simplex/plugin.yaml \
-       $out/share/hermes-agent/plugins/platforms/simplex/plugin.yaml
-  '';
 in {
   imports = [
     inputs.hermes-agent.nixosModules.default
@@ -60,12 +49,6 @@ in {
     extraPackages = [flake.packages.${pkgs.system}.simplex-chat pkgs.uv];
 
     addToSystemPackages = true;
-  };
-
-  systemd.services.hermes-agent = {
-    serviceConfig.BindReadOnlyPaths = [
-      "${patched-adapter}/share/hermes-agent/plugins/platforms/simplex/adapter.py:${hermes-base}/share/hermes-agent/plugins/platforms/simplex/adapter.py"
-    ];
   };
 
   services.simplex-chat = {

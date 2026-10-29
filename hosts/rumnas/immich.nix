@@ -1,9 +1,14 @@
-{...}: {
+{perSystem, ...}: {
   services.caddyProxy.services.immich.port = 2283;
   services.caddyProxy.services.kiosk.port = 9019;
 
   services.immich = {
     enable = true;
+
+    # Immich 2.7.5 is EOL/insecure in release-26.05 (CVE-2026-59258,
+    # CVE-2026-82272). Pull 3.x from nixpkgs-unstable until 26.11 ships it.
+    # TODO: move to stable on 26.11 release
+    package = perSystem.nixpkgs-unstable.immich;
 
     host = "0.0.0.0";
     port = 2283;
