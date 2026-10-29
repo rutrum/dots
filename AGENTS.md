@@ -30,30 +30,6 @@
 | rumpi | 3D Printer | OctoPrint (mostly unused) |
 | standalone | Home Manager only | User config only |
 
-### Services
-
-| Service | Host | Port | Description |
-|---------|------|------|-------------|
-| Immich | rumnas | 2283 | Photo gallery |
-| Jellyfin | rumnas | 8096 | Media server |
-| Mealie | rumnas | 9000 | Recipe manager |
-| Grafana | rumnas | 3000 | Visualization |
-| Prometheus | rumnas | 9090 | Metrics |
-| Loki | rumnas | 3100 | Log aggregation |
-| AdGuard Home | rumnas | 3001 | DNS filtering |
-| Paperless-NGX | rumnas | 8000 | Document management |
-| Dashy | rumnas | 8180 | Dashboard |
-| FreshRSS | rumnas | 8085 | RSS aggregator |
-| NocoDB | rumnas | 8081 | No-code database |
-| RomM | rumnas | 8087 | ROM manager |
-| qBittorrent | rumnas | 9009 | VPN-confined torrent |
-| Home Assistant | rumnas | 8082 | Home automation |
-| Local-AI | rumnas | 8089 | Local LLM |
-| Calibre-Web | rumnas | 8083 | Book library |
-| ntfy | rumnas | 8888 | Push notifications |
-| Firefly III | rumtower | 8080 | Finance tracker |
-| Nextcloud | nosk | 443 | Cloud suite |
-
 ### Network
 
 - **Tailscale:** rumnas (100.73.14.110), rumtower as exit nodes
@@ -155,6 +131,10 @@ passCommand = "cat \${secrets."borg/rumnas_borgbase_passphrase".path}";
 - The decrypted files appear at `/run/secrets/<path>` at activation time.
 
 ## Common Workflows
+
+### Nix gotchas
+
+- `builtins.getFlake (toString ./.)` inside `nix eval --expr` needs `--impure` on this repo (dirty git tree); without it the error is "cannot call 'getFlake' on unlocked flake reference".
 
 ### Building the System
 
