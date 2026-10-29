@@ -134,6 +134,7 @@
     mediainfo
     csvlens # csv tui
     slumber # rest client
+    gh # GitHub CLI
   ];
 
   home.sessionVariables = {

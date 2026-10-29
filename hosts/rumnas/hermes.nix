@@ -27,10 +27,115 @@ in {
       model = {
         provider = "custom:litellm";
         default = "gemma-4-12b-it-qat-q4_0";
-        context_length = 64000;
+        context_length = 128000;
       };
+      # The compression summariser defaults to the main model, but a stale
+      # context_length hint would clamp compaction to the old window (Hermes
+      # lowers the trigger to the aux window; see conversation_compression.py).
+      # Keep this in step with model.context_length above.
+      auxiliary.compression.context_length = 128000;
       terminal.backend = "local";
       toolsets = ["all"];
+
+      # --- Token budget (hermes-optimization-guide ch. 05) ---
+      # Global toolset suppression; applied last, on every surface. `browser`
+      # also removes `browser-use`. `delegation` is deliberately kept for
+      # subagents.
+      agent.disabled_toolsets = [
+        "tts"
+        "browser"
+        "code_execution"
+        "connections"
+      ];
+
+      # Cap what tools may dump into the context (defaults target 128K+ models).
+      tool_output = {
+        max_bytes = 25000;
+        max_lines = 1000;
+      };
+      file_read_max_chars = 50000;
+      web.extract_char_limit = 8000;
+
+      # Keep the last few real instructions verbatim through compaction.
+      compression.min_tail_user_messages = 3;
+
+      # --- Skills (hermes-optimization-guide ch. 08) ---
+      # Each enabled skill adds a ~19-token line to every call's index, whether
+      # or not it is used (bodies load lazily). `hermes curator usage` shows
+      # only add-mealie-recipe and hermes-agent had ever fired, so keep a small
+      # stack-relevant set and disable the rest. The kept 19 are intentionally
+      # absent from this list: add-mealie-recipe, hermes-agent,
+      # local-ai-interaction, llama-cpp, serving-llms-vllm, messaging-gateways,
+      # youtube-content, ocr-and-documents, pdf, openhue, systematic-debugging,
+      # python-debugpy, hermes-agent-skill-authoring, github-repo-management,
+      # github-pr-workflow, github-issues, arxiv, llm-wiki, obsidian.
+      skills.disabled = [
+        "airtable"
+        "apple-notes"
+        "apple-reminders"
+        "architecture-diagram"
+        "ascii-art"
+        "ascii-video"
+        "baoyu-infographic"
+        "blocked-page-recovery"
+        "blogwatcher"
+        "box"
+        "claude-code"
+        "claude-design"
+        "codebase-inspection"
+        "codex"
+        "comfyui"
+        "competitor-news-monitor"
+        "computer-use"
+        "design-md"
+        "document-to-action-items"
+        "docx"
+        "dogfood"
+        "email-inbox-triage"
+        "evaluating-llms-harness"
+        "excalidraw"
+        "findmy"
+        "gif-search"
+        "github"
+        "github-auth"
+        "github-code-review"
+        "google-workspace"
+        "grounded-citations"
+        "himalaya"
+        "huggingface-hub"
+        "humanizer"
+        "imessage"
+        "inspecting-hermes-desktop-dom"
+        "manim-video"
+        "maps"
+        "meeting-action-items"
+        "nano-pdf"
+        "node-inspect-debugger"
+        "notion"
+        "opencode"
+        "p5js"
+        "plan"
+        "polymarket"
+        "popular-web-designs"
+        "powerpoint"
+        "pretext"
+        "product-price-monitor"
+        "requesting-code-review"
+        "research-paper-writing"
+        "simplify-code"
+        "sketch"
+        "songsee"
+        "songwriting-and-ai-music"
+        "spike"
+        "teams-meeting-pipeline"
+        "test-driven-development"
+        "touchdesigner-mcp"
+        "weekly-review-planning"
+        "weights-and-biases"
+        "xlsx"
+        "xurl"
+      ];
+
       gateway.api_server = {
         enabled = true;
         host = "127.0.0.1";
