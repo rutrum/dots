@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  flake,
   inputs,
   ...
 }: let
@@ -11,7 +10,6 @@ in {
   imports = [
     inputs.hermes-agent.nixosModules.default
     inputs.hermes-webui.nixosModules.default
-    inputs.self.nixosModules.simplex-chat
   ];
 
   services.hermes-agent = {
@@ -145,32 +143,17 @@ in {
       };
     };
 
-    environment = {
-      SIMPLEX_WS_URL = "ws://127.0.0.1:5225";
-      SIMPLEX_ALLOWED_USERS = "StirringZaniness";
-      SIMPLEX_HOME_CHANNEL = "StirringZaniness";
-    };
-
     environmentFiles = [config.sops.secrets."hermes/env".path];
 
-    extraPackages = [flake.packages.${pkgs.system}.simplex-chat pkgs.uv];
+    extraPackages = [pkgs.uv];
 
     addToSystemPackages = true;
-  };
-
-  services.simplex-chat = {
-    enable = true;
-    user = "hermes";
-    group = "hermes";
-    dataDir = "/var/lib/hermes/.simplex";
   };
 
   sops.secrets."hermes/env" = {
     owner = "hermes";
     restartUnits = ["hermes-agent.service"];
   };
-
-  environment.systemPackages = [flake.packages.${pkgs.system}.simplex-chat];
 
   # Browser UI for the same agent. Runs as the hermes user so it can read the
   # agent's HERMES_HOME (/var/lib/hermes/.hermes) and reuse its venv/state.
