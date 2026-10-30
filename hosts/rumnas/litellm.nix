@@ -28,6 +28,29 @@ in {
           };
         }
         {
+          # Winnow-E4B — Gemma 4 E4B fine-tune for typed decisions, served by
+          # the rumnas GPUs. Small, fast, classification/decision-shaped work.
+          model_name = "winnow-e4b";
+          litellm_params = {
+            model = "openai/winnow-e4b";
+            api_base = "http://local-ai.rum.internal:8089/v1";
+            api_key = "local-ai-dummy-key"; # local-ai does not authenticate
+          };
+        }
+        {
+          # rumtower's RTX 4070 instance of Gemma 4 12B (128K single-slot
+          # context, all-GPU, ~105 tok/s). Same weights as the fleet default
+          # above, but pinned to the tower and *discoverable* (the rumtower/*
+          # wildcard below is hidden). Ask for it by this full name to route
+          # work to the 4070; the bare name still goes to rumnas.
+          model_name = "rumtower/gemma-4-12b-it-qat-q4_0";
+          litellm_params = {
+            model = "openai/gemma-4-12b-it-qat-q4_0";
+            api_base = "http://rumtower.local-ai.rum.internal:8089/v1";
+            api_key = "local-ai-dummy-key"; # local-ai does not authenticate
+          };
+        }
+        {
           # Everything the rumtower LocalAI serves. Ask for it as
           # "rumtower/<model>" (e.g. "rumtower/qwen3.5-9b-dflash"); LiteLLM
           # strips the "rumtower/" prefix before the upstream call, so a model

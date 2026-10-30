@@ -22,11 +22,13 @@ in {
       providers.litellm = {
         base_url = "http://litellm.rum.internal/v1";
         key_env = "LITELLM_API_KEY";
-        default_model = "gemma-4-12b-it-qat-q4_0";
+        # Pin Hermes to the RTX 4070 instance on rumtower (128K, all-GPU,
+        # ~105 tok/s) rather than the fleet default that rumnas served.
+        default_model = "rumtower/gemma-4-12b-it-qat-q4_0";
       };
       model = {
         provider = "custom:litellm";
-        default = "gemma-4-12b-it-qat-q4_0";
+        default = "rumtower/gemma-4-12b-it-qat-q4_0";
         context_length = 128000;
       };
       # The compression summariser defaults to the main model, but a stale
